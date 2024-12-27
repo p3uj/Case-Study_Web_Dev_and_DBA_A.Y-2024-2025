@@ -13,7 +13,9 @@ class NavbarComponent extends HTMLElement {
                 <a href="post-a-property.html" id="post-property-link">Post a Property</a>
                 <a href="review.html" id="review-link">Review</a>
                 <button class="logout-btn" type="submit">Logout</button>
-                <img src="../img/sampleProfile.png" class="sample-profile" alt="Sample Profile">
+                <a href="user-profile.html" class="profile-link">
+                    <img src="../img/sampleProfile.png" class="sample-profile" alt="Sample Profile">
+                </a>
             </div>
         `;
         this.setActiveLink();
