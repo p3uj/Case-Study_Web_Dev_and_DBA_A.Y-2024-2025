@@ -1,4 +1,4 @@
-body{
+body {
     background-color: var(--rentease-primary)
 }
 
@@ -12,44 +12,44 @@ body{
     flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
-.rentease-logo{
+.rentease-logo {
     width: 42px;
     height: 42px;
     margin-left: 58px;
 }
 
-.searchbar{
+.searchbar {
     width: 800px;
     height: 38px;
     padding-left: 16px;
     padding-right: 16px;
 }
 
-.searchbar:focus{
+.searchbar:focus {
     outline: none;
     border-style: solid;
     border-color: var(--rentease-secondary);
 }
 
-form{
+form {
     display: flex;
     justify-content: flex-start;
     align-items: start;
     flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
-form button{
-    padding: 14px 28px 14px 28px;
+form button {
+    padding: 14px 28px;
     color: white;
     background-color: var(--btn-default);
     border: none;
 }
 
-form button:hover{
+form button:hover {
     background-color: var(--btn-hover);
 }
 
-form button:active{
+form button:active {
     background-color: var(--btn-pressed);
 }
 
@@ -72,7 +72,7 @@ form button:active{
     color: white;
 }
 
-.logout-btn{
+.logout-btn {
     background-color: var(--rentease-primary);
     color: var(--txt-primary);
     border: none;
@@ -81,15 +81,32 @@ form button:active{
     font-size: 16px;
 }
 
-.logout-btn:hover{
+.logout-btn:hover {
     background-color: #FF6666;
 }
 
+/* Profile Picture Styling */
 .sample-profile {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    border: 1px solid var(--btn-default);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%; /* Already makes the image circular */
+    border: 2px solid var(--btn-default);
     object-fit: cover; /* Ensures the image fits well inside the circle */
     margin-right: 58px;
+    cursor: pointer;
+}
+
+/* Change border style on click (active state) */
+.navbar .profile-link.active .sample-profile {
+    border: 2px solid var(--rentease-secondary); /* Highlight with a thicker border */
+}
+
+.navbar .profile-link:hover .sample-profile {
+    border: 2px solid var(--rentease-hover-secondary);
+}
+
+/* Disable hover and active effect in profile link */
+.navbar .profile-link:hover,
+.navbar .profile-link.active {
+    background-color: transparent;
 }
