@@ -6,10 +6,44 @@
     <title>User Profile</title>
     <link rel="stylesheet" href="../css/customizedColor.css">
     <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <script src="../js/navbarComponent.js" defer></script>
+    <!-- Font Awesome Icon Library -->
+    <script src="https://kit.fontawesome.com/87abdb3ce2.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <navbar-component></navbar-component>
-    <h1>Profile Page</h1>
+    <div class="profile-container">
+        <div class="profile-info">
+            <h1>Do Kyung-soo</h1>
+            <p>Landlord</p>
+            <p>Quezon City</p>
+            <div class="rating-container">
+                <h2>4.0</h2>
+                <div class="reviews">
+                    <h3>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i> <!--Empty star-->
+                    </h3>
+                </div>
+            </div>
+            <p class="bio">
+                Hi, I’m Do Kyung-Soo of EXO—Your Friendly Landlord!<br>
+                As a landlord, I take pride in providing clean, comfortable, and welcoming spaces for my tenants.
+                I believe in creating a positive living experience by ensuring my properties are well-maintained and
+                fostering open, respectful communication.<br><br>
+
+                With a background in music and acting, I approach everything I do with creativity and attention to detail.
+                I’m quick to respond to any concerns and always strive to make sure my tenants feel at home. If you’re
+                looking for a place where you can truly relax and feel comfortable, I’d be happy to help you find the perfect spot!
+            </p>
+        </div>
+        <div class="profile-picture">
+            <img src="../img/sampleProfile.png" alt="Profile Picture">
+        </div>
+    </div>
 </body>
 </html>
