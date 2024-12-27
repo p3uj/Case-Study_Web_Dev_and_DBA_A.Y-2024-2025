@@ -1,0 +1,77 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: poppins,sans-serif;
+    text-decoration: none;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 4rem;
+}
+
+.profile-picture {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--rentease-secondary);
+    box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.profile-picture img:hover {
+    transform: scale(1.2);
+}
+
+.profile-info {
+    max-width: 800px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.profile-info h1 {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.profile-info p {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.bio {
+    line-height: 36px;
+}
+
+.rating-container {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.rating-container h2 {
+    margin-right: 8px;
+}
+
+.reviews i {
+    margin-right: 2px;
+}
+
+.reviews {
+    color: orange;
+}
