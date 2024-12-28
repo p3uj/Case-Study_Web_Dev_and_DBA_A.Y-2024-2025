@@ -27,7 +27,7 @@ body {
 }
 
 .searchbar {
-    width: 30vw;
+    width: auto;
     height: 43px;
     padding-left: 16px;
     padding-right: 16px;
