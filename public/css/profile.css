@@ -264,6 +264,110 @@ body{
     background-color: var(--btn-hover);
 }
 
+.reviews-content {
+    display: grid;
+    column-gap: 30px;
+    /*grid-template-columns: auto auto auto; /* contains 3 columns with auto weight*/
+    grid-template-columns: repeat(3, minmax(400px, 1fr));
+    background-color: var(--rentease-secondary);
+    height: 646px;
+    overflow: hidden;
+    margin-bottom: 38px;
+    width: 100vw;
+    box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
+    padding-left: 135px;
+    padding-right: 135px;
+}
+
+/* For smaller screens */
+@media (max-width: 1200px) {
+    .reviews-content {
+        grid-template-columns: repeat(2, minmax(400px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.review-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 120px 38px 38px 38px;
+    border: 1px solid var(--rentease-primary);
+    width: 371px;
+    height: 522px;
+    overflow: visible;
+    border-radius: 45px;
+    position: relative;
+    margin-top: 90px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s; /* Transition all properties including border color */
+}
+
+.review-info-container:hover {
+    transition: scale(1.2);
+    box-shadow: 0px 4px 50px var(--rentease-primary)
+}
+
+.user-review-profile {
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 3px solid var(--rentease-secondary);
+    outline: 1px solid var(--rentease-primary);
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-review-profile img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.user-review-profile img:hover {
+    transform: scale(1.2);
+}
+
+.reviews-content h1 {
+    font-size: 38px;
+}
+
+.quotation-mark-right {
+    display: flex;
+    justify-content: right;
+}
+
+.review-info-container .reviews,
+.review-caption,
+h4,
+.date-review {
+    align-self: center;
+}
+
+.review-caption {
+    display: flex;
+    max-height: 200px;
+    overflow: auto;
+    line-height: 30px;
+    text-align: center;
+}
+
+/* the date-review is place inside the review-info-container */
+.date-review {
+    color: var(--txt-secondary);
+    margin-top: 8px;
+    bottom: 38px;
+}
 
 /* Cuztomize the scrollbar */
 /* Target the scrollbar */
