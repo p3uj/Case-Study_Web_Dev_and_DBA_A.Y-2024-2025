@@ -90,7 +90,7 @@ body{
 }
 
 .tab-btn {
-    background-color: var(--rentease-primary);
+    background-color: transparent;
     color: var(--txt-secondary);
     padding: 16px 32px;
     border: none;
@@ -104,7 +104,20 @@ body{
     background-color: var(--rentease-hover-secondary);
 }
 
-.content-container {
+.tab-btn.active {
+    background-color: var(--rentease-secondary);
+    color: var(--bg-primary);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.property-post-content {
     display: flex;
     background-color: var(--rentease-secondary);
     max-height: 400px;
@@ -115,7 +128,7 @@ body{
     box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
 }
 
-.content-container img {
+.property-post-content img {
     height: auto;
     width: 40%;
     object-fit: cover;
@@ -170,7 +183,7 @@ body{
     line-height: 30px;
 }
 
-.bottom-container {
+.property-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -193,6 +206,61 @@ body{
 }
 
 .rent-btn:hover {
+    background-color: var(--btn-hover);
+}
+
+.find-tenant-content {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--rentease-secondary);
+    max-height: 400px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    width: 100vw;
+    box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
+}
+
+.find-tenant-info{
+    padding: 38px 135px 0px 135px;
+    width: 100vw;
+}
+
+.caption {
+    max-height: 150px;
+    overflow: auto; /* allow user to scroll when the height exceed to the max-height*/
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.find-tenant-bottom {
+    padding: 16px 135px 38px 135px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-btn {
+    padding: 16px 32px;
+    background-color: transparent;
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 20px;
+}
+
+.delete-btn:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.isFound-btn {
+    padding: 16px 32px;
+    background-color: var(--btn-default);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 20px;
+}
+
+.isFound-btn:hover {
     background-color: var(--btn-hover);
 }
 
