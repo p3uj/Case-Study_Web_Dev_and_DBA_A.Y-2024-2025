@@ -197,7 +197,7 @@ body{
     color: var(--txt-primary);
 }
 
-.rent-btn {
+.isAvailable-btn {
     padding: 16px 32px;
     color: var(--bg-primary);
     background-color: var(--btn-default);
@@ -205,7 +205,7 @@ body{
     border-radius: 20px;
 }
 
-.rent-btn:hover {
+.isAvailable-btn:hover {
     background-color: var(--btn-hover);
 }
 
