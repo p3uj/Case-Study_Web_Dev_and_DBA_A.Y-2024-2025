@@ -1,0 +1,89 @@
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #F5F5DC; /* Light yellowish background */
+    font-family: Arial, sans-serif;
+}
+
+/* Center content styling */
+.container {
+    text-align: center;
+    width: 350px; /* Adjust width if needed */
+    padding: 0; /* Remove padding for no white box */
+}
+
+/* Logo styling */
+.icon {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Title */
+h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000; /* Black */
+}
+
+/* Subtitle */
+p {
+    margin: 5px 0 20px;
+    font-size: 14px;
+    color: #555; /* Slightly darker gray */
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input fields */
+input[type="text"], input[type="password"] {
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Input focus effect */
+input:focus {
+    border: 1px solid #555; /* Slightly darker on focus */
+}
+
+/* Login button */
+button {
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff; /* White text */
+    background-color: #007bff; /* Blue button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Forgot password and Register links */
+a {
+    font-size: 12px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
