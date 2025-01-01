@@ -5,11 +5,22 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/navbar.css',
-                'resources/css/customizedColor.css',
-                'resources/js/app.js',
-                'resources/images/RentEaseLogo.png',
-                'resources/images/sampleProfile.png',
+                // CSS files
+                'resources/css/customizedColor.css'
+                ,'resources/css/Login.css'
+                ,'resources/css/navbar.css'
+                ,'resources/css/profile.css'
+
+                // JS files
+                ,'resources/js/profile.js'
+
+                // Images files
+                ,'resources/images/RentEaseLogo.png'
+                ,'resources/images/sampleProfile.png'
+                ,'resources/images/icon/location.png'
+                ,'resources/images/propertysample/property1.png'
+                ,'resources/images/propertysample/property2.png'
+                ,'resources/images/propertysample/property3.png'
             ],
             refresh: true,
         }),
