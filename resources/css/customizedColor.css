@@ -1,0 +1,20 @@
+/*CUSTOMIZE THE COLOR TO USE IT GLOBALLY*/
+:root {
+    /*RENT EASE COLORS*/
+    --rentease-primary: #F5F5DC;
+    --rentease-secondary: #BDA27E;
+    --rentease-hover-secondary: #CAB598;
+
+    /*BUTTON COLORS*/
+    --btn-default: #105DFB;
+    --btn-hover: #357EFB;
+    --btn-pressed: #084AC5;
+    --btn-disable: #CCCCCC;
+
+    /*BACKGROUND COLOR CONTAINER/TEXT*/
+    --bg-primary: #FFFAFA;
+
+    /*TEXT COLORS*/
+    --txt-primary: #12151C;
+    --txt-secondary: #4A4F57;
+}
