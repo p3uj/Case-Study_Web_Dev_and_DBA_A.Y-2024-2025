@@ -69,18 +69,17 @@ form button:active {
     font-size: 17px;
 }
 
-.navbar a:hover:not(.profile-border) {
+.navbar a:hover:not(.profile-border):not(.logout) {
     background-color: var(--rentease-hover-secondary);
     color: white;
 }
 
-.navbar a.active:not(.profile-border) {
+.navbar a.active:not(.profile-border):not(.logout) {
     background-color: var(--rentease-secondary);
     color: white;
 }
 
-.logout-btn {
-    background-color: var(--rentease-primary);
+.logout {
     color: var(--txt-primary);
     border: none;
     padding: 13px 16px;
@@ -88,7 +87,7 @@ form button:active {
     font-size: 16px;
 }
 
-.logout-btn:hover {
+.logout:hover {
     background-color: #FF6666;
 }
 
