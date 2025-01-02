@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->dateTime('date_review');
             $table->integer('rating');
-            $table->string('review_text');
+            $table->text('review_text');
             $table->timestamps();
         });
     }
