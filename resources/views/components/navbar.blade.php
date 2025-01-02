@@ -21,7 +21,7 @@
         <a href="{{ route("findroommateortenantpage")}}" class="{{ Route::currentRouteName() === 'findroommateortenantpage' ? 'active' : '' }}">Find Roommate/Tenant</a>
         <a href="{{ route("postapropertypage")}}" class="{{ Route::currentRouteName() === 'postapropertypage' ? 'active' : '' }}">Post a Property</a>
         <a href="{{ route("reviewpage")}}" class="{{ Route::currentRouteName() === 'reviewpage' ? 'active' : '' }}">Review</a>
-        <button class="logout-btn" type="submit">Logout</button>
+        <a href="{{ route("logout") }}" class="logout">Logout</a>
         <a href="{{ route("userprofilepage")}}" class="{{ Route::currentRouteName() == 'userprofilepage' ? 'active' : '' }} profile-border">
             <img src="{{ Vite::asset('resources/images/sampleProfile.png')}}" alt="Sample Profile" class="sample-profile">
         </a>
