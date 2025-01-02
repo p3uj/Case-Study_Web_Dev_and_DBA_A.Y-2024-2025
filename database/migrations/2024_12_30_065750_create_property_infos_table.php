@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('unit_category');
             $table->decimal('rental_price', 10, 2);
             $table->integer('max_occupancy');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }
