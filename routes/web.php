@@ -1,31 +1,29 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserProfileController;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('login');
+// Ensure that the authenticated user are the only one who can access the following routes.
+Route::middleware('auth')->group(function () {
+    Route::view('/home', 'home')->name('homepage');
+    Route::view('/property', 'properties')->name('propertiespage');
+    Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
+    Route::view('/postaproperty', 'post-a-property')->name('postapropertypage');
+    Route::view('/review', 'review')->name('reviewpage');
+    Route::get('/userprofile', [UserProfileController::class, 'userInfo'])->name('userprofilepage');
+    Route::get('/userprofile', [UserProfileController::class, 'propertyPost'])->name('userprofilepage');
+    // Route::view('/userprofile', 'user-profile')->name('userprofilepage');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->name("homepage");
+// Ensure that only the unauthenticated user are the only one who can access this root route.
+Route::middleware('guest')->get('/', function () {
+    return view('Auth/login');
+});
 
-Route::get('/properties', function () {
-    return view('Properties');
-})->name("propertiespage");
-
-Route::get('/find-roommate-or-tenant', function () {
-    return view('find-Roommate-or-Tenant');
-})->name("findroommateortenantpage");
-
-Route::get('/post-a-property', function () {
-    return view('post-A-Property');
-})->name("postapropertypage");
-
-Route::get('/review', function () {
-    return view('review');
-})->name("reviewpage");
-
-Route::get('/userprofile', function () {
-    return view('user-profile');
-})->name("userprofilepage");
+// Authentication routes
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'loginpost'])->name('login.post');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');

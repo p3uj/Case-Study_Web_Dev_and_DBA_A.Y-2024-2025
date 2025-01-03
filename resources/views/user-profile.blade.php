@@ -21,9 +21,9 @@
     <x-navbar></x-navbar>
     <div class="profile-container">
         <div class="profile-info">
-            <h1>Do Kyung-soo</h1>
-            <p>Landlord</p>
-            <p>Quezon City</p>
+            <h1>{{ $user->firstname }} {{ $user->lastname }}</h1>
+            <p>{{ $user->role }}</p>
+            <p>{{ $user->city }}</p>
             <div class="rating-container">
                 <h2>4.0</h2>
                 <div class="reviews">
@@ -37,14 +37,7 @@
                 </div>
             </div>
             <p class="bio">
-                Hi, I’m Do Kyung-Soo of EXO—Your Friendly Landlord!<br>
-                As a landlord, I take pride in providing clean, comfortable, and welcoming spaces for my tenants.
-                I believe in creating a positive living experience by ensuring my properties are well-maintained and
-                fostering open, respectful communication.<br><br>
-
-                With a background in music and acting, I approach everything I do with creativity and attention to detail.
-                I’m quick to respond to any concerns and always strive to make sure my tenants feel at home. If you’re
-                looking for a place where you can truly relax and feel comfortable, I’d be happy to help you find the perfect spot!
+                {{ $user->bio }}
             </p>
         </div>
         <div class="profile-picture">
@@ -53,56 +46,64 @@
     </div>
     <div class="container">
         <div class="tab-box">
-            <button class="tab-btn active">Property Post</button>
-            <button class="tab-btn">Find Tenant Post</button>
-            <button class="tab-btn">Review from Tenant</button>
+            <button id="property-post-btn" class="tab-btn" data-role="{{$user->role}}">
+                Property Post
+            </button>
+            <button class="tab-btn">
+                Find {{ $user->role === 'Landlord' ? 'Tenant' : 'Roommate'}} Post
+            </button>
+            <button class="tab-btn">
+                Review from {{ $user->role === 'Landlord' ? 'Tenant' : 'Landlord'}}
+            </button>
         </div>
+
         <!-- Property Post Content -->
-        <div class="tab-content active">
-            <div class="property-post-content">
-                <img src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Image 1">
-                <div class="property-info">
-                    <p class="date-posted">February 14, 2024 at 11:50 AM</p>
-                    <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">Quezon City, Commonwealth</h2>
-                    <div class="tags">
-                        <a class="unit-type">Studio Unit</>
-                        <a class="unit-price">₱7,000 /month</a>
-                    </div>
-                    <p class="description">Cozy Studio Unit for Rent – Ideal for Singles or Couples
-                        <br>
-                        Looking for a modern and affordable living space? This charming studio unit offers the
-                        perfect balance of comfort and convenience. Located in a secure, well-maintained building,
-                        this unit is perfect for singles, couples, or anyone who values simplicity and practicality.
-                        <br>
-                        Key features:
-                        <br>
-                        - Open-concept layout with plenty of natural light <br>
-                        - Fully equipped kitchenette with stove, refrigerator, and sink <br>
-                        - Well-designed bathroom with modern fixtures <br>
-                        - Air conditioning for added comfort <br>
-                        - High-speed internet access available <br>
-                        - Access to building amenities such as laundry facilities and a common lounge area <br>
-                        - Prime location near restaurants, cafes, shopping, and public transportation <br>
-                        Enjoy the ease of city living with everything you need just steps away. Whether you're
-                        looking for a place to call home or a comfortable space for work and relaxation, this studio
-                        unit is ready for you to move in. Contact us today to schedule a viewing!
-                    </p>
-                    <div class="property-bottom">
-                        <div class="reviews">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i> <!--Empty star-->
-                            <p>4 out of 5</p>
-                        </div>
-                        <div class="">
-                            <button class="delete-btn">Delete</button>
-                            <button class="isAvailable-btn">Not Available?</button>
+        <div class="tab-content">
+            @if ($properties->isNotEmpty())
+                @foreach ($properties as $property)
+                    <div id="property-post" class="property-post-content" data-isPostAvailable="{{$property->is_available}}">
+                        <img src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Image 1">
+                        <div class="property-info">
+                            <p class="date-posted">{{ $property->date_posted->format('F d, Y \a\t h:i A') }}</p>
+                            <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                {{ $property->propertyInfo->city }}, {{ $property->propertyInfo->barangay }}
+                            </h2>
+                            <div class="tags">
+                                <a class="unit-type">{{ $property->propertyInfo->unit_category }}</a>
+                                <a class="unit-price">₱{{ number_format($property->propertyInfo->rental_price, 2) }} /month</a>
+                            </div>
+                            <p class="description">
+                                {{ $property->propertyInfo->description }}
+                            </p>
+                            <div class="property-bottom">
+                                <div class="reviews">
+                                    @for ($star = 1; $star <= 5; $star++)
+                                        <!-- If the star is less than or equal to average rating, show the filled star -->
+                                        @if ($star <= ($property->averageRating() ?? 0))
+                                            <i class="fas fa-star"></i>
+                                        <!-- Otherwise, show empty star -->
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                    <p>{{ $property->averageRating() ?? 0 }} out of 5</p>
+                                </div>
+                                <div class="">
+                                    <button class="delete-btn">Delete</button>
+                                    <button class="isAvailable-btn">
+                                        {{ $property->is_available ? 'Not Available?' : 'Available?' }}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                @endforeach
+            @else
+                <div style="margin: 16px 135px;">
+                    <h1>No property posts!</h1>
                 </div>
-            </div>
+            @endif
+
         </div>
 
         <!-- Find Tenant Content -->
@@ -184,55 +185,6 @@
                             tenant. She has always paid rent on time and kept the
                             property in excellent condition. Any maintenance issues
                             were promptlysfsdfsdf.
-                        </p>
-                    </div>
-                    <h1 class="quotation-mark-right">❞</h1>
-                    <h4>- Do Kyung-Soo</h4>
-                    <p class="date-review">July 07, 2024 at 12:00 AM</p>
-                </div>
-
-
-                <div class="review-info-container">
-                    <div class="user-review-profile">
-                        <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Sample Profile">
-                    </div>
-                    <div class="reviews">
-                        <h3>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i> <!--Empty star-->
-                        </h3>
-                    </div>
-                    <h1>❝</h1>
-                    <div class="review-caption">
-                        <p>I have had the pleasure of renting to
-                            Alice Guo for the past 10 years.
-                        </p>
-                    </div>
-                    <h1 class="quotation-mark-right">❞</h1>
-                    <h4>- Do Kyung-Soo</h4>
-                    <p class="date-review">July 07, 2024 at 12:00 AM</p>
-                </div>
-
-                <div class="review-info-container">
-                    <div class="user-review-profile">
-                        <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Sample Profile">
-                    </div>
-                    <div class="reviews">
-                        <h3>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i> <!--Empty star-->
-                        </h3>
-                    </div>
-                    <h1>❝</h1>
-                    <div class="review-caption">
-                        <p>eme had the pleasure of renting to
-                            Alice Guo for the past.
                         </p>
                     </div>
                     <h1 class="quotation-mark-right">❞</h1>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->dateTime('date_posted');
             $table->string('city');
             $table->string('barangay');
-            $table->string('description');
+            $table->text('description');
             $table->boolean('is_already_found')->default(false);
             $table->string('category_finding');
             $table->timestamps();
