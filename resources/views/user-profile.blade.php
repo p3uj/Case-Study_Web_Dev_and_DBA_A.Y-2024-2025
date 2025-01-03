@@ -59,44 +59,51 @@
 
         <!-- Property Post Content -->
         <div class="tab-content">
-            @foreach ($properties as $property)
-                <div id="property-post" class="property-post-content" data-isPostAvailable="{{$property->is_available}}">
-                    <img src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Image 1">
-                    <div class="property-info">
-                        <p class="date-posted">{{ $property->date_posted->format('F d, Y \a\t h:i A') }}</p>
-                        <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
-                            {{ $property->propertyInfo->city }}, {{ $property->propertyInfo->barangay }}
-                        </h2>
-                        <div class="tags">
-                            <a class="unit-type">{{ $property->propertyInfo->unit_category }}</a>
-                            <a class="unit-price">₱{{ number_format($property->propertyInfo->rental_price, 2) }} /month</a>
-                        </div>
-                        <p class="description">
-                            {{ $property->propertyInfo->description }}
-                        </p>
-                        <div class="property-bottom">
-                            <div class="reviews">
-                                @for ($star = 1; $star <= 5; $star++)
-                                    <!-- If the star is less than or equal to average rating, show the filled star -->
-                                    @if ($star <= ($property->averageRating() ?? 0))
-                                        <i class="fas fa-star"></i>
-                                    <!-- Otherwise, show empty star -->
-                                    @else
-                                        <i class="far fa-star"></i>
-                                    @endif
-                                @endfor
-                                <p>{{ $property->averageRating() ?? 0 }} out of 5</p>
+            @if ($properties->isNotEmpty())
+                @foreach ($properties as $property)
+                    <div id="property-post" class="property-post-content" data-isPostAvailable="{{$property->is_available}}">
+                        <img src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Image 1">
+                        <div class="property-info">
+                            <p class="date-posted">{{ $property->date_posted->format('F d, Y \a\t h:i A') }}</p>
+                            <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                {{ $property->propertyInfo->city }}, {{ $property->propertyInfo->barangay }}
+                            </h2>
+                            <div class="tags">
+                                <a class="unit-type">{{ $property->propertyInfo->unit_category }}</a>
+                                <a class="unit-price">₱{{ number_format($property->propertyInfo->rental_price, 2) }} /month</a>
                             </div>
-                            <div class="">
-                                <button class="delete-btn">Delete</button>
-                                <button class="isAvailable-btn">
-                                    {{ $property->is_available ? 'Not Available?' : 'Available?' }}
-                                </button>
+                            <p class="description">
+                                {{ $property->propertyInfo->description }}
+                            </p>
+                            <div class="property-bottom">
+                                <div class="reviews">
+                                    @for ($star = 1; $star <= 5; $star++)
+                                        <!-- If the star is less than or equal to average rating, show the filled star -->
+                                        @if ($star <= ($property->averageRating() ?? 0))
+                                            <i class="fas fa-star"></i>
+                                        <!-- Otherwise, show empty star -->
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                    <p>{{ $property->averageRating() ?? 0 }} out of 5</p>
+                                </div>
+                                <div class="">
+                                    <button class="delete-btn">Delete</button>
+                                    <button class="isAvailable-btn">
+                                        {{ $property->is_available ? 'Not Available?' : 'Available?' }}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                @endforeach
+            @else
+                <div style="margin: 16px 135px;">
+                    <h1>No property posts!</h1>
                 </div>
-            @endforeach
+            @endif
+
         </div>
 
         <!-- Find Tenant Content -->
