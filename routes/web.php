@@ -14,6 +14,7 @@ Route::middleware('auth')->group(function () {
     Route::view('/postaproperty', 'post-a-property')->name('postapropertypage');
     Route::view('/review', 'review')->name('reviewpage');
     Route::get('/userprofile', [UserProfileController::class, 'userInfo'])->name('userprofilepage');
+    Route::get('/userprofile', [UserProfileController::class, 'propertyPost'])->name('userprofilepage');
     // Route::view('/userprofile', 'user-profile')->name('userprofilepage');
 });
 
