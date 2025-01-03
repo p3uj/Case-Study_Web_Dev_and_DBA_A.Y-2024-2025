@@ -21,9 +21,9 @@
     <x-navbar></x-navbar>
     <div class="profile-container">
         <div class="profile-info">
-            <h1>Do Kyung-soo</h1>
-            <p>Landlord</p>
-            <p>Quezon City</p>
+            <h1>{{ $user->firstname }} {{ $user->lastname }}</h1>
+            <p>{{ $user->role }}</p>
+            <p>{{ $user->city }}</p>
             <div class="rating-container">
                 <h2>4.0</h2>
                 <div class="reviews">
@@ -37,14 +37,7 @@
                 </div>
             </div>
             <p class="bio">
-                Hi, I’m Do Kyung-Soo of EXO—Your Friendly Landlord!<br>
-                As a landlord, I take pride in providing clean, comfortable, and welcoming spaces for my tenants.
-                I believe in creating a positive living experience by ensuring my properties are well-maintained and
-                fostering open, respectful communication.<br><br>
-
-                With a background in music and acting, I approach everything I do with creativity and attention to detail.
-                I’m quick to respond to any concerns and always strive to make sure my tenants feel at home. If you’re
-                looking for a place where you can truly relax and feel comfortable, I’d be happy to help you find the perfect spot!
+                {{ $user->bio }}
             </p>
         </div>
         <div class="profile-picture">
@@ -53,19 +46,26 @@
     </div>
     <div class="container">
         <div class="tab-box">
-            <button class="tab-btn active">Property Post</button>
-            <button class="tab-btn">Find Tenant Post</button>
-            <button class="tab-btn">Review from Tenant</button>
+            <button id="property-post-btn" class="tab-btn" data-role="{{$user->role}}">
+                Property Post
+            </button>
+            <button class="tab-btn">
+                Find {{ $user->role === 'Landlord' ? 'Tenant' : 'Roommate'}} Post
+            </button>
+            <button class="tab-btn">
+                Review from {{ $user->role === 'Landlord' ? 'Tenant' : 'Landlord'}}
+            </button>
         </div>
+
         <!-- Property Post Content -->
-        <div class="tab-content active">
-            <div class="property-post-content">
+        <div class="tab-content">
+            <div id="property-post" class="property-post-content">
                 <img src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Image 1">
                 <div class="property-info">
                     <p class="date-posted">February 14, 2024 at 11:50 AM</p>
                     <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">Quezon City, Commonwealth</h2>
                     <div class="tags">
-                        <a class="unit-type">Studio Unit</>
+                        <a class="unit-type">Studio Unit</a>
                         <a class="unit-price">₱7,000 /month</a>
                     </div>
                     <p class="description">Cozy Studio Unit for Rent – Ideal for Singles or Couples
@@ -191,7 +191,7 @@
                     <p class="date-review">July 07, 2024 at 12:00 AM</p>
                 </div>
 
-
+                {{--
                 <div class="review-info-container">
                     <div class="user-review-profile">
                         <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Sample Profile">
@@ -239,6 +239,7 @@
                     <h4>- Do Kyung-Soo</h4>
                     <p class="date-review">July 07, 2024 at 12:00 AM</p>
                 </div>
+                --}}
             </div>
         </div>
     </div>
