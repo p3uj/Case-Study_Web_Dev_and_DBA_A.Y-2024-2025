@@ -9,6 +9,7 @@ class PropertyInfo extends Model
 {
     use HasFactory;
 
+    // Relationship of tables
     public function user()
     {
         return $this->belongsTo(User::class);
