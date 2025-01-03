@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 // Ensure that the authenticated user are the only one who can access the following routes.
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [HomeController::class, '__invoke'])->name('homepage');
+    Route::view('/home', 'home')->name('homepage');
     Route::view('/property', 'properties')->name('propertiespage');
     Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
     Route::view('/postaproperty', 'post-a-property')->name('postapropertypage');
