@@ -26,13 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Configure visibility based on user role
     if (userRole === "Tenant") {
-        propertyPostBtn.style.display = "none"; // Hide the property post button for tenants
-        propertyPostContent.style.display = "none"; // Hide the property post content for tenants
         tabs[1].classList.add("active");    // Make the find roommate post tab as active by default
         tabContents[1].classList.add("active"); // Make the find roommate content as active by default
+        propertyPostBtn.style.display = "none"; // Hide the property post button for tenants
+        propertyPostContent.style.display = "none"; // Hide the property post content for tenants
     } else {
-        propertyPostBtn.style.display = "inline-block"; // Show the property post button for landlords
         tabs[0].classList.add("active");    // Make the property post tab as active by default
         tabContents[0].classList.add("active"); // Make the property post content as active by default
+        propertyPostBtn.style.display = "inline-block"; // Show the property post button for landlords
     }
 });
