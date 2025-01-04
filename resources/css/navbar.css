@@ -1,3 +1,11 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: poppins,sans-serif;
+    text-decoration: none;
+}
+
 body {
     background-color: var(--rentease-primary)
 }
@@ -19,8 +27,8 @@ body {
 }
 
 .searchbar {
-    width: 800px;
-    height: 38px;
+    width: auto;
+    height: 43px;
     padding-left: 16px;
     padding-right: 16px;
 }
@@ -59,21 +67,19 @@ form button:active {
     padding: 12px 16px;
     text-decoration: none;
     font-size: 17px;
-
 }
 
-.navbar a:hover {
+.navbar a:hover:not(.profile-border):not(.logout) {
     background-color: var(--rentease-hover-secondary);
     color: white;
 }
 
-.navbar a.active {
+.navbar a.active:not(.profile-border):not(.logout) {
     background-color: var(--rentease-secondary);
     color: white;
 }
 
-.logout-btn {
-    background-color: var(--rentease-primary);
+.logout {
     color: var(--txt-primary);
     border: none;
     padding: 13px 16px;
@@ -81,7 +87,7 @@ form button:active {
     font-size: 16px;
 }
 
-.logout-btn:hover {
+.logout:hover {
     background-color: #FF6666;
 }
 
@@ -97,16 +103,10 @@ form button:active {
 }
 
 /* Change border style on click (active state) */
-.navbar .profile-link.active .sample-profile {
+.navbar .profile-border.active .sample-profile {
     border: 2px solid var(--rentease-secondary); /* Highlight with a thicker border */
 }
 
-.navbar .profile-link:hover .sample-profile {
-    border: 2px solid var(--rentease-hover-secondary);
-}
-
-/* Disable hover and active effect in profile link */
-.navbar .profile-link:hover,
-.navbar .profile-link.active {
-    background-color: transparent;
+.navbar .profile-border:hover .sample-profile {
+    border: 2px solid var(--rentease-secondary);
 }

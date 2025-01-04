@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post a Property</title>
-    <link rel="stylesheet" href="../css/customizedColor.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <script src="../js/navbarComponent.js" defer></script>
 </head>
 <body>
-    <navbar-component></navbar-component>
+    <x-navbar></x-navbar>
     <h1>Post a Property</h1>
 </body>
 </html>
