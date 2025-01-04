@@ -31,11 +31,11 @@
                     </select>
 
                     <!-- City Dropdown Box -->
-                    <select name="city" id="city" required>
-                        <!-- The value of option should be dynamic -->
+                    <select data-live-search="true" name="city" id="city" required>
                         <option value="" disabled selected>Please select city</option>
-                        <option value="Quezon City">Quezon City</option>
-                        <option value="Manila">Manila</option>
+                        @foreach ($cities as $city)
+                            <option value="{{ $city['name'] }}">{{ $city['name'] }}</option>
+                        @endforeach
                     </select>
 
                     <!-- Barangay Dropdown Box -->
@@ -44,8 +44,9 @@
                             This dropdown should be disable until the city has a value.
                         -->
                         <option value="" disabled selected>Please select barangay</option>
-                        <option value="Holy Spirit">Holy Spirit</option>
-                        <option value="Tondo">Tondo</option>
+                        {{-- @foreach ($barangays as $barangay) --}}
+                            {{-- <option value="{{ $barangay['name'] }}">{{ $barangay['name'] }}</option> --}}
+                        {{-- @endforeach --}}
                     </select>
 
                     <!-- input -->
