@@ -8,14 +8,13 @@
 
     {{-- Link css and javascript file --}}
     @vite('resources/css/properties.css')
+    @vite('resources/js/property.js')
 </head>
 <body>
     <x-navbar></x-navbar>
     <div class="properties-container">
-        <h1>Properties Page</h1>
-
         <div popover id="create-post-popover">
-            <h5>Create a Property Post</h5>
+            <h3>Create a Property Post</h3>
 
             <!-- Form -->
             <form action="" method="post">
@@ -31,36 +30,38 @@
                     </select>
 
                     <!-- City Dropdown Box -->
-                    <select data-live-search="true" name="city" id="city" required>
+                    <select name="city" id="city" data-city-code="" required>
                         <option value="" disabled selected>Please select city</option>
                         @foreach ($cities as $city)
-                            <option value="{{ $city['name'] }}">{{ $city['name'] }}</option>
+                            <option id="{{ $city['code'] }}"
+                                value="{{ $city['name'] }}">
+                                {{ $city['name'] }}
+                            </option>
                         @endforeach
                     </select>
 
                     <!-- Barangay Dropdown Box -->
                     <select name="barangay" id="barangay" required>
-                        <!-- The value of option should be dynamic.
-                            This dropdown should be disable until the city has a value.
+                        <!-- This dropdown should be dynamic based on the selected option in the city.
+                            You can use this for API call to get the barangays based on the id(stored as cityCode) of selected option in the city.
+                            https://psgc.gitlab.io/api/cities/{cityCode}/barangays/
                         -->
                         <option value="" disabled selected>Please select barangay</option>
-                        {{-- @foreach ($barangays as $barangay) --}}
-                            {{-- <option value="{{ $barangay['name'] }}">{{ $barangay['name'] }}</option> --}}
-                        {{-- @endforeach --}}
+                        <option value="{value of barangay}">{Value of Barangay}</option>
                     </select>
 
                     <!-- input -->
                     <input type="number" placeholder="Rental Price" id="rental-price" name="rental-price" required>
-                    <input type="number" placeholder="Maximum of Occupancy" id="max-occupancy" name="max-occupancy" required>
-                    <input type="text" placeholder="Write a description" id="description" name="description" required>
+                    <input type="number" placeholder="Maximum Occupancy" id="max-occupancy" name="max-occupancy" required>
+                    <textarea class="description" placeholder="Write a description" id="description" name="description" required></textarea>
 
-                    <button>Add all photos</button>
+                    <button class="add-photos-btn">Add all photos</button>
                     <button class="post-btn">Post</button>
                 </div>
             </form>
         </div>
 
-        <button popovertarget="create-post-popover">
+        <button class="create-a-post-btn" popovertarget="create-post-popover">
             Create a post
         </button>
     </div>
