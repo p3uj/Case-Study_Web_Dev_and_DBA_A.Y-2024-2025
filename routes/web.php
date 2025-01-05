@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\BarangaysController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\FindRommateOrTenantController;
 use App\Http\Controllers\UserProfileController;
+use App\Models\FindRoommateOrTenant;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -12,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::view('/home', 'home')->name('homepage');
     //Route::view('/property', 'properties')->name('propertiespage');
-    Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
+    //Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
     Route::view('/postaproperty', 'post-a-property')->name('postapropertypage');
     Route::view('/review', 'review')->name('reviewpage');
     Route::get('/userprofile', [UserProfileController::class, 'userInfo'])->name('userprofilepage');
     Route::get('/userprofile', [UserProfileController::class, 'propertyPost'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'showCityList'])->name('propertiespage');
-    // Route::view('/userprofile', 'user-profile')->name('userprofilepage');
+    Route::get('/findroommateortenant', [FindRommateOrTenantController::class, 'userInfo'])->name('findroommateortenantpage');
+    Route::get('/findroommateortenant', [FindRommateOrTenantController::class, 'showCityList'])->name('findroommateortenantpage');
 });
 
 // Ensure that only the unauthenticated user are the only one who can access this root route.
@@ -30,5 +34,3 @@ Route::middleware('guest')->get('/', function () {
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'loginpost'])->name('login.post');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
-//Route::get('city', [CityController::class, 'index'])->name('city');
