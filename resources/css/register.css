@@ -1,0 +1,137 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden; /* Prevents scrollbars if content overflows */
+}
+
+/* Left Section */
+.left-section {
+    flex: 3.1;
+    background: url('../images/LoginImage.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+/* Right Section */
+.right-section {
+    flex: 2;
+    background-color: #F5F5DC;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+/* Logo */
+.icon {
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+/* Heading */
+h1 {
+    font-size: 32px;
+    margin: 0;
+    color: #333;
+}
+
+p {
+    margin: 10px 0 30px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+/* Form Styles */
+form {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 1rem; /* Padding for better appearance */
+    margin-bottom: 0.75rem; /* Reduced margin to maintain space */
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Rounded corners */
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* Styles for Two Inputs in One Row */
+.form-row {
+    display: flex;
+    gap: 1rem; /* Space between first and last name fields */
+    margin-bottom: 0.25rem; /* Reduced margin to bring first and last name closer to email */
+}
+
+.form-row input {
+    flex: 1; /* Make the inputs take equal space */
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* Role Selection */
+.role-selection {
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.role-selection strong {
+    display: block; /* Make question appear on a new line */
+    margin-bottom: 10px; /* Space between the question and radio buttons */
+}
+
+.radio-buttons {
+    display: flex;
+    justify-content: center; /* Center the radio buttons */
+    gap: 20px; /* Space between the radio buttons */
+}
+
+/* Button Styles */
+button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Link Styles */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Error Message Styles */
+.text-danger {
+    color: red;
+    font-size: 12px;
+}
