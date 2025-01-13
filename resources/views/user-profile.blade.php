@@ -55,8 +55,8 @@
 
         <!-- Property Post Content -->
         <div class="tab-content">
-            @if ($properties->isNotEmpty())
-                @foreach ($properties as $property)
+            @if ($propertyPost->isNotEmpty())
+                @foreach ($propertyPost as $property)
                     <div id="property-post" class="property-post-content" data-isPostAvailable="{{$property->is_available}}">
                         <img src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Image 1">
                         <div class="property-info">
@@ -104,33 +104,27 @@
 
         <!-- Find Tenant Content -->
         <div class="tab-content">
-            <div class="find-tenant-content">
-                <div class="find-tenant-info">
-                    <p class="date-posted">February 14, 2024 at 11:50 AM</p>
-                    <p class="caption">As a landlord, I am currently seeking a responsible tenant for
-                        my spacious 2-bedroom apartment located in Makati, Metro Manila. The apartment is
-                        available for PHP 25,000 per month, with a security deposit of PHP 50,000. It is
-                        equipped with modern amenities, including built-in closets in both bedrooms, a fully
-                        equipped kitchen with appliances (stove, refrigerator, microwave), and air-conditioning
-                        units in every room. The open-plan living and dining area provides ample space, and the
-                        apartment also features a balcony with scenic views of the city skyline. Free parking is
-                        available, and high-speed internet access can be arranged for an additional fee. I am
-                        looking for a tenant who is responsible, quiet, and able to provide proof of income, such
-                        as payslips or bank statements. Smoking is not allowed inside the unit, and pets are only
-                        permitted by prior arrangement. If you are interested, please feel free to contact me at
-                        (0917) 123-4567 or email me at landlord.makati@example.com to schedule a viewing or for
-                        further inquiries. I look forward to hearing from you!
-
-                    </p>
-                </div>
-                <div class="find-tenant-bottom">
-                    <h2>Finding Tenant</h2>
-                    <div>
-                        <button class="delete-btn">Delete Post</button>
-                        <button class="isFound-btn">Already Found?</button>
+            @if ($findPost->isNotEmpty())
+                @foreach ($findPost as $searchingPost)
+                    <div class="find-tenant-content">
+                        <div class="find-tenant-info">
+                            <p class="date-posted">{{ $searchingPost->date_posted->format('F d, Y \a\t h:i A') }}</p>
+                            <p class="caption">{{ $searchingPost->description }}</p>
+                        </div>
+                        <div class="find-tenant-bottom">
+                            <h2>{{ $searchingPost->is_already_found ? 'Found' : ('Finding ' .$searchingPost->category_finding) }}</h2>
+                            <div>
+                                <button class="delete-btn">Delete Post</button>
+                                <button class="isFound-btn">{{ $searchingPost->is_already_found ? 'Not yet Found?' : 'Already Found?' }}</button>
+                            </div>
+                        </div>
                     </div>
+                @endforeach
+            @else
+                <div style="margin: 16px 135px;">
+                    <h1>No property posts!</h1>
                 </div>
-            </div>
+            @endif
         </div>
 
         <!-- Review from Tenant Content -->
