@@ -49,5 +49,27 @@
             Create a post
         </button>
     </div>
+
+    <div class="find-roommate-tenant-content">
+        @if ($posts->isNotEmpty())
+            @foreach ($posts as $post)
+                <div class="find-roommate-tenant-container" data-user-id="{{ $post->user_id }}">
+                    <div class="user-profile">
+                        <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Sample Profile">
+                    </div>
+                    <h4>{{ $post->firstname }} {{ $post->lastname }}</h4>
+                    <p class="date-posted">{{ $post->date_posted->format('F d, Y \a\t h:i A') }}</p><br>
+                    <div class="caption">
+                        <p>{{ $post->description }}</p>
+                    </div><br>
+                    <h4 class="category-finding">Finding {{$post->category_finding }}</h4>
+                </div>
+            @endforeach
+        @else
+            <div style="margin: 16px 135px;">
+                <h1>No Searching Posts!</h1>
+            </div>
+        @endif
+    </div>
 </body>
 </html>
