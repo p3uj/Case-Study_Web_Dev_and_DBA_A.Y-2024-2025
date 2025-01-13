@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FindRoommateOrTenant extends Model
@@ -29,5 +30,17 @@ class FindRoommateOrTenant extends Model
         });
 
         return $posts;
+    }
+
+    public static function getAuthUserFindingPost() {
+        // Fetch the finding post for the authenticated user
+        $userFindPost = self::where('user_id', Auth::id())->orderByDesc('date_posted')->get();
+
+        // Convert date_posted to Carbon instance
+        $userFindPost->each(function ($findPost) {
+            $findPost->date_posted = \Carbon\Carbon::parse($findPost->date_posted);
+        });
+
+        return $userFindPost;
     }
 }
