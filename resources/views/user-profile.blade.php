@@ -129,59 +129,43 @@
 
         <!-- Review from Tenant Content -->
         <div class="tab-content">
-            <div class="reviews-content">
-                <div class="review-info-container">
-                    <div class="user-review-profile">
-                        <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Sample Profile">
-                    </div>
-                    <div class="reviews">
-                        <h3>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i> <!--Empty star-->
-                        </h3>
-                    </div>
-                    <h1>❝</h1>
-                    <div class="review-caption">
-                        <p>As a landlord, I have had the pleasure of renting to
-                            Alice Guo for the past 10 years. Throughout the lease,
-                            she has consistently been a respectful and responsible
-                            tenant. She has always paid rent on time and kept the
-                            property in excellent condition. Any maintenance issues
-                            were promptlysfsdfsdf.
-                            As a landlord, I have had the pleasure of renting to
-                            Alice Guo for the past 10 years. Throughout the lease,
-                            she has consistently been a respectful and responsible
-                            tenant. She has always paid rent on time and kept the
-                            property in excellent condition. Any maintenance issues
-                            were promptlysfsdfsdf.
-                            As a landlord, I have had the pleasure of renting to
-                            Alice Guo for the past 10 years. Throughout the lease,
-                            she has consistently been a respectful and responsible
-                            tenant. She has always paid rent on time and kept the
-                            property in excellent condition. Any maintenance issues
-                            were promptlysfsdfsdf.
-                            As a landlord, I have had the pleasure of renting to
-                            Alice Guo for the past 10 years. Throughout the lease,
-                            she has consistently been a respectful and responsible
-                            tenant. She has always paid rent on time and kept the
-                            property in excellent condition. Any maintenance issues
-                            were promptlysfsdfsdf.
-                            As a landlord, I have had the pleasure of renting to
-                            Alice Guo for the past 10 years. Throughout the lease,
-                            she has consistently been a respectful and responsible
-                            tenant. She has always paid rent on time and kept the
-                            property in excellent condition. Any maintenance issues
-                            were promptlysfsdfsdf.
-                        </p>
-                    </div>
-                    <h1 class="quotation-mark-right">❞</h1>
-                    <h4>- Do Kyung-Soo</h4>
-                    <p class="date-review">July 07, 2024 at 12:00 AM</p>
+            @if ($reviews->isNotEmpty())
+                <div class="reviews-content">
+                    @foreach ($reviews as $review)
+                        <div class="review-info-container">
+                            <div class="user-review-profile">
+                                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Sample Profile">
+                            </div>
+                            <div class="reviews">
+                                <h3>
+                                    @for ($star = 1; $star <= 5; $star++)
+                                        <!-- If the star is less than or equal to average rating, show the filled star -->
+                                        @if ($star <= $review->rating)
+                                            <i class="fas fa-star"></i>
+                                        <!-- Otherwise, show empty star -->
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                </h3>
+
+                            </div>
+                            <h1>❝</h1>
+                            <div class="review-caption">
+                                <p>{{ $review->review_text }}</p>
+                            </div>
+                            <h1 class="quotation-mark-right">❞</h1>
+                            <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
+                            <p class="date-review">{{ $review->date_review->format('F d, Y \a\t h:i A') }}</p>
+                        </div>
+                    @endforeach
                 </div>
-            </div>
+            @else
+                <div style="margin: 16px 135px;">
+                    <h1>No Review!</h1>
+                </div>
+            @endif
+
         </div>
     </div>
 </body>
