@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FindRoommateOrTenant;
 use App\Models\PropertyInfo;
 use App\Models\PropertyPost;
+use App\Models\Reviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -26,6 +27,13 @@ class UserProfileController extends Controller
         return $findPost;
     }
 
+    private function reviewsReceivedByAuthUser() {
+        // Call the getAllReviewsForAuthUser() method in the Reviews model to fetch all the reviews that received by authenticated user
+        $reviewReceived = Reviews::getAllReviewsForAuthUser();
+
+        return $reviewReceived;
+    }
+
     public function index() {
         // Call the getUserAuthInfo method in the User model to fetch the info of the authenticated user
         $userInfo = User::getUserAuthInfo();
@@ -36,10 +44,14 @@ class UserProfileController extends Controller
         // Call the findRoommateOrTenantPost() method to fetch the post for the authenticated user
         $findingPost = $this->findRoommateOrTenantPost();
 
+        // Call the reviewsReceivedByAuthUser() method to fetch all the reviews that the authenticated user received
+        $reviews = $this->reviewsReceivedByAuthUser();
+
         return view('user-profile', [
             'user' => $userInfo
             ,'propertyPost' => $properties
             ,'findPost' => $findingPost
+            ,'reviews' => $reviews
         ]);
     }
 }
