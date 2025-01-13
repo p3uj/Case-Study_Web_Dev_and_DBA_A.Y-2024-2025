@@ -21,8 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/userprofile', [UserProfileController::class, 'userInfo'])->name('userprofilepage');
     Route::get('/userprofile', [UserProfileController::class, 'propertyPost'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'showCityList'])->name('propertiespage');
-    Route::get('/findroommateortenant', [FindRommateOrTenantController::class, 'userInfo'])->name('findroommateortenantpage');
-    Route::get('/findroommateortenant', [FindRommateOrTenantController::class, 'showCityList'])->name('findroommateortenantpage');
+    Route::get('/findroommateortenant', [FindRommateOrTenantController::class, 'index'])->name('findroommateortenantpage');
 });
 
 // Ensure that only unauthenticated users can access this root route.
