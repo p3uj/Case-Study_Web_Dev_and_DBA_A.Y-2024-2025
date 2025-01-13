@@ -39,7 +39,7 @@
     background-color: var(--rentease-secondary);
     border: none;
     border-radius: 20px;
-    box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.3);
 }
 
 .form-container {
@@ -48,6 +48,10 @@
     align-items: center; /* Center items horizontally */
     gap: 10px; /* Add space between items */
     width: 30vw;
+}
+
+.form-container select {
+    border-radius: 15px;
 }
 
 .post-btn {
@@ -72,7 +76,152 @@
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 15px;
     font-size: 16px;
     resize: none;
+}
+
+.find-roommate-tenant-content {
+    display: grid;
+    column-gap: 30px;
+    grid-template-columns: repeat(3, minmax(400px, 1fr));
+    /* background-color: var(--rentease-secondary); */
+    justify-items: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 38px;
+    width: 100%;
+    /* box-shadow: 5px 7px 25px var(--rentease-hover-secondary); */
+    padding-left: 135px;
+    padding-right: 135px;
+    padding-bottom: 30px;
+}
+
+/* For smaller screens */
+@media (max-width: 1200px) {
+    .find-roommate-tenant-content {
+        grid-template-columns: repeat(2, minmax(400px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .find-roommate-tenant-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.find-roommate-tenant-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 120px 38px 38px 38px;
+    background-color: rgba(189, 162, 126, 0.2);
+    /* background-color: rgba(217, 217, 179, 0.5); */
+    border: 1px solid var(--rentease-secondary);
+    width: 371px;
+    height: 522px;
+    overflow: visible;
+    border-radius: 45px;
+    position: relative;
+    margin-top: 90px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s; /* Transition all properties including border color */
+}
+
+.find-roommate-tenant-container:hover {
+    transition: scale(1.2);
+    background-color: var(--rentease-secondary);
+    box-shadow: 0px 4px 20px rgba(189, 162, 126, 0.5)
+}
+
+.user-profile {
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 3px solid var(--rentease-secondary);
+    outline: 1px solid var(--rentease-primary);
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.user-profile img:hover {
+    transform: scale(1.2);
+}
+
+.find-roommate-tenant-content h1 {
+    font-size: 38px;
+}
+
+.quotation-mark-right {
+    display: flex;
+    justify-content: right;
+}
+
+.find-roommate-tenant-container .caption,
+h4,
+.date-posted {
+    align-self: center;
+}
+
+.caption {
+    display: flex;
+    max-height: 200px;
+    overflow: auto;
+    line-height: 30px;
+    text-align: center;
+}
+
+/* the date-posted is place inside the find-roommate-tenant-container */
+.date-posted {
+    color: var(--txt-secondary);
+    margin-top: 8px;
+    bottom: 38px;
+}
+
+.find-roommate-tenant-content ::backdrop{
+    background-color: black;
+}
+
+/* Cuztomize the scrollbar */
+/* Target the scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the vertical scrollbar */
+    height: 10px; /* Height of the horizontal scrollbar */
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+    background: rgba(240, 240, 240, 0.3); /* Color of the scrollbar track */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid #f0f0f0; /* Padding around the thumb */
+}
+
+/* Scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #0056b3; /* Darker color when hovering */
+}
+
+/* Styling for the backdrop of the popover in the top layer */
+[popover]:-internal-popover-in-top-layer::backdrop {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.5);
+    pointer-events: none !important;
+    inset: 0px;
 }
