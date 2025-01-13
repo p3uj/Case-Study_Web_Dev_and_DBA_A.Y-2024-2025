@@ -18,7 +18,9 @@
         </form>
         <a href="{{ route("homepage")}}" class="{{ Route::currentRouteName() === 'homepage' ? 'active' : '' }}">Home</a>
         <a href="{{ route("propertiespage")}}" class="{{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}">Properties</a>
-        <a href="{{ route("findroommateortenantpage")}}" class="{{ Route::currentRouteName() === 'findroommateortenantpage' ? 'active' : '' }}">Find Roommate/Tenant</a>
+        <a href="{{ route("findroommateortenantpage")}}" class="{{ Route::currentRouteName() === 'findroommateortenantpage' ? 'active' : '' }}">
+            Find {{ Auth::user()->role === 'Landlord' ? 'Tenant' : 'Roommate' }}
+        </a>
         <a href="{{ route("postapropertypage")}}" class="{{ Route::currentRouteName() === 'postapropertypage' ? 'active' : '' }}">Post a Property</a>
         <a href="{{ route("reviewpage")}}" class="{{ Route::currentRouteName() === 'reviewpage' ? 'active' : '' }}">Review</a>
         <a href="{{ route("logout") }}" class="logout">Logout</a>
