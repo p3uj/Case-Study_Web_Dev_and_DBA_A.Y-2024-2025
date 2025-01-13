@@ -11,12 +11,16 @@ class FindRoommateOrTenant extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'date_posted' => 'datetime', // Ensure it's cast to a Carbon instance
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public static function getUserInfoAndItsFindingPost(){
+    public static function getAllFindingPostsWithUser(){
         // Query the database
         $posts = DB::table('find_roommate_or_tenants as find_post')
                     ->join('users', 'find_post.user_id', '=', 'users.id') // Inner Join
@@ -35,11 +39,6 @@ class FindRoommateOrTenant extends Model
     public static function getAuthUserFindingPost() {
         // Fetch the finding post for the authenticated user
         $userFindPost = self::where('user_id', Auth::id())->orderByDesc('date_posted')->get();
-
-        // Convert date_posted to Carbon instance
-        $userFindPost->each(function ($findPost) {
-            $findPost->date_posted = \Carbon\Carbon::parse($findPost->date_posted);
-        });
 
         return $userFindPost;
     }
