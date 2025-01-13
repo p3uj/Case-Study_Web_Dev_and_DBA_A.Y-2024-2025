@@ -267,16 +267,17 @@ body{
 .reviews-content {
     display: grid;
     column-gap: 30px;
-    /*grid-template-columns: auto auto auto; /* contains 3 columns with auto weight*/
     grid-template-columns: repeat(3, minmax(400px, 1fr));
+    justify-items: center;
+    align-items: center;
     background-color: var(--rentease-secondary);
-    height: 646px;
     overflow: hidden;
-    margin-bottom: 38px;
+    /* margin-bottom: 38px; */
     width: 100vw;
     box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
     padding-left: 135px;
     padding-right: 135px;
+    padding-bottom: 30px;
 }
 
 /* For smaller screens */
@@ -310,7 +311,7 @@ body{
 
 .review-info-container:hover {
     transition: scale(1.2);
-    box-shadow: 0px 4px 50px var(--rentease-primary)
+    box-shadow: 0px 4px 30px rgba(245, 245, 220, 0.5);
 }
 
 .user-review-profile {
