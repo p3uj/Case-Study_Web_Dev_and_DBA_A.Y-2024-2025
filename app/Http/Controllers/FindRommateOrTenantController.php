@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Api\BarangayController;
 use App\Http\Controllers\Api\CityController;
 use App\Models\FindRoommateOrTenant;
 use Illuminate\Http\Request;
@@ -10,26 +11,20 @@ use App\Models\User;
 
 class FindRommateOrTenantController extends Controller
 {
-    private function showCityList(){
-        // Call the CityController to fetch the data from the external API
-        $cities = CityController::index();
-
-        return $cities;
-    }
-
     public function index(){
         // Call the getUserAuthInfo() method in the User model to retrieve the authenticated user's information
         $user = User::getUserAuthInfo();
 
-        // Call the showCityList() method to fetch the city
-        $cityList = $this->showCityList();
+        $city = CityController::index();
+        $barangay = BarangayController::index();
 
         // Use the User model to call the getAllFindingPostsWithUser() method to get user info and their related posts
         $usersPosts = FindRoommateOrTenant::getAllFindingPostsWithUser();
 
         return view('find-roommate-or-tenant', [
             'user' => $user
-            ,'cities' => $cityList
+            ,'cities' => $city
+            ,'barangays' => $barangay
             ,'posts' => $usersPosts
         ]);
     }
