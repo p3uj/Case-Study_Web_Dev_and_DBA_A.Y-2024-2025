@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
-    public function showCityList(){
-        // Call the CityController to fetch the data from the external API
-        $cities = CityController::index();
+    public function index() {
+        // Call the index method in the CityController and BarangayController to fetch all the city and barangay list from external API
+        $city = CityController::index();
+        $barangay = BarangayController::index();
 
         return view('properties', [
-            'cities' => $cities,
+            'cities' => $city
+            ,'barangays' => $barangay
         ]);
     }
 }
