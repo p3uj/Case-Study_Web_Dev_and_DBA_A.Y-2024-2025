@@ -25,6 +25,7 @@ class FindRoommateOrTenant extends Model
         $posts = DB::table('find_roommate_or_tenants as find_post')
                     ->join('users', 'find_post.user_id', '=', 'users.id') // Inner Join
                     ->select('find_post.*', 'users.firstname', 'users.lastname') // Select only the specific column
+                    ->where('find_post.is_already_found', '=', 0) // Filter to get only the posts that is not already found
                     ->orderByDesc('find_post.date_posted')
                     ->get();
 
