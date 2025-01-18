@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertyController;
-use App\Http\Controllers\FindRommateOrTenantController;
+use App\Http\Controllers\FindRoommateOrTenantController;
 use App\Http\Controllers\UserProfileController;
 use App\Models\FindRoommateOrTenant;
 use Illuminate\Container\Attributes\Auth;
@@ -20,7 +20,10 @@ Route::middleware('auth')->group(function () {
     Route::view('/review', 'review')->name('reviewpage');
     Route::get('/userprofile', [UserProfileController::class, 'index'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
-    Route::get('/findroommateortenant', [FindRommateOrTenantController::class, 'index'])->name('findroommateortenantpage');
+    Route::get('/findroommateortenant', [FindRoommateOrTenantController::class, 'index'])->name('findroommateortenantpage');
+
+    // Post routes
+    Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
 });
 
 // Ensure that only unauthenticated users can access this root route.
