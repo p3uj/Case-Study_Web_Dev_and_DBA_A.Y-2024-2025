@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
 
-class FindRommateOrTenantController extends Controller
+class FindRoommateOrTenantController extends Controller
 {
     public function index(){
         // Call the getUserAuthInfo() method in the User model to retrieve the authenticated user's information
