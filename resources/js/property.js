@@ -45,10 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update the hidden input field with the currently selected barangay value from the dropdown
         barangayDropdown.addEventListener('change', function () {
-            var selectedBarangay = document.getElementById('selected-barangay'); // Get the element that has an id of 'selected-barnagay' (the hidden input in this case)
-            selectedBarangay.value = this.value; // Set the value of the hidden input
+            var selectedBarangayOption = this.options[this.selectedIndex];  // Get the selected option
 
-            console.log('selected barangay:', selectedBarangay.value);
+            console.log('barangay value:', selectedBarangayOption)
         });
 
         // Check the barangay dropdown if the value is null
