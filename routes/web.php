@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::view('/postaproperty', 'post-a-property')->name('postapropertypage');
     Route::view('/review', 'review')->name('reviewpage');
     Route::get('/userprofile', [UserProfileController::class, 'index'])->name('userprofilepage');
-    Route::get('/property', [PropertyController::class, 'showCityList'])->name('propertiespage');
+    Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
     Route::get('/findroommateortenant', [FindRommateOrTenantController::class, 'index'])->name('findroommateortenantpage');
 });
 
