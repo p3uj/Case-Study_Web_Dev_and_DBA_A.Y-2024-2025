@@ -169,8 +169,7 @@
 }
 
 .find-roommate-tenant-container .caption,
-h4,
-.date-posted {
+h4, .date-posted, .location {
     align-self: center;
 }
 
@@ -183,10 +182,14 @@ h4,
 }
 
 /* the date-posted is place inside the find-roommate-tenant-container */
-.date-posted {
+.date-posted, .location {
     color: var(--txt-secondary);
     margin-top: 8px;
     bottom: 38px;
+}
+
+.location {
+    font-weight: 600;
 }
 
 .find-roommate-tenant-content ::backdrop{
