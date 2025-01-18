@@ -15,7 +15,8 @@
             <h3>Post a {{ $user->role === 'Tenant' ? 'Roommate' : 'Tenant'}} Search</h3>
 
             <!-- Form -->
-            <form id="form" action="" method="post">
+            <form id="form" action="{{ route("findroommateortenant.post") }}" method="post">
+                @csrf
                 <div class="form-container">
                     <!-- City Dropdown Box -->
                     <select name="city" id="city" data-city-code="" required>
@@ -38,9 +39,6 @@
                         <!-- Barangay options will be populated by property.js  -->
                     </select>
 
-                    <!-- Hidden input to store the selected barangay -->
-                    <input type="hidden" id="selected-barangay" name="selected-barangay" value="" />
-
                     <!-- input -->
                     <textarea class="description" placeholder="Write a description" id="description" name="description" required></textarea>
 
@@ -62,6 +60,10 @@
                         <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Sample Profile">
                     </div>
                     <h4>{{ $post->firstname }} {{ $post->lastname }}</h4>
+                    <p class="location">
+                        <img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; hight: 16px; opacity: 0.5">
+                        {{ $post->barangay }}, {{ $post->city }}
+                    </p>
                     <p class="date-posted">{{ $post->date_posted->format('F d, Y \a\t h:i A') }}</p><br>
                     <div class="caption">
                         <p>{{ $post->description }}</p>
