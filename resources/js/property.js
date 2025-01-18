@@ -1,9 +1,61 @@
-document.getElementById('city').addEventListener('change', function () {
-    var selectedOption = this.options[this.selectedIndex];  // Get the index of the selected option.
-    var cityCode = selectedOption.id;   // Get the id of the selected option.
+document.addEventListener('DOMContentLoaded', () => {
+    var barangayDropdown = document.getElementById('barangay'); // Get the barangay dropdown element
+    barangayDropdown.disabled = true; // Disable the barangay dropdown initially
+    const form = document.getElementById('form');
 
-    console.log("Selected City Code:", cityCode);  // For debugging
+    document.getElementById('city').addEventListener('change', function () {
+        var selectedOption = this.options[this.selectedIndex];  // Get the selected option
+        var cityCode = selectedOption.id;  // Get the city code from the selected option
+        const barangayList = JSON.parse(document.getElementById('barangay').dataset.barangayList);  // Get barangay data from the dataset attribute
 
-    // Set the data attribute of the data-city-code to the value of cityCode variable.
-    document.getElementById('city').setAttribute('data-city-code', cityCode);
+        console.log('Data type:', typeof barangayList);
+        console.log('Barangay list:', barangayList);
+        console.table(barangayList);
+
+        console.log("Selected City Code:", cityCode);  // For debugging
+
+        // Set the data attribute for the city code on the city dropdown
+        document.getElementById('city').setAttribute('data-city-code', cityCode);
+
+        barangayDropdown.disabled = false; // Enable the barangay dropdown
+
+        // Filter barangay list based on the cityCode
+        var filteredBarangays = barangayList.filter(function (barangay) {
+            return barangay.cityCode === cityCode;  // Match barangays with the selected city code
+        });
+
+        // Clear previous barangay options
+        barangayDropdown.innerHTML = '';
+
+        // Add a default "Select Barangay" option
+        var defaultOption = document.createElement('option');
+        defaultOption.text = 'Please select barangay';
+        defaultOption.value = ""; // Set the value as null
+        defaultOption.disabled = true;  // Disable the default option
+        defaultOption.selected = true;  // Make it the default selected option
+        barangayDropdown.appendChild(defaultOption);
+
+        // Populate barangay dropdown with filtered barangays
+        filteredBarangays.forEach(function (barangay) {
+            var option = document.createElement('option');
+            option.value = barangay.name;  // Set value to barangay name
+            option.text = barangay.name;  // Set the display text to barangay name
+            barangayDropdown.appendChild(option);
+        });
+
+        // Update the hidden input field with the currently selected barangay value from the dropdown
+        barangayDropdown.addEventListener('change', function () {
+            var selectedBarangay = document.getElementById('selected-barangay'); // Get the element that has an id of 'selected-barnagay' (the hidden input in this case)
+            selectedBarangay.value = this.value; // Set the value of the hidden input
+
+            console.log('selected barangay:', selectedBarangay.value);
+        });
+
+        // Check the barangay dropdown if the value is null
+        form.addEventListener('submit', function (event) {
+            if (barangayDropdown.value === "") {
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    });
 });
