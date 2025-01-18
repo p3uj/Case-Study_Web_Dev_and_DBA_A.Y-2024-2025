@@ -17,7 +17,7 @@
             <h3>Create a Property Post</h3>
 
             <!-- Form -->
-            <form action="" method="post">
+            <form id="form" action="" method="post">
                 <div class="form-container">
                     <!-- Unit Category Dropdown Box -->
                     <select name="unit-category" id="unit-category" required>
@@ -41,14 +41,18 @@
                     </select>
 
                     <!-- Barangay Dropdown Box -->
-                    <select name="barangay" id="barangay" required>
+                    <select name="barangay" id="barangay" data-barangay-list="{{ json_encode($barangays) }}" required>
                         <!-- This dropdown should be dynamic based on the selected option in the city.
                             You can use this for API call to get the barangays based on the id(stored as cityCode) of selected option in the city.
                             https://psgc.gitlab.io/api/cities/{cityCode}/barangays/
                         -->
+
                         <option value="" disabled selected>Please select barangay</option>
-                        <option value="{value of barangay}">{Value of Barangay}</option>
+                        <!-- Barangay options will be populated by property.js  -->
                     </select>
+
+                    <!-- Hidden input to store the selected barangay -->
+                    <input type="hidden" id="selected-barangay" name="selected-barangay" value="" />
 
                     <!-- input -->
                     <input type="number" placeholder="Rental Price" id="rental-price" name="rental-price" required>
