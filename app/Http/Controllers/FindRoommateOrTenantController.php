@@ -14,7 +14,7 @@ class FindRoommateOrTenantController extends Controller
 {
     public function index(){
         // Call the getUserAuthInfo() method in the User model to retrieve the authenticated user's information
-        $user = User::getUserAuthInfo();
+        $user = User::getUserAuthInfo(Auth::id());
 
         $city = CityController::index();
         $barangay = BarangayController::index();
