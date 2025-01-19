@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -71,7 +73,8 @@ class User extends Authenticatable
         return $this->hasMany(Reviews::class);
     }
 
-    public static function getUserAuthInfo() {
-        return Auth::user();
+    public static function getUserAuthInfo($id) {
+        $userInfo = DB::select('EXEC AuthenticatedUserInfo ?', [$id]); // Used stored procedure and the return will be an array
+        return $userInfo[0]; // Returning the first element of the result array, which contains the authenticated user's information
     }
 }
