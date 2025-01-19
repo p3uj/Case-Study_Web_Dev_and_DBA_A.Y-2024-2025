@@ -53,7 +53,7 @@
     </div>
 
     <div class="find-roommate-tenant-content">
-        @if ($posts->isNotEmpty())
+        @if (!empty($posts))
             @foreach ($posts as $post)
                 <div class="find-roommate-tenant-container" data-user-id="{{ $post->user_id }}">
                     <div class="user-profile">
@@ -64,7 +64,7 @@
                         <img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; hight: 16px; opacity: 0.5">
                         {{ $post->barangay }}, {{ $post->city }}
                     </p>
-                    <p class="date-posted">{{ $post->date_posted->format('F d, Y \a\t h:i A') }}</p><br>
+                    <p class="date-posted">{{ $post->date_posted }}</p><br>
                     <div class="caption">
                         <p>{{ $post->description }}</p>
                     </div><br>
