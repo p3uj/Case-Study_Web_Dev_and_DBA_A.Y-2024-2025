@@ -13,9 +13,9 @@ use App\Models\User;
 
 class UserProfileController extends Controller
 {
-    private function propertyPost() {
+    private function propertyPost($userId) {
         // Call the PropertyPost model to get the property posts of the authenticated user
-        $propertyPost = PropertyPost::getUserPropertyPost();
+        $propertyPost = PropertyPost::getAuthUserPropertyPosts($userId);
 
         return $propertyPost;
     }
@@ -38,8 +38,8 @@ class UserProfileController extends Controller
         // Call the getUserAuthInfo method in the User model with the id of the authenticated user to fetch its info
         $userInfo = User::getUserAuthInfo(Auth::id());
 
-        // Call the propertyPost method to fetch the property post of an authenticated user
-        $properties = $this->propertyPost();
+        // Call the propertyPost method with authenticated user id to fetch the property post of an authenticated user
+        $properties = $this->propertyPost(Auth::id());
 
         // Call the findRoommateOrTenantPost() method to fetch the post for the authenticated user
         $findingPost = $this->findRoommateOrTenantPost();
