@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Helpers\DateConversion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PropertyPost extends Model
 {
@@ -31,13 +33,12 @@ class PropertyPost extends Model
     }
 
     // Retrieve all data from property post
-    public static function getUserPropertyPost(){
-        // Get the property posts with related PropertyInfo and Reviews based on the id of the authenticated user
-        return self::where('user_id', Auth::id())->with(['propertyInfo', 'reviews'])->get();
-    }
+    public static function getAuthUserPropertyPosts($userId){
+        $authUserPropertyPosts = DB::select('EXEC GetAuthUserPropertyPosts ?', [$userId]); // Used stored procedure and the return will be an array
 
-    // Average the ratings from reviews
-    public function averageRating(){
-        return $this->reviews->avg('rating');
+        // Call the formatDate method in the DateConversion class, passing the $authUserPropertyPosts and the column name 'date_posted'
+        $authUserPropertyPosts = DateConversion::formatDate($authUserPropertyPosts, 'date_posted');
+
+        return $authUserPropertyPosts;
     }
 }
