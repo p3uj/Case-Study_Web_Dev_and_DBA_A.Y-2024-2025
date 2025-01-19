@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class FindRoommateOrTenantController extends Controller
 {
@@ -30,20 +31,26 @@ class FindRoommateOrTenantController extends Controller
         ]);
     }
 
-    // Insert data into the 'find_roommate_or_tenants' table in the database.
+    // Insert data into the 'find_roommate_or_tenants' table in the database
     public function store(Request $request) {
-        $searchingPost = new FindRoommateOrTenant();
-        $searchingPost->user_id = Auth::id();
-        $searchingPost->date_posted = Carbon::now();
-        $searchingPost->city = $request->city;
-        $searchingPost->barangay = $request->barangay;
-        $searchingPost->description = $request->description;
-        $searchingPost->category_finding = (Auth::user()->role == 'Tenant' ? 'Roommate' : 'Tenant');
+        // Extracting the variables for clarity and readability
+        $userId = Auth::id(); // Id of the authenticated user
+        $datePosted = Carbon::now(); // Current date and time
+        $city = $request->city; // city from the request
+        $barangay = $request->barangay; // barangay from the request
+        $description = $request->description; // description from the request
+        $categoryFinding = Auth::user()->role == 'Tenant' ? 'Roommate' : 'Tenant'; // category finding based on the authenticated user role
 
-        if ($searchingPost->save()) {
-            return redirect()->back();
-        }
+        // Used a stored procedure to store the data
+        DB::statement('EXEC StoreSearchingPost ?, ?, ?, ?, ?, ?', [
+            $userId
+            ,$datePosted
+            ,$city
+            ,$barangay
+            ,$description
+            ,$categoryFinding
+        ]);
 
-        return "Error occured";
+        return redirect()->back();
     }
 }
