@@ -55,34 +55,34 @@
 
         <!-- Property Post Content -->
         <div class="tab-content">
-            @if ($propertyPost->isNotEmpty())
+            @if (!empty($propertyPost))
                 @foreach ($propertyPost as $property)
                     <div id="property-post" class="property-post-content" data-isPostAvailable="{{$property->is_available}}">
                         <img src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Image 1">
                         <div class="property-info">
-                            <p class="date-posted">{{ $property->date_posted->format('F d, Y \a\t h:i A') }}</p>
+                            <p class="date-posted">{{ $property->date_posted }}</p>
                             <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
-                                {{ $property->propertyInfo->city }}, {{ $property->propertyInfo->barangay }}
+                                {{ $property->city }}, {{ $property->barangay }}
                             </h2>
                             <div class="tags">
-                                <a class="unit-type">{{ $property->propertyInfo->unit_category }}</a>
-                                <a class="unit-price">₱{{ number_format($property->propertyInfo->rental_price, 2) }} /month</a>
+                                <a class="unit-type">{{ $property->unit_category }}</a>
+                                <a class="unit-price">₱{{ number_format($property->rental_price, 2) }} /month</a>
                             </div>
                             <p class="description">
-                                {{ $property->propertyInfo->description }}
+                                {{ $property->description }}
                             </p>
                             <div class="property-bottom">
                                 <div class="reviews">
                                     @for ($star = 1; $star <= 5; $star++)
                                         <!-- If the star is less than or equal to average rating, show the filled star -->
-                                        @if ($star <= ($property->averageRating() ?? 0))
+                                        @if ($star <= $property->Rating)
                                             <i class="fas fa-star"></i>
                                         <!-- Otherwise, show empty star -->
                                         @else
                                             <i class="far fa-star"></i>
                                         @endif
                                     @endfor
-                                    <p>{{ $property->averageRating() ?? 0 }} out of 5</p>
+                                    <p>{{ $property->Rating }} out of 5</p>
                                 </div>
                                 <div class="">
                                     <button class="delete-btn">Delete</button>
