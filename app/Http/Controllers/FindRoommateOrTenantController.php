@@ -13,7 +13,7 @@ use Carbon\Carbon;
 class FindRoommateOrTenantController extends Controller
 {
     public function index(){
-        // Call the getUserAuthInfo() method in the User model to retrieve the authenticated user's information
+        // Call the getUserAuthInfo method in the User model with the id of the authenticated user to retrieve its info
         $user = User::getUserAuthInfo(Auth::id());
 
         $city = CityController::index();
