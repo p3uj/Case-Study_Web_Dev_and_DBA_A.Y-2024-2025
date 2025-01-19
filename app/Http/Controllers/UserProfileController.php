@@ -35,8 +35,8 @@ class UserProfileController extends Controller
     }
 
     public function index() {
-        // Call the getUserAuthInfo method in the User model to fetch the info of the authenticated user
-        $userInfo = User::getUserAuthInfo();
+        // Call the getUserAuthInfo method in the User model with the id of the authenticated user to fetch its info
+        $userInfo = User::getUserAuthInfo(Auth::id());
 
         // Call the propertyPost method to fetch the property post of an authenticated user
         $properties = $this->propertyPost();
