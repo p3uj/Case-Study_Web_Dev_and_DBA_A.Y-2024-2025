@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -40,6 +41,16 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        // Create stored procedure
+        DB::statement("
+            CREATE PROCEDURE AuthenticatedUserInfo (@Id BIGINT)
+            AS
+            BEGIN
+                SELECT * FROM users
+                WHERE id = @Id
+            END
+        ");
     }
 
     /**
@@ -47,6 +58,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Drop the stored procedure
+        DB::statement("DROP PROCEDURE IF EXISTS AuthenticatedUserInfo");
+
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');

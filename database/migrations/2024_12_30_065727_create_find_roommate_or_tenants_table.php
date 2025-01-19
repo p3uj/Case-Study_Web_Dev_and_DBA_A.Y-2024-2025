@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('find_roommate_or_tenants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key referencing users(id)
+            $table->foreignId('user_id')->constrained('users'); // Foreign key referencing users(id)
             $table->dateTime('date_posted');
             $table->string('city');
             $table->string('barangay');
@@ -22,6 +23,47 @@ return new class extends Migration
             $table->string('category_finding');
             $table->timestamps();
         });
+
+        // Create stored procedure
+        // Define stored procedure to get all finding posts with user
+        DB::statement("
+            CREATE PROCEDURE GetAllFindingPostsWithUser
+            AS
+            BEGIN
+                SELECT find_post.*, users.firstname, users.lastname
+                FROM find_roommate_or_tenants AS find_post
+                INNER JOIN users
+                    ON find_post.user_id = users.id
+                WHERE find_post.is_already_found = 0
+                ORDER BY find_post.date_posted DESC
+            END
+        ");
+
+        // Define stored procedure to insert a data into find_roommate_or_tenants table
+        DB::statement("
+            CREATE PROCEDURE StoreSearchingPost
+                @userId BIGINT
+                ,@datePosted DATETIME
+                ,@city NVARCHAR(255)
+                ,@barangay NVARCHAR(255)
+                ,@description NVARCHAR(MAX)
+                ,@categoryFinding NVARCHAR(255)
+            AS
+            BEGIN
+                INSERT INTO find_roommate_or_tenants (user_id
+                    ,date_posted
+                    ,city
+                    ,barangay
+                    ,description
+                    ,category_finding)
+                VALUES (@userId
+                    ,@datePosted
+                    ,@city
+                    ,@barangay
+                    ,@description
+                    ,@categoryFinding)
+            END
+        ");
     }
 
     /**
@@ -29,6 +71,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Drop the stored procedure
+        DB::statement("DROP PROCEDURE IF EXISTS AuthenticatedUserInfo");
+        DB::statement("DROP PROCEDURE IF EXISTS StoreSearchingPost");
+
         Schema::dropIfExists('find_roommate_or_tenants');
     }
 };
