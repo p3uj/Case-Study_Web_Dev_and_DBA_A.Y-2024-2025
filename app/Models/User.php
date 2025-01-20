@@ -73,8 +73,8 @@ class User extends Authenticatable
         return $this->hasMany(Reviews::class);
     }
 
-    public static function getUserAuthInfo($id) {
-        $userInfo = DB::select('EXEC AuthenticatedUserInfo ?', [$id]); // Used stored procedure and the return will be an array
+    public static function getUserInfoById($id) {
+        $userInfo = DB::select('EXEC GetUserInfoById ?', [$id]); // Used stored procedure and the return will be an array
         return $userInfo[0]; // Returning the first element of the result array, which contains the authenticated user's information
     }
 }
