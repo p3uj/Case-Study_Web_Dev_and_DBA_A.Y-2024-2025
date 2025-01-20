@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('unit_photos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_info_id')->constrained('property_infos')->onDelete('cascade');
+            $table->foreignId('property_info_id')->constrained('property_infos');
             $table->string('photo_path');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->boolean('is_deleted')->default(false);
         });
     }
 

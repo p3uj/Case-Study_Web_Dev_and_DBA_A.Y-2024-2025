@@ -14,17 +14,18 @@ return new class extends Migration
     {
         Schema::create('property_posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_info_id')->constrained('property_infos')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->dateTime('date_posted');
+            $table->foreignId('property_info_id')->constrained('property_infos');
+            $table->foreignId('user_id')->constrained('users');
             $table->boolean('is_available')->default(true);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->boolean('is_deleted')->default(false);
         });
 
         // Create stored procedure
         // Define stored procedure to get all the property post of the authenticated user
         DB::statement("
-            CREATE PROCEDURE GetAuthUserPropertyPosts
+            CREATE PROCEDURE GetPropertyPostsByUserId
                 @userId BIGINT
             AS
             BEGIN
@@ -45,8 +46,8 @@ return new class extends Migration
                     FROM reviews
                     GROUP BY property_post_id
                 ) AS ReviewRating ON ReviewRating.property_post_id = PPost.id
-                WHERE users.id = @userId
-                ORDER BY PPost.date_posted DESC
+                WHERE users.id = @userId AND PPost.is_deleted = 0
+                ORDER BY PPost.updated_at DESC
             END
         ");
     }
@@ -57,6 +58,8 @@ return new class extends Migration
     public function down(): void
     {
         // Drop the stored procedure
-        DB::statement("DROP PROCEDURE IF EXISTS GetAuthUserPropertyPosts");
+        DB::statement("DROP PROCEDURE IF EXISTS GetPropertyPostsByUserId");
+
+        Schema::dropIfExists('property_posts');
     }
 };

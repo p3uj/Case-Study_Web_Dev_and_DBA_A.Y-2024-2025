@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_post_id')->constrained('property_posts')->onDelete('cascade');
+            $table->foreignId('property_post_id')->constrained('property_posts');
             $table->foreignId('user_id')->constrained('users');
-            $table->dateTime('date_review');
-            $table->integer('rating');
-            $table->text('review_text');
-            $table->timestamps();
+            $table->integer('rating')->nullable();
+            $table->text('review_text')->nullable();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
@@ -28,5 +27,6 @@ return new class extends Migration
     public function down(): void
     {
         //
+        Schema::dropIfExists('reviews');
     }
 };

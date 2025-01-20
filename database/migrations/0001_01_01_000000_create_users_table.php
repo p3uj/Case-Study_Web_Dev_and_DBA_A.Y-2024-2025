@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('lastname');
             $table->string('city');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            //$table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('profile_photo_path');
             $table->text('bio');
-            $table->rememberToken();
-            $table->timestamps();
+            //$table->rememberToken();
+            $table->timestamp('created_at')->useCurrent();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -44,7 +44,8 @@ return new class extends Migration
 
         // Create stored procedure
         DB::statement("
-            CREATE PROCEDURE AuthenticatedUserInfo (@Id BIGINT)
+            CREATE PROCEDURE GetUserInfoById
+                @Id BIGINT
             AS
             BEGIN
                 SELECT * FROM users
@@ -59,7 +60,7 @@ return new class extends Migration
     public function down(): void
     {
         // Drop the stored procedure
-        DB::statement("DROP PROCEDURE IF EXISTS AuthenticatedUserInfo");
+        DB::statement("DROP PROCEDURE IF EXISTS GetUserInfoById");
 
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->decimal('rental_price', 10, 2);
             $table->integer('max_occupancy');
             $table->text('description');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

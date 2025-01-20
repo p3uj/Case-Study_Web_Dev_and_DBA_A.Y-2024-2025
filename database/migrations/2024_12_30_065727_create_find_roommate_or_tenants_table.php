@@ -15,53 +15,61 @@ return new class extends Migration
         Schema::create('find_roommate_or_tenants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users'); // Foreign key referencing users(id)
-            $table->dateTime('date_posted');
             $table->string('city');
             $table->string('barangay');
             $table->text('description');
             $table->boolean('is_already_found')->default(false);
-            $table->string('category_finding');
-            $table->timestamps();
+            $table->string('search_categories');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->boolean('is_deleted')->default(false);
         });
 
         // Create stored procedure
         // Define stored procedure to get all finding posts with user
         DB::statement("
-            CREATE PROCEDURE GetAllFindingPostsWithUser
+            CREATE PROCEDURE GetAllRoommateTenantPostsWithUser
             AS
             BEGIN
                 SELECT find_post.*, users.firstname, users.lastname
                 FROM find_roommate_or_tenants AS find_post
                 INNER JOIN users
                     ON find_post.user_id = users.id
-                WHERE find_post.is_already_found = 0
-                ORDER BY find_post.date_posted DESC
+                WHERE find_post.is_deleted = 0 AND find_post.is_already_found = 0
+                ORDER BY find_post.updated_at DESC
             END
         ");
 
         // Define stored procedure to insert a data into find_roommate_or_tenants table
         DB::statement("
-            CREATE PROCEDURE StoreSearchingPost
+            CREATE PROCEDURE StoreRoommateTenantPost
                 @userId BIGINT
-                ,@datePosted DATETIME
                 ,@city NVARCHAR(255)
                 ,@barangay NVARCHAR(255)
                 ,@description NVARCHAR(MAX)
-                ,@categoryFinding NVARCHAR(255)
+                ,@searchCategory NVARCHAR(255)
             AS
             BEGIN
                 INSERT INTO find_roommate_or_tenants (user_id
-                    ,date_posted
                     ,city
                     ,barangay
                     ,description
-                    ,category_finding)
+                    ,search_categories)
                 VALUES (@userId
-                    ,@datePosted
                     ,@city
                     ,@barangay
                     ,@description
-                    ,@categoryFinding)
+                    ,@searchCategory)
+            END
+        ");
+
+        // Define stored procedure to get 'find_roommate_or_tenant' post based on the user id
+        DB::statement("
+            CREATE PROCEDURE GetAllRoommateTenantPostsByUserId (@userId BIGINT)
+            AS
+            BEGIN
+                SELECT * FROM find_roommate_or_tenants
+                WHERE user_id = @userId AND is_deleted = 0
             END
         ");
     }
@@ -72,8 +80,9 @@ return new class extends Migration
     public function down(): void
     {
         // Drop the stored procedure
-        DB::statement("DROP PROCEDURE IF EXISTS AuthenticatedUserInfo");
-        DB::statement("DROP PROCEDURE IF EXISTS StoreSearchingPost");
+        DB::statement("DROP PROCEDURE IF EXISTS GetAllRoommateTenantPostsWithUser");
+        DB::statement("DROP PROCEDURE IF EXISTS StoreRoommateTenantPost");
+        DB::statement("DROP PROCEDURE IF EXISTS GetAllRoommateTenantPostsByUserId");
 
         Schema::dropIfExists('find_roommate_or_tenants');
     }
