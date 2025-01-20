@@ -15,37 +15,37 @@ class UserProfileController extends Controller
 {
     private function propertyPost($userId) {
         // Call the PropertyPost model to get the property posts of the authenticated user
-        $propertyPost = PropertyPost::getAuthUserPropertyPosts($userId);
+        $propertyPost = PropertyPost::getPropertyPostsByUserId($userId);
 
         return $propertyPost;
     }
 
-    private function findRoommateOrTenantPost() {
+    private function findRoommateOrTenantPost($userId) {
         // Call the FindRoommateOrTenant model to fetch posts for the authenticated user
-        $findPost = FindRoommateOrTenant::getAuthUserFindingPost();
+        $findPost = FindRoommateOrTenant::getAllRoommateTenantPostsByUserId($userId);
 
         return $findPost;
     }
 
-    private function reviewsReceivedByAuthUser() {
+    private function reviewsReceivedByUserId($userId) {
         // Call the getAllReviewsForAuthUser() method in the Reviews model to fetch all the reviews that received by authenticated user
-        $reviewReceived = Reviews::getAllReviewsForAuthUser();
+        $reviewReceived = Reviews::getAllReviewsForAUser($userId);
 
         return $reviewReceived;
     }
 
     public function index() {
         // Call the getUserAuthInfo method in the User model with the id of the authenticated user to fetch its info
-        $userInfo = User::getUserAuthInfo(Auth::id());
+        $userInfo = User::getUserInfoById(Auth::id());
 
         // Call the propertyPost method with authenticated user id to fetch the property post of an authenticated user
         $properties = $this->propertyPost(Auth::id());
 
         // Call the findRoommateOrTenantPost() method to fetch the post for the authenticated user
-        $findingPost = $this->findRoommateOrTenantPost();
+        $findingPost = $this->findRoommateOrTenantPost(Auth::id());
 
         // Call the reviewsReceivedByAuthUser() method to fetch all the reviews that the authenticated user received
-        $reviews = $this->reviewsReceivedByAuthUser();
+        $reviews = $this->reviewsReceivedByUserID(Auth::id());
 
         return view('user-profile', [
             'user' => $userInfo

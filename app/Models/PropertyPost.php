@@ -33,11 +33,11 @@ class PropertyPost extends Model
     }
 
     // Retrieve all data from property post
-    public static function getAuthUserPropertyPosts($userId){
-        $authUserPropertyPosts = DB::select('EXEC GetAuthUserPropertyPosts ?', [$userId]); // Used stored procedure and the return will be an array
+    public static function getPropertyPostsByUserId($userId){
+        $authUserPropertyPosts = DB::select('EXEC GetPropertyPostsByUserId ?', [$userId]); // Used stored procedure and the return will be an array
 
-        // Call the formatDate method in the DateConversion class, passing the $authUserPropertyPosts and the column name 'date_posted'
-        $authUserPropertyPosts = DateConversion::formatDate($authUserPropertyPosts, 'date_posted');
+        // Call the formatDate method in the DateConversion class, passing the $authUserPropertyPosts and the column name 'updated_at'
+        $authUserPropertyPosts = DateConversion::formatDate($authUserPropertyPosts, 'updated_at');
 
         return $authUserPropertyPosts;
     }
