@@ -60,7 +60,7 @@
                     <div id="property-post" class="property-post-content" data-isPostAvailable="{{$property->is_available}}">
                         <img src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Image 1">
                         <div class="property-info">
-                            <p class="date-posted">{{ $property->date_posted }}</p>
+                            <p class="date-posted">{{ $property->updated_at }}</p>
                             <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
                                 {{ $property->city }}, {{ $property->barangay }}
                             </h2>
@@ -96,7 +96,7 @@
                 @endforeach
             @else
                 <div style="margin: 16px 135px;">
-                    <h1>No property posts!</h1>
+                    <h1>No Property Posts!</h1>
                 </div>
             @endif
 
@@ -104,15 +104,15 @@
 
         <!-- Find Tenant Content -->
         <div class="tab-content">
-            @if ($findPost->isNotEmpty())
+            @if (!empty($findPost))
                 @foreach ($findPost as $searchingPost)
                     <div class="find-tenant-content">
                         <div class="find-tenant-info">
-                            <p class="date-posted">{{ $searchingPost->date_posted->format('F d, Y \a\t h:i A') }}</p>
+                            <p class="date-posted">{{ $searchingPost->updated_at }}</p>
                             <p class="caption">{{ $searchingPost->description }}</p>
                         </div>
                         <div class="find-tenant-bottom">
-                            <h2>{{ $searchingPost->is_already_found ? 'Found' : ('Finding ' .$searchingPost->category_finding) }}</h2>
+                            <h2>{{ $searchingPost->is_already_found ? 'Found' : ('Finding ' .$searchingPost->search_categories) }}</h2>
                             <div>
                                 <button class="delete-btn">Delete Post</button>
                                 <button class="isFound-btn">{{ $searchingPost->is_already_found ? 'Not yet Found?' : 'Already Found?' }}</button>
@@ -122,14 +122,14 @@
                 @endforeach
             @else
                 <div style="margin: 16px 135px;">
-                    <h1>No property posts!</h1>
+                    <h1>No Searching Posts!</h1>
                 </div>
             @endif
         </div>
 
         <!-- Review from Tenant Content -->
         <div class="tab-content">
-            @if ($reviews->isNotEmpty())
+            @if (!empty($reviews))
                 <div class="reviews-content">
                     @foreach ($reviews as $review)
                         <div class="review-info-container">
@@ -156,7 +156,7 @@
                             </div>
                             <h1 class="quotation-mark-right">❞</h1>
                             <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
-                            <p class="date-review">{{ $review->date_review->format('F d, Y \a\t h:i A') }}</p>
+                            <p class="date-review">{{ $review->created_at }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -165,7 +165,6 @@
                     <h1>No Review!</h1>
                 </div>
             @endif
-
         </div>
     </div>
 </body>
