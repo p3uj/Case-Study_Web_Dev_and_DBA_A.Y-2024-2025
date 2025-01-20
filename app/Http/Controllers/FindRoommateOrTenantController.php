@@ -15,7 +15,7 @@ class FindRoommateOrTenantController extends Controller
 {
     public function index(){
         // Call the getUserAuthInfo method in the User model with the id of the authenticated user to retrieve its info
-        $user = User::getUserAuthInfo(Auth::id());
+        $user = User::getUserInfoById(Auth::id());
 
         $city = CityController::index();
         $barangay = BarangayController::index();
@@ -35,20 +35,18 @@ class FindRoommateOrTenantController extends Controller
     public function store(Request $request) {
         // Extracting the variables for clarity and readability
         $userId = Auth::id(); // Id of the authenticated user
-        $datePosted = Carbon::now(); // Current date and time
         $city = $request->city; // city from the request
         $barangay = $request->barangay; // barangay from the request
         $description = $request->description; // description from the request
-        $categoryFinding = Auth::user()->role == 'Tenant' ? 'Roommate' : 'Tenant'; // category finding based on the authenticated user role
+        $searchCategory = Auth::user()->role == 'Tenant' ? 'Roommate' : 'Tenant'; // search category based on the authenticated user role
 
         // Used a stored procedure to store the data
-        DB::statement('EXEC StoreSearchingPost ?, ?, ?, ?, ?, ?', [
+        DB::statement('EXEC StoreRoommateTenantPost ?, ?, ?, ?, ?', [
             $userId
-            ,$datePosted
             ,$city
             ,$barangay
             ,$description
-            ,$categoryFinding
+            ,$searchCategory
         ]);
 
         return redirect()->back();
