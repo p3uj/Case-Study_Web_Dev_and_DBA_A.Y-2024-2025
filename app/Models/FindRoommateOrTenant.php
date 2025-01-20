@@ -23,18 +23,21 @@ class FindRoommateOrTenant extends Model
 
     public static function getAllFindingPostsWithUser(){
         // Query the database
-        $posts = DB::select('EXEC GetAllFindingPostsWithUser');
+        $posts = DB::select('EXEC GetAllRoommateTenantPostsWithUser');
 
-        // Call the formatDate method in the DateConversion class, passing the $posts and the column name 'date_posted'
-        $posts = DateConversion::formatDate($posts, 'date_posted');
+        // Call the formatDate method in the DateConversion class, passing the $posts and the column name 'updated_at'
+        $posts = DateConversion::formatDate($posts, 'updated_at');
 
         return $posts;
     }
 
-    public static function getAuthUserFindingPost() {
+    public static function getAllRoommateTenantPostsByUserId($userId) {
         // Fetch the finding post for the authenticated user
-        $userFindPost = self::where('user_id', Auth::id())->orderByDesc('date_posted')->get();
+        $userRoommateTenantPosts = DB::select('EXEC GetAllRoommateTenantPostsByUserId ?', [$userId]);
 
-        return $userFindPost;
+        // Call the formatDate method in the DateConversion class, passing the $posts and the column name 'updated_at'
+        $userRoommateTenantPosts = DateConversion::formatDate($userRoommateTenantPosts, 'updated_at');
+
+        return $userRoommateTenantPosts;
     }
 }
