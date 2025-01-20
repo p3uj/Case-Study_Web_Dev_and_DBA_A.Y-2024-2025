@@ -64,15 +64,15 @@
                         <img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; hight: 16px; opacity: 0.5">
                         {{ $post->barangay }}, {{ $post->city }}
                     </p>
-                    <p class="date-posted">{{ $post->date_posted }}</p><br>
+                    <p class="date-posted">{{ $post->updated_at }}</p><br>
                     <div class="caption">
                         <p>{{ $post->description }}</p>
                     </div><br>
-                    <h4 class="category-finding">Finding {{$post->category_finding }}</h4>
+                    <h4 class="category-finding">Finding {{ $post->search_categories }}</h4>
                 </div>
             @endforeach
         @else
-            <div style="margin: 16px 135px;">
+            <div style="margin-top: 16px;">
                 <h1>No Searching Posts!</h1>
             </div>
         @endif
