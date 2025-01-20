@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\DateConversion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -21,23 +22,11 @@ class Reviews extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function getAllReviewsForAuthUser() {
-        $reviews = DB::table('property_posts AS PPost')
-                    // ->join('users AS PPostOwner', 'PPost.user_id', '=', 'PPostOwner.id') // Inner join
-                    ->join('reviews AS R', 'PPost.id', '=', 'R.property_post_id') // Inner join
-                    ->join('users AS ReviewByUser', 'R.user_id', '=', 'ReviewByUser.id')
-                    ->where('PPost.user_id', '=', DB::raw(Auth::id()))
-                    ->select('ReviewByUser.firstname', 'ReviewByUser.lastname'
-                            ,'R.date_review'
-                            ,'R.rating'
-                            ,'R.review_text')
-                    ->orderByDesc('R.date_review')
-                    ->get();
+    public static function getAllReviewsForAUser($userId) {
+        $reviews = DB::select('EXEC GetAllReviewsByUserId ?', [$userId]);
 
-        // Convert date_posted to Carbon instance
-        $reviews->each(function ($review) {
-            $review->date_review = \Carbon\Carbon::parse($review->date_review);
-        });
+        // Call the formatDate method in the DateConversion class, passing the $authUserPropertyPosts and the column name 'updated_at'
+        $reviews = DateConversion::formatDate($reviews, 'created_at');
 
         return $reviews;
     }
