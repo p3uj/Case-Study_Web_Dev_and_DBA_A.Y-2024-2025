@@ -14,32 +14,15 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_post_id')->constrained('property_posts');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('property_post_id')->nullable()->constrained('property_posts');
+            $table->foreignId('review_by_user_id')->constrained('users');
+            $table->foreignId('review_to_user_id')->constrained('users');
             $table->integer('rating')->nullable();
             $table->text('review_text')->nullable();
+            $table->boolean('is_edited')->default(false);
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
-
-        // Create stored procedure
-        // Define stored procedure to get all reviews based on the user id
-        DB::statement("
-            CREATE PROCEDURE GetAllReviewsByUserId
-                @userId BIGINT
-            AS
-            BEGIN
-                SELECT reviews.*, ReviewByUser.firstname, ReviewByUser.lastname
-                FROM reviews
-                INNER JOIN property_posts AS PPost
-                    ON PPost.id = reviews.property_post_id
-                INNER JOIN users AS PPostOwner
-                    ON PPostOwner.id = PPost.user_id
-                INNER JOIN users AS ReviewByUser
-                    ON ReviewByUser.id = reviews.user_id
-                WHERE PPostOwner.id = @userId
-                ORDER BY created_at DESC
-            END
-        ");
     }
 
     /**
@@ -47,9 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Drop the stored procedure
-        DB::statement("DROP PROCEDURE IF EXISTS GetAllReviewsByUserId");
-
         Schema::dropIfExists('reviews');
     }
 };
