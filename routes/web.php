@@ -8,6 +8,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\FindRoommateOrTenantController;
 use App\Http\Controllers\UserProfileController;
 use App\Models\FindRoommateOrTenant;
+use App\Models\PropertyPost;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
+    Route::post('/property', [PropertyController::class, 'store'])->name('property.post');
 });
 
 // Ensure that only unauthenticated users can access this root route.
