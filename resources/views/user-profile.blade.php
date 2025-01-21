@@ -129,6 +129,7 @@
 
         <!-- Review from Tenant Content -->
         <div class="tab-content">
+            {{--
             @if (!empty($reviews))
                 <div class="reviews-content">
                     @foreach ($reviews as $review)
@@ -165,6 +166,7 @@
                     <h1>No Review!</h1>
                 </div>
             @endif
+            --}}
         </div>
     </div>
 </body>

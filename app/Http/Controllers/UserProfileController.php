@@ -45,13 +45,13 @@ class UserProfileController extends Controller
         $findingPost = $this->findRoommateOrTenantPost(Auth::id());
 
         // Call the reviewsReceivedByAuthUser() method to fetch all the reviews that the authenticated user received
-        $reviews = $this->reviewsReceivedByUserID(Auth::id());
+        //$reviews = $this->reviewsReceivedByUserID(Auth::id());
 
         return view('user-profile', [
             'user' => $userInfo
             ,'propertyPost' => $properties
             ,'findPost' => $findingPost
-            ,'reviews' => $reviews
+            //,'reviews' => $reviews
         ]);
     }
 }
