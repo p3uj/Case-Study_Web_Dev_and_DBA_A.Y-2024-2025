@@ -129,7 +129,6 @@
 
         <!-- Review from Tenant Content -->
         <div class="tab-content">
-            {{--
             @if (!empty($reviews))
                 <div class="reviews-content">
                     @foreach ($reviews as $review)
@@ -157,7 +156,7 @@
                             </div>
                             <h1 class="quotation-mark-right">❞</h1>
                             <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
-                            <p class="date-review">{{ $review->created_at }}</p>
+                            <p class="date-review">{{ $review->updated_at }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -166,7 +165,6 @@
                     <h1>No Review!</h1>
                 </div>
             @endif
-            --}}
         </div>
     </div>
 </body>
