@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Data type:', typeof barangayList);
         console.log('Barangay list:', barangayList);
         console.table(barangayList);
-
         console.log("Selected City Code:", cityCode);  // For debugging
 
         // Set the data attribute for the city code on the city dropdown
@@ -46,19 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update the hidden input field with the currently selected barangay value from the dropdown
         barangayDropdown.addEventListener('change', function () {
             var selectedBarangayOption = this.options[this.selectedIndex];  // Get the selected option
-
-            console.log('barangay value:', selectedBarangayOption)
-        });
-
-        // Check the barangay dropdown if the value is null
-        form.addEventListener('submit', function (event) {
-            if (barangayDropdown.value === "") {
-                event.preventDefault(); // Prevent form submission
-            }
+            console.log('barangay value:', selectedBarangayOption);
         });
     });
 
-
+    // Image input and preview section
     const imageInput = document.getElementById('imageInput');
     const imagePreviewSection = document.getElementById('image-preview-section');
 
@@ -69,6 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     imageInput.addEventListener('change', function () {
         const files = Array.from(imageInput.files);
+
+        // Check if total files exceed the limit
+        if (files.length > 12) {
+            alert('You can only upload a maximum of 12 files.');
+            imageInput.value = ''; // Reset the input
+            selectedFiles = []; // Clear selected files array
+            imagePreviewSection.style.display = 'none'; // Hide the preview section
+            return;
+        }
+
         selectedFiles = files; // Update the selected files array
 
         // If files are selected, show the preview section
@@ -119,5 +120,29 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             reader.readAsDataURL(file); // Convert file to base64 URL
         });
+    });
+
+    // Form submission validation
+    form.addEventListener('submit', function (event) {
+        // Check if barangayDropdown value is empty
+        if (barangayDropdown.value === "") {
+            event.preventDefault(); // Prevent form submission
+            alert('Please select a barangay.');
+        }
+
+        // Check if imageInput has files
+        if (imageInput.files.length === 0) {
+            event.preventDefault(); // Prevent form submission
+            alert('Please upload at least one image.');
+        }
+
+        // Check if imageInput exceeds file limit
+        if (imageInput.files.length > 12) {
+            event.preventDefault(); // Prevent form submission
+            alert('You can upload a maximum of 12 files. Please remove some files.');
+            imageInput.value = ''; // Reset the input
+            selectedFiles = []; // Clear selected files array
+            imagePreviewSection.style.display = 'none'; // Hide preview section
+        }
     });
 });
