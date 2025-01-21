@@ -18,4 +18,9 @@ class PropertyController extends Controller
             ,'barangays' => $barangay
         ]);
     }
+
+    // Create Property Post on the database
+    public static function store(Request $request) {
+        dd($request->file('images'));
+    }
 }
