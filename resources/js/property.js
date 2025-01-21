@@ -57,4 +57,67 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+
+    const imageInput = document.getElementById('imageInput');
+    const imagePreviewSection = document.getElementById('image-preview-section');
+
+    let selectedFiles = []; // Array to hold selected files
+
+    // Initially hide the image-preview-section
+    imagePreviewSection.style.display = 'none';
+
+    imageInput.addEventListener('change', function () {
+        const files = Array.from(imageInput.files);
+        selectedFiles = files; // Update the selected files array
+
+        // If files are selected, show the preview section
+        if (files.length > 0) {
+            imagePreviewSection.style.display = 'flex';
+        } else {
+            imagePreviewSection.style.display = 'none';
+        }
+
+        imagePreviewSection.innerHTML = ''; // Clear previous previews
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const previewDiv = document.createElement('div');
+                previewDiv.classList.add('image-preview');
+
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                previewDiv.appendChild(img);
+
+                // Create and add remove button
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'X';
+                removeButton.classList.add('remove-button');
+                previewDiv.appendChild(removeButton);
+
+                // Remove the preview when the button is clicked
+                removeButton.addEventListener('click', () => {
+                    // Find and remove the file from the selectedFiles array
+                    selectedFiles = selectedFiles.filter(f => f !== file);
+
+                    // Rebuild the file input with the updated files array
+                    const dataTransfer = new DataTransfer();
+                    selectedFiles.forEach(f => dataTransfer.items.add(f));
+
+                    imageInput.files = dataTransfer.files; // Update the file input
+
+                    // Remove the preview from the DOM
+                    previewDiv.remove();
+
+                    // If no files left, hide the preview section
+                    if (selectedFiles.length === 0) {
+                        imagePreviewSection.style.display = 'none';
+                    }
+                });
+
+                imagePreviewSection.appendChild(previewDiv);
+            };
+            reader.readAsDataURL(file); // Convert file to base64 URL
+        });
+    });
 });
