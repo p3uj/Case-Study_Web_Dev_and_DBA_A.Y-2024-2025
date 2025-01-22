@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: poppins,sans-serif;
+    text-decoration: none;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.review-container {
+    padding-top: 1rem;
+    margin-left: 135px;
+    margin-right: 135px;
+    min-height: calc(100vh - 7rem);
+    background-color: rgb(16, 64, 198);
+}
+/* General tab styles */
+.nav-tabs {
+    margin: none;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #555;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+.nav-tabs .nav-link:hover {
+    background-color: #ffe7c7;
+    color: #000;
+}
+.nav-tabs .nav-link.active {
+    background-color: #ffe7c7;
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tab-content {
+    display: flex;
+    justify-content: space-between; /* Spaces the items apart */
+    align-items: flex-start; /* Aligns items to the top */
+    height: auto; /* Let the height adapt to content */;
+    padding-bottom: 2rem;
+}
+
+.review-container {
+    padding-top: 1rem;
+    margin-left: 135px;
+    margin-right: 135px;
+    background-color: aqua;
+}
+
+.tab-content {
+    display: flex;
+    justify-content: space-between; /* Spaces the items apart */
+    align-items: flex-start; /* Aligns items to the top */
+    height: auto; /* Let the height adapt to content */;
+    padding-bottom: 2rem;
+}
