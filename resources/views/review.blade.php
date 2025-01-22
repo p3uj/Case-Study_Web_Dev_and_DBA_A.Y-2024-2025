@@ -10,6 +10,9 @@
     @vite('resources/css/customizedColor.css')
     @vite('resources/css/navbar.css')
     @vite('resources/css/review.css')
+
+    <!-- Font Awesome Icon Library -->
+    <script src="https://kit.fontawesome.com/87abdb3ce2.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <x-navbar></x-navbar>
@@ -26,39 +29,56 @@
         </ul>
 
         <!-- Tab content -->
-        <div class="tab-content mt-4" id="reviewTabsContent">
-            <div class="tab-pane fade show active" id="to-review" role="tabpanel" aria-labelledby="to-review-tab">
-                <!-- Card List -->
+        <div class="tab-content" id="reviewTabsContent">
+            <!-- 'To Review' Tab -->
+            <div class="tab-pane fade show active" id="to-review" role="tabpanel" aria-labelledby="to-review-tab" style="width: 100%;">
+                <!-- Card List -->               
                 <div class="card">
-                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" class="card-img-top" alt="Property">
-                    <div class="card-body">
-                        <h5 class="card-title">Quezon City, Commonwealth</h5>
-                        <p class="card-text">Studio Unit</p>
-                        <p class="price">₱7,000 / month</p>
-                        <p class="card-text text-muted">Direct tenants are preferred but open for agents.<br>PRC Accreditation No.: 24716<br>PRC Registration No.: 0016054</p>
-                        <button class="review-btn">Review</button>
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" class="card-img" alt="Card Image">
+                        </div>
+                        
+                        <div class="card-body col-md-3">
+                            <h5 class="fw-bold">Quezon City, Commonwealth</h5>
+                            <div class="d-flex">
+                                <p class="card-info">Studio Unit</p>
+                                <p class="card-info" style="background-color: rgb(208, 76, 76)">₱7,000/month</p>
+                            </div>
+                            <p class="card-desc">Direct Tenants are preferred but open for Agents.</p>
+                            <div class="reviews">
+                                <h3>
+                                    <i class="fas fa-star" data-rating="1"></i>
+                                    <i class="fas fa-star" data-rating="2"></i>
+                                    <i class="fas fa-star" data-rating="3"></i>
+                                    <i class="fas fa-star" data-rating="4"></i>
+                                    <i class="fas fa-star" data-rating="5"></i>
+                                </h3>
+                            <p>4 out of 5</p>    
+                            </div>
+                        </div>
+
+                        <div class="card-button-col col-md-1">
+                            <button class="card-button">Review</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="Property">
-                    <div class="card-body">
-                        <h5 class="card-title">Quezon City, Commonwealth</h5>
-                        <p class="card-text">Studio Unit</p>
-                        <p class="price">₱7,000 / month</p>
-                        <p class="card-text text-muted">Direct tenants are preferred but open for agents.<br>PRC Accreditation No.: 24716<br>PRC Registration No.: 0016054</p>
-                        <button class="review-btn">Review</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-pane fade" id="my-reviews" role="tabpanel" aria-labelledby="my-reviews-tab">
-                <p>No reviews yet.</p>
-                <p>You have not written any reviews so far.</p>
+            <div>
+                <p>No property to review.</p>
+                <p>There is no property to review now.</p>
+            </div> 
+            <!-- 'My Reviews' Tab -->
+            <div class="tab-pane fade" id="my-reviews" role="tabpanel" aria-labelledby="my-reviews-tab" style="width: 100%;">
+                <div>
+                    <p>No reviews yet.</p>
+                    <p>You have not written any reviews yet.</p>
+                </div>    
             </div>
         </div>
     </div>
 
+    <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
