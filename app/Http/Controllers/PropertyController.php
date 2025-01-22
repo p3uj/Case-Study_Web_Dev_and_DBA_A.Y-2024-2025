@@ -21,6 +21,16 @@ class PropertyController extends Controller
 
     // Create Property Post on the database
     public static function store(Request $request) {
-        dd($request->file('images'));
+        //dd($request->file('images'));
+        $uploadedFiles = $request->file('images'); // Retrieve all the uploaded files
+
+        $photoPath = []; // Use to store all the original file name
+        // Extract the original name of the files
+        foreach ($uploadedFiles as $file) {
+            $photoPath[] = $file->getClientOriginalName(); // Store the original name
+        }
+
+        //dd($photoPath);
+        return $photoPath;
     }
 }
