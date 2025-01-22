@@ -61,7 +61,7 @@
                     </div>
                     <h4>{{ $post->firstname }} {{ $post->lastname }}</h4>
                     <p class="location">
-                        <img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; hight: 16px; opacity: 0.5">
+                        <img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; height: 16px; opacity: 0.5">
                         {{ $post->barangay }}, {{ $post->city }}
                     </p>
                     <p class="date-posted">{{ $post->updated_at }}</p><br>
