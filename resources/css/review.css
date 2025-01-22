@@ -123,20 +123,18 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    margin: 30px;
 }
 
 .card-button {
     background-color: var(--btn-default);
     color: #ffffff;
     border: none;
-    border-radius: 45px;
-    padding: 10px 20px;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
-    margin: 10px;
     transition: all 0.3s ease;
+    border-radius: 40px;
+    padding: 15px;
+    margin-right: 70px;
 }
 
 .card-button:hover {
