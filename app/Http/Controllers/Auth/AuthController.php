@@ -34,7 +34,8 @@ class AuthController extends Controller
         }
 
         // If the credentials are incorrect, show error and redirect to login page.
-        return redirect(route("login"))->with("error", "Login failed");
+        return redirect(route("login"))
+        ->with("error", "Invalid email or password. Please try again.");
     }
 
     public function logout()
