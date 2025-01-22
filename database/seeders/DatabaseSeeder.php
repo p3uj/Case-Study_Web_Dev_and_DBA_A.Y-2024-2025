@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             ->create([
                 'firstname' => 'Elphaba',
                 'lastname' => 'Thropp',
-                'city' => 'Emerald',
+                'city' => 'Emerald City',
                 'email' => 'landlord@gmail.com',
             ]);
 
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             ->create([
                 'firstname' => 'Alice',
                 'lastname' => 'Guo',
-                'city' => 'New York',
+                'city' => 'New York City',
                 'email' => 'tenant@gmail.com',
             ]);
     }
