@@ -77,8 +77,9 @@ class RegisterController extends Controller
                 'role' => $user->role
             ]);
         }
+        // Flash success message
+        session()->flash('success', 'Registration successful! Welcome to RentEase!');
 
-        // Redirect to the homepage or dashboard
-        return redirect()->route('homepage'); // Adjust this to your needs
+        return back();
     }
 }
