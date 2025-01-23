@@ -64,9 +64,54 @@
             </form>
         </div>
 
+        <!-- Filter search -->
+        <div class="filter-search-box">
+            <div class="filter-search">Filter Search</div>
+            <!-- Unit Category Dropdown Box -->
+            <select class="property-unit-category" name="propety-unit-category" id="">
+                <option value="">Dormitories</option>
+                <option value="">Studio Units</option>
+                <option value="">Apartments</option>
+                <option value="">Boarding Houses</option>
+                <option value="">Other</option>
+            </select>
+
+            <!-- Use city-dropdown component and pass the value of $cities -->
+            <x-city-dropdown :cities="$cities"></x-city-dropdown>
+
+            <!-- Rental Price -->
+            <input class="budget-price" type="number" placeholder="Budget price" id="rental-price" name="rental-price">
+        </div>
+
+        <!-- Create Post Button -->
         <button class="create-a-post-btn" popovertarget="create-post-popover">
             Create a post
         </button>
+    </div>
+
+    <div class="container">
+        <!-- Dormitory content -->
+        <div class="property-post-content">
+            <div class="property-post-container">
+                <img class="property-post-image" src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Property Post Image">
+                <h3><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; height: 16px;">
+                    <span class="location">Holy Spirit, Quezon City</span>
+                </h3>
+                <p class="property-post-description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse hic eius ad nulla unde consequuntur ea, minima non dolor recusandae distinctio qui quibusdam ipsum sapiente corrupti odit nesciunt voluptatibus tenetur!
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab rerum neque a sint aliquam alias obcaecati tenetur vel nostrum error, consequatur modi ipsum nemo ut amet pariatur eum, excepturi vero?
+                </p>
+                <h2 class="unit-price">₱5,0000 <span class="per-month">/month</span></h2>
+                <div class="bottom-part">
+                    <div class="user-profile">
+                        <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                        {{-- Do Kyung-Soo --}}
+                        <span class="user-name">Do Kyung-Soo</span>
+                    </div>
+                    <a>See more</a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
