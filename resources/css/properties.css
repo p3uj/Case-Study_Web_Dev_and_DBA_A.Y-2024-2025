@@ -20,8 +20,44 @@
 }
 
 .properties-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
     margin-left: 135px;
     margin-right: 135px;
+}
+
+.filter-search-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #ffff;
+    white-space: nowrap;
+    padding-left: 10px;
+    height: 50px;
+    padding-right: 20px;
+    border-radius: 40px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+.filter-search {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    background-color: var(--rentease-secondary);
+    margin: 0 0 0 -10px;
+    padding: 0 8px 0 8px;
+    border-radius: 40px;
+    border: 2px solid var(--rentease-primary);
+    padding: 0 16px 0 16px;
+    color: var(--rentease-primary);
+}
+
+.property-unit-category, .budget-price {
+    border-radius: 40px;
+    border: none;
 }
 
 .properties-container select, input {
@@ -131,4 +167,186 @@
 
 .remove-button:hover {
     background-color: red;
+}
+
+.property-post-content {
+    display: grid;
+    column-gap: 30px;
+    grid-template-columns: repeat(3, minmax(400px, 1fr));
+    /* background-color: var(--rentease-secondary); */
+    justify-items: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 38px;
+    width: 100%;
+    /* box-shadow: 5px 7px 25px var(--rentease-hover-secondary); */
+    padding-top: 20px;
+    padding-left: 135px;
+    padding-right: 135px;
+    padding-bottom: 30px;
+}
+
+/* For smaller screens */
+@media (max-width: 1200px) {
+    .find-roommate-tenant-content {
+        grid-template-columns: repeat(2, minmax(400px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .find-roommate-tenant-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.property-post-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 0 38px 38px 38px;
+    /* background-color: rgba(189, 162, 126, 0.2); */
+    background-color: var(--rentease-secondary);
+    border: 1px solid var(--rentease-secondary);
+    width: 371px;
+    height: 522px;
+    overflow: visible;
+    border-radius: 45px;
+    position: relative;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s; /* Transition all properties including border color */
+}
+
+.property-post-image {
+    margin: 0 -38px 8px -38px; /* Negative margins to counteract the container's horizontal padding */
+}
+
+.property-post-container img {
+    width: 369px;
+    height: 250px;
+    object-fit: cover;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+}
+
+.property-post-container h3 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.location {
+    max-width: 270px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent wrapping */
+    display: inline-block; /* Ensure it's treated as a block for text overflow */
+    color: var(--txt-primary);
+}
+
+.property-post-description {
+    display: flex;
+    max-height: 200px;
+    overflow: auto;
+    line-height: 25px;
+    /* text-align: center; */
+    color: #1C1F26;
+}
+
+.unit-price {
+    color: var(--rentease-primary);
+}
+
+.per-month {
+    font-size: medium;
+}
+
+.user-profile {
+    display: inline-flex; /* Make the container adjust its width based on content */
+    align-items: center;
+    gap: 6px;
+    background-color: var(--rentease-primary);
+    padding-right: 10px;
+    border-radius: 50px;
+    height: 38px;
+    margin: 7px 0;
+}
+
+.user-name {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent wrapping */
+    display: inline-block; /* Ensure it's treated as a block for text overflow */
+    color: var(--txt-primary);
+}
+
+.user-profile img{
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* border: 2px solid var(--rentease-primary); */
+    border: 2px solid var(--rentease-secondary);
+    margin-left: -6px;
+}
+
+.bottom-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bottom-part a {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    margin: 3px;
+    padding: 8px 16px;
+    background-color: transparent;
+    border-radius: 40px;
+    border: 1px solid var(--rentease-primary);
+    color: var(--txt-secondary);
+    font-weight: 600;
+}
+
+.bottom-part a:hover {
+    background-color: var(--rentease-primary);
+    color: var(--txt-secondary);
+    cursor: pointer;
+}
+
+
+
+
+/* Cuztomize the scrollbar */
+/* Target the scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the vertical scrollbar */
+    height: 10px; /* Height of the horizontal scrollbar */
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+    background: rgba(240, 240, 240, 0.3); /* Color of the scrollbar track */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid #f0f0f0; /* Padding around the thumb */
+}
+
+/* Scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #0056b3; /* Darker color when hovering */
+}
+
+/* Styling for the backdrop of the popover in the top layer */
+[popover]:-internal-popover-in-top-layer::backdrop {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.5);
+    pointer-events: none !important;
+    inset: 0px;
 }
