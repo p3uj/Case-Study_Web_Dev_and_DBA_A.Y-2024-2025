@@ -23,7 +23,7 @@ class PropertyController extends Controller
 
     // Create Property Post on the database
     public static function store(Request $request) {
-        $photoPathString = ""; // Use to store all the original file name since the stored procedure only accepts a string as a parameter
+        $photoNameString = ""; // Use to store all the original file name since the stored procedure only accepts a string as a parameter
 
         // Extracting the variables for clarity and readability
         $city = $request->city; // City from request
@@ -38,11 +38,11 @@ class PropertyController extends Controller
 
         // Extract the original name of the files and store in a single string
         foreach ($uploadedFiles as $file) {
-            $photoPathString .= '"' . $file->getClientOriginalName() . '", '; // Add quotes around each name and a comma to make it easier to convert to JSON format in the stored procedure.
+            $photoNameString .= '"' . time() . '_' . $file->getClientOriginalName() . '", '; // Add quotes around each name and a comma to make it easier to convert to JSON format in the stored procedure.
         }
 
         // Remove the trailing comma and space at the end of the string
-        $photoPathString = rtrim($photoPathString, ', ');
+        $photoNameString = rtrim($photoNameString, ', ');
 
         // Used a stored procedure to store the data
         DB::statement('RE_SP_INSERT_PROPERTY_POST_WITH_RELATIONS ?, ?, ?, ?, ?, ?, ?, ?', [
@@ -52,9 +52,16 @@ class PropertyController extends Controller
             ,$rentalPrice
             ,$maxOccupancy
             ,$description
-            ,$photoPathString
+            ,$photoNameString
             ,$userId
         ]);
+
+        // Save the uploaded photos in public folder
+        foreach ($uploadedFiles as $file) {
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            $file->move(public_path('uploads/images/property-posts'), $fileName); // Move the file in the desired folder
+        }
 
         return redirect()->back();
     }
