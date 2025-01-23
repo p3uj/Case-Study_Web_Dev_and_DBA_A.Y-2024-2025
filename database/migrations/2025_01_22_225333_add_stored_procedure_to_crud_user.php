@@ -13,14 +13,14 @@ return new class extends Migration
         // Create stored procedure
         DB::statement("
             CREATE PROCEDURE RE_SP_INSERT_USER
-                @u_role NVARCHAR(255),
-                @u_firstname NVARCHAR(255),
-                @u_lastname NVARCHAR(255),
-                @u_city NVARCHAR(255),
-                @u_email NVARCHAR(255),
-                @u_password NVARCHAR(255),
-                @u_profile_photo_path NVARCHAR(255),
-                @u_bio NVARCHAR(MAX)
+                @p_role NVARCHAR(255),
+                @p_firstname NVARCHAR(255),
+                @p_lastname NVARCHAR(255),
+                @p_city NVARCHAR(255),
+                @p_email NVARCHAR(255),
+                @p_password NVARCHAR(255),
+                @p_profile_photo_path NVARCHAR(255),
+                @p_bio NVARCHAR(MAX)
             AS
             BEGIN
                 INSERT INTO users (
@@ -33,14 +33,14 @@ return new class extends Migration
                     profile_photo_path,
                     bio
                 ) VALUES (
-                    @u_role,
-                    @u_firstname,
-                    @u_lastname,
-                    @u_city,
-                    @u_email,
-                    @u_password,
-                    @u_profile_photo_path,
-                    @u_bio
+                    @p_role,
+                    @p_firstname,
+                    @p_lastname,
+                    @p_city,
+                    @p_email,
+                    @p_password,
+                    @p_profile_photo_path,
+                    @p_bio
                 );
             END
         ");
