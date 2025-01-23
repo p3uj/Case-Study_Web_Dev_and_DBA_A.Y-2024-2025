@@ -12,7 +12,7 @@ return new class extends Migration
     {
         // Create stored procedure
         DB::statement("
-            CREATE PROCEDURE SP_INSERT_USER
+            CREATE PROCEDURE RE_SP_INSERT_USER
                 @u_role NVARCHAR(255),
                 @u_firstname NVARCHAR(255),
                 @u_lastname NVARCHAR(255),
@@ -44,6 +44,23 @@ return new class extends Migration
                 );
             END
         ");
+
+        DB::statement("
+            CREATE PROCEDURE RE_SP_GET_NEWLY_CREATED_USER
+                @p_email NVARCHAR(255)
+            AS
+            BEGIN
+                SELECT
+                    id AS user_id
+                    ,email
+                    ,password
+                    ,role
+                FROM
+                    users
+                WHERE
+                    email = @p_email;
+            END
+        ");
     }
 
     /**
@@ -52,6 +69,7 @@ return new class extends Migration
     public function down(): void
     {
         // Drop the stored procedure
-        DB::statement("DROP PROCEDURE IF EXISTS SP_INSERT_USER");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_INSERT_USER");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_NEWLY_CREATED_USER");
     }
 };
