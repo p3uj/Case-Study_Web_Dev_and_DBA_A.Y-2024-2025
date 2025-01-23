@@ -32,6 +32,19 @@
                     <span class="text-danger">{{ $errors->first('lastname') }}</span>
                 @endif
 
+                <!-- City Dropdown Box -->
+                <div class="dropdown-container">
+                    <select name="city" id="city" data-city-code="" required>
+                        <option value="" disabled selected>Please select city</option>
+                        @foreach ($cities as $city)
+                            <option id="{{ $city['code'] }}"
+                                value="{{ $city['name'] }}">
+                                {{ $city['name'] }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <!-- Email -->
                 <input type="email" placeholder="Email" id="email" name="email" required>
                 @if ($errors->has('email'))
@@ -52,11 +65,11 @@
                     <label for="role"><strong>What best describes you?</strong></label><br>
                     <div class="radio-buttons">
                         <label>
-                            <input type="radio" name="role" value="tenant" required {{ old('role') == 'tenant' ? 'checked' : '' }}>
+                            <input type="radio" name="role" value="Tenant" required {{ old('role') == 'Tenant' ? 'checked' : '' }}>
                             Tenant
                         </label>
                         <label>
-                            <input type="radio" name="role" value="landlord" required {{ old('role') == 'landlord' ? 'checked' : '' }}>
+                            <input type="radio" name="role" value="Landlord" required {{ old('role') == 'Landlord' ? 'checked' : '' }}>
                             Landlord
                         </label>
                     </div>

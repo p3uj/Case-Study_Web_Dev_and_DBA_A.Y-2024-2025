@@ -30,6 +30,10 @@ class AuthController extends Controller
 
         // If the user entered correct credentials, redirect to home page.
         if (Auth::attempt($credentials)) {
+            session([
+                'user_id' => Auth::user()->id,
+                'role' => Auth::user()->role,
+            ]);
             return redirect()->intended(route("homepage"));
         }
 

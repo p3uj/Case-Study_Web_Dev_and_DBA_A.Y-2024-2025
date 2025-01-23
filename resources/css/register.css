@@ -60,7 +60,8 @@ form {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+#city {
     width: 100%;
     padding: 1rem; /* Padding for better appearance */
     margin-bottom: 0.75rem; /* Reduced margin to maintain space */
@@ -68,6 +69,20 @@ input[type="password"] {
     border-radius: 25px; /* Rounded corners */
     font-size: 1rem;
     box-sizing: border-box;
+    background-color: #f5f5f5; /* Light gray background for inputs */
+    color: #666;
+}
+
+/* Change input to black on focus */
+input:focus, #city:focus {
+    border-color: black;
+    background-color: #fff; /* White background on focus */
+    outline: none;
+    color: black;
+}
+
+input:valid, #city:valid {
+    color: black;
 }
 
 /* Styles for Two Inputs in One Row */
@@ -134,4 +149,10 @@ a:hover {
 .text-danger {
     color: red;
     font-size: 12px;
+}
+
+/* Dropdown container styles */
+.dropdown-container {
+    width: 100%; /* Make the dropdown take the full width */
+    margin-bottom: 0.75rem; /* Space between inputs */
 }
