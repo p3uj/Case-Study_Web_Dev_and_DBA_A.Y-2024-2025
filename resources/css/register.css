@@ -156,3 +156,14 @@ a:hover {
     width: 100%; /* Make the dropdown take the full width */
     margin-bottom: 0.75rem; /* Space between inputs */
 }
+
+/* Dropdown styles */
+#city {
+    width: 100%;
+    padding: 1rem; /* Same padding as input fields */
+    border: 1px solid #ccc; /* Same border as input fields */
+    border-radius: 25px; /* Rounded corners to match input fields */
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #f5f5f5; /* Light gray background */
+}

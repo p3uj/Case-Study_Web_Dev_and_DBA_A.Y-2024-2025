@@ -12,12 +12,17 @@
     <div class="container">
         <div class="left"></div>
         <div class="right">
-            {{-- Display error message if credentials are incorrect --}}
-            <div id="error-alert" class="alert hidden">
-                <span class="alert-icon">⚠️</span> 
-                <span class="alert-message">{{ session('error') }}</span>
-            </div>
-            <img src="{{ Vite::asset('resources/images/RentEaseLogo.png')}}" alt="RentEase Logo" class="icon">
+            {{-- Dynamic alert for error or warning --}}
+            @if (session('error') || session('info'))
+                <div id="alert" class="alert {{ session('error') ? 'alert-danger' : 'alert-warning' }}">
+                    <span class="alert-icon">⚠️</span> 
+                    <span class="alert-message">
+                        {{ session('error') ?? session('info') }}
+                    </span>
+                </div>
+            @endif
+
+            <img src="{{ Vite::asset('resources/images/RentEaseLogo.png') }}" alt="RentEase Logo" class="icon">
             <h1>RentEase</h1>
             <p>Hassle-free and easy way to find a new home!</p>
 
@@ -50,17 +55,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const errorAlert = document.getElementById('error-alert');
+            const alertBox = document.getElementById('alert');
 
-            // Only show error if there's an error message (i.e., login failed)
-            if (errorAlert && "{{ session('error') }}") {
+            // Only show the alert if it exists
+            if (alertBox) {
                 // Show the alert (make it visible)
-                errorAlert.classList.remove('hidden');
-                errorAlert.style.opacity = 1;
+                alertBox.style.opacity = 1;
 
                 // Hide the alert after 3 seconds (fade it out)
                 setTimeout(function () {
-                    errorAlert.style.opacity = 0;
+                    alertBox.style.opacity = 0;
                 }, 3000);  // 3 seconds
             }
         });

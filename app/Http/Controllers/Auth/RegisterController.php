@@ -47,50 +47,39 @@ class RegisterController extends Controller
             ? 'Landlord managing multiple properties.'
             : 'Tenant looking for affordable housing.';
 
-        // Hash the password
-        $hashedPassword = Hash::make($request->input('password'));
-
         // Define the default profile photo path
-        $profilePhotoPath = "/resources/images/sampleProfile.png";
+        $profilePhotoPath = asset("/resources/images/sampleProfile.png");
 
         // Call the stored procedure to insert the user
-        DB::statement('
-            EXEC SP_INSERT_USER 
-                @u_role = ?, 
-                @u_firstname = ?, 
-                @u_lastname = ?, 
-                @u_city = ?, 
-                @u_email = ?, 
-                @u_password = ?, 
-                @u_profile_photo_path = ?, 
-                @u_bio = ?',
-            [
+        DB::statement('EXEC RE_SP_INSERT_USER ?, ?, ?, ?, ?, ?, ?, ?', [
                 $request->input('role'),
                 $request->input('firstname'),
                 $request->input('lastname'),
                 $request->input('city'),
                 $request->input('email'),
-                $hashedPassword,
+                Hash::make($request->input('password')),
                 $profilePhotoPath,
                 $bio,
             ]
         );
 
-        // Find the newly created user by email
-        $user = DB::table('users')->where('email', $request->input('email'))->first();
+        // Use the stored procedure to find the newly created user by email
+        $user = DB::select('EXEC RE_SP_GET_NEWLY_CREATED_USER ?', [$request->input('email'),]);
 
-        // Log the user in
-        if ($user) {
-            Auth::loginUsingId($user->id);
+        // Log the user in if found
+        if (!empty($user)) {
+            $user = $user[0]; // Fetch the first record since DB::select returns an array
+            Auth::loginUsingId($user->user_id);
 
             // Store user ID and role in session
             session([
-                'user_id' => $user->id,
+                'user_id' => $user->user_id,
                 'role' => $user->role
             ]);
         }
+        // Flash success message
+        session()->flash('success', 'Registration successful! Welcome to RentEase!');
 
-        // Redirect to the homepage or dashboard
-        return redirect()->route('homepage'); // Adjust this to your needs
+        return back();
     }
 }

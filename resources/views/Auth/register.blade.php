@@ -85,5 +85,23 @@
             <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
         </div>
     </div>
+
+    @if(session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            // Display the SweetAlert pop-up with the success message
+            Swal.fire({
+                title: 'Success!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                showConfirmButton: false, // Disable the confirm button
+                timer: 4000 // Wait for 2 seconds (2000ms)
+            }).then(() => {
+                // Redirect to homepage after the pop-up closes
+                window.location.href = "{{ route('homepage') }}";
+            });
+        </script>
+    @endif
+
 </body>
 </html>

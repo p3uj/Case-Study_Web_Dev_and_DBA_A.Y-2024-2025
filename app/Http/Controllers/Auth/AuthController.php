@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -25,21 +26,36 @@ class AuthController extends Controller
             "email" => "required|email",
             "password" => "required",
         ]);
-        
-        $credentials = $request->only("email", "password");
 
-        // If the user entered correct credentials, redirect to home page.
-        if (Auth::attempt($credentials)) {
-            session([
-                'user_id' => Auth::user()->id,
-                'role' => Auth::user()->role,
-            ]);
-            return redirect()->intended(route("homepage"));
+        // Retrieve the user's details using the stored procedure
+        $userDetails = DB::select('EXEC RE_SP_GET_NEWLY_CREATED_USER ?', [$request->input('email')]);
+        
+        // Check if user exists
+        $user = $userDetails[0] ?? null;
+        if (!$user) {
+            // Redirect to registration with a recommendation to create an account
+            return redirect(route("login"))
+                ->with("info", "Email not found. Please create an account.");
+        }
+        else {
+            // Verify the password
+            if (password_verify($request->input('password'), $user->password)) {
+                // Log the user in manually
+                Auth::loginUsingId($user->user_id);
+
+                // Store user details in session
+                session([
+                    'user_id' => $user->user_id,
+                    'role' => $user->role,
+                ]);
+
+                return redirect()->intended(route("homepage"));
+            }
         }
 
-        // If the credentials are incorrect, show error and redirect to login page.
+        // If the credentials are incorrect, show an error and redirect to login page.
         return redirect(route("login"))
-        ->with("error", "Invalid email or password. Please try again.");
+            ->with("error", "Invalid email or password. Please try again.");
     }
 
     public function logout()
@@ -53,33 +69,5 @@ class AuthController extends Controller
     public function showRegisterForm()
     {
         return view('auth.register');  // Ensure you have a 'register' view
-    }
-
-    // Handle the registration form submission
-    public function register(Request $request)
-    {
-        // Validate the registration form data
-        $request->validate([
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed', // Make sure the passwords match
-            'role' => 'required|in:tenant,landlord', // Validate role field
-        ]);
-
-        // Create a new user in the database
-        $user = User::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => $request->role,  // Save the role
-        ]);
-
-        // Log the user in automatically after registration
-        Auth::login($user);
-
-        // Redirect to the homepage or wherever needed after successful registration
-        return redirect()->route('homepage');
     }
 }
