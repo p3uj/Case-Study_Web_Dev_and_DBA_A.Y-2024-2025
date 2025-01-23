@@ -56,7 +56,6 @@ return new class extends Migration
             -- Insert Property Post
             INSERT INTO property_posts(property_info_id, user_id)
             VALUES(@v_LastPropertyInfoId, @p_UserId)
-            GO
         ");
     }
 

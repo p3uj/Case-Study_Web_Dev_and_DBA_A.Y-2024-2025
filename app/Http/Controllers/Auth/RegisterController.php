@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Api\CityController;
 
 class RegisterController extends Controller
 {
@@ -17,7 +18,10 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('auth.register'); // Ensure this path matches your Blade file's location
+        // Fetch cities to populate the registration form
+        $cities = CityController::index(); // Assuming this returns an array of cities
+
+        return view('auth.register', ['cities' => $cities]);
     }
 
     /**
@@ -32,24 +36,61 @@ class RegisterController extends Controller
         $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|string|in:tenant,landlord', // Validation for the role selection
+            'role' => 'required|string|in:Tenant,Landlord',
         ]);
 
-        // Create a new user with the validated data
-        $user = User::create([
-            'role' => $request->input('role'), // Store the selected role
-            'firstname' => $request->input('firstname'),
-            'lastname' => $request->input('lastname'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')), // Ensure password is hashed
-        ]);
+        // Set the bio based on the role
+        $bio = $request->input('role') === 'Landlord'
+            ? 'Landlord managing multiple properties.'
+            : 'Tenant looking for affordable housing.';
 
-        // Automatically log the user in after successful registration
-        Auth::login($user);
+        // Hash the password
+        $hashedPassword = Hash::make($request->input('password'));
 
-        // Redirect to the homepage after registration
-        return redirect()->route('homepage'); // Adjust this route name as per your application
+        // Define the default profile photo path
+        $profilePhotoPath = "/resources/images/sampleProfile.png";
+
+        // Call the stored procedure to insert the user
+        DB::statement('
+            EXEC SP_INSERT_USER 
+                @u_role = ?, 
+                @u_firstname = ?, 
+                @u_lastname = ?, 
+                @u_city = ?, 
+                @u_email = ?, 
+                @u_password = ?, 
+                @u_profile_photo_path = ?, 
+                @u_bio = ?',
+            [
+                $request->input('role'),
+                $request->input('firstname'),
+                $request->input('lastname'),
+                $request->input('city'),
+                $request->input('email'),
+                $hashedPassword,
+                $profilePhotoPath,
+                $bio,
+            ]
+        );
+
+        // Find the newly created user by email
+        $user = DB::table('users')->where('email', $request->input('email'))->first();
+
+        // Log the user in
+        if ($user) {
+            Auth::loginUsingId($user->id);
+
+            // Store user ID and role in session
+            session([
+                'user_id' => $user->id,
+                'role' => $user->role
+            ]);
+        }
+
+        // Redirect to the homepage or dashboard
+        return redirect()->route('homepage'); // Adjust this to your needs
     }
 }

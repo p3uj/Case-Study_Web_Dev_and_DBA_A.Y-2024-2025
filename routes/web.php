@@ -11,6 +11,7 @@ use App\Models\FindRoommateOrTenant;
 use App\Models\PropertyPost;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
 Route::middleware('auth')->group(function () {
@@ -29,9 +30,14 @@ Route::middleware('auth')->group(function () {
 });
 
 // Ensure that only unauthenticated users can access this root route.
-Route::middleware('guest')->get('/', function () {
-    return view('Auth/login');
+Route::middleware('guest')->group(function () {
+    Route::view('/', 'Auth/login');
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'loginpost'])->name('login.post');
 });
+
 
 // Authentication routes
 Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -39,5 +45,5 @@ Route::post('login', [AuthController::class, 'loginpost'])->name('login.post');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 // Registration routes
-Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('register', [AuthController::class, 'register'])->name('register.post');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
