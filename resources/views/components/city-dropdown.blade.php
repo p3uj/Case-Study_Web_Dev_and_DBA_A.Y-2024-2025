@@ -11,8 +11,9 @@
 </head>
 <body>
     <!-- City Dropdown Box -->
-    <select name="city" class="filter-city" data-filter-city-value="" style="border-radius: 40px; border: none;">
-        <option value="" disabled selected>Please select city</option>
+    <select name="city" class="filter-city" data-filter-city="{{ $filtercity }}" data-filter-city-value="" style="border-radius: 40px; border: none;">
+        <option value="" disabled>Select city</option>
+        <option value="">Clear Selection</option>
         @foreach ($cities as $city)
             <option id="{{ $city['code'] }}" value="{{ $city['name'] }}">
                 {{ $city['name'] }}
