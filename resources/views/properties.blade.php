@@ -65,23 +65,26 @@
         </div>
 
         <!-- Filter search -->
-        <div class="filter-search-box">
-            <div class="filter-search">Filter Search</div>
-            <!-- Unit Category Dropdown Box -->
-            <select class="filter-unit-category" name="filter-unit-category" id="filter-unit-category">
-                <option value="Dormitories" selected>Dormitories</option>
-                <option value="Studio Units">Studio Units</option>
-                <option value="Apartments">Apartments</option>
-                <option value="Boarding Houses">Boarding Houses</option>
-                <option value="Other">Other</option>
-            </select>
+        <form action="" method="post">
+            <div class="filter-search-box">
+                <div class="filter-search">Filter Search</div>
+                <!-- Unit Category Dropdown Box -->
+                <select class="filter-unit-category" name="filter-unit-category" id="filter-unit-category">
+                    <option value="Dormitories" selected>Dormitories</option>
+                    <option value="Studio Units">Studio Units</option>
+                    <option value="Apartments">Apartments</option>
+                    <option value="Boarding Houses">Boarding Houses</option>
+                    <option value="Other">Other</option>
+                </select>
 
-            <!-- Use city-dropdown component and pass the value of $cities -->
-            <x-city-dropdown :cities="$cities"></x-city-dropdown>
+                <!-- Use city-dropdown component and pass the value of $cities -->
+                <x-city-dropdown :cities="$cities"></x-city-dropdown>
 
-            <!-- Rental Price -->
-            <input class="filter-rental-price" type="number" placeholder="Budget price" id="filter-rental-price" name="filter-rental-price">
-        </div>
+                <!-- Rental Price -->
+                <input class="filter-rental-price" type="number" placeholder="Budget price" id="filter-rental-price" name="filter-rental-price">
+                <button type="submit" class="filter-search-btn">Search</button>
+            </div>
+        </form>
 
         <!-- Create Post Button -->
         <button class="create-a-post-btn" popovertarget="create-post-popover">
