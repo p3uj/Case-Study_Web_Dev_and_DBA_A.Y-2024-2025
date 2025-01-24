@@ -68,19 +68,19 @@
         <div class="filter-search-box">
             <div class="filter-search">Filter Search</div>
             <!-- Unit Category Dropdown Box -->
-            <select class="property-unit-category" name="propety-unit-category" id="">
-                <option value="">Dormitories</option>
-                <option value="">Studio Units</option>
-                <option value="">Apartments</option>
-                <option value="">Boarding Houses</option>
-                <option value="">Other</option>
+            <select class="filter-unit-category" name="filter-unit-category" id="filter-unit-category">
+                <option value="Dormitories" selected>Dormitories</option>
+                <option value="Studio Units">Studio Units</option>
+                <option value="Apartments">Apartments</option>
+                <option value="Boarding Houses">Boarding Houses</option>
+                <option value="Other">Other</option>
             </select>
 
             <!-- Use city-dropdown component and pass the value of $cities -->
             <x-city-dropdown :cities="$cities"></x-city-dropdown>
 
             <!-- Rental Price -->
-            <input class="budget-price" type="number" placeholder="Budget price" id="rental-price" name="rental-price">
+            <input class="filter-rental-price" type="number" placeholder="Budget price" id="filter-rental-price" name="filter-rental-price">
         </div>
 
         <!-- Create Post Button -->
@@ -92,25 +92,32 @@
     <div class="container">
         <!-- Dormitory content -->
         <div class="property-post-content">
-            <div class="property-post-container">
-                <img class="property-post-image" src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Property Post Image">
-                <h3><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; height: 16px;">
-                    <span class="location">Holy Spirit, Quezon City</span>
-                </h3>
-                <p class="property-post-description">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse hic eius ad nulla unde consequuntur ea, minima non dolor recusandae distinctio qui quibusdam ipsum sapiente corrupti odit nesciunt voluptatibus tenetur!
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab rerum neque a sint aliquam alias obcaecati tenetur vel nostrum error, consequatur modi ipsum nemo ut amet pariatur eum, excepturi vero?
-                </p>
-                <h2 class="unit-price">₱5,0000 <span class="per-month">/month</span></h2>
-                <div class="bottom-part">
-                    <div class="user-profile">
-                        <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
-                        {{-- Do Kyung-Soo --}}
-                        <span class="user-name">Do Kyung-Soo</span>
+            @if (!empty($propertyPosts))
+                @foreach ($propertyPosts as $property)
+                    <div class="property-post-container">
+                        <img class="property-post-image" src="{{ Vite::asset('public/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Property Post Image">
+                        <h3><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; height: 16px;">
+                            <span class="location">{{ $property->Location }}</span>
+                        </h3>
+                        <p class="property-post-description">
+                            {{ $property->description }}
+                        </p>
+                        <h2 class="unit-price">₱{{ number_format($property->rental_price, 2) }}<span class="per-month"> /month</span></h2>
+                        <div class="bottom-part">
+                            <div class="user-profile">
+                                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                                {{-- Do Kyung-Soo --}}
+                                <span class="user-name">{{ $property->UserName }}</span>
+                            </div>
+                            <a>See more</a>
+                        </div>
                     </div>
-                    <a>See more</a>
+                @endforeach
+            @else
+                <div style="margin-top: 16px;">
+                    <h1>No Searching Posts!</h1>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 </body>
