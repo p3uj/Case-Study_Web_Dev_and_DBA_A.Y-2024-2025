@@ -9,6 +9,7 @@
     {{-- Link css and javascript file --}}
     @vite('resources/css/properties.css')
     @vite('resources/js/property.js')
+    @vite('resources/js/filter-property.js')
 </head>
 <body>
     <x-navbar></x-navbar>
@@ -65,23 +66,27 @@
         </div>
 
         <!-- Filter search -->
-        <form action="" method="post">
+        <form action="{{ route("filtersearch.post") }}" method="post">
+            @csrf
             <div class="filter-search-box">
                 <div class="filter-search">Filter Search</div>
                 <!-- Unit Category Dropdown Box -->
-                <select class="filter-unit-category" name="filter-unit-category" id="filter-unit-category">
-                    <option value="Dormitories" selected>Dormitories</option>
+                <select class="filter-unit-category" name="filter-unit-category" id="filter-unit-category" data-filter-unit-category="{{ $filterSearch['filter-unit-category'] }}">
+                    <option value="Dormitories">Dormitories</option>
                     <option value="Studio Units">Studio Units</option>
                     <option value="Apartments">Apartments</option>
                     <option value="Boarding Houses">Boarding Houses</option>
                     <option value="Other">Other</option>
                 </select>
 
+                <!-- Hidden input to ensure null value is submitted when no option is selected -->
+                <input type="hidden" name="city" value="">
+
                 <!-- Use city-dropdown component and pass the value of $cities -->
-                <x-city-dropdown :cities="$cities"></x-city-dropdown>
+                <x-city-dropdown :cities="$cities" :filtercity="$filterSearch['city']"></x-city-dropdown>
 
                 <!-- Rental Price -->
-                <input class="filter-rental-price" type="number" placeholder="Budget price" id="filter-rental-price" name="filter-rental-price">
+                <input class="filter-rental-price" type="number" placeholder="Budget price" id="filter-rental-price" name="filter-rental-price" data-filter-rental-price="{{ $filterSearch['filter-rental-price'] }}">
                 <button type="submit" class="filter-search-btn">Search</button>
             </div>
         </form>
@@ -118,7 +123,7 @@
                 @endforeach
             @else
                 <div style="margin-top: 16px;">
-                    <h1>No Searching Posts!</h1>
+                    <h1>No Property Posts!</h1>
                 </div>
             @endif
         </div>
