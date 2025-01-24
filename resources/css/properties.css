@@ -55,7 +55,7 @@
     color: var(--rentease-primary);
 }
 
-.property-unit-category, .budget-price {
+.filter-unit-category, .filter-rental-price {
     border-radius: 40px;
     border: none;
 }
