@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Api\BarangayController;
 use App\Http\Controllers\Api\CityController;
+use App\Models\PropertyPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,10 +15,12 @@ class PropertyController extends Controller
         // Call the index method in the CityController and BarangayController to fetch all the city and barangay list from external API
         $city = CityController::index();
         $barangay = BarangayController::index();
+        $propertyPosts = PropertyPost::getAllPropertyPostByFilterSearch('Dormitories');
 
         return view('properties', [
             'cities' => $city
             ,'barangays' => $barangay
+            ,'propertyPosts' => $propertyPosts
         ]);
     }
 
