@@ -41,4 +41,14 @@ class PropertyPost extends Model
 
         return $authUserPropertyPosts;
     }
+
+    public static function getAllPropertyPostByFilterSearch($unitCategory = null, $city = null, $rentalPrice = null) {
+        $propertyPosts = DB::select('RE_SP_GET_ALL_PROPERTY_POST_BASED_ON_FILTER_SEARCH ?, ?, ?', [
+            $unitCategory
+            ,$city
+            ,$rentalPrice
+        ]);
+
+        return $propertyPosts;
+    }
 }
