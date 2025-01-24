@@ -188,6 +188,7 @@
 .property-post-content {
     display: grid;
     column-gap: 30px;
+    row-gap: 65px;
     grid-template-columns: repeat(3, minmax(400px, 1fr));
     /* background-color: var(--rentease-secondary); */
     justify-items: center;
