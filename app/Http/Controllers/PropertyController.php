@@ -15,17 +15,25 @@ class PropertyController extends Controller
         // Call the index method in the CityController and BarangayController to fetch all the city and barangay list from external API
         $city = CityController::index();
         $barangay = BarangayController::index();
-        $propertyPosts = PropertyPost::getAllPropertyPostByFilterSearch('Dormitories');
+        $propertyPosts = PropertyPost::getAllPropertyPostByFilterSearch("Dormitories");
+
+        // Set the default value of filter search
+        $filterSearch = [
+            'filter-unit-category' => 'Dormitories'
+            ,'city' => null
+            ,'filter-rental-price' => null
+        ];
 
         return view('properties', [
             'cities' => $city
             ,'barangays' => $barangay
             ,'propertyPosts' => $propertyPosts
+            ,'filterSearch' => $filterSearch
         ]);
     }
 
     // Create Property Post on the database
-    public static function store(Request $request) {
+    public function store(Request $request) {
         $photoNameString = ""; // Use to store all the original file name since the stored procedure only accepts a string as a parameter
 
         // Extracting the variables for clarity and readability
@@ -67,5 +75,22 @@ class PropertyController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function filterSearch(Request $request) {
+        // Get the filtered property posts based on the criteria in the request
+        $propertyPosts = PropertyPost::getAllPropertyPostByFilterSearch($request->input('filter-unit-category'), $request->city, $request->input('filter-rental-price'));
+
+        // Retrieve the list of cities and barangays to pass them along with the filtered property posts
+        $city = CityController::index();
+        $barangay = BarangayController::index();
+
+        // Redirect back to the 'properties' page with updated data
+        return view('properties', [
+            'cities' => $city
+            ,'barangays' => $barangay
+            ,'propertyPosts' => $propertyPosts
+            ,'filterSearch' => $request
+        ]);
     }
 }
