@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Api\BarangayController;
+use App\Http\Controllers\Api\CityController;
 use App\Models\FindRoommateOrTenant;
 use App\Models\PropertyInfo;
 use App\Models\PropertyPost;
@@ -35,6 +37,10 @@ class UserProfileController extends Controller
     }
 
     public function index() {
+        // Call the index method of the city and barangay controller to get the data
+        $city = CityController::index();
+        $barangay = BarangayController::index();
+
         // Call the getUserAuthInfo method in the User model with the id of the authenticated user to fetch its info
         $userInfo = User::getUserInfoById(Auth::id());
 
@@ -52,6 +58,8 @@ class UserProfileController extends Controller
             ,'propertyPost' => $properties
             ,'findPost' => $findingPost
             ,'reviews' => $reviews
+            ,'cities' => $city
+            ,'barangays' => $barangay
         ]);
     }
 }
