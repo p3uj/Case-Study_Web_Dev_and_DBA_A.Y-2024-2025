@@ -49,7 +49,7 @@ class PropertyController extends Controller
 
             return view('properties', [
                 'cities' => $this->city
-                ,'barangays' => $this->city
+                ,'barangays' => $this->barangay
                 ,'filterSearch' => $request->only(['filter-unit-category', 'city', 'filter-rental-price']) // Only return these fields from the request
                 ,'propertyPosts' => $filteredPropertyPosts
             ]);
@@ -97,7 +97,8 @@ class PropertyController extends Controller
         foreach ($uploadedFiles as $file) {
             $fileName = time() . '_' . $file->getClientOriginalName();
 
-            $file->move(public_path('uploads/images/property-posts'), $fileName); // Move the file in the desired folder
+            //$file->move(public_path('uploads/images/property-posts'), $fileName); // Move the file in the desired folder
+            $file->storeAs('public/uploads/images/property-posts', $fileName); // Move the file in the desired folder
         }
 
         return redirect()->back();
