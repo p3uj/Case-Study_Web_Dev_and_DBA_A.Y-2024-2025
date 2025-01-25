@@ -66,7 +66,7 @@
         </div>
 
         <!-- Filter search -->
-        <form action="{{ route("filtersearch.post") }}" method="post">
+        <form action="{{ route("property.post") }}" method="post">
             @csrf
             <div class="filter-search-box">
                 <div class="filter-search">Filter Search</div>
