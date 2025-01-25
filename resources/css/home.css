@@ -1,0 +1,367 @@
+/* Global Reset */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+
+/* Body Background Color */
+body {
+    background-color: #F5F5DC;
+}
+
+/* Container Styling */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    background-color: #F5F5DC;
+}
+
+/* Text Section */
+.text-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.text-section h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.text-section p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.text-section a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #5a3d2b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect on button */
+.text-section a:hover {
+    background-color: #9f8b67;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Section */
+.image-section {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+}
+
+/* Circular Images */
+.circleOne-image,
+.circleTwo-image {
+    position: absolute;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.circleOne-image {
+    width: 500px; /* Increased size */
+    height: 500px; /* Increased size */
+    top: 10px; /* Moved higher */
+    left: 10px; /* Moved more left */
+    z-index: 2;
+}
+
+.circleTwo-image {
+    width: 350px; /* Increased size */
+    height: 350px; /* Increased size */
+    top: 210px; /* Move lower so it doesn't overlap */
+    left: 350px; /* Move further left to avoid overlap */
+    z-index: 1;
+}
+
+/* Featured Properties Section */
+.featured-properties {
+    padding: 40px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.featured-properties .section-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.featured-properties .property-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns for all images */
+    grid-template-rows: repeat(2, 1fr); /* Two rows */
+    gap: 20px;
+    margin: 0 auto; /* Center the grid */
+}
+
+.featured-properties .property-image {
+    width: 100%;
+    height: 250px; /* Equal height for all images */
+    object-fit: cover;
+    margin: 0 10px; /* Add margin to the sides */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0; /* Remove rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.featured-properties .property-image:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+
+/* Properties Section */
+.properties {
+    padding: 30px 40px; /* Increased left and right padding */
+    text-align: center;
+    margin-top: 40px;
+}
+
+.properties h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.properties .properties-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.property-card {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    height: 480px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.property-card .image-holder {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
+}
+
+.property-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.property-card .text-content {
+    padding: 20px;
+    padding-top: 20px;
+    background-color: #fff;
+    flex-grow: 1;
+}
+
+.property-card h3 {
+    font-size: 18px;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+.property-card .category,
+.property-card .location,
+.property-card .price,
+.property-card .ratings {
+    font-size: 14px;
+    margin: 8px 0;
+    padding-left: 15px;
+}
+
+.property-card .price {
+    font-weight: bold;
+    color: #BDA27E;
+}
+
+.property-card .ratings i {
+    color: #FFD700;
+}
+
+.property-card a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 25px;
+    background-color: #BDA27E;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 20px;
+}
+
+.property-card a:hover {
+    background-color: #9f8b67;
+    transform: translateY(-2px);
+}
+
+/* Arrows for Carousel */
+.arrows-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.arrow {
+    background-color: #757575;
+    border: none;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.arrow:hover {
+    background-color: #616161;
+}
+
+/* Left and Right Arrows Styling */
+.left-arrow {
+    margin-left: 20px;
+}
+
+.right-arrow {
+    margin-right: 20px;
+}
+
+
+/* Top Rated Properties Section */
+.top-rated-properties {
+    background-color: #F5F5DC;
+    padding: 15px;
+    margin-top: 40px;
+    margin-bottom: 40px; /* Space below the section */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.top-rated-properties h2 {
+    font-size: 2rem; /* Same font size as other titles */
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center; /* Centers only the title */
+}
+
+/* Grid for Top Rated Properties */
+.top-rated-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 0 auto;
+}
+
+/* Ranked Property Cards */
+.ranked-property {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+
+/* Hover effect for each Ranked Property Card */
+.ranked-property:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced box shadow on hover */
+}
+
+/* Rank Circle */
+.ranked-property .rank {
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #5a3d2b;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* Image Placeholder */
+.ranked-property .image-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #f2f2f2;
+    border-radius: 6px;
+    margin-right: 8px;
+}
+
+/* Property Info */
+.ranked-property .info {
+    flex: 1;
+}
+
+.ranked-property h3 {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+    color: #333;
+}
+
+.ranked-property p {
+    font-size: 0.7rem;
+    color: #666;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
