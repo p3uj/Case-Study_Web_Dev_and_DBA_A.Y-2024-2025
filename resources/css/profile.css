@@ -146,10 +146,25 @@ body{
     margin-right: 8px;
 }
 
+.date-and-edit-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.edit-icon {
+    background-color: transparent;
+    border: none;
+}
+
+.edit-icon:hover {
+    transform: scale(1.2);
+}
+
 .date-posted {
     font-size: 16px;
     color: var(--txt-secondary);
-    margin-bottom: 16px;
 }
 
 .tags {
@@ -393,4 +408,27 @@ h4,
 /* Scrollbar thumb on hover */
 ::-webkit-scrollbar-thumb:hover {
     background-color: #0056b3; /* Darker color when hovering */
+}
+
+
+/* Edit form */
+#edit-search-post-popover {
+    position: fixed; /* stay on screen even when scrolling */
+    top: 50%; /* Move element halfway down the viewport */
+    left: 50%; /* Move element halfway to the right */
+    transform: translate(-50%, -50%); /* Adjust position back by half the element's width and height */
+    text-align: center;
+    padding: 40px;
+    background-color: var(--rentease-secondary);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for the backdrop of the popover in the top layer */
+[popover]:-internal-popover-in-top-layer::backdrop {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.5);
+    pointer-events: none !important;
+    inset: 0px;
 }
