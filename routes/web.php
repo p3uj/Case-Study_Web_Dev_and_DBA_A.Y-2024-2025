@@ -26,8 +26,7 @@ Route::middleware('auth')->group(function () {
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
-    Route::post('/property', [PropertyController::class, 'store'])->name('property.post');
-    Route::post('/property/filtersearch', [PropertyController::class, 'filterSearch'])->name('filtersearch.post');
+    Route::post('/property', [PropertyController::class, 'storeOrFilterSearch'])->name('property.post');
 });
 
 // Ensure that only unauthenticated users can access this root route.
