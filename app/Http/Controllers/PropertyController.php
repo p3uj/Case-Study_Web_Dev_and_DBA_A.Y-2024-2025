@@ -7,15 +7,24 @@ use App\Http\Controllers\Api\CityController;
 use App\Models\PropertyPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
+    private $city;
+    private $barangay;
+
+    public function __construct()
+    {
+        // Call the index method in the city and barangay controller to fetch the data from external API and assign to the properties of the class
+        $this->city = CityController::index();
+        $this->barangay = BarangayController::index();
+    }
+
     public function index() {
-        // Call the index method in the CityController and BarangayController to fetch all the city and barangay list from external API
-        $city = CityController::index();
-        $barangay = BarangayController::index();
-        $propertyPosts = PropertyPost::getAllPropertyPostByFilterSearch("Dormitories");
+        // Call the getAllFilteredPropertyPosts method in the PropertyPost model, passing the 'Dormitories' as a parameter
+        $propertyPosts = PropertyPost::getAllFilteredPropertyPosts("Dormitories");
 
         // Set the default value of filter search
         $filterSearch = [
@@ -25,11 +34,28 @@ class PropertyController extends Controller
         ];
 
         return view('properties', [
-            'cities' => $city
-            ,'barangays' => $barangay
+            'cities' => $this->city
+            ,'barangays' => $this->barangay
             ,'propertyPosts' => $propertyPosts
             ,'filterSearch' => $filterSearch
         ]);
+    }
+
+    public function storeOrFilterSearch(Request $request) {
+        // Check if the request has filter unit category field
+        if ($request->has('filter-unit-category')) {
+            // Get the filtered property posts based on the criteria in the request
+            $filteredPropertyPosts = PropertyPost::getAllFilteredPropertyPosts($request->input('filter-unit-category'), $request->city, $request->input('filter-rental-price'));
+
+            return view('properties', [
+                'cities' => $this->city
+                ,'barangays' => $this->city
+                ,'filterSearch' => $request->only(['filter-unit-category', 'city', 'filter-rental-price']) // Only return these fields from the request
+                ,'propertyPosts' => $filteredPropertyPosts
+            ]);
+        }
+
+        return $this->store($request); // Call the store method to store the request data in the database
     }
 
     // Create Property Post on the database
@@ -75,22 +101,5 @@ class PropertyController extends Controller
         }
 
         return redirect()->back();
-    }
-
-    public function filterSearch(Request $request) {
-        // Get the filtered property posts based on the criteria in the request
-        $propertyPosts = PropertyPost::getAllPropertyPostByFilterSearch($request->input('filter-unit-category'), $request->city, $request->input('filter-rental-price'));
-
-        // Retrieve the list of cities and barangays to pass them along with the filtered property posts
-        $city = CityController::index();
-        $barangay = BarangayController::index();
-
-        // Redirect back to the 'properties' page with updated data
-        return view('properties', [
-            'cities' => $city
-            ,'barangays' => $barangay
-            ,'propertyPosts' => $propertyPosts
-            ,'filterSearch' => $request
-        ]);
     }
 }
