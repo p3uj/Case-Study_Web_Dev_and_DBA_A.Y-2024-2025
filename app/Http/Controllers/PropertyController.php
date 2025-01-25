@@ -93,12 +93,11 @@ class PropertyController extends Controller
             ,$userId
         ]);
 
-        // Save the uploaded photos in public folder
+        // Save the uploaded photos in the desired folder
         foreach ($uploadedFiles as $file) {
             $fileName = time() . '_' . $file->getClientOriginalName();
 
-            //$file->move(public_path('uploads/images/property-posts'), $fileName); // Move the file in the desired folder
-            $file->storeAs('public/uploads/images/property-posts', $fileName); // Move the file in the desired folder
+            $file->storeAs("uploads/images/property-posts", $fileName, "public"); // Store the file in the desired folder
         }
 
         return redirect()->back();
