@@ -41,8 +41,8 @@ class BarangayController extends Controller
                 // After sorting, reset the array keys by using values() and use all() to return the final sorted array
                 $sortedBarangayList = $sortedBarangayList->values()->all();
 
-                // Store the sortedBarangayList data in cache for 24 hours
-                Cache::put('sortedBarangayList', $sortedBarangayList, now()->addHours(24));
+                // Store the sortedBarangayList data in cache for 1 year
+                Cache::put('sortedBarangayList', $sortedBarangayList, now()->addYear(1));
 
                 // Return sorted list of barangays
                 return $sortedBarangayList;

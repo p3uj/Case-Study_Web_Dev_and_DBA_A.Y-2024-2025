@@ -41,8 +41,8 @@ class CityController extends Controller
                 // After sorting, reset the array keys by using values() and use all() to return the final sorted array
                 $sortedCityList = $sortedCityList->values()->all();
 
-                // Store the sortedCityList data in cache for 24 hours
-                Cache::put('sortedCityList', $sortedCityList, now()->addHours(24));
+                // Store the sortedCityList data in cache for 1 year
+                Cache::put('sortedCityList', $sortedCityList, now()->addYear(1));
 
                 // Return sorted list of cities
                 return $sortedCityList;
