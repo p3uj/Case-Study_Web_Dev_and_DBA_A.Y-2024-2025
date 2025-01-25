@@ -58,7 +58,7 @@
             @if (!empty($propertyPost))
                 @foreach ($propertyPost as $property)
                     <div id="property-post" class="property-post-content" data-isPostAvailable="{{$property->is_available}}">
-                        <img src="{{ Vite::asset('resources/images/propertysample/property1.png') }}" alt="Image 1">
+                        <img src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Image 1">
                         <div class="property-info">
                             <p class="date-posted">{{ $property->updated_at }}</p>
                             <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
