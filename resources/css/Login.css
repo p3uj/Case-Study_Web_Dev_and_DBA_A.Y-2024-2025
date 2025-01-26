@@ -15,76 +15,91 @@ body, html {
 
 /* Left Section */
 .left {
-    flex: 3.02; /* Slightly larger than the right section */
+    flex: 3.02; /* Matches the register left section size */
     background: url('../images/LoginImage.jpg') no-repeat center center;
     background-size: cover; /* Ensures the image scales to cover the section */
     height: 100vh; /* Ensures it covers the full height */
 }
 
-/* Right Section */
 .right {
-    flex: 2; /* Adjusted to make the right section smaller */
-    background-color: #F5F5DC; /* Matches the light yellow tone */
+    flex: 2;
+    background-color: #F5F5DC;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Centers the content vertically */
     align-items: center;
-    padding: 2rem;
-    height: 100vh;
-    overflow-y: auto; /* Prevents content from overflowing on smaller screens */
+    padding: 80px 20px; /* Adds space at the top and sides */
+    height: 100vh; /* Ensures it covers the full height */
+    box-sizing: border-box;
 }
+
 
 /* Logo */
 .icon {
-    width: 80px;
+    width: 60px; /* Matches the register logo size */
     height: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 5px; /* Matches spacing from register */
 }
 
 /* Heading and Paragraph */
 h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 32px; /* Matches the register heading size */
+    margin-bottom: 5px;
+    color: #333;
 }
 
 p {
-    margin-bottom: 2rem;
+    margin-bottom: 10px; /* Matches the spacing from register */
     color: #555;
     text-align: center;
+    font-size: 14px;
 }
 
 /* Form Styles */
 form {
     width: 100%;
-    max-width: 350px; /* Increased max-width for longer input */
+    max-width: 350px; /* Matches the max-width from register */
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-/* Input Fields (more roundy and longer) */
+/* Input Fields */
 input[type="text"],
 input[type="password"] {
     width: 100%;
-    padding: 1rem; /* Increased padding for longer input */
-    margin-bottom: 1rem;
+    padding: 0.75rem; /* Matches the register padding */
+    margin-bottom: 0.75rem; /* Matches spacing between fields */
     border: 1px solid #ccc;
-    border-radius: 25px; /* More rounded corners */
+    border-radius: 25px; /* Matches rounded corners from register */
     font-size: 1rem;
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    box-sizing: border-box;
+    background-color: #f5f5f5; /* Matches register background */
+    color: #666;
 }
 
-/* Login Button (more roundy) */
+/* Change input to black on focus */
+input:focus {
+    border-color: black;
+    background-color: #fff;
+    outline: none;
+    color: black;
+}
+
+/* Login Button */
 button {
     width: 100%;
-    padding: 1rem; /* Increased padding for a more elongated look */
-    background-color: #007BFF;
+    padding: 1rem; /* Matches register button padding */
+    background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 25px; /* More rounded corners for the button */
+    border-radius: 25px; /* Matches register button's rounded corners */
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -95,8 +110,8 @@ button:hover {
 a {
     color: #007BFF;
     text-decoration: none;
-    font-size: 0.9rem;
-    margin-top: 1rem; /* Added margin-top to space it out from the login button */
+    font-size: 14px; /* Matches register link size */
+    margin-top: 1rem;
 }
 
 a:hover {
@@ -106,28 +121,23 @@ a:hover {
 /* Error Message */
 .text-danger {
     color: red;
-    font-size: 0.8rem;
+    font-size: 12px; /* Matches the error message size in register */
 }
 
-/* Register Link */
-.register-link {
-    margin-top: 1rem;
-}
-
-/* Error Message */
+/* Alert */
 .alert {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
     padding: 15px;
     border-radius: 5px;
-    font-size: 16px;
-    opacity: 0;  /* Initially hidden */
-    transition: opacity 1s ease-out;  /* Smooth transition */
-    width: 100%;  /* Adjust width as needed */
-    text-align: center;  /* Centers the text */
-    margin-bottom: 20px;  /* Adds space between the alert and the form */
-    display: block; /* Ensures the element is present in the flow */
+    font-size: 14px; /* Matches the alert size from register */
+    opacity: 0;  
+    transition: opacity 1s ease-out; 
+    width: 100%; 
+    text-align: center; 
+    margin-bottom: 20px; 
+    display: block; 
 }
 
 .alert-icon {
@@ -137,9 +147,4 @@ a:hover {
 
 .alert-message {
     font-weight: bold;
-}
-
-.hidden {
-    opacity: 0;
-    pointer-events: none; /* Ensures it doesn't interfere with interactions */
 }

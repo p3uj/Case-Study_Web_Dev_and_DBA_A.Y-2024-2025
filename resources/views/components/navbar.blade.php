@@ -8,13 +8,16 @@
     {{-- Link css and javascript file --}}
     @vite('resources/css/customizedColor.css')
     @vite('resources/css/navbar.css')
+
+    <!-- Add Font Awesome CDN for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
-        <img src="{{ Vite::asset('resources/images/RentEaseLogo.png') }}" alt="Rent Ease Logo" class="rentease-logo"">
-        <form>
+        <img src="{{ Vite::asset('resources/images/RentEaseLogo.png') }}" alt="Rent Ease Logo" class="rentease-logo">
+        <form class="search-form">
             <input type="text" class="searchbar" placeholder="Search a user...">
-            <button type="submit">Search</button>
+            <button type="submit"><i class="fas fa-search"></i></button>
         </form>
         <a href="{{ route("homepage")}}" class="{{ Route::currentRouteName() === 'homepage' ? 'active' : '' }}">Home</a>
         <a href="{{ route("propertiespage")}}" class="{{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}">Properties</a>

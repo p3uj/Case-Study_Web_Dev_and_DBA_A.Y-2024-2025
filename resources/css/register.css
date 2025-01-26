@@ -4,6 +4,7 @@ body, html {
     padding: 0;
     height: 100%;
     font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevents the page from being scrollable */
 }
 
 .container {
@@ -14,37 +15,40 @@ body, html {
 
 /* Left Section */
 .left-section {
-    flex: 3.1;
+    flex: 3.02;
     background: url('../images/LoginImage.jpg') no-repeat center center;
     background-size: cover;
+    height: 100vh; /* Ensures it covers the full height */
 }
 
-/* Right Section */
 .right-section {
     flex: 2;
     background-color: #F5F5DC;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Centers the content vertically */
     align-items: center;
-    padding: 40px;
+    padding: 400px 20px; /* Adds space at the top and sides */
+    height: 100vh; /* Ensures it covers the full height */
+    box-sizing: border-box;
 }
 
 /* Logo */
 .icon {
     width: 60px;
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Reduced margin to bring the logo closer to the tagline */
 }
 
 /* Heading */
 h1 {
     font-size: 32px;
-    margin: 0;
+    margin: 0 0 5px 0; /* Reduced margin for better positioning */
     color: #333;
 }
 
+/* Tagline */
 p {
-    margin: 10px 0 30px;
+    margin: 0 0 10px 0; /* Reduced bottom margin to bring the tagline closer to the form */
     font-size: 14px;
     color: #666;
     text-align: center;
@@ -53,23 +57,28 @@ p {
 /* Form Styles */
 form {
     width: 100%;
-    max-width: 350px;
+    max-width: 350px; /* Set a max width */
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Reduced top margin to bring it closer to the tagline */
+    margin-bottom: 20px; /* Add space from the bottom */
+    justify-content: flex-start; /* Align form content from top */
 }
 
+/* Slimmed Down Input Fields */
 input[type="text"],
-input[type="email"],
 input[type="password"],
+input[type="email"],
 #city {
     width: 100%;
-    padding: 1rem; /* Padding for better appearance */
-    margin-bottom: 0.75rem; /* Reduced margin to maintain space */
+    padding: 0.75rem; /* Reduced padding to make them slimmer */
+    margin-bottom: 0.75rem; /* Spacing between inputs */
     border: 1px solid #ccc;
-    border-radius: 25px; /* Rounded corners */
+    border-radius: 25px;
     font-size: 1rem;
     box-sizing: border-box;
-    background-color: #f5f5f5; /* Light gray background for inputs */
+    background-color: #f5f5f5; /* Light gray background */
     color: #666;
 }
 
@@ -78,10 +87,6 @@ input:focus, #city:focus {
     border-color: black;
     background-color: #fff; /* White background on focus */
     outline: none;
-    color: black;
-}
-
-input:valid, #city:valid {
     color: black;
 }
 
@@ -94,7 +99,7 @@ input:valid, #city:valid {
 
 .form-row input {
     flex: 1; /* Make the inputs take equal space */
-    padding: 1rem;
+    padding: 0.75rem; /* Slimmer padding */
     border: 1px solid #ccc;
     border-radius: 25px;
     font-size: 1rem;
@@ -103,19 +108,30 @@ input:valid, #city:valid {
 
 /* Role Selection */
 .role-selection {
+    display: flex;
+    flex-direction: column; /* Stack the question and radio buttons vertically */
+    justify-content: flex-start; /* Align content to the left */
     margin: 20px 0;
     font-size: 14px;
+    width: 100%;
 }
 
 .role-selection strong {
-    display: block; /* Make question appear on a new line */
-    margin-bottom: 10px; /* Space between the question and radio buttons */
+    margin-bottom: 10px; /* Slightly increased margin for better spacing */
+    font-size: 14px;
 }
 
 .radio-buttons {
     display: flex;
-    justify-content: center; /* Center the radio buttons */
-    gap: 20px; /* Space between the radio buttons */
+    justify-content: space-evenly; /* Evenly spaces the buttons while keeping them balanced */
+    gap: 20px; /* Slight gap between the buttons */
+    width: 100%;
+}
+
+/* Optional: Adjusting individual radio button label spacing */
+.radio-buttons label {
+    font-size: 14px;
+    padding: 0 10px; /* Adds inner spacing around the labels */
 }
 
 /* Button Styles */
@@ -160,10 +176,23 @@ a:hover {
 /* Dropdown styles */
 #city {
     width: 100%;
-    padding: 1rem; /* Same padding as input fields */
-    border: 1px solid #ccc; /* Same border as input fields */
-    border-radius: 25px; /* Rounded corners to match input fields */
+    padding: 0.75rem; /* Reduced padding to slim down the dropdown */
+    border: 1px solid #ccc;
+    border-radius: 25px;
     font-size: 1rem;
     box-sizing: border-box;
     background-color: #f5f5f5; /* Light gray background */
+}
+
+/* Adjustments for the login switch button */
+.login-switch-button {
+    margin-top: auto; /* Pushes it to the bottom */
+    padding: 1rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%; /* Ensure button spans full width */
+    font-size: 1rem;
 }

@@ -1,112 +1,146 @@
-*{
+/* Global Reset */
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: poppins,sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-decoration: none;
 }
 
+/* Body Background Color */
 body {
-    background-color: var(--rentease-primary)
+    background-color: #F5F5DC; /* Light Beige color */
 }
 
+/* Navbar Container */
 .navbar {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    padding: 0 20px;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    padding: 10px 50px;
+    background-color: #F5F5DC !important; /* Light Beige color to match the body */
+    border-bottom: none; /* Removed the border to ensure consistency */
+    flex-wrap: wrap;
 }
 
+/* Logo Styling */
 .rentease-logo {
     width: 42px;
     height: 42px;
-    margin-left: 58px;
 }
 
-.searchbar {
-    width: auto;
-    height: 43px;
-    padding-left: 16px;
-    padding-right: 16px;
-}
-
-.searchbar:focus {
-    outline: none;
-    border-style: solid;
-    border-color: var(--rentease-secondary);
-}
-
-form {
-    display: flex;
-    justify-content: flex-start;
-    align-items: start;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-}
-
-form button {
-    padding: 14px 28px;
-    color: white;
-    background-color: var(--btn-default);
-    border: none;
-}
-
-form button:hover {
-    background-color: var(--btn-hover);
-}
-
-form button:active {
-    background-color: var(--btn-pressed);
-}
-
+/* Navigation Links */
 .navbar a {
-    color: var(--txt-primary);
-    text-align: center;
-    padding: 12px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-.navbar a:hover:not(.profile-border):not(.logout) {
-    background-color: var(--rentease-hover-secondary);
-    color: white;
-}
-
-.navbar a.active:not(.profile-border):not(.logout) {
-    background-color: var(--rentease-secondary);
-    color: white;
-}
-
-.logout {
-    color: var(--txt-primary);
-    border: none;
-    padding: 13px 16px;
-    cursor: pointer;
+    color: #333;
+    padding: 10px 20px;
     font-size: 16px;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    text-decoration: none; /* Remove underline */
 }
 
-.logout:hover {
-    background-color: #FF6666;
+.navbar a:hover {
+    color: #BDA27E; /* Color when hovering */
+    background-color: transparent; /* Remove background when hovering */
 }
 
-/* Profile Picture Styling */
+.navbar a.active {
+    color: #C19A6B; /* Change text color when active */
+    background-color: transparent;
+}
+
+/* Search Bar */
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 5px 10px;
+    width: 500px; /* Fixed width for consistency */
+    max-width: 100%; /* Ensures it doesn't exceed screen width on smaller screens */
+}
+
+/* Search Bar Input */
+.searchbar {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    width: 100%; /* Fill the container width */
+    font-size: 14px;
+    color: #333;
+}
+
+.searchbar::placeholder {
+    color: #aaa;
+}
+
+/* Search Button */
+.search-form button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: #000;
+    font-size: 18px;
+    margin-left: 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.search-form button i {
+    font-size: 20px;
+}
+
+.search-form button:hover {
+    color: #BDA27E;
+    transform: scale(1.1);
+}
+
+/* Profile Picture */
 .sample-profile {
     width: 42px;
     height: 42px;
-    border-radius: 50%; /* Already makes the image circular */
-    border: 2px solid var(--btn-default);
-    object-fit: cover; /* Ensures the image fits well inside the circle */
-    margin-right: 58px;
+    border-radius: 50%;
+    object-fit: cover;
     cursor: pointer;
+    border: 2px solid #ddd;
+    transition: border 0.3s ease;
 }
 
-/* Change border style on click (active state) */
-.navbar .profile-border.active .sample-profile {
-    border: 2px solid var(--rentease-secondary); /* Highlight with a thicker border */
+.sample-profile:hover {
+    border: 2px solid #483C32; /* Change border color of profile image to #483C32 on hover */
 }
 
-.navbar .profile-border:hover .sample-profile {
-    border: 2px solid var(--rentease-secondary);
+/* Sign In and Register Buttons */
+.navbar .auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.navbar .auth-buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .auth-buttons .btn-signin {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.navbar .auth-buttons .btn-signin:hover {
+    background-color: #0056b3;
+}
+
+.navbar .auth-buttons .btn-register {
+    background-color: #fff;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.navbar .auth-buttons .btn-register:hover {
+    background-color: #007bff;
+    color: #fff;
 }
