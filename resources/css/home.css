@@ -453,12 +453,6 @@ video:hover {
     transition: all 0.3s ease; /* Smooth transition for hover effect */
 }
 
-/* Hover effect for Contact Us section */
-.contact-us:hover {
-    background-color: #E5E4E2; /* Darker shade of background color */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
-}
-
 /* Contact Details and Location Layout */
 .contact-details, .location {
     display: flex;

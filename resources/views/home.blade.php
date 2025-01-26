@@ -244,7 +244,7 @@
         <h2>Our Location</h2>
         <div class="map">
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.80204930130863!2d121.10551580000001!3d14.7052863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397bb000379d1e1%3A0x2d3d34d77fe10053!2sRentEase!5e0!3m2!1sen!2sph!4v1695801322305!5m2!1sen!2sph"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3469.5861414046355!2d121.0282728!3d14.6194512!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397bb000379d1e1%3A0x2d3d34d77fe10053!2sRentEase!5e0!3m2!1sen!2sph!4v1610471320367!5m2!1sen!2sph"
                 width="100%"
                 height="200"
                 style="border:0;"
