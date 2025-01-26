@@ -23,7 +23,7 @@ export default defineConfig({
 
                 // Images files
                 ,'resources/images/icon/location.png'
-                ,'resources/images/LoginImage.png'
+                ,'resources/images/LoginImage.jpg'
                 ,'resources/images/RentEaseLogo.png'
                 ,'resources/images/sampleProfile.png'
             ],
