@@ -275,7 +275,6 @@ body {
     margin-right: 20px;
 }
 
-
 /* Top Rated Properties Section */
 .top-rated-properties {
     background-color: #F5F5DC;
@@ -310,15 +309,23 @@ body {
     padding: 10px;
     border-radius: 6px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    height: 70px;
+    height: 90px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
 }
 
 /* Hover effect for each Ranked Property Card */
 .ranked-property:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced box shadow on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: #A8A9AD;
+    color: white;
+}
+
+/* Optional: Adjust text color inside the card */
+.ranked-property:hover h3,
+.ranked-property:hover p {
+    color: white;
 }
 
 /* Rank Circle */
@@ -365,3 +372,208 @@ body {
     text-overflow: ellipsis;
 }
 
+/* About Us Section */
+.about-us {
+    margin: 100px 20px; /* Adds margin on all sides (top and bottom: 40px, left and right: 20px) */
+    padding: 20px;
+    background-color: #BDA27E;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the About Us section */
+.about-us:hover {
+    background-color: #E5E4E2; /* Darker shade of background color */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+}
+
+/* Title Styling */
+.about-us h2 {
+    font-size: 2rem; /* Updated to match the font size of other titles */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Content Layout */
+.about-us-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Text Section */
+.about-us-text {
+    flex: 1;
+    min-width: 300px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    padding-top: 20px;
+}
+
+/* Video Section */
+.about-us-video {
+    flex: 1;
+    min-width: 300px;
+    padding-top: 20px;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the video container */
+.about-us-video:hover {
+    transform: scale(1.01); /* Very subtle zoom effect on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer, smaller shadow */
+}
+
+video {
+    width: 100%; /* Ensures the video takes the full width of the container */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer, smaller shadow */
+    transition: all 0.3s ease; /* Smooth transition for video hover effect */
+}
+
+/* Hover effect for the video */
+video:hover {
+    transform: scale(1.01); /* Very subtle zoom effect on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer, smaller shadow */
+}
+
+/* Contact Us Section */
+.contact-us {
+    margin: 100px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    background-color: #BDA27E;
+    align-items: start;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for Contact Us section */
+.contact-us:hover {
+    background-color: #E5E4E2; /* Darker shade of background color */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+}
+
+/* Contact Details and Location Layout */
+.contact-details, .location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem; /* Reduced from 2rem to bring elements closer */
+}
+
+.contact-details h2, .location h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem; /* Reduced margin to bring text closer */
+}
+
+.contact-details p, .location p {
+    margin-bottom: 0.5rem; /* Add consistent spacing between paragraphs */
+}
+
+/* Hover effect for the map container */
+.location .map {
+    width: 100%;
+    max-width: 600px;
+    height: 500px;
+    margin-top: 1rem;
+    position: relative;
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect for the map */
+.location .map:hover {
+    transform: scale(1.01); /* Subtle zoom effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow */
+}
+
+.location .map iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px; /* Optional: add rounded corners */
+}
+
+/* Cards Grid Layout */
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+/* Card Styling */
+.card {
+    background-color: #ffffff;
+    color: black;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* Smooth transition for card hover effect */
+}
+
+/* Hover effect for individual cards */
+.card:hover {
+    background-color: #A8A9AD; /* Lighter shade of the card background */
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+}
+
+/* Card Header Styling */
+.card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: black;
+}
+
+/* Card List Styling */
+.card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1rem;
+}
+
+.card ul li i {
+    font-size: 1.2rem;
+    color: black;
+}
+
+.card p {
+    margin-bottom: 1rem;
+}
+
+/* Social Media Links */
+.social-media {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-media li {
+    list-style: none;
+}
+
+.social-media li a {
+    color: black;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+/* Hover effect for social media links */
+.social-media li a:hover {
+    color: #f1c40f; /* Changes the color on hover */
+}

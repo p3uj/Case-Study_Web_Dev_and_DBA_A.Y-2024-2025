@@ -24,6 +24,7 @@
             <img src="{{ Vite::asset('resources/images/home/circleTwo.jpg') }}" alt="Circle Two" class="circleTwo-image">
         </div>
     </div>
+
 <!-- Featured Properties Section -->
 <div class="featured-properties">
     <h2 class="section-title">Featured Properties</h2>
@@ -170,6 +171,91 @@
         </div>
     </div>
 </div>
+
+<!-- About Us Section -->
+<!-- About Us Section -->
+<div class="about-us">
+    <h2>About Us</h2>
+    <div class="about-us-content">
+        <!-- First Column for Text -->
+        <div class="about-us-text">
+            <p>At RentEase, we strive to provide a hassle-free and seamless experience for those looking to find their perfect home. Our platform offers a wide selection of properties, from apartments to boarding houses, with detailed information to help you make an informed decision. We are committed to making the property rental process as easy and convenient as possible for both renters and property owners.</p>
+            <p>With RentEase, you can browse listings, view property details, and contact landlords or agents directly. Our goal is to make renting a property as stress-free as possible for everyone involved.</p>
+        </div>
+        
+        <!-- Second Column for Video -->
+        <div class="about-us-video">
+            <video width="100%" controls>
+                <source src="{{ Vite::asset('resources/images/home/RentEaseVideo.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Us Section -->
+<div class="contact-us">
+    <div class="contact-details">
+        <h2>Contact Us</h2>
+        <p>We’d love to hear from you! Reach out to us through any of the following channels:</p>
+        
+        <div class="cards-grid">
+            <!-- Address Card -->
+            <div class="card">
+                <h3>Address</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> RentEase, P445+257, Graceful, Quezon City, Metro Manila</li>
+                </ul>
+            </div>
+
+            <!-- Email Card -->
+            <div class="card">
+                <h3>Email</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> hello@rentease.com</li>
+                    <li><i class="fas fa-envelope"></i> support@rentease.com</li>
+                </ul>
+            </div>
+
+            <!-- Call Us Card -->
+            <div class="card">
+                <h3>Call Us</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
+                    <li><i class="fas fa-phone"></i> +63 912 987 6543</li>
+                </ul>
+            </div>
+
+            <!-- Follow Us Card -->
+            <div class="card">
+                <h3>Follow Us</h3>
+                <p>Follow us on social media:</p>
+                <ul class="social-media">
+                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-discord"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="location">
+        <h2>Our Location</h2>
+        <div class="map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.80204930130863!2d121.10551580000001!3d14.7052863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397bb000379d1e1%3A0x2d3d34d77fe10053!2sRentEase!5e0!3m2!1sen!2sph!4v1695801322305!5m2!1sen!2sph"
+                width="100%"
+                height="200"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
 {{-- Footer --}}
     <x-footer />
 </body>
