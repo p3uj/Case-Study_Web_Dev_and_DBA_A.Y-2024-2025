@@ -12,6 +12,7 @@ use App\Models\PropertyPost;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ViewPropertyPost;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
 Route::middleware('auth')->group(function () {
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/userprofile', [UserProfileController::class, 'index'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
     Route::get('/findroommateortenant', [FindRoommateOrTenantController::class, 'index'])->name('findroommateortenantpage');
+    Route::get('viewproperty/{id}/{property_info_id}', [ViewPropertyPost::class, 'index'])->name('viewpropertypostpage');
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
