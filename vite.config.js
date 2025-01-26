@@ -7,20 +7,25 @@ export default defineConfig({
             input: [
                 // CSS files
                 'resources/css/customizedColor.css'
+                ,'resources/css/find-roommate-or-tenant.css'
                 ,'resources/css/Login.css'
                 ,'resources/css/navbar.css'
                 ,'resources/css/profile.css'
+                ,'resources/css/properties.css'
+                ,'resources/css/register.css'
+                ,'resources/css/review.css'
 
                 // JS files
+                ,'resources/js/edit-form.js'
+                ,'resources/js/filter-property.js'
                 ,'resources/js/profile.js'
+                ,'resources/js/property.js'
 
                 // Images files
+                ,'resources/images/icon/location.png'
+                ,'resources/images/LoginImage.png'
                 ,'resources/images/RentEaseLogo.png'
                 ,'resources/images/sampleProfile.png'
-                ,'resources/images/icon/location.png'
-                ,'resources/images/propertysample/property1.png'
-                ,'resources/images/propertysample/property2.png'
-                ,'resources/images/propertysample/property3.png'
             ],
             refresh: true,
         }),
