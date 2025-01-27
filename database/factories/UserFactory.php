@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'city' => $this->faker->city(),
             'email' => fake()->unique()->safeEmail(),
             'password' => Hash::make('1234'),
-            'profile_photo_path' => 'resources/images/sampleProfile.png',
+            'profile_photo_path' => 'sampleProfile.png',
             'bio' => $this->faker->text(100),
         ];
     }

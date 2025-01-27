@@ -13,7 +13,7 @@ use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\CreateReviewController;
+use App\Http\Controllers\AddReviewController;
 
 use App\Http\Controllers\ViewPropertyPost;
 
@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
     Route::get('/findroommateortenant', [FindRoommateOrTenantController::class, 'index'])->name('findroommateortenantpage');
     // Route to show the create review modal as a new page
-    Route::get('/create-review', [CreateReviewController::class, 'index'])->name('create.review.page');
+    Route::get('/add-review', [AddReviewController::class, 'index'])->name('add.review.page');
 
     Route::get('viewproperty/{id}/{property_info_id}', [ViewPropertyPost::class, 'index'])->name('viewpropertypostpage');
 

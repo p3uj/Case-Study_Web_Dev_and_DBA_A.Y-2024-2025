@@ -61,6 +61,22 @@ return new class extends Migration
                     email = @p_email;
             END
         ");
+
+        DB::statement("
+            CREATE PROCEDURE RE_SP_GET_ALL_TENANT
+            AS
+            BEGIN
+                SELECT
+                    U.id
+                    ,U.firstname
+                    ,U.lastname
+                    ,U.profile_photo_path
+                FROM
+                    users AS U
+                WHERE
+                    U.role = 'Tenant'
+            END
+        ");
     }
 
     /**
