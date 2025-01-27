@@ -87,5 +87,6 @@ return new class extends Migration
         // Drop the stored procedure
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_INSERT_USER");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_NEWLY_CREATED_USER");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_ALL_TENANT");
     }
 };
