@@ -58,7 +58,10 @@
             @if (!empty($propertyPost))
                 @foreach ($propertyPost as $property)
                     <div id="property-post" class="property-post-content" data-isPostAvailable="{{$property->is_available}}">
-                        <img src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Image 1">
+                        <img class="unit-photo"
+                            src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Image 1"
+                            onclick="window.location.href='{{ route('viewpropertypostpage', ['id' => $property->id, 'property_info_id' => $property->property_info_id]) }}'"
+                        >
                         <div class="property-info">
                             <div class="date-and-edit-icon">
                                 <p class="date-posted">{{ $property->updated_at }}</p>
@@ -67,11 +70,12 @@
                                 />
                             </div>
                             <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
-                                {{ $property->city }}, {{ $property->barangay }}
+                                {{ $property->Location }}
                             </h2>
                             <div class="tags">
                                 <a class="unit-type">{{ $property->unit_category }}</a>
                                 <a class="unit-price">₱{{ number_format($property->rental_price, 2) }} /month</a>
+                                <a class="max-occupancy">Max {{ $property->max_occupancy }} occupants</a>
                             </div>
                             <p class="description">
                                 {{ $property->description }}
