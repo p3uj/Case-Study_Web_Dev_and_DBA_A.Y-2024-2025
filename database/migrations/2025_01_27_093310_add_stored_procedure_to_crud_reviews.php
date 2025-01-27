@@ -66,6 +66,24 @@ return new class extends Migration
                 AND R.lease_end IS NOT NULL
             ORDER BY R.updated_at DESC
         ");
+
+        DB::statement("
+            CREATE PROCEDURE RE_SP_INSERT_REVIEW
+                @p_PPostId INt,
+                @p_ReviewBy INT,
+                @p_ReviewTo INT
+            AS
+            BEGIN
+                INSERT INTO reviews (
+                    property_post_id
+                    ,review_by_user_id
+                    ,review_to_user_id)
+                VALUES (
+                    @PropertyPostId
+                    ,@ReviewByUserId
+                    ,@ReviewToUserId);
+            END
+        ");
     }
 
     /**
@@ -75,5 +93,6 @@ return new class extends Migration
     {
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_PROPERTIES_TO_BE_REVIEWED");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_TENANTS_TO_BE_REVIEWED");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_INSERT_REVIEW");
     }
 };
