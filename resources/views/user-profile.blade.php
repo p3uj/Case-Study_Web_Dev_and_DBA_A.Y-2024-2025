@@ -21,14 +21,18 @@
             <p>{{ $user->role }}</p>
             <p>{{ $user->city }}</p>
             <div class="rating-container">
-                <h2>4.0</h2>
+                <h2>{{ number_format($user->Rating, 1) }}</h2>
                 <div class="reviews">
                     <h3>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i> <!--Empty star-->
+                        @for ($star = 1; $star <= 5; $star++)
+                            <!-- If the star is less than or equal to average rating, show the filled star -->
+                            @if ($star <= $user->Rating)
+                                <i class="fas fa-star"></i>
+                            <!-- Otherwise, show empty star -->
+                            @else
+                                <i class="far fa-star"></i>
+                            @endif
+                        @endfor
                     </h3>
                 </div>
             </div>
@@ -37,7 +41,11 @@
             </p>
         </div>
         <div class="profile-picture">
-            <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+            @if ($user->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+            @else
+                <img src="{{ asset('storage/uploads/images/property-posts/' . $user->profile_photo_path) }}" alt="Profile Picture">
+            @endif
         </div>
     </div>
     <div class="container">
@@ -187,7 +195,11 @@
                     @foreach ($reviews as $review)
                         <div class="review-info-container">
                             <div class="user-review-profile">
-                                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Sample Profile">
+                                @if ($review->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                                @else
+                                    <img src="{{ asset('storage/uploads/images/property-posts/' . $review->profile_photo_path) }}" alt="Profile Picture">
+                                @endif
                             </div>
                             <div class="reviews">
                                 <h3>
@@ -208,7 +220,7 @@
                                 <p>{{ $review->review_text }}</p>
                             </div>
                             <h1 class="quotation-mark-right">❞</h1>
-                            <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
+                            <h4>- {{ $review->UserName }}</h4>
                             <p class="date-review">{{ $review->updated_at }}</p>
                         </div>
                     @endforeach
@@ -221,5 +233,4 @@
         </div>
     </div>
 </body>
-<script src="{{ mix('resources/js/edit-form.js') }}"></script>
 </html>
