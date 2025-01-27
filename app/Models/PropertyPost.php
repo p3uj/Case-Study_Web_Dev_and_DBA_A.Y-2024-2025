@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Null_;
 
 class PropertyPost extends Model
 {
@@ -34,7 +35,7 @@ class PropertyPost extends Model
 
     // Retrieve all data from property post
     public static function getPropertyPostsByUserId($userId){
-        $authUserPropertyPosts = DB::select('RE_SP_GET_PROPERTY_POSTS_WITH_RATINGS_BY_USER_ID ?', [$userId]); // Used stored procedure and the return will be an array
+        $authUserPropertyPosts = DB::select('RE_SP_GET_PROPERTY_DETAILS_BY_ID ?', [$userId]); // Used stored procedure and the return will be an array
 
         // Call the formatDate method in the DateConversion class, passing the $authUserPropertyPosts and the column name 'updated_at'
         $authUserPropertyPosts = DateConversion::formatDate($authUserPropertyPosts, 'updated_at');
@@ -55,10 +56,7 @@ class PropertyPost extends Model
 
     // Retrieve property post and its details based on the property post id
     public static function getAllPropertyDetailsById($propertyPostId) {
-        $propertyPostDetails = DB::select('RE_SP_GET_PROPERTY_DETAILS_BY_ID ?', [$propertyPostId]);
-
-        // Call the formatDate method in the DateConversion class, passing the $authUserPropertyPosts and the column name 'updated_at'
-        //$propertyPostDetails = DateConversion::formatDate($propertyPostId, 'updated_at');
+        $propertyPostDetails = DB::select('RE_SP_GET_PROPERTY_DETAILS_BY_ID ?, ?', [null, $propertyPostId]);
 
         return $propertyPostDetails[0];
     }
