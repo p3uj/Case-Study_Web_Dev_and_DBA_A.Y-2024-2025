@@ -13,6 +13,6 @@
 </head>
 <body>
     <x-navbar></x-navbar>
-    <h1>add review</h1>
+    <h1>add reviewss</h1>
 </body>
 </html>
