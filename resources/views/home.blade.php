@@ -16,7 +16,7 @@
         <div class="text-section">
             <h1>RentEase</h1>
             <p>Hassle-free and easy way to find a new home! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Habitant cras morbi hendrerit nunc vel sapien. In habitasse at diam suspendisse non vitae fermentum, pharetra arcu.</p>
-            <a href="#">Find now</a>
+            <a href="{{ route("propertiespage")}}" class="{{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}">Find now</a>
         </div>
         <div class="image-section">
             <!-- Adding the images from the specified paths -->
@@ -182,7 +182,7 @@
             <p>At RentEase, we strive to provide a hassle-free and seamless experience for those looking to find their perfect home. Our platform offers a wide selection of properties, from apartments to boarding houses, with detailed information to help you make an informed decision. We are committed to making the property rental process as easy and convenient as possible for both renters and property owners.</p>
             <p>With RentEase, you can browse listings, view property details, and contact landlords or agents directly. Our goal is to make renting a property as stress-free as possible for everyone involved.</p>
         </div>
-        
+
         <!-- Second Column for Video -->
         <div class="about-us-video">
             <video width="100%" controls>
@@ -198,7 +198,7 @@
     <div class="contact-details">
         <h2>Contact Us</h2>
         <p>We’d love to hear from you! Reach out to us through any of the following channels:</p>
-        
+
         <div class="cards-grid">
             <!-- Address Card -->
             <div class="card">
