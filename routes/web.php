@@ -12,6 +12,7 @@ use App\Models\PropertyPost;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ReviewController;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
 Route::middleware('auth')->group(function () {
@@ -19,7 +20,7 @@ Route::middleware('auth')->group(function () {
     //Route::view('/property', 'properties')->name('propertiespage');
     //Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
     Route::view('/postaproperty', 'post-a-property')->name('postapropertypage');
-    Route::view('/review', 'review')->name('reviewpage');
+    Route::get('/review', [ReviewController::class, 'index'])->name('reviewpage');
     Route::get('/userprofile', [UserProfileController::class, 'index'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
     Route::get('/findroommateortenant', [FindRoommateOrTenantController::class, 'index'])->name('findroommateortenantpage');

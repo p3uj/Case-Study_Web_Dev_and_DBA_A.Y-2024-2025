@@ -10,137 +10,134 @@ body{
     overflow-x: hidden;
 }
 
-.review-container {
-    padding-top: 1rem;
+.container {
+    width: 100vw;
+}
+
+.tab-box {
     margin-left: 135px;
     margin-right: 135px;
-    min-height: calc(100vh - 7rem);
+    margin-top: 26px;
+    margin-bottom: 26px;
 }
 
-/* General tab styles */
-.nav-tabs {
-    margin: none;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    border-bottom: none;
-}
-
-.nav-tabs .nav-link {
+.tab-btn {
+    background-color: transparent;
+    color: var(--txt-secondary);
+    padding: 16px 32px;
     border: none;
-    color: #555;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 20px;
-    transition: all 0.3s ease;
     border-radius: 45px;
-    margin: 5px;
+    font-size: 16px;
+    font-weight: 600;
 }
-.nav-tabs .nav-link:hover {
+
+.tab-btn:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.tab-btn:hover {
+    color: var(--bg-primary);
     background-color: var(--rentease-hover-secondary);
-    color: #000;
 }
-.nav-tabs .nav-link.active {
+
+.tab-btn.active {
     background-color: var(--rentease-secondary);
-    color: #000;
-    font-weight: bold;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--bg-primary);
 }
 
 .tab-content {
-    display: flex;
-    align-items: flex-start; /* Aligns items to the top */
-    padding-top: 10px;
-    padding-bottom: 10px;
+    display: none;
 }
 
-.card {
-    height: 250px;
-    width: 100%; /* Stretches the card to the full width */
-    margin-bottom: 20px;
-    border-radius: 45px;
+.tab-content.active {
+    display: block;
+}
+
+.to-review-content {
+    display: flex;
     background-color: var(--rentease-secondary);
-    padding: 0;
-}
-
-.card-img {
-    height: 250px; /* Scale the image to fill the parent column */
-    width: 100%; /* Ensure the image matches the column width */
-    object-fit: cover; /* Ensures the image maintains its proportions */
-    border-top-left-radius: 45px;
-    border-bottom-left-radius: 45px;
-    padding: 0;
-    margin: 0;
-    display: block; /* Removes any inline space from the image */
-}
-
-.card-body {
-    flex-direction: column;
-    margin: 10px;
-}
-
-.card-info {
-    background-color: var(--bg-primary);
-    border-radius: 45px;
-    height: 100%;
-    width: auto;
-    padding: 10px;
-    margin-right: 20px;
-    border: 1px solid black
-}
-
-.card-desc {
-    line-height: 20px;
-    margin: 0;
-    width: 75%;
-    height: calc(20px * 3); /* Ensures the height covers 3 lines of text */
-    white-space: normal; /* Allows text to wrap */
-    overflow: hidden; /* Hides any overflow content */
-    text-overflow: ellipsis; /* Truncates text with an ellipsis for safety */
-    color: var(--txt-secondary); /* Sets the text color */
-    display: -webkit-box; /* Uses a flexible box layout for text */
-    
-    /* Vendor-prefixed versions for WebKit browsers */
-    -webkit-line-clamp: 3; /* Limits the text to 3 lines for webkit-based browsers */
-    -webkit-box-orient: vertical; /* Ensures proper box orientation for webkit-based browsers */
-
-    /* Standard, non-prefixed property for compatibility */
-    line-clamp: 3; /* Limits the text to 3 lines (non-prefixed version) */
-    -webkit-box-orient: vertical; /* For standard browsers that support line-clamp */
-}
-
-/* Style for the stars */
-.reviews i {
-    font-size: 100%; /* Adjust the size of the stars (can be responsive with em, % or px) */
-    margin-right: 5px;
-    color: var(--txt-secondary); /* Default color (unfilled star) */
-}
-
-/* Filled star color */
-.reviews i.filled {
-    color: gold; /* Filled stars color */
-}
-
-.card-button-col {
-    display: flex;
-    justify-content: center;
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 28px;
+    width: 100%;
+    box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-.card-button {
+.to-review-content img {
+    height: auto;
+    width: 40%;
+    object-fit: cover;
+}
+
+.to-review-info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+.to-review-info img {
+    height: 18px;
+    width: 18px;
+    margin-right: 8px;
+}
+
+.review-btn-wrapper {
+    display: flex;
+    width: 10%;
+    justify-content: center;
+}
+
+.review-btn {
+    padding: 16px 32px;
+    color: var(--bg-primary);
     background-color: var(--btn-default);
-    color: #ffffff;
     border: none;
-    font-size: 15px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    border-radius: 40px;
-    padding: 15px;
-    margin-right: 70px;
+    border-radius: 20px;
+    margin: 20px;
 }
 
-.card-button:hover {
+.review-btn:hover {
     background-color: var(--btn-hover);
 }
 
-.card-button:active {
-    background-color: var(--btn-pressed);
+.lease-duration {
+    font-size: 16px;
+    color: var(--txt-secondary);
+}
+
+.tags {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    display: inline-flex;
+    gap: 14px;
+}
+
+.unit-type {
+    background: linear-gradient(82deg,#F5F5DC, #BDA27E);
+    padding: 16px 24px;
+    border-radius: 45px;
+    font-weight: 600;
+    border: 1px solid var(--btn-default);
+}
+
+.unit-price {
+    background: linear-gradient(82deg,#D9534F, #FF6F61);
+    padding: 16px 24px;
+    border-radius: 45px;
+    font-weight: 600;
+    border: 1px solid var(--btn-default);
+}
+
+.description {
+    max-height: 120px;
+    overflow: auto; /* allow user to scroll when the height exceed to the max-height*/
+    font-size: 20px;
+    line-height: 30px;
 }
