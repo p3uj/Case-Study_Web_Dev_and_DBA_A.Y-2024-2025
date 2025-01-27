@@ -25,47 +25,55 @@
 
         <!-- Tab Content (To Review)-->
         <div class="tab-content active" id="to-review">
-            @if ($userRole = "Tenant")
-                <div id="property-post" class="to-review-content">
-                    <img src="asset('resources/images/sampleProfile.png')" alt="Image 1">
-                    <div class="to-review-info">
-                        <p class="lease-duration">start - end</p>
+            @if (!empty($toReview))
+                @if ($userRole == "Tenant")
+                @foreach ($toReview as $property)
+                        <div id="property-post" class="to-review-content">
+                            <img src="{{ asset($toReview->FirstPhoto) }}" alt="Image 1">
 
-                        <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
-                            city, barangay
-                        </h2>
+                            <div class="to-review-info">
+                                <p class="lease-duration">{{ $property->created_at }} - {{ $property->lease_end }}</p>
 
-                        <div class="tags">
-                            <a class="unit-type">category</a>
-                            <a class="unit-price">₱price /month</a>
+                                <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                    {{ $property->city }}, {{ $property->barangay }}
+                                </h2>
+
+                                <div class="tags">
+                                    <a class="unit-type">{{ $property->unit_category }}</a>
+                                    <a class="unit-price">₱{{ $property->rental_price }} /month</a>
+                                </div>
+
+                                <p class="description">
+                                    {{ $property->description }}
+                                </p>
+                            </div>
+                            <div class="review-btn-wrapper">
+                                <button class="review-btn">Review</button>
+                            </div>
                         </div>
+                    @endforeach
+                @else
+                    <div class="to-review-content">
+                        <img src="asset('resources/images/sampleProfile.png')" alt="Image 1">
+                        <div class="to-review-info">
+                            <p class="lease-duration">{{ $property->created_at }} - {{ $property->lease_end }}</p>
 
-                        <p class="description">
-                            halooo
-                        </p>
+                            <h2>{{ $property->firstname }} {{ $property->lastname }}</h2>
+
+                            <h5><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                {{ $property->city }}, {{ $property->barangay }}
+                            </h5>
+                            
+                            <div class="review-btn-wrapper">
+                                <button class="review-btn">Review</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="review-btn-wrapper">
-                        <button class="review-btn">Review</button>
-                    </div>
-                </div>
+                @endif
             @else
-                <div class="to-review-content">
-                    <img src="asset('resources/images/sampleProfile.png')" alt="Image 1">
-                    <div class="to-review-info">
-                        <p class="lease-duration">start - end</p>
-
-                        <h2>
-                            username
-                        </h2>
-
-                        <h5><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
-                            city, barangay
-                        </h5>
-                        
-                        <div class="review-btn-wrapper">
-                            <button class="review-btn">Review</button>
-                        </div>
-                    </div>
+                <div style="margin: 16px 135px;">
+                    <h1>No {{ $userRole === 'Tenant' ? 'Porperty' : 'Tenant'}} to Review!</h1>
+                    <h4>There are no {{ $userRole === 'Tenant' ? 'property' : 'tenant'}} to review so far.</h4>
                 </div>
             @endif
         </div>
@@ -73,7 +81,7 @@
             <div class="tab-content" id="my-reviews">
                 <div style="margin: 16px 135px;">
                     <h1>No Reviews Made.</h1>
-                    <h3>You have not given a review yet.</h3>
+                    <h3>You have not given a review so far.</h3>
                 </div>
             </div>
 

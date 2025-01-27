@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('review_text')->nullable();
             $table->boolean('is_edited')->default(false);
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('lease_end')->nullable();
             $table->timestamp('updated_at')->useCurrent();
         });
     }

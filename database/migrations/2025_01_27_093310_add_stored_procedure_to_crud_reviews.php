@@ -18,7 +18,7 @@ return new class extends Migration
                 @p_UserId BIGINT
             AS
             SELECT
-                ,R.id
+                R.id
                 ,(
                     SELECT TOP 1 photo_path
                     FROM unit_photos
