@@ -13,6 +13,8 @@ use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CreateReviewController;
+
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
 Route::middleware('auth')->group(function () {
@@ -24,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/userprofile', [UserProfileController::class, 'index'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
     Route::get('/findroommateortenant', [FindRoommateOrTenantController::class, 'index'])->name('findroommateortenantpage');
+    // Route to show the create review modal as a new page
+    Route::get('/create-review', [CreateReviewController::class, 'index'])->name('create.review.page');
+
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
