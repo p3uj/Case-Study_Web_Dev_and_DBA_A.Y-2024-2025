@@ -79,7 +79,7 @@ class User extends Authenticatable
     }
 
     public static function getUserInfoById($id) {
-        $userInfo = DB::select('EXEC GetUserInfoById ?', [$id]); // Used stored procedure and the return will be an array
+        $userInfo = DB::select('EXEC RE_SP_GET_USER_INFO_BY_ID_AND_USER_BY_EMAIL ?, ?', [$id, null]); // Used stored procedure and the return will be an array
         return $userInfo[0]; // Returning the first element of the result array, which contains the authenticated user's information
     }
 }
