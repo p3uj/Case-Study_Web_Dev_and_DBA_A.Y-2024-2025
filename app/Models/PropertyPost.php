@@ -62,11 +62,4 @@ class PropertyPost extends Model
 
         return $propertyPostDetails[0];
     }
-
-    // Retrieve all unit photos of the property post based on the property info id
-    public static function getAllUnitPhotosById($propertyInfoId) {
-        $unitPhotos = DB::select('RE_SP_GET_ALL_PHOTOS_BY_ID ?', [$propertyInfoId]);
-
-        return $unitPhotos;
-    }
 }
