@@ -17,28 +17,12 @@
 <body>
     <x-navbar></x-navbar>
     <section class="slider-container">
-        <div class="slider-images">
-            <div class="slider-img">
-                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="1" />
-            </div>
-            <div class="slider-img">
-                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="2" />
-            </div>
-            <div class="slider-img">
-                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="3" />
-            </div>
-            <div class="slider-img active">
-                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="4" />
-            </div>
-            <div class="slider-img">
-                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="5" />
-            </div>
-            <div class="slider-img">
-                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="6" />
-            </div>
-            <div class="slider-img">
-                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="7" />
-            </div>
+        <div class="slider-images" id="slider-images" data-count-unit-photos="{{ $propertyUnitPhotos->count() }}">
+            @foreach ($propertyUnitPhotos as $unitPhoto)
+                <div class="slider-img">
+                    <img src="{{ asset('storage/uploads/images/property-posts/' . $unitPhoto->photo_path) }}" alt="{{$unitPhoto->photo_path}}" />
+                </div>
+            @endforeach
         </div>
     </section>
 
