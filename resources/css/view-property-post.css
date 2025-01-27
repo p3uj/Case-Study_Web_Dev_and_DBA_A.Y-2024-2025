@@ -27,26 +27,31 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 6px;
-    transition: 0.5s;
+    border-radius: 50px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .slider-img {
     width: 110px;
-    border-radius: 6px;
+    border-radius: 50px;
     cursor: pointer;
     position: relative;
     transition: 0.7s ease;
 }
 
 .slider-images img:hover {
-    transition: scale(5);
-    box-shadow: 0 0 20px var(--rentease-secondary);
+    transform: scale(1.1); /* Zoom effect */
+    box-shadow: 0 4px 20px var(--rentease-secondary);
+    padding: 2px;
+    outline: 2px solid var(--rentease-hover-secondary);
 }
 
 .slider-img.active {
     width: 766px !important;
     height: 750px !important;
+    pointer-events: none; /* Prevent hover */
+    padding: 3px;
+    outline: 3px solid var(--rentease-secondary);
 }
 
 /* Property Post Details */
@@ -54,8 +59,8 @@
     display: flex;
     flex-direction: column;
     row-gap: 12px;
-    margin-top: 28px;
-    padding: 0 135px 48px 135px;
+    padding: 28px 135px 48px 135px;
+    background-color: var(--rentease-secondary);
 }
 
 .date-posted {
@@ -63,7 +68,8 @@
 }
 
 .unit-price {
-    color: var(--rentease-secondary);
+    color: var(--rentease-primary);
+    font-size: 38px;
 }
 
 .per-month {
@@ -93,14 +99,18 @@
     color: orange;
 }
 
+.reviews p {
+    color: var(--rentease-primary);
+}
+
 .user-profile {
     display: inline-flex; /* Make the container adjust its width based on content */
     align-items: center;
     gap: 6px;
-    background-color: var(--rentease-secondary);
+    background-color: var(--rentease-primary);
     padding-right: 10px;
     border-radius: 50px;
-    height: 38px;
+    height: 48px;
     margin: 7px 0;
 }
 
@@ -109,12 +119,12 @@
 }
 
 .user-profile img{
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
     border-radius: 50%;
     /* border: 2px solid var(--rentease-primary); */
-    border: 2px solid var(--rentease-primary);
+    border: 2px solid var(--rentease-secondary);
     margin-left: -6px;
 }
 
