@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PropertyPost;
+use App\Models\UnitPhotos;
 use Illuminate\Http\Request;
 
 class ViewPropertyPost extends Controller
@@ -11,9 +12,7 @@ class ViewPropertyPost extends Controller
     {
         // Call the getAllPropertyDetailsById and getAllUnitPhotosById method in the model to get the data
         $propertyPostDetails = PropertyPost::getAllPropertyDetailsById($propertyPostid);
-        $propertyUnitPhotos = PropertyPost::getAllUnitPhotosById($propertyInfoId);
-
-        //dd($propertyPostDetails);
+        $propertyUnitPhotos = UnitPhotos::getAllUnitPhotosById($propertyInfoId);
 
         return view('view-property-post', [
             'propertyDetails' => $propertyPostDetails
