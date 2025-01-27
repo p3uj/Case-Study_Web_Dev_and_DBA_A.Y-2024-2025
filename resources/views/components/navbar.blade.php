@@ -20,7 +20,7 @@
             <button type="submit"><i class="fas fa-search"></i></button>
         </form>
         <a href="{{ route("homepage")}}" class="{{ Route::currentRouteName() === 'homepage' ? 'active' : '' }}">Home</a>
-        <a href="{{ route("propertiespage")}}" class="{{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}">Properties</a>
+        <a href="{{ route("propertiespage")}}" class="{{ Route::currentRouteName() === 'propertiespage' || Route::currentRouteName() === 'property.post' || Route::currentRouteName() === 'viewpropertypostpage' ? 'active' : '' }} ">Properties</a>
         <a href="{{ route("findroommateortenantpage")}}" class="{{ Route::currentRouteName() === 'findroommateortenantpage' ? 'active' : '' }}">
             Find {{ Auth::user()->role === 'Landlord' ? 'Tenant' : 'Roommate' }}
         </a>

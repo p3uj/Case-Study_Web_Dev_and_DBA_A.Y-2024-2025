@@ -42,6 +42,7 @@ class PropertyPost extends Model
         return $authUserPropertyPosts;
     }
 
+    // Retrieve all property posts based on the filter search
     public static function getAllFilteredPropertyPosts($unitCategory = null, $city = null, $rentalPrice = null) {
         $propertyPosts = DB::select('RE_SP_GET_ALL_PROPERTY_POST_BASED_ON_FILTER_SEARCH ?, ?, ?', [
             $unitCategory
@@ -50,5 +51,15 @@ class PropertyPost extends Model
         ]);
 
         return $propertyPosts;
+    }
+
+    // Retrieve property post and its details based on the property post id
+    public static function getAllPropertyDetailsById($propertyPostId) {
+        $propertyPostDetails = DB::select('RE_SP_GET_PROPERTY_DETAILS_BY_ID ?', [$propertyPostId]);
+
+        // Call the formatDate method in the DateConversion class, passing the $authUserPropertyPosts and the column name 'updated_at'
+        //$propertyPostDetails = DateConversion::formatDate($propertyPostId, 'updated_at');
+
+        return $propertyPostDetails[0];
     }
 }
