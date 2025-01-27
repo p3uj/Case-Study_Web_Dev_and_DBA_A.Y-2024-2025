@@ -132,6 +132,7 @@ body{
     height: auto;
     width: 40%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .property-info {
@@ -174,7 +175,7 @@ body{
     gap: 14px;
 }
 
-.unit-type {
+.unit-type, .max-occupancy {
     background: linear-gradient(82deg,#F5F5DC, #BDA27E);
     padding: 16px 24px;
     border-radius: 45px;
