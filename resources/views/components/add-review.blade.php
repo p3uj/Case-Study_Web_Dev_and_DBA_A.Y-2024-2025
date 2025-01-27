@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Add Review Page</title>
 
     {{-- Link css and javascript file --}}
     @vite('resources/css/customizedColor.css')
     @vite('resources/css/navbar.css')
     @vite('resources/css/add-review.css')
+    @vite('resources/js/add-review.js')
 
 </head>
 <body>
@@ -17,6 +19,8 @@
     <div class="container">
         <!-- Close Button Container (placed below navbar) -->
         <div class="close-btn-container">
+            <p id="user-name">User: </p>
+            <p id="property-name" style="margin-left: 70px;">Property: </p>
             <button class="close-btn" onclick="window.history.back()">x</button>
         </div>
 
@@ -32,7 +36,11 @@
                             </div>
                             <div class="tenant">
                                 <p>{{ $tenant->firstname }} {{ $tenant->lastname }}</p>
-                                <button>+</button>
+                                <button class="select-tenant-btn" 
+                                        data-tenant-id="{{ $tenant->id }}" 
+                                        data-tenant-name="{{ $tenant->firstname }} {{ $tenant->lastname }}">
+                                    +
+                                </button>
                             </div>                        
                         </div>
                     @endforeach
@@ -48,7 +56,11 @@
                             </div>
                             <div class="tenant">
                                 <p>{{ $property->city }}, {{ $property->barangay }}</p>
-                                <button>+</button>
+                                <button class="select-property-btn" 
+                                        data-property-id="{{ $property->id }}" 
+                                        data-property-name="{{ $property->city }} {{ $property->barangay }}">
+                                    +
+                                </button>
                             </div>                        
                         </div>
                     @endforeach
@@ -58,48 +70,8 @@
 
         <!-- Submit Button Container -->
         <div class="submit-btn-container">
-            <button class="submit-btn">Submit</button>
+            <button class="submit-btn" id="submit-btn">Submit</button>
         </div>
     </div>
 </body>
-<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const tenantSearchBar = document.querySelector('#tenant-search-bar');
-            const propertySearchBar = document.querySelector('#property-search-bar');
-            
-            const tenantList = document.querySelector('#tenant-list');
-            const propertyList = document.querySelector('#property-list');
-
-            // Function to filter tenants
-            tenantSearchBar.addEventListener('input', function() {
-                const searchTerm = tenantSearchBar.value.toLowerCase();
-                const tenants = tenantList.querySelectorAll('#tenant-item');
-
-                tenants.forEach(function(tenant) {
-                    const tenantName = tenant.querySelector('p').innerText.toLowerCase();
-                    if (tenantName.includes(searchTerm)) {
-                        tenant.style.display = 'block'; // Show tenant item
-                    } else {
-                        tenant.style.display = 'none'; // Hide tenant item
-                    }
-                });
-            });
-
-            // Function to filter properties
-            propertySearchBar.addEventListener('input', function() {
-                const searchTerm = propertySearchBar.value.toLowerCase();
-                const properties = propertyList.querySelectorAll('#property-item');
-
-                properties.forEach(function(property) {
-                    const propertyName = property.querySelector('p').innerText.toLowerCase();
-                    if (propertyName.includes(searchTerm)) {
-                        property.style.display = 'block'; // Show property item
-                    } else {
-                        property.style.display = 'none'; // Hide property item
-                    }
-                });
-            });
-        });
-    </script>
-
 </html>

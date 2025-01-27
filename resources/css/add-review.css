@@ -16,12 +16,19 @@
 .close-btn-container {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
-    padding: 10px;
+    justify-content: space-between;
     position: relative;
-    margin: 0;
+    padding: 10px 60px 10px 100px;
 }
 
+.close-btn-container p {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50px;
+    width: 400px;
+    align-self: center;
+    justify-self: center;
+}
 /* Close button styling */
 .close-btn {
     background-color: var(--btn-default);
