@@ -117,7 +117,7 @@
                                 {{-- Do Kyung-Soo --}}
                                 <span class="user-name">{{ $property->UserName }}</span>
                             </div>
-                            <a>See more</a>
+                            <a href="{{ route('viewpropertypostpage', ['id' => $property->id, 'property_info_id' => $property->property_info_id]) }}">See more</a>
                         </div>
                     </div>
                 @endforeach
