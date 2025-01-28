@@ -103,9 +103,11 @@
                                 </div>
                                 <div class="">
                                     <button class="delete-btn">Delete</button>
-                                    <button class="isAvailable-btn">
-                                        {{ $property->is_available ? 'Not Available?' : 'Available?' }}
-                                    </button>
+                                    <a href="{{ route('add.review.page') }}">
+                                        <button class="isAvailable-btn">
+                                            {{ $property->is_available ? 'Not Available?' : 'Available?' }}
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

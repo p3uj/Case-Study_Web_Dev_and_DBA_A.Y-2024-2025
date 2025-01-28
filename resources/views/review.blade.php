@@ -3,82 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Review Page</title>
+    <title>Profile Tabs</title>
 
     {{-- Link css and javascript file --}}
     @vite('resources/css/customizedColor.css')
     @vite('resources/css/navbar.css')
     @vite('resources/css/review.css')
+    @vite('resources/js/review.js')
 
     <!-- Font Awesome Icon Library -->
     <script src="https://kit.fontawesome.com/87abdb3ce2.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <x-navbar></x-navbar>
-
-    <div class="review-container">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" id="reviewTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="to-review-tab" data-bs-toggle="tab" href="#to-review" role="tab" aria-controls="to-review" aria-selected="true">To Review</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="my-reviews-tab" data-bs-toggle="tab" href="#my-reviews" role="tab" aria-controls="my-reviews" aria-selected="false">My Reviews</a>
-            </li>
-        </ul>
-
-        <!-- Tab content -->
-        <div class="tab-content" id="reviewTabsContent">
-            <!-- 'To Review' Tab -->
-            <div class="tab-pane fade show active" id="to-review" role="tabpanel" aria-labelledby="to-review-tab" style="width: 100%;">
-                <!-- Card List -->               
-                <div class="card">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" class="card-img" alt="Card Image">
-                        </div>
-                        
-                        <div class="card-body col-md-3">
-                            <h5 class="fw-bold">Quezon City, Commonwealth</h5>
-                            <div class="d-flex">
-                                <p class="card-info">Studio Unit</p>
-                                <p class="card-info" style="background-color: rgb(208, 76, 76)">₱7,000/month</p>
-                            </div>
-                            <p class="card-desc">Direct Tenants are preferred but open for Agents.</p>
-                            <div class="reviews">
-                                <h3>
-                                    <i class="fas fa-star" data-rating="1"></i>
-                                    <i class="fas fa-star" data-rating="2"></i>
-                                    <i class="fas fa-star" data-rating="3"></i>
-                                    <i class="fas fa-star" data-rating="4"></i>
-                                    <i class="fas fa-star" data-rating="5"></i>
-                                </h3>
-                            <p>4 out of 5</p>    
-                            </div>
-                        </div>
-
-                        <div class="card-button-col col-md-1">
-                            <button class="card-button">Review</button>
-                        </div>
-                    </div>
-                </div>
-
-            <div>
-                <p>No property to review.</p>
-                <p>There is no property to review now.</p>
-            </div> 
-            <!-- 'My Reviews' Tab -->
-            <div class="tab-pane fade" id="my-reviews" role="tabpanel" aria-labelledby="my-reviews-tab" style="width: 100%;">
-                <div>
-                    <p>No reviews yet.</p>
-                    <p>You have not written any reviews yet.</p>
-                </div>    
-            </div>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tab-box">
+            <button class="tab-btn active" data-tab="to-review">To Review</button>
+            <button class="tab-btn" data-tab="my-reviews">My Reviews</button>
         </div>
-    </div>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Tab Content (To Review)-->
+        <div class="tab-content active" id="to-review">
+            @if (!empty($toReview))
+                @if ($userRole == "Tenant")
+                    @foreach ($toReview as $property)
+                        <div id="property-post" class="to-review-content">
+                            <img src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Image 1">
+
+                            <div class="to-review-info">
+                                <p class="lease-duration">{{ $property->created_at }} - {{ $property->lease_end }}</p>
+
+                                <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                    {{ $property->city }}, {{ $property->barangay }}
+                                </h2>
+
+                                <div class="tags">
+                                    <a class="unit-type">{{ $property->unit_category }}</a>
+                                    <a class="unit-price">₱{{ $property->rental_price }} /month</a>
+                                </div>
+
+                                <p class="description">
+                                    {{ $property->description }}
+                                </p>
+                            </div>
+                            <div class="review-btn-wrapper">
+                                <button class="review-btn">Review</button>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    @foreach ($toReview as $tenant)
+                        <div class="to-review-content">
+                            @if ($tenant->pfp == asset('resources/images/sampleProfile.png'))
+                                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                            @else
+                                <img src="{{ asset('storage/uploads/images/profile-pictures/' . $tenant->pfp) }}" alt="Profile Picture">
+                            @endif
+                            <div class="to-review-info">
+                                <p class="lease-duration">{{ $tenant->created_at }} - {{ $tenant->lease_end }}</p>
+
+                                <h2>{{ $tenant->firstname }} {{ $tenant->lastname }}</h2>
+
+                                <h5><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                    {{ $tenant->city }}, {{ $tenant->barangay }}
+                                </h5>
+                                
+                                <div class="review-btn-wrapper">
+                                    <button class="review-btn">Review</button>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            @else
+                <div style="margin: 16px 135px;">
+                    <h1>No {{ $userRole === 'Tenant' ? 'Porperty' : 'Tenant'}} to Review!</h1>
+                    <h4>There are no {{ $userRole === 'Tenant' ? 'property' : 'tenant'}} to review so far.</h4>
+                </div>
+            @endif
+
+        </div>
+            <!-- Tab Content (My Reviews) -->
+            <div class="tab-content" id="my-reviews">
+                <div style="margin: 16px 135px;">
+                    <h1>No Reviews Made.</h1>
+                    <h3>You have not given a review so far.</h3>
+                </div>
+            </div>
+
+    </div>
 </body>
 </html>

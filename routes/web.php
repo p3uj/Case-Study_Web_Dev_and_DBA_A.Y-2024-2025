@@ -12,6 +12,9 @@ use App\Models\PropertyPost;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\AddReviewController;
+
 use App\Http\Controllers\ViewPropertyPost;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
@@ -20,15 +23,20 @@ Route::middleware('auth')->group(function () {
     //Route::view('/property', 'properties')->name('propertiespage');
     //Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
     Route::view('/postaproperty', 'post-a-property')->name('postapropertypage');
-    Route::view('/review', 'review')->name('reviewpage');
+    Route::get('/review', [ReviewController::class, 'index'])->name('reviewpage');
     Route::get('/userprofile', [UserProfileController::class, 'index'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
     Route::get('/findroommateortenant', [FindRoommateOrTenantController::class, 'index'])->name('findroommateortenantpage');
+    // Route to show the create review modal as a new page
+    Route::get('/add-review', [AddReviewController::class, 'index'])->name('add.review.page');
+
     Route::get('viewproperty/{id}/{property_info_id}', [ViewPropertyPost::class, 'index'])->name('viewpropertypostpage');
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
     Route::post('/property', [PropertyController::class, 'storeOrFilterSearch'])->name('property.post');
+    Route::post('/submit-review', [AddReviewController::class, 'submitReview'])->name('submit.review');
+
 });
 
 // Ensure that only unauthenticated users can access this root route.

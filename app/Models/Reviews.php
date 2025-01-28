@@ -30,4 +30,15 @@ class Reviews extends Model
 
         return $reviews;
     }
+
+    public static function getPropertiesToReview($userId) {
+        $properties = DB::select('EXEC RE_SP_GET_PROPERTIES_TO_BE_REVIEWED ?', [$userId]);
+        return $properties;
+    }
+
+    public static function getTenantsToReview($userId) {
+        $tenants = DB::select('EXEC RE_SP_GET_TENANTS_TO_BE_REVIEWED ?', [$userId]);
+        
+        return $tenants;
+    }
 }

@@ -14,13 +14,14 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_post_id')->nullable()->constrained('property_posts');
+            $table->foreignId('property_post_id')->constrained('property_posts');
             $table->foreignId('review_by_user_id')->constrained('users');
             $table->foreignId('review_to_user_id')->constrained('users');
             $table->integer('rating')->nullable();
             $table->text('review_text')->nullable();
             $table->boolean('is_edited')->default(false);
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('lease_end')->nullable();
             $table->timestamp('updated_at')->useCurrent();
         });
     }

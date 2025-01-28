@@ -61,6 +61,22 @@ return new class extends Migration
                     email = @p_email;
             END
         ");
+
+        DB::statement("
+            CREATE PROCEDURE RE_SP_GET_ALL_TENANT
+            AS
+            BEGIN
+                SELECT
+                    U.id
+                    ,U.firstname
+                    ,U.lastname
+                    ,U.profile_photo_path
+                FROM
+                    users AS U
+                WHERE
+                    U.role = 'Tenant'
+            END
+        ");
     }
 
     /**
@@ -71,5 +87,6 @@ return new class extends Migration
         // Drop the stored procedure
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_INSERT_USER");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_NEWLY_CREATED_USER");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_ALL_TENANT");
     }
 };
