@@ -33,11 +33,13 @@ class PropertyController extends Controller
             ,'filter-rental-price' => null
         ];
 
+        $userRole = Auth::user()->role;   // Get the role of the authenticated user
         return view('properties', [
             'cities' => $this->city
             ,'barangays' => $this->barangay
             ,'propertyPosts' => $propertyPosts
             ,'filterSearch' => $filterSearch
+            ,'userRole' => $userRole
         ]);
     }
 
