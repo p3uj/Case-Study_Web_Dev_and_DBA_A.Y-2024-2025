@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class AddReviewController extends Controller
 {
@@ -23,43 +25,29 @@ class AddReviewController extends Controller
 
     public function submitReview(Request $request)
     {
-        // Ensure the user is authenticated
-        if (!Auth::check()) {
-            return response()->json(['message' => 'User not authenticated'], 401);
-        }
-
-        // Get the current authenticated user's ID
-        $userId = Auth::id();
-
-        // Get data from AJAX request
-        $tenantId = $request->input('tenantId');
-        $propertyId = $request->input('propertyId');
-
-        // Validate the input IDs
-        if (empty($tenantId) || empty($propertyId)) {
-            return response()->json(['message' => 'Tenant or Property ID missing'], 400);
-        }
+        $tenantId = $request->input('tenant_id');
+        $propertyId = $request->input('property_id');
+        $landlordId = Auth::id();
 
         try {
             // Call the stored procedure to create the first review (user as review_by and tenant as review_to)
-            DB::select('CALL RE_SP_INSERT_REVIEW(?, ?, ?)', [
-                $propertyId, // p_PPostId
-                $userId,     // p_ReviewBy (user)
-                $tenantId    // p_ReviewTo (tenant)
+            DB::statement('EXEC RE_SP_INSERT_REVIEW @p_PPostId = ?, @p_ReviewBy = ?, @p_ReviewTo = ?', [
+                NULL,              // PropertyPostId (null for the first review)
+                $landlordId,      // p_ReviewBy (user)
+                $tenantId         // p_ReviewTo (tenant)
             ]);
 
             // Call the stored procedure to create the second review (tenant as review_by and user as review_to)
-            DB::select('CALL RE_SP_INSERT_REVIEW(?, ?, ?)', [
-                $propertyId, // p_PPostId
-                $tenantId,   // p_ReviewBy (tenant)
-                $userId      // p_ReviewTo (user)
+            DB::statement('EXEC RE_SP_INSERT_REVIEW @p_PPostId = ?, @p_ReviewBy = ?, @p_ReviewTo = ?', [
+                $propertyId,      // PropertyPostId (not null for the second review)
+                $tenantId,        // p_ReviewBy (tenant)
+                $landlordId       // p_ReviewTo (user)
             ]);
-            
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error executing stored procedure', 'error' => $e->getMessage()], 500);
         }
-
-        // Return a success response
-        return response()->json(['message' => 'Reviews submitted successfully']);
-    }
+    
+        // Redirect the user back to their profile page
+        return redirect()->route('userprofilepage')->with('message', 'Reviews submitted successfully!');
+    }    
 }

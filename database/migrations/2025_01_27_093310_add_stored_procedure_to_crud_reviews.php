@@ -69,7 +69,7 @@ return new class extends Migration
 
         DB::statement("
             CREATE PROCEDURE RE_SP_INSERT_REVIEW
-                @p_PPostId INt,
+                @p_PPostId INT = NULL,
                 @p_ReviewBy INT,
                 @p_ReviewTo INT
             AS
@@ -79,9 +79,9 @@ return new class extends Migration
                     ,review_by_user_id
                     ,review_to_user_id)
                 VALUES (
-                    @PropertyPostId
-                    ,@ReviewByUserId
-                    ,@ReviewToUserId);
+                    @p_PPostId
+                    ,@p_ReviewBy
+                    ,@p_ReviewTo);
             END
         ");
     }
