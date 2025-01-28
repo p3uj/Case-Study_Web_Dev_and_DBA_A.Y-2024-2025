@@ -92,7 +92,7 @@
         </form>
 
         <!-- Create Post Button -->
-        <button class="create-a-post-btn" popovertarget="create-post-popover">
+        <button id="create-a-post-btn" class="create-a-post-btn" popovertarget="create-post-popover" data-user-role="{{$userRole}}">
             Create a post
         </button>
     </div>
