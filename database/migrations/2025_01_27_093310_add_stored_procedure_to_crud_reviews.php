@@ -31,15 +31,14 @@ return new class extends Migration
                 ,PInfo.unit_category
                 ,PInfo.rental_price
                 ,PInfo.description
-            FROM reviews AS R
-            LEFT JOIN property_posts AS PPost
-                ON PPost.id = R.property_post_id
+            FROM property_posts AS PPost
             INNER JOIN property_infos AS PInfo
                 ON PInfo.id = PPost.property_info_id
+            RIGHT JOIN reviews AS R
+                ON R.property_post_id = PPost.id
             WHERE 
                 R.review_by_user_id = @p_UserId
                 AND R.lease_end IS NOT NULL
-            ORDER BY R.updated_at DESC
         ");
 
         DB::statement("
@@ -54,17 +53,16 @@ return new class extends Migration
                 ,U.lastname
                 ,PInfo.City
                 ,PInfo.barangay
-            FROM reviews AS R
-            LEFT JOIN property_posts AS PPost
-                ON PPost.id = R.property_post_id
+            FROM property_posts AS PPost
             INNER JOIN property_infos AS PInfo
                 ON PInfo.id = PPost.property_info_id
-            INNER JOIN users AS U
-                ON U.id = R.review_to_user_id
-            WHERE 
-                R.review_by_user_id = 1
-                AND R.lease_end IS NOT NULL
-            ORDER BY R.updated_at DESC
+            RIGHT JOIN reviews AS R
+                ON R.property_post_id = PPost.id
+            LEFT JOIN users AS U
+                ON U.id = R.review_by_user_id
+            WHERE
+                review_by_user_id = 1
+                AND lease_end IS NOT NULL
         ");
 
         DB::statement("
