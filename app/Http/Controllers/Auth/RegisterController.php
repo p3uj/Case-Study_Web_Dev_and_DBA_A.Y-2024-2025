@@ -48,7 +48,7 @@ class RegisterController extends Controller
             : 'Tenant looking for affordable housing.';
 
         // Define the default profile photo path
-        $profilePhotoPath = 'sampleProfile.png';
+        $profilePhotoPath = asset("/resources/images/sampleProfile.png");
 
         // Call the stored procedure to insert the user
         DB::statement('EXEC RE_SP_INSERT_USER ?, ?, ?, ?, ?, ?, ?, ?', [

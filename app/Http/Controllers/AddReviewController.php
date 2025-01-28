@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 
 class AddReviewController extends Controller
@@ -32,7 +31,7 @@ class AddReviewController extends Controller
         try {
             // Call the stored procedure to create the first review (user as review_by and tenant as review_to)
             DB::statement('EXEC RE_SP_INSERT_REVIEW @p_PPostId = ?, @p_ReviewBy = ?, @p_ReviewTo = ?', [
-                NULL,              // PropertyPostId (null for the first review)
+                $propertyId,              // PropertyPostId (null for the first review)
                 $landlordId,      // p_ReviewBy (user)
                 $tenantId         // p_ReviewTo (tenant)
             ]);

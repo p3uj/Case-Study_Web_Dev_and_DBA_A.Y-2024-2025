@@ -49,25 +49,36 @@ return new class extends Migration
                 R.id
                 ,R.created_at
                 ,R.lease_end
-                ,U.firstname
-                ,U.lastname
-                ,PInfo.City
+                ,(
+                    SELECT profile_photo_path
+                    FROM users AS U
+                    WHERE U.id = R.review_to_user_id
+                ) AS pfp
+                ,(
+                    SELECT firstname
+                    FROM users AS U
+                    WHERE U.id = R.review_to_user_id
+                ) AS firstname
+                ,(
+                    SELECT lastname
+                    FROM users AS U
+                    WHERE U.id = R.review_to_user_id
+                ) AS lastname
+                ,PInfo.city
                 ,PInfo.barangay
             FROM property_posts AS PPost
             INNER JOIN property_infos AS PInfo
                 ON PInfo.id = PPost.property_info_id
             RIGHT JOIN reviews AS R
                 ON R.property_post_id = PPost.id
-            LEFT JOIN users AS U
-                ON U.id = R.review_by_user_id
             WHERE
-                review_by_user_id = 1
+                review_by_user_id = @p_UserId
                 AND lease_end IS NOT NULL
         ");
 
         DB::statement("
             CREATE PROCEDURE RE_SP_INSERT_REVIEW
-                @p_PPostId INT = NULL,
+                @p_PPostId INT,
                 @p_ReviewBy INT,
                 @p_ReviewTo INT
             AS

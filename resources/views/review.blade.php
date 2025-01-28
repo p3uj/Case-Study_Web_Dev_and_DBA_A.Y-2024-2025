@@ -27,9 +27,9 @@
         <div class="tab-content active" id="to-review">
             @if (!empty($toReview))
                 @if ($userRole == "Tenant")
-                @foreach ($toReview as $property)
+                    @foreach ($toReview as $property)
                         <div id="property-post" class="to-review-content">
-                            <img src="{{ asset($toReview->FirstPhoto) }}" alt="Image 1">
+                            <img src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Image 1">
 
                             <div class="to-review-info">
                                 <p class="lease-duration">{{ $property->created_at }} - {{ $property->lease_end }}</p>
@@ -53,22 +53,28 @@
                         </div>
                     @endforeach
                 @else
-                    <div class="to-review-content">
-                        <img src="asset('resources/images/sampleProfile.png')" alt="Image 1">
-                        <div class="to-review-info">
-                            <p class="lease-duration">{{ $property->created_at }} - {{ $property->lease_end }}</p>
+                    @foreach ($toReview as $tenant)
+                        <div class="to-review-content">
+                            @if ($tenant->pfp == asset('resources/images/sampleProfile.png'))
+                                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                            @else
+                                <img src="{{ asset('storage/uploads/images/profile-pictures/' . $tenant->pfp) }}" alt="Profile Picture">
+                            @endif
+                            <div class="to-review-info">
+                                <p class="lease-duration">{{ $tenant->created_at }} - {{ $tenant->lease_end }}</p>
 
-                            <h2>{{ $property->firstname }} {{ $property->lastname }}</h2>
+                                <h2>{{ $tenant->firstname }} {{ $tenant->lastname }}</h2>
 
-                            <h5><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
-                                {{ $property->city }}, {{ $property->barangay }}
-                            </h5>
-                            
-                            <div class="review-btn-wrapper">
-                                <button class="review-btn">Review</button>
+                                <h5><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                    {{ $tenant->city }}, {{ $tenant->barangay }}
+                                </h5>
+                                
+                                <div class="review-btn-wrapper">
+                                    <button class="review-btn">Review</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 @endif
             @else
                 <div style="margin: 16px 135px;">
@@ -76,6 +82,7 @@
                     <h4>There are no {{ $userRole === 'Tenant' ? 'property' : 'tenant'}} to review so far.</h4>
                 </div>
             @endif
+
         </div>
             <!-- Tab Content (My Reviews) -->
             <div class="tab-content" id="my-reviews">

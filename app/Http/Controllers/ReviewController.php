@@ -3,32 +3,36 @@
 namespace App\Http\Controllers;
 use App\Models\Reviews;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class ReviewController extends Controller
 {
-    private function reviewsReceivedByUserId($userId) {
-        $userId = Auth::id();
-        $userRole = Auth::user()->role;
-        if ($userRole == 'Tenant') {
-            // Fetch properties the tenant should review
-            $toReview=Reviews::getPropertiesToReview($userId);
-        } else {
-            // Fetch tenants the landlord should review
-            $toReview=Reviews::getTenantsToReview($userId);
-        }
+    private function properties($userId) {
+        // Call the PropertyPost model to get the property posts of the authenticated user
+        $properties = Reviews::getPropertiesToReview($userId);
 
-        return $toReview;
+        return $properties;
     }
 
-    public function index() {
-        $toReview = $this->reviewsReceivedByUserID(Auth::id());
+    private function tenants($userId) {
+        // Call the PropertyPost model to get the property posts of the authenticated user
+        $tenants = Reviews::getTenantsToReview($userId);
 
-        Log::info('Reviews Data:', ['toReview' => $toReview, 'userRole' => Auth::user()->role]);
+        return $tenants;
+    }
 
-        return view('review', [
-            'toReview' => $toReview
-            ,'userRole' => Auth::user()->role
-        ]);
+    public function index()
+    {
+        $userId = Auth::id();
+        $userRole = Auth::user()->role;
+
+        if ($userRole == 'Tenant') {
+            // Fetch properties the tenant should review
+            $toReview = $this->properties($userId);
+        } else {
+            // Fetch tenants the landlord should review
+            $toReview = $this->tenants($userId);
+        }
+
+        return view('review', ['toReview' => $toReview, 'userRole' => $userRole]);
     }
 }
