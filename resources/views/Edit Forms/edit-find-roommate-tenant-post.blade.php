@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Searching Post</title>
+
+    @vite('resources/js/edit-dropdown.js')
+</head>
+<body>
+    <x-navbar></x-navbar>
+
+    <!-- Form -->
+    <form id="form" action="{{ route('editsearchpost.post') }}" method="post">
+        @csrf
+        <div class="form-container">
+            <!-- Hidden input to hold the id for the server side -->
+            <input type="hidden" name="id" value="{{ $id }}">
+
+            <!-- Fetch values from the database -->
+            <select hidden name="default-city" id="">
+                <option value="{{ $post->city }}" selected></option>
+            </select>
+            <select hidden name="default-barangay" id="">
+                <option value="{{ $post->barangay }}" selected></option>
+            </select>
+            <textarea hidden name="default-description">{{ $post->description }}</textarea>
+
+            <!-- City Dropdown Box -->
+            <select name="city" id="city" data-city-list="{{ json_encode($cities) }}">
+                <option value="" disabled selected>Please select city</option>
+                @foreach ($cities as $city)
+                    <option id="{{ $city['code'] }}" value="{{ $city['name'] }}"
+                        {{ $city['name'] === $post->city ? 'selected' : '' }}>
+                        {{ $city['name'] }}
+                    </option>
+                @endforeach
+            </select>
+
+            <!-- Hidden input to hold the barangay list for default -->
+            <input type="hidden" id="default-barangay-list" data-default-barangay="">
+
+            <!-- Barangay Dropdown Box -->
+            <select name="barangay" id="barangay" data-barangay-list="{{ json_encode($barangays) }}"
+                data-fetch-barangay="{{ $post->barangay }}">
+                <!-- This dropdown should be dynamic based on the selected option in the city.
+                            You can use this for API call to get the barangays based on the id(stored as cityCode) of selected option in the city.
+                            https://psgc.gitlab.io/api/cities/{cityCode}/barangays/
+                        -->
+                <option value="" disabled selected>Please select barangay</option>
+                <!-- Barangay options will be populated by property.js  -->
+            </select>
+
+            <!-- input -->
+            <textarea class="description" placeholder="Write a description" id="description" name="description">{{ $post->description }}</textarea>
+
+            <button class="post-btn">Post</button>
+        </div>
+    </form>
+</body>
+</html>
