@@ -81,7 +81,7 @@
 
             <!-- Submit Button Container -->
             <div class="submit-btn-container">
-                <button type="submit" class="submit-btn" id="submit-btn">Submit</button>
+                <button type="submit" class="submit-btn" id="submit-btn">Rent</button>
             </div>
         </form>
     </div>
