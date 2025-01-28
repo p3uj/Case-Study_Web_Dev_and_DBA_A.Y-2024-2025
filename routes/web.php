@@ -16,6 +16,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AddReviewController;
 
 use App\Http\Controllers\ViewPropertyPost;
+use App\Http\Controllers\WriteReviewController;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
 Route::middleware('auth')->group(function () {
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/findroommateortenant', [FindRoommateOrTenantController::class, 'index'])->name('findroommateortenantpage');
     // Route to show the create review modal as a new page
     Route::get('/add-review', [AddReviewController::class, 'index'])->name('add.review.page');
+    Route::get('/write-review/{id}', [WriteReviewController::class, 'index'])->name('write.reviewpage');
 
     Route::get('viewproperty/{id}/{property_info_id}', [ViewPropertyPost::class, 'index'])->name('viewpropertypostpage');
 

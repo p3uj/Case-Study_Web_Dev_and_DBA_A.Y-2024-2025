@@ -10,6 +10,8 @@
     @vite('resources/css/navbar.css')
     @vite('resources/css/review.css')
     @vite('resources/js/review.js')
+    @vite('resources/css/write-review.css') <!-- If this file contains your modal styles -->
+
 
     <!-- Font Awesome Icon Library -->
     <script src="https://kit.fontawesome.com/87abdb3ce2.js" crossorigin="anonymous"></script>
@@ -48,8 +50,9 @@
                                 </p>
                             </div>
                             <div class="review-btn-wrapper">
-                                <button class="review-btn">Review</button>
-                            </div>
+                            <form method="GET" action="{{ route('write.reviewpage', ['id' => $property->id]) }}">
+                                <button type="submit" class="btn review-btn">Review</button>
+                            </form>
                         </div>
                     @endforeach
                 @else
@@ -70,7 +73,9 @@
                                 </h5>
                                 
                                 <div class="review-btn-wrapper">
-                                    <button class="review-btn">Review</button>
+                                    <form method="GET" action="{{ route('write.reviewpage', ['id' => $tenant->id]) }}">
+                                        <button type="submit" class="btn review-btn">Review</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -93,5 +98,6 @@
             </div>
 
     </div>
+
 </body>
 </html>

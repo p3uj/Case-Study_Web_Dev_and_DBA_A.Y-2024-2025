@@ -34,7 +34,7 @@
                             <div class="tenant-item" id="tenant-item">
                                 <div class="tenant-image">
                                 @if ($tenant->profile_photo_path == asset('resources/images/sampleProfile.png'))
-                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Tenant Image">
                                 @else
                                     <img src="{{ asset('storage/uploads/images/profile-pictures/' . $tenant->profile_photo_path) }}" alt="Tenant Image">
                                 @endif

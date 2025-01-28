@@ -93,6 +93,20 @@ return new class extends Migration
                     ,@p_ReviewTo);
             END
         ");
+
+        DB::statement("
+            CREATE PROCEDURE RE_SP_GET_REVIEW_BY_ID
+                @p_ReviewId INT
+            AS
+            BEGIN
+                SELECT
+                    *
+                FROM
+                    reviews AS R
+                WHERE
+                    R.id = @p_ReviewId;
+            END;
+        ");
     }
 
     /**
@@ -103,5 +117,6 @@ return new class extends Migration
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_PROPERTIES_TO_BE_REVIEWED");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_TENANTS_TO_BE_REVIEWED");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_INSERT_REVIEW");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_REVIEW_BY_ID");
     }
 };
