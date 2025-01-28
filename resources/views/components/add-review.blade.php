@@ -21,56 +21,62 @@
         <div class="close-btn-container">
             <p id="user-name">User: </p>
             <p id="property-name" style="margin-left: 70px;">Property: </p>
-            <button class="close-btn" onclick="window.history.back()">x</button>
+            <a class="close-btn" href="{{ route('userprofilepage') }}">x</a>
         </div>
-
-        <!-- Middle Container with two columns -->
-        <div class="s-container">
-            <div class="search-container">
-                <input type="text" class="search-bar" id="tenant-search-bar" placeholder="Search Tenant...">
-                <div class="tenant-list" id="tenant-list">
-                    @foreach ($tenants as $tenant)
-                        <div class="tenant-item" id="tenant-item">
-                            <div class="tenant-image">
-                                <img src="{{ asset('storage/uploads/images/profile-pictures/' . $tenant->profile_photo_path) }}" alt="Tenant Image">
-                            </div>
-                            <div class="tenant">
-                                <p>{{ $tenant->firstname }} {{ $tenant->lastname }}</p>
-                                <button class="select-tenant-btn" 
-                                        data-tenant-id="{{ $tenant->id }}" 
-                                        data-tenant-name="{{ $tenant->firstname }} {{ $tenant->lastname }}">
-                                    +
-                                </button>
-                            </div>                        
+            <div class="form-container">
+                <!-- Middle Container with two columns -->
+                <div class="s-container">
+                    <div class="search-container">
+                        <input type="text" class="search-bar" id="tenant-search-bar" placeholder="Search Tenant...">
+                        <div class="tenant-list" id="tenant-list">
+                            @foreach ($tenants as $tenant)
+                                <div class="tenant-item" id="tenant-item">
+                                    <div class="tenant-image">
+                                        <img src="{{ asset('storage/uploads/images/profile-pictures/' . $tenant->profile_photo_path) }}" alt="Tenant Image">
+                                    </div>
+                                    <div class="tenant">
+                                        <p>{{ $tenant->firstname }} {{ $tenant->lastname }}</p>
+                                        <button class="select-tenant-btn" 
+                                                data-tenant-id="{{ $tenant->id }}" 
+                                                data-tenant-name="{{ $tenant->firstname }} {{ $tenant->lastname }}">
+                                            +
+                                        </button>
+                                    </div>                        
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
-                </div>
-            </div>
-            <div class="search-container">
-                <input type="text" class="search-bar" id="property-search-bar" placeholder="Search Property...">
-                <div class="tenant-list" id="property-list">
-                    @foreach ($properties as $property)
-                        <div class="tenant-item" id="property-item">
-                            <div class="tenant-image">
-                                <img src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Tenant Image">
-                            </div>
-                            <div class="tenant">
-                                <p>{{ $property->city }}, {{ $property->barangay }}</p>
-                                <button class="select-property-btn" 
-                                        data-property-id="{{ $property->id }}" 
-                                        data-property-name="{{ $property->city }} {{ $property->barangay }}">
-                                    +
-                                </button>
-                            </div>                        
+                    </div>
+                    <div class="search-container">
+                        <input type="text" class="search-bar" id="property-search-bar" placeholder="Search Property...">
+                        <div class="tenant-list" id="property-list">
+                            @foreach ($properties as $property)
+                                <div class="tenant-item" id="property-item">
+                                    <div class="tenant-image">
+                                        <img src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Tenant Image">
+                                    </div>
+                                    <div class="tenant">
+                                        <p>{{ $property->city }}, {{ $property->barangay }}</p>
+                                        <button class="select-property-btn" 
+                                                data-property-id="{{ $property->id }}" 
+                                                data-property-name="{{ $property->city }} {{ $property->barangay }}">
+                                            +
+                                        </button>
+                                    </div>                        
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Submit Button Container -->
-        <div class="submit-btn-container">
-            <button class="submit-btn" id="submit-btn">Submit</button>
+                <!-- Hidden Inputs to Store Selected IDs -->
+                <input type="hidden" name="tenant_id" id="tenant_id">
+                <input type="hidden" name="property_id" id="property_id">
+
+                <!-- Submit Button Container -->
+                <div class="submit-btn-container">
+                    <button class="submit-btn" id="submit-btn">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const tenantNameDisplay = document.querySelector('#user-name');
     const propertyNameDisplay = document.querySelector('#property-name');
 
+    const submitBtn = document.getElementById('submit-btn');
+    const form = document.querySelector('form');
+
     let selectedTenant = null;
     let selectedProperty = null;
 
@@ -55,35 +58,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Submit button click event
-    document.querySelector('#submit-btn').addEventListener('click', function() {
-        const tenantId = selectedTenant?.id;
-        const propertyId = selectedProperty?.id;
-    
-        // Ensure tenant and property are selected
-        if (!tenantId || !propertyId) {
-            alert('Please select both a tenant and a property.');
-            return;
+    // Handling the Submit Button Click (Check if both tenant and property are selected)
+    submitBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form from submitting immediately
+
+        // Check if both tenant and property are selected
+        if (!selectedTenant || !selectedProperty) {
+            alert('Please select both a tenant and a property before submitting.');
+            return;  // Stop submission if not both are selected
         }
-    
-        // Send AJAX request to submit the reviews
-        fetch('/submit-review', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({
-                tenantId: tenantId,
-                propertyId: propertyId
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    });    
+
+        // Ask for confirmation before submitting
+        const confirmation = confirm('Rent the property?');
+        if (confirmation) {
+            form.submit();  // Submit the form if user confirms
+        }
+    });
 });
