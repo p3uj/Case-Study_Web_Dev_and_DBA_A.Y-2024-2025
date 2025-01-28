@@ -40,4 +40,11 @@ class FindRoommateOrTenant extends Model
 
         return $userRoommateTenantPosts;
     }
+
+    public static function getRoommateTenantPostsById($id) {
+        // Retrieve the city, barangay and description of the roommate tenant post based on the id for displaying it to the edit-find-roommate-tenant-post
+        $post = DB::select('RE_SP_GET_ROOMMATE_TENANT_BY_ID ?', [$id]);
+
+        return $post[0];
+    }
 }
