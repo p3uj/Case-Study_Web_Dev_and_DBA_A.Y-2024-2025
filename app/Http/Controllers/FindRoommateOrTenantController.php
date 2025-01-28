@@ -20,8 +20,8 @@ class FindRoommateOrTenantController extends Controller
         $city = CityController::index();
         $barangay = BarangayController::index();
 
-        // Use the User model to call the getAllFindingPostsWithUser() method to get user info and their related posts
-        $usersPosts = FindRoommateOrTenant::getAllFindingPostsWithUser();
+        // Use the User model to call the getAllFindingPosts() method to all the available find roommate or tenants posts
+        $usersPosts = FindRoommateOrTenant::getAllFindingPosts();
 
         return view('find-roommate-or-tenant', [
             'user' => $user
