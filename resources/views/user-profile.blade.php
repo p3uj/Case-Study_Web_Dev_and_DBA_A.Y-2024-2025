@@ -127,10 +127,11 @@
                         <div class="find-tenant-info">
                             <div class="date-and-edit-icon">
                                 <p class="date-posted">{{ $searchingPost->updated_at }}</p>
-                                <button class="edit-icon" popovertarget="edit-search-post-popover" data-id="{{ $searchingPost->id }}" onclick="updatePopoverDataId(this)">
-                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAZdJREFUSEu11TnPDWEYxvHf2xAlEQpiS+xrKSGWaCQK38BXUGs0GlrfQa0TFWLtJYpX7EFCFAprg3PJfWQyzjJn3vc8zWRmnvlf93LdzyyY81qYM99yCKzAGazCdXxvBt0WOIvL2DUhs184h2tYjVs4VPsXcRifh9+3Bd5iQ0f4moIfxDt8wU48wkn8DKct8Lvg00q3tuD78Qyn8LWeHcB5XO0rsA53sLuCeT64P1ERp1z7cAkX+wisx+2Cv6+otyOl/YYd+IhklutMJQr8IbZVzY+UYyK4p7JJL44NTPBiXJPH9SCNv9uCvy4X3cPehmie/1tdmhz4A2xuQWLRITzQ48j19MCqN7tm0BWecqU8gWfYMnR/17QMXmIL3lSEr9C2aBwUeNYPrGxypwkMe7KxIIHHoqn502roh0bJ/+thV4HsC/x+TWuOhNS8CY9Ob4GmMQI/ik8jjpQlCzypqR0F75XBhHNv5KuZM1h2gQzKplmprf2x8tZxc5AfzpVySh+dx4NT9QJujBPoA534zbQfy5IF5y7wB1dYahkZIgF+AAAAAElFTkSuQmCC"
-                                        style="height: 24px; width: 24px;"
-                                    />
+                                <button class="edit-icon" popovertarget="edit-search-post-popover" data-id="{{ $searchingPost->id }}"
+                                    onclick="window.location.href='{{ route('editsearchpostpage', ['id' => $searchingPost->id]) }}'">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAZdJREFUSEu11TnPDWEYxvHf2xAlEQpiS+xrKSGWaCQK38BXUGs0GlrfQa0TFWLtJYpX7EFCFAprg3PJfWQyzjJn3vc8zWRmnvlf93LdzyyY81qYM99yCKzAGazCdXxvBt0WOIvL2DUhs184h2tYjVs4VPsXcRifh9+3Bd5iQ0f4moIfxDt8wU48wkn8DKct8Lvg00q3tuD78Qyn8LWeHcB5XO0rsA53sLuCeT64P1ERp1z7cAkX+wisx+2Cv6+otyOl/YYd+IhklutMJQr8IbZVzY+UYyK4p7JJL44NTPBiXJPH9SCNv9uCvy4X3cPehmie/1tdmhz4A2xuQWLRITzQ48j19MCqN7tm0BWecqU8gWfYMnR/17QMXmIL3lSEr9C2aBwUeNYPrGxypwkMe7KxIIHHoqn502roh0bJ/+thV4HsC/x+TWuOhNS8CY9Ob4GmMQI/ik8jjpQlCzypqR0F75XBhHNv5KuZM1h2gQzKplmprf2x8tZxc5AfzpVySh+dx4NT9QJujBPoA534zbQfy5IF5y7wB1dYahkZIgF+AAAAAElFTkSuQmCC"
+                                            style="height: 24px; width: 24px;"
+                                        />
                                 </button>
 
                             </div>
@@ -139,8 +140,12 @@
                         <div class="find-tenant-bottom">
                             <h2>{{ $searchingPost->is_already_found ? 'Found' : ('Finding ' .$searchingPost->search_categories) }}</h2>
                             <div>
-                                <button class="delete-btn">Delete Post</button>
-                                <button class="isFound-btn">{{ $searchingPost->is_already_found ? 'Not yet Found?' : 'Already Found?' }}</button>
+                                <button class="delete-btn" onclick="window.location.href='{{ route('userprofilepage.updatefoundordeleted', ['id' => $searchingPost->id, 'found' => 'null', 'deleted' => 1]) }}'">
+                                    Delete Post
+                                </button>
+                                <button class="isFound-btn" onclick="window.location.href='{{ route('userprofilepage.updatefoundordeleted', ['id' => $searchingPost->id, 'found' => ($searchingPost->is_already_found == 1) ? 0 : 1, 'deleted' => 'null']) }}'">
+                                    {{ $searchingPost->is_already_found == 1 ? 'Not yet Found?' : 'Already Found?' }}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -150,42 +155,6 @@
                     <h1>No Searching Posts!</h1>
                 </div>
             @endif
-        </div>
-
-        <div popover id="edit-search-post-popover" data-id="">
-            <h3>Edit {{ $user->role === 'Tenant' ? 'Roommate' : 'Tenant'}} Search</h3>
-
-            <!-- Form -->
-            <form id="form" action="{{ route("findroommateortenant.post") }}" method="post">
-                @csrf
-                <div class="form-container">
-                    <!-- City Dropdown Box -->
-                    <select name="city" id="city" data-city-code="" required>
-                        <option value="" disabled selected>Please select city</option>
-                        @foreach ($cities as $city)
-                            <option id="{{ $city['code'] }}"
-                                value="{{ $city['name'] }}">
-                                {{ $city['name'] }}
-                            </option>
-                        @endforeach
-                    </select>
-
-                    <!-- Barangay Dropdown Box -->
-                    <select name="barangay" id="barangay" data-barangay-list="{{ json_encode($barangays) }}" required>
-                        <!-- This dropdown should be dynamic based on the selected option in the city.
-                            You can use this for API call to get the barangays based on the id(stored as cityCode) of selected option in the city.
-                            https://psgc.gitlab.io/api/cities/{cityCode}/barangays/
-                        -->
-                        <option value="" disabled selected>Please select barangay</option>
-                        <!-- Barangay options will be populated by property.js  -->
-                    </select>
-
-                    <!-- input -->
-                    <textarea class="description" placeholder="Write a description" id="description" name="description" required></textarea>
-
-                    <button class="post-btn">Post</button>
-                </div>
-            </form>
         </div>
 
         <!-- Review from Tenant Content -->
