@@ -63,7 +63,7 @@ class EditPropertyPostController extends Controller
         return redirect()->route('user-profile');
     }
 
-    public function delete($id, $available, $deleted) {
+    public function isAvailableOrDelete($id, $available, $deleted) {
         // Set to null if the value of available and deleted is 'null'
         $available = $available != "null" ? $available : null;
         $deleted = $deleted != "null" ? $deleted : null;
@@ -72,16 +72,13 @@ class EditPropertyPostController extends Controller
         if (!is_null($deleted)) {
             // Used a stored procedure to store the data
             DB::statement('RE_SP_UPDATE_PROPERTY_POST_AND_INFO_BY_ID ?, ?, ?, ?, ?, ?, ?, ?, ?, ?', [
-                null
-                ,$id
-                ,null
-                ,null
-                ,null
-                ,null
-                ,null
-                ,null
-                ,$available
-                ,$deleted
+                null, $id, null, null, null, null, null, null, $available, $deleted
+            ]);
+        } else {
+            // Update only the is_available column in the database
+            // Used a stored procedure to store the data
+            DB::statement('RE_SP_UPDATE_PROPERTY_POST_AND_INFO_BY_ID ?, ?, ?, ?, ?, ?, ?, ?, ?', [
+                null, $id, null, null, null, null, null, null, $available
             ]);
         }
 
