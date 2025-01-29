@@ -54,7 +54,11 @@
         </div>
         <div class="profile-container">
             <div class="user-profile">
-                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                @if (asset('resources/images/' . $propertyDetails->ProfilePhoto) == asset('resources/images/sampleProfile.png'))
+                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                @else
+                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $propertyDetails->ProfilePhoto) }}" alt="Profile Picture">
+                @endif
                 {{-- Do Kyung-Soo --}}
                 <span class="user-name">{{ $propertyDetails->Username }}</span>
             </div>
