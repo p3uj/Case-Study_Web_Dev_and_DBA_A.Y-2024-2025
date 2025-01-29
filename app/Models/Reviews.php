@@ -41,4 +41,10 @@ class Reviews extends Model
         
         return $tenants;
     }
+
+    public static function getUserReviews($userId) {
+        $reviews = DB::select('EXEC RE_SP_GET_ALL_REVIEWS_BY_USER ?', [$userId]);
+        
+        return $reviews;
+    }
 }
