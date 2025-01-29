@@ -177,15 +177,24 @@ return new class extends Migration
         ");
 
         DB::statement("
-            CREATE PROCEDURE RE_SP_GET_ALL_REVIEWS_BY_USER
+            CREATE PROCEDURE RE_SP_GET_ALL_REVIEWS_WRITTEN_BY_USER
                     @p_UserId INT 
             AS
                 SELECT
-                    *
+                    U.profile_photo_path AS pfp
+                    ,U.firstname
+                    ,U.lastname
+                    ,R.rating
+                    ,R.review_text
+                    ,R.is_edited
+                    ,R.updated_at
                 FROM 
-                    reviews as R
+                    reviews AS R
+                LEFT JOIN users AS U
+                    ON U.id = R.review_by_user_id
                 WHERE
-                    R.id = @p_UserId
+                    R.review_by_user_id = @p_UserId
+                    AND R.is_reviewed = 1
         ");
     }
 
@@ -200,6 +209,6 @@ return new class extends Migration
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_LANDLORD_REVIEW_BY_ID");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_TENANT_REVIEW_BY_ID");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_UPDATE_REVIEW");
-        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_ALL_REVIEWS_BY_USER");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_ALL_REVIEWS_WRITTEN_BY_USER");
     }
 };

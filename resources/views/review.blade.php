@@ -103,11 +103,84 @@
 
         </div>
         <!-- Tab Content (My Reviews) -->
-        <div class="tab-content" id="my-reviews">
-            <div style="margin: 16px 135px;">
-                <h1>No Reviews Made.</h1>
-                <h3>You have not given a review so far.</h3>
-            </div>
+        <div class="tab-content">
+            @if (!empty($reviews))
+                <div class="reviews-content">
+                    @foreach ($reviews as $review)
+                        <div class="review-info-container">
+                            <div class="user-review-profile">
+                                @if ($tenant->pfp == asset('resources/images/sampleProfile.png'))
+                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                                @else
+                                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $tenant->pfp) }}" alt="Profile Picture">
+                                @endif
+                            </div>
+                            <div class="reviews">
+                                <h3>
+                                    @for ($star = 1; $star <= $review; $star++)
+                                        <!-- If the star is less than or equal to average rating, show the filled star -->
+                                        @if ($star <= $review->rating)
+                                            <i class="fas fa-star"></i>
+                                        <!-- Otherwise, show empty star -->
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                </h3>
+
+                            </div>
+                            <h1>❝</h1>
+                            <div class="review-caption">
+                                <p>{{ $review->review_text }}</p>
+                            </div>
+                            <h1 class="quotation-mark-right">❞</h1>
+                            <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
+                            <p class="date-review">{{ $review->updated_at }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div style="margin: 16px 135px;">
+                    <h1>No Reviews Made.</h1>
+                    <h3>You have not given a review so far.</h3>
+                </div>
+            @endif
+        </div>
+
+        <div popover id="edit-search-post-popover" data-id="">
+            <h3>Edit {{ $user->role === 'Tenant' ? 'Roommate' : 'Tenant'}} Search</h3>
+
+            <!-- Form -->
+            <form id="form" action="{{ route("findroommateortenant.post") }}" method="post">
+                @csrf
+                <div class="form-container">
+                    <!-- City Dropdown Box -->
+                    <select name="city" id="city" data-city-code="" required>
+                        <option value="" disabled selected>Please select city</option>
+                        @foreach ($cities as $city)
+                            <option id="{{ $city['code'] }}"
+                                value="{{ $city['name'] }}">
+                                {{ $city['name'] }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <!-- Barangay Dropdown Box -->
+                    <select name="barangay" id="barangay" data-barangay-list="{{ json_encode($barangays) }}" required>
+                        <!-- This dropdown should be dynamic based on the selected option in the city.
+                            You can use this for API call to get the barangays based on the id(stored as cityCode) of selected option in the city.
+                            https://psgc.gitlab.io/api/cities/{cityCode}/barangays/
+                        -->
+                        <option value="" disabled selected>Please select barangay</option>
+                        <!-- Barangay options will be populated by property.js  -->
+                    </select>
+
+                    <!-- input -->
+                    <textarea class="description" placeholder="Write a description" id="description" name="description" required></textarea>
+
+                    <button class="post-btn">Post</button>
+                </div>
+            </form>
         </div>
     </div>
 

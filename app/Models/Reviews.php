@@ -43,7 +43,7 @@ class Reviews extends Model
     }
 
     public static function getUserReviews($userId) {
-        $reviews = DB::select('EXEC RE_SP_GET_ALL_REVIEWS_BY_USER ?', [$userId]);
+        $reviews = DB::select('EXEC RE_SP_GET_ALL_REVIEWS_WRITTEN_BY_USER ?', [$userId]);
         
         return $reviews;
     }
