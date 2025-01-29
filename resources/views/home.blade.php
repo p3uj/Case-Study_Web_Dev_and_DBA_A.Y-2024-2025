@@ -244,10 +244,10 @@
                 <h3>Follow Us</h3>
                 <p>Follow us on social media:</p>
                 <ul class="social-media">
-                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fab fa-discord"></i></a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i></a>@RentEase</li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a>@RentEase</li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a>@RentEase</li>
+                    <li><a href="#"><i class="fab fa-discord"></i></a> @RentEase</li>
                 </ul>
             </div>
         </div>

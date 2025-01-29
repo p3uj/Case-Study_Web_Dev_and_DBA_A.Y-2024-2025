@@ -28,10 +28,8 @@ return new class extends Migration
             WHERE UP.id = (
                 SELECT TOP 1 id
                 FROM unit_photos
-                WHERE property_info_id = PInfo.id
-                ORDER BY id
-            )
-            ORDER BY RAND()
+                WHERE property_info_id = PInfo.id)
+            ORDER BY NEWID()
         ");
     }
 
