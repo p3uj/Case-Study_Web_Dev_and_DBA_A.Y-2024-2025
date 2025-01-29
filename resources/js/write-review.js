@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (role === "Tenant") {
                 modalImage.src = `/storage/uploads/images/property-posts/${photo}`;
             } else {
-                if (photo === "http://localhost/RentEase/public/images/sampleProfile.png") {
+                if (photo === asset('resources/images/sampleProfile.png')) {
                     modalImage.src = "/resources/images/sampleProfile.png"; // Default profile image
                 } else {
                     modalImage.src = `/storage/uploads/images/profile-pictures/${photo}`;
