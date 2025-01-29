@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('review_to_user_id')->constrained('users');
             $table->integer('rating')->nullable();
             $table->text('review_text')->nullable();
+            $table->boolean('is_reviewed')->default(false);
             $table->boolean('is_edited')->default(false);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('lease_end')->nullable();

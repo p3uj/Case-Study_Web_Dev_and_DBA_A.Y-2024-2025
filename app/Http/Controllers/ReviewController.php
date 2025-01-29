@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Reviews;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
@@ -35,4 +37,24 @@ class ReviewController extends Controller
 
         return view('review', ['toReview' => $toReview, 'userRole' => $userRole]);
     }
+
+    public function addReview(Request $request)
+    {
+        // Get values from the request
+        $reviewId = $request->input('review-id');
+        $reviewText = $request->input('review-text');
+        $rating = $request->input('rating');
+        $isReviewed = 1;
+        $isEdited = 0;
+
+
+        // Call the stored procedure
+        DB::statement('EXEC RE_SP_UPDATE_REVIEW ?, ?, ?, ?, ?', [
+            $reviewId, $rating, $reviewText, $isReviewed, $isEdited
+        ]);
+
+        // Send the tenants data to the view
+        return redirect()->back();
+    }
+
 }

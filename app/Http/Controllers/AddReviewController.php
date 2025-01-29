@@ -19,7 +19,7 @@ class AddReviewController extends Controller
         $properties = DB::select('EXEC RE_SP_GET_ALL_USER_PROPERTY ?', [$userId]);
 
         // Send the tenants data to the view
-        return view('components.add-review', compact('tenants', 'properties'));
+        return view('add-review', compact('tenants', 'properties'));
     }
 
     public function submitReview(Request $request)

@@ -10,6 +10,9 @@
     @vite('resources/css/navbar.css')
     @vite('resources/css/review.css')
     @vite('resources/js/review.js')
+    @vite('resources/css/write-review.css')
+    @vite('resources/js/write-review.js')
+
 
     <!-- Font Awesome Icon Library -->
     <script src="https://kit.fontawesome.com/87abdb3ce2.js" crossorigin="anonymous"></script>
@@ -48,8 +51,15 @@
                                 </p>
                             </div>
                             <div class="review-btn-wrapper">
-                                <button class="review-btn">Review</button>
-                            </div>
+                                <button class="review-btn" id="reviewBtn" 
+                                    data-id="{{ $property->id }}" 
+                                    data-photo="{{ $property->FirstPhoto }}"
+                                    data-duration="{{ $property->created_at }} - {{ $property->lease_end }}"
+                                    data-location="{{ $property->city }}, {{ $property->barangay }}"
+                                    data-info="{{ $property->unit_category }}, {{ $property->rental_price }}"
+                                    data-role="{{ $userRole }}">
+                                    Review
+                                </button>
                         </div>
                     @endforeach
                 @else
@@ -70,7 +80,15 @@
                                 </h5>
                                 
                                 <div class="review-btn-wrapper">
-                                    <button class="review-btn">Review</button>
+                                    <button class="review-btn" id="reviewBtn" 
+                                        data-id="{{ $tenant->id }}" 
+                                        data-photo="{{ $tenant->pfp }}"
+                                        data-duration="{{ $tenant->created_at }} - {{ $tenant->lease_end }}"
+                                        data-location="{{ $tenant->firstname }} {{ $tenant->lastname }}"
+                                        data-info="{{ $tenant->city }}, {{ $tenant->barangay }}"
+                                        data-role="{{ $userRole }}">
+                                        Review
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -84,14 +102,16 @@
             @endif
 
         </div>
-            <!-- Tab Content (My Reviews) -->
-            <div class="tab-content" id="my-reviews">
-                <div style="margin: 16px 135px;">
-                    <h1>No Reviews Made.</h1>
-                    <h3>You have not given a review so far.</h3>
-                </div>
+        <!-- Tab Content (My Reviews) -->
+        <div class="tab-content" id="my-reviews">
+            <div style="margin: 16px 135px;">
+                <h1>No Reviews Made.</h1>
+                <h3>You have not given a review so far.</h3>
             </div>
-
+        </div>
     </div>
+
+    <!-- Include Modal HTML -->
+    @include('write-review')
 </body>
 </html>
