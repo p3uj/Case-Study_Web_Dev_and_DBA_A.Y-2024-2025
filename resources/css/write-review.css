@@ -43,6 +43,11 @@
     cursor: pointer;
 }
 
+.image img {
+    height: 100%;
+    width: 100%;
+}
+
 .star-rating {
     direction: rtl;
     display: block;

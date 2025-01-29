@@ -20,13 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Set correct image path based on role
             if (role === "Tenant") {
-                modalImage.src = `/storage/uploads/images/property-posts/${photo}`;
+                modalImage.src = `/RentEase/public/storage/uploads/images/property-posts/${photo}`;
             } else {
-                if (photo === "http://localhost/RentEase/public/images/sampleProfile.png") {
-                    modalImage.src = "/resources/images/sampleProfile.png"; // Default profile image
-                } else {
-                    modalImage.src = `/storage/uploads/images/profile-pictures/${photo}`;
-                }
+                modalImage.src = `/RentEase/public/storage/uploads/images/profile-pictures/samplePhote.png`;             
             }
 
             // Update text fields
@@ -43,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.style.display = "none";
     }
 
-    // Close the modal if the user clicks the close button (✖)
+    // Close the modal if the user clicks the close button (x)
     const closeButton = modal.querySelector(".close-btn");
     closeButton.addEventListener("click", closeModal);
 
@@ -61,11 +57,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Check if review text is empty or rating is not selected
         if (!reviewText.trim() || !rating) {
-            event.preventDefault();  // Prevent form submission
-
-            // Show alert or message to inform the user
+            event.preventDefault(); // Prevent form submission
             alert("Please provide both a review description and a rating before submitting.");
             return false;
+        }
+
+        // Ask for confirmation before submitting
+        const confirmation = confirm("Are you sure you want to submit this review?");
+        if (!confirmation) {
+            event.preventDefault(); // Prevent form submission if user cancels
         }
     });
 });
