@@ -1,0 +1,133 @@
+/* General body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    margin: 0;
+    padding: 0;
+}
+
+/* Centering the form while keeping the navbar intact */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px); /* Adjust height considering the navbar */
+    padding-top: 80px; /* Push content below the navbar */
+}
+
+/* Modal background */
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Dimmed background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Ensures modal is on top */
+}
+
+/* Form container styling */
+.form-container {
+    width: 500px; /* Fixed width for the form */
+    padding: 20px;
+    background-color: #BDA27E; /* Background color */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    
+    /* Center the form properly */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Hover effect for the form container */
+.form-container:hover {
+    background-color: #E5E4E2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Close button */
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 25px;
+    color: black; /* Change the color to black */
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #9f8b67; /* Optional: You can keep the hover effect or remove it */
+}
+
+/* Form elements */
+select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Disabled dropdowns */
+select:disabled {
+    background-color: #e9e9e9;
+    color: #999;
+}
+
+/* Textarea styling */
+textarea.description {
+    height: 150px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Button styling */
+.save-btn {
+    display: block;
+    width: 100%; /* Full width of the parent */
+    max-width: 400px; /* Adjust for desired length */
+    margin: 20px auto; /* Centers the button */
+    padding: 12px;
+    background-color: #5a3d2b; /* Brown color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.save-btn:hover {
+    background-color: #9f8b67; /* Lighter brown */
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Placeholder styling */
+textarea::placeholder {
+    color: #aaa;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .post-btn {
+        font-size: 14px;
+    }
+}

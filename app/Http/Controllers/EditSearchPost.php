@@ -28,7 +28,7 @@ class EditSearchPost extends Controller
     }
 
     public function update(Request $request) {
-        dd($request);
+        ($request);
         // Check if city is different from the default, set null if same
         $city = ($request->city == $request->input('default-city')) ? null : $request->city;
 
@@ -45,8 +45,9 @@ class EditSearchPost extends Controller
             ,$barangay
             ,$description
         ]);
-
-        return redirect()->back();
+        
+        // Change the redirect to go to user profile
+        return redirect()->route('user-profile');
     }
 
     public function updateFoundOrDelete($id, $found, $deleted) {
