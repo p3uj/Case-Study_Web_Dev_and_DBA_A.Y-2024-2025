@@ -115,10 +115,10 @@
                         <h2 class="unit-price">₱{{ number_format($property->rental_price, 2) }}<span class="per-month"> /month</span></h2>
                         <div class="bottom-part">
                             <div class="user-profile">
-                                @if ($property->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                                @if (asset('resources/images/' . $property->profile_photo_path) == asset('resources/images/sampleProfile.png'))
                                     <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                                 @else
-                                    <img src="{{ asset('storage/uploads/images/property-posts/' . $property->profile_photo_path) }}" alt="Profile Picture">
+                                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $property->profile_photo_path) }}" alt="Profile Picture">
                                 @endif
                                 {{-- Do Kyung-Soo --}}
                                 <span class="user-name">{{ $property->UserName }}</span>
