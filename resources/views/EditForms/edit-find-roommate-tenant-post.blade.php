@@ -17,7 +17,7 @@
         @csrf
         <input type="hidden" name="redirect_to" value="{{ route('user-profile') }}">
         <div class="form-container">
-            <!-- Close button with the correct route -->
+            <!-- Close button -->
             <a href="{{ route('user-profile') }}" class="close-btn" onclick="return confirm('Are you sure you want to leave? Any unsaved changes will be lost.')">&times;</a>
 
             <!-- Rest of your form remains the same -->

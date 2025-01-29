@@ -60,7 +60,7 @@ class EditPropertyPostController extends Controller
             ,$description
         ]);
 
-        return redirect()->route('userprofilepage');
+        return redirect()->route('user-profile');
     }
 
     public function delete($id, $available, $deleted) {
