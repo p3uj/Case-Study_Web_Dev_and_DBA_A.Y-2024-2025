@@ -95,17 +95,64 @@ return new class extends Migration
         ");
 
         DB::statement("
-            CREATE PROCEDURE RE_SP_GET_REVIEW_BY_ID
+            CREATE PROCEDURE RE_SP_GET_LANDLORD_REVIEW_BY_ID
                 @p_ReviewId INT
             AS
-            BEGIN
-                SELECT
-                    *
-                FROM
-                    reviews AS R
-                WHERE
-                    R.id = @p_ReviewId;
-            END;
+            SELECT
+                R.id
+                ,R.created_at
+                ,R.lease_end
+                ,(
+                    SELECT profile_photo_path
+                    FROM users AS U
+                    WHERE U.id = R.review_to_user_id
+                ) AS pfp
+                ,(
+                    SELECT firstname
+                    FROM users AS U
+                    WHERE U.id = R.review_to_user_id
+                ) AS firstname
+                ,(
+                    SELECT lastname
+                    FROM users AS U
+                    WHERE U.id = R.review_to_user_id
+                ) AS lastname
+                ,PInfo.city
+                ,PInfo.barangay
+            FROM property_posts AS PPost
+            INNER JOIN property_infos AS PInfo
+                ON PInfo.id = PPost.property_info_id
+            RIGHT JOIN reviews AS R
+                ON R.property_post_id = PPost.id
+            WHERE
+                R.id = @p_ReviewId
+        ");
+
+        DB::statement("
+            CREATE PROCEDURE RE_SP_RE_SP_GET_TENANT_REVIEW_BY_ID
+                @p_ReviewId INT
+            AS
+            SELECT
+                R.id
+                ,(
+                    SELECT TOP 1 photo_path
+                    FROM unit_photos
+                    WHERE property_info_id = PInfo.id
+                ) AS FirstPhoto
+                ,R.created_at
+                ,R.lease_end
+                ,PInfo.city
+                ,PInfo.barangay
+                ,PInfo.unit_category
+                ,PInfo.rental_price
+                ,PInfo.description
+            FROM property_posts AS PPost
+            INNER JOIN property_infos AS PInfo
+                ON PInfo.id = PPost.property_info_id
+            RIGHT JOIN reviews AS R
+                ON R.property_post_id = PPost.id
+            WHERE 
+                R.id = @p_ReviewId
         ");
     }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Reviews;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
 class ReviewController extends Controller
 {
     private function properties($userId) {
@@ -35,4 +35,14 @@ class ReviewController extends Controller
 
         return view('review', ['toReview' => $toReview, 'userRole' => $userRole]);
     }
+
+    public function edit(Request $request)
+    {
+        $review = $request;
+
+        dd($request->all());
+
+        return $review;
+    }
+
 }
