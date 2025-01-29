@@ -14,13 +14,12 @@
     <x-navbar></x-navbar>
 
     <!-- Form -->
-    <form id="form" action="{{ route('editprofilepage.post') }}" method="post">
+    <form id="form" action="{{ route('editprofilepage.post') }}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="redirect_to" value="{{ route('user-profile') }}">
         <div class="form-container">
             <!-- Close button with the correct route -->
             <a href="{{ route('user-profile') }}" class="close-btn" onclick="return confirm('Are you sure you want to leave? Any unsaved changes will be lost.')">&times;</a>
-
 
             <!-- Rest of your form remains the same -->
             <input type="hidden" name="id" value="{{ $id }}">
@@ -33,7 +32,7 @@
             <input type="hidden" name="default-profile-photo-path" value="{{ $userInfo->profile_photo_path }}">
 
             <div class="profile-picture">
-                <img id="profilePreview" src="{{ $userInfo->profile_photo_path == asset('resources/images/sampleProfile.png') ? Vite::asset('resources/images/sampleProfile.png') : asset('storage/uploads/images/property-posts/' . $userInfo->profile_photo_path) }}" alt="Profile Picture">
+                <img id="profilePreview" src="{{ asset('resources/images/' . $userInfo->profile_photo_path) == asset('resources/images/sampleProfile.png') ? Vite::asset('resources/images/sampleProfile.png') : asset('storage/uploads/images/profile-pictures/' . $userInfo->profile_photo_path) }}" alt="Profile Picture">
             </div>
             <input type="file" id="image" name="profile-photo-path" accept="image/*">
 
