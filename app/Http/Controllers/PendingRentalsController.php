@@ -1,16 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\DB;
+use App\Models\Reviews;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class PendingRentalsController extends Controller
 {
     public function index()
     {
-        return view('pending-rentals');
+        $userId = Auth::id();
+        $userRole = Auth::user()->role;
+
+        $rentedProperties = DB::select('EXEC RE_SP_GET_USER_PENDING_RENTALS ?', [$userId]);
+
+        return view('pending-rentals', ['rentedProperties' => $rentedProperties, 'userRole' => $userRole]);
     }
 }
