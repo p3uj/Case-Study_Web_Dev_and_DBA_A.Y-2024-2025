@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         // Drop old view
-        DB::statement('DROP VIEW IF EXISTS RE_SP_GET_PROPERTY_DETAILS_BY_ID');
+        DB::statement('DROP PROCEDURE IF EXISTS RE_SP_GET_PROPERTY_DETAILS_BY_ID');
 
         // -- DEFINE STORED PROCEDURE TO GET PROPERTY DETAILS BASED ON THE ID
         DB::statement("
