@@ -10,7 +10,7 @@ use App\Models\UnitPhotos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class EditSearchPost extends Controller
+class EditSearchPostController extends Controller
 {
     public function index($id) {
         $city = CityController::index();
@@ -28,7 +28,6 @@ class EditSearchPost extends Controller
     }
 
     public function update(Request $request) {
-        ($request);
         // Check if city is different from the default, set null if same
         $city = ($request->city == $request->input('default-city')) ? null : $request->city;
 
@@ -45,15 +44,14 @@ class EditSearchPost extends Controller
             ,$barangay
             ,$description
         ]);
-        
-        // Change the redirect to go to user profile
-        return redirect()->route('user-profile');
+
+        return redirect()->route('userprofilepage');
     }
 
     public function updateFoundOrDelete($id, $found, $deleted) {
         // Set to null if the value of found and deleted is 'null'
         $found = $found != "null" ? $found : null;
-        $deleted = $found != "null" ? $deleted : null;
+        $deleted = $deleted != "null" ? $deleted : null;
 
         // Update only the is_alrady_found column in the database if the value of $found is not null
         if (!is_null($found)) {
