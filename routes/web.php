@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('editprofile', [EditProfileController::class, 'update'])->name('editprofilepage.post');
 
 
-    Route::put('/write-review', [ReviewController::class, 'addReview'])->name('writereview');
+    Route::put('/write-review', [ReviewController::class, 'writeReview'])->name('writereview');
 });
 
 // Ensure that only unauthenticated users can access this root route.

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
                 'lastname' => 'Guo',
                 'city' => 'New York City',
                 'email' => 'tenant@gmail.com',
+                'profile_photo_path' => "sampleProfile.png",
             ]);
 
         // Create a Tenant
