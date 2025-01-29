@@ -48,20 +48,22 @@ class RegisterController extends Controller
             : 'Tenant looking for affordable housing.';
 
         // Define the default profile photo path
-        $profilePhotoPath = asset("/resources/images/sampleProfile.png");
+        $profilePhotoPath = "sampleProfile.png";
 
         // Call the stored procedure to insert the user
-        DB::statement('EXEC RE_SP_INSERT_USER ?, ?, ?, ?, ?, ?, ?, ?', [
-                $request->input('role'),
-                $request->input('firstname'),
-                $request->input('lastname'),
-                $request->input('city'),
-                $request->input('email'),
-                Hash::make($request->input('password')),
-                $profilePhotoPath,
-                $bio,
-            ]
-        );
+        DB::statement('EXEC RE_SP_INSERT_USER ?, ?, ?, ?, ?, ?, ?, ?, ?, ?', [
+            $request->input('role'),
+            $request->input('firstname'),
+            $request->input('lastname'),
+            $request->input('city'),
+            $request->input('email'),
+            Hash::make($request->input('password')),
+            $profilePhotoPath,
+            $bio,
+            now(),
+            now(),
+        ]);
+        
 
         // Use the stored procedure to find the newly created user by email
         $user = DB::select('EXEC RE_SP_GET_USER_INFO_BY_ID_AND_USER_BY_EMAIL ?, ?', [null, $request->input('email')]);

@@ -20,7 +20,9 @@ return new class extends Migration
                 @p_email NVARCHAR(255),
                 @p_password NVARCHAR(255),
                 @p_profile_photo_path NVARCHAR(255),
-                @p_bio NVARCHAR(MAX)
+                @p_bio NVARCHAR(MAX),
+                @p_created_at DATETIME,
+                @p_updated_at DATETIME
             AS
             BEGIN
                 INSERT INTO users (
@@ -31,7 +33,9 @@ return new class extends Migration
                     email,
                     password,
                     profile_photo_path,
-                    bio
+                    bio,
+                    created_at,
+                    updated_at
                 ) VALUES (
                     @p_role,
                     @p_firstname,
@@ -40,7 +44,9 @@ return new class extends Migration
                     @p_email,
                     @p_password,
                     @p_profile_photo_path,
-                    @p_bio
+                    @p_bio,
+                    @p_created_at,
+                    @p_updated_at
                 );
             END
         ");

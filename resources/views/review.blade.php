@@ -57,7 +57,8 @@
                                     data-duration="{{ $property->created_at }} - {{ $property->lease_end }}"
                                     data-location="{{ $property->city }}, {{ $property->barangay }}"
                                     data-info="{{ $property->unit_category }}, {{ $property->rental_price }}"
-                                    data-role="{{ $userRole }}">
+                                    data-role="{{ $userRole }}"
+                                    data-review-status="{{ $property->is_reviewed }}">
                                     Review
                                 </button>
                         </div>
@@ -86,7 +87,8 @@
                                         data-duration="{{ $tenant->created_at }} - {{ $tenant->lease_end }}"
                                         data-location="{{ $tenant->firstname }} {{ $tenant->lastname }}"
                                         data-info="{{ $tenant->city }}, {{ $tenant->barangay }}"
-                                        data-role="{{ $userRole }}">
+                                        data-role="{{ $userRole }}"
+                                        data-review-status="{{ $tenant->is_reviewed }}">
                                         Review
                                     </button>
                                 </div>
@@ -100,15 +102,68 @@
                     <h4>There are no {{ $userRole === 'Tenant' ? 'property' : 'tenant'}} to review so far.</h4>
                 </div>
             @endif
-
         </div>
+
         <!-- Tab Content (My Reviews) -->
         <div class="tab-content" id="my-reviews">
-            <div style="margin: 16px 135px;">
-                <h1>No Reviews Made.</h1>
-                <h3>You have not given a review so far.</h3>
-            </div>
+            @if (!empty($reviews))
+                <div class="reviews-content">
+                    @foreach ($reviews as $review)
+                        <div class="review-info-container">
+                            <div class="user-review-profile">
+                                @if ($review->pfp == asset('resources/images/sampleProfile.png'))
+                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                                @else
+                                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $review->pfp) }}" alt="Profile Picture">
+                                @endif
+                            </div>
+                            <div class="reviews">
+                                <h3>
+                                    @for ($star = 1; $star <= $review->rating; $star++)
+                                        <!-- If the star is less than or equal to average rating, show the filled star -->
+                                        @if ($star <= $review->rating)
+                                            <i class="fas fa-star"></i>
+                                        <!-- Otherwise, show empty star -->
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                </h3>
+
+                            </div>
+                            <h1>❝</h1>
+                            <div class="review-caption">
+                                <p>{{ $review->review_text }}</p>
+                            </div>
+                            <h1 class="quotation-mark-right">❞</h1>
+                            <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
+                            <p class="date-review">{{ $review->updated_at }}</p>
+
+                            @if ($review->is_reviewed != 1)
+                                <button class="review-btn" id="reviewBtn" 
+                                    data-id="{{ $review->id }}" 
+                                    data-photo="{{ $review->pfp }}"
+                                    data-duration="{{ $review->created_at }} - {{ $review->lease_end }}"
+                                    data-location="{{ $review->firstname }} {{ $review->lastname }}"
+                                    data-info="{{ $review->city }}, {{ $review->barangay }}"
+                                    data-role="{{ $userRole }}"
+                                    data-rating="{{ $review->rating }}" 
+                                    data-desc="{{ $review->review_text }}"
+                                    data-review-status="{{ $review->is_reviewed }}">
+                                    Edit Review
+                                </button>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div style="margin: 16px 135px;">
+                    <h1>No Reviews Made.</h1>
+                    <h3>You have not given a review so far.</h3>
+                </div>
+            @endif
         </div>
+
     </div>
 
     <!-- Include Modal HTML -->

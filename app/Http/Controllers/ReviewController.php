@@ -22,6 +22,13 @@ class ReviewController extends Controller
         return $tenants;
     }
 
+    private function reviews($userId) {
+        // Call the PropertyPost model to get the property posts of the authenticated user
+        $reviews = Reviews::getUserReviews($userId);
+
+        return $reviews;
+    }
+
     public function index()
     {
         $userId = Auth::id();
@@ -35,7 +42,9 @@ class ReviewController extends Controller
             $toReview = $this->tenants($userId);
         }
 
-        return view('review', ['toReview' => $toReview, 'userRole' => $userRole]);
+        $reviews = $this->reviews($userId);
+        
+        return view('review', ['toReview' => $toReview, 'userRole' => $userRole, 'reviews' => $reviews]);
     }
 
     public function addReview(Request $request)
@@ -45,7 +54,7 @@ class ReviewController extends Controller
         $reviewText = $request->input('review-text');
         $rating = $request->input('rating');
         $isReviewed = 1;
-        $isEdited = 0;
+        $isEdited = $request->input('isEdited');
 
 
         // Call the stored procedure
