@@ -27,6 +27,9 @@ class EditProfileController extends Controller
     }
 
     public function update(Request $request) {
+        $profilePhotoStringName = ""; // Use to store all the original file name since the stored procedure only accepts a string as a parameter
+        $uploadedFiles = "";
+
         // Check if firtname is different from the default, set null if same
         $first = ($request->firstname == $request->input('default-firstname')) ? null : $request->firstname;
 
@@ -40,10 +43,11 @@ class EditProfileController extends Controller
         $bio = ($request->bio == $request->input('default-bio')) ? null : $request->bio;
 
         // Check if description is different from the default, set null if same
-        $profilePhoto = ($request->input('profile-photo-path') == $request->input('default-profile-photo-path')) ? null : $request->input('profile-photo-path');
+        $profilePhotoStringName = ($request->input('profile-photo-path') == $request->input('default-profile-photo-path')) ? null : $request->input('profile-photo-path');
 
-        if ($profilePhoto) {
-
+        if ($request->hasFile('profile-photo-path')) {
+            $uploadedFiles = $request->file('profile-photo-path');
+            $profilePhotoStringName .= time() . '_' . $uploadedFiles->getClientOriginalName(); // No quotes around the name
         }
 
         // Used a stored procedure to store the data
@@ -53,10 +57,11 @@ class EditProfileController extends Controller
             ,$lastname
             ,$city
             ,$bio
-            ,$profilePhoto
+            ,$profilePhotoStringName
         ]);
 
-        // Save the
+        // Save the uploaded photos in the desired folder
+        $uploadedFiles->storeAs("uploads/images/profile-pictures", $profilePhotoStringName, "public"); // Store the file in the desired folder
 
         return redirect()->route('userprofilepage');
     }
