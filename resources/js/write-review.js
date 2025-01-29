@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Validate form before submitting
+    const form = document.getElementById("form");
     form.addEventListener("submit", function(event) {
         const reviewText = document.getElementById("review-text").value;
         const rating = document.querySelector('input[name="rating"]:checked');
@@ -65,6 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Show alert or message to inform the user
             alert("Please provide both a review description and a rating before submitting.");
+            return false;
+        }
+
+        // Show a confirmation dialog before proceeding with the form submission
+        const confirmation = confirm("Are you sure you want to submit this review?");
+        if (!confirmation) {
+            event.preventDefault();  // Prevent form submission if user cancels
             return false;
         }
     });
