@@ -18,7 +18,8 @@
             
             <!-- Hidden field to store the review ID -->
             <input type="hidden" name="review-id" id="review-id" value="">
-
+            <input type="hidden" id="is-edited" name="isEdited" value="0">
+            
             <textarea name="review-text" id="review-text" placeholder="Write your review here..."></textarea>
 
             <div class="star-rating">

@@ -31,6 +31,7 @@ return new class extends Migration
                 ,PInfo.unit_category
                 ,PInfo.rental_price
                 ,PInfo.description
+                ,R.is_reviewed
             FROM property_posts AS PPost
             INNER JOIN property_infos AS PInfo
                 ON PInfo.id = PPost.property_info_id
@@ -67,6 +68,7 @@ return new class extends Migration
                 ) AS lastname
                 ,PInfo.city
                 ,PInfo.barangay
+                ,R.is_reviewed
             FROM property_posts AS PPost
             INNER JOIN property_infos AS PInfo
                 ON PInfo.id = PPost.property_info_id
@@ -187,6 +189,7 @@ return new class extends Migration
                 ,R.rating
                 ,R.review_text
                 ,R.is_edited
+                ,R.is_reviewed
                 ,R.updated_at
                 ,R.id
                 ,(

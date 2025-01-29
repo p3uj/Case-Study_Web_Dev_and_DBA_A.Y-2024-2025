@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const durationText = modal.querySelector(".duration");
     const titleText = modal.querySelector(".title");
     const infoText = modal.querySelector(".info");
-    
+    const form = document.getElementById("review-form"); // Assuming you have a form element
 
     reviewButtons.forEach(button => {
         button.addEventListener("click", function () {
@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const location = this.getAttribute("data-location");
             const info = this.getAttribute("data-info");
             const role = this.getAttribute("data-role");
+            const editStatus = this.getAttribute("data-edit-status"); // New: get edit status
+            const isReviewed = this.getAttribute("data-is-reviewed"); // Check if review is already made
 
             // Set the hidden review ID input field value
             document.getElementById("review-id").value = reviewId;
@@ -30,6 +32,27 @@ document.addEventListener("DOMContentLoaded", function () {
             durationText.textContent = duration;
             titleText.textContent = location;
             infoText.textContent = info;
+
+            // If review has already been made, set isEdited to 1
+            if (isReviewed == "1") {
+                document.getElementById("is-edited").value = 1; // Set isEdited to 1 if review is made
+            } else {
+                document.getElementById("is-edited").value = 0; // Set isEdited to 0 if it's a new review
+            }
+
+            // Check if we are editing an existing review
+            if (editStatus == "1") {
+                const reviewText = this.getAttribute("data-desc"); // Get existing review text
+                const rating = this.getAttribute("data-rating"); // Get existing rating
+
+                // Pre-fill the modal with the existing review text and rating
+                document.getElementById("review-text").value = reviewText;
+                document.querySelector(`input[name="rating"][value="${rating}"]`).checked = true;
+            } else {
+                // For new review, ensure review text is empty and rating is unselected
+                document.getElementById("review-text").value = '';
+                document.querySelector('input[name="rating"]:checked').checked = false;
+            }
 
             // Show the modal
             modal.style.display = "block";

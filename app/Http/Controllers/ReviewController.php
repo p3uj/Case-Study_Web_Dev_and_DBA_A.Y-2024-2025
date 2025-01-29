@@ -54,7 +54,7 @@ class ReviewController extends Controller
         $reviewText = $request->input('review-text');
         $rating = $request->input('rating');
         $isReviewed = 1;
-        $isEdited = 0;
+        $isEdited = $request->input('isEdited');
 
 
         // Call the stored procedure

@@ -57,7 +57,8 @@
                                     data-duration="{{ $property->created_at }} - {{ $property->lease_end }}"
                                     data-location="{{ $property->city }}, {{ $property->barangay }}"
                                     data-info="{{ $property->unit_category }}, {{ $property->rental_price }}"
-                                    data-role="{{ $userRole }}">
+                                    data-role="{{ $userRole }}"
+                                    data-review-status="{{ $review->is_reviewed }}">
                                     Review
                                 </button>
                         </div>
@@ -86,7 +87,8 @@
                                         data-duration="{{ $tenant->created_at }} - {{ $tenant->lease_end }}"
                                         data-location="{{ $tenant->firstname }} {{ $tenant->lastname }}"
                                         data-info="{{ $tenant->city }}, {{ $tenant->barangay }}"
-                                        data-role="{{ $userRole }}">
+                                        data-role="{{ $userRole }}"
+                                        data-review-status="{{ $review->is_reviewed }}">
                                         Review
                                     </button>
                                 </div>
@@ -145,8 +147,8 @@
                                 data-info="{{ $review->city }}, {{ $review->barangay }}"
                                 data-role="{{ $userRole }}"
                                 data-rating="{{ $review->rating }}" 
-                                data-desc="{{ $review->review-text }}"
-                                data-edit-status="{{ $review->is_edited }}">
+                                data-desc="{{ $review->review_text }}"
+                                data-review-status="{{ $review->is_reviewed }}">
                                 Edit Review
                             </button>
                         </div>
