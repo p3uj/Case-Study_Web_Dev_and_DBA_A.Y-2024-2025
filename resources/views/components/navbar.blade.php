@@ -28,7 +28,11 @@
         <a href="{{ route("reviewpage")}}" class="{{ Route::currentRouteName() === 'reviewpage' ? 'active' : '' }}">Review</a>
         <a href="{{ route("logout") }}" class="logout">Logout</a>
         <a href="{{ route("userprofilepage")}}" class="{{ Route::currentRouteName() == 'userprofilepage' ? 'active' : '' }} profile-border">
-            <img src="{{ Vite::asset('resources/images/sampleProfile.png')}}" alt="Sample Profile" class="sample-profile">
+            @if (asset('resources/images/' . Auth::user()->profile_photo_path) == asset('resources/images/sampleProfile.png'))
+                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture" class="sample-profile">
+            @else
+                <img src="{{ asset('storage/uploads/images/profile-pictures/' . Auth::user()->profile_photo_path) }}" alt="Profile Picture" class="sample-profile">
+            @endif
         </a>
     </div>
 </body>
