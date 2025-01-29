@@ -104,7 +104,7 @@
                 @foreach ($propertyPosts as $property)
                     <div class="property-post-container">
                         <img class="property-post-image" src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Property Post Image"
-                        onclick="window.location.href='{{ route('viewpropertypostpage', ['id' => $property->id, 'property_info_id' => $property->property_info_id]) }}'"
+                            onclick="window.location.href='{{ route('viewpropertypostpage', ['id' => $property->id, 'property_info_id' => $property->property_info_id]) }}'"
                         >
                         <h3><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; height: 16px;">
                             <span class="location">{{ $property->Location }}</span>
