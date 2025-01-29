@@ -12,8 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Create stored procedure
-        // Define stored procedure to create new data in property info, unit photos, and property post
+        // -- DEFINE STORED PROCEDURE TO INSERT PROPERTY POST AND ITS PROPERTY INFOS AND UNIT PHOTOS
         DB::statement("
             CREATE PROC RE_SP_INSERT_PROPERTY_POST_WITH_RELATIONS
                 @p_City NVARCHAR(255)
@@ -64,7 +63,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Drop the stored procedure
+        // Drop the view if it exists
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_INSERT_PROPERTY_POST_WITH_RELATIONS");
     }
 };

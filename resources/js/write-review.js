@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Validate form before submitting
+    const form = document.getElementById("form");
     form.addEventListener("submit", function(event) {
         const reviewText = document.getElementById("review-text").value;
         const rating = document.querySelector('input[name="rating"]:checked');

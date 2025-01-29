@@ -28,8 +28,8 @@ class AuthController extends Controller
         ]);
 
         // Retrieve the user's details using the stored procedure
-        $userDetails = DB::select('EXEC RE_SP_GET_NEWLY_CREATED_USER ?', [$request->input('email')]);
-        
+        $userDetails = DB::select('EXEC RE_SP_GET_USER_INFO_BY_ID_AND_USER_BY_EMAIL ?, ?', [null, $request->input('email')]);
+
         // Check if user exists
         $user = $userDetails[0] ?? null;
         if (!$user) {

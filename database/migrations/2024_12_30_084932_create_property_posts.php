@@ -21,35 +21,6 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent();
             $table->boolean('is_deleted')->default(false);
         });
-
-        // Create stored procedure
-        // Define stored procedure to get all the property post of the authenticated user
-        DB::statement("
-            CREATE PROCEDURE GetPropertyPostsByUserId
-                @userId BIGINT
-            AS
-            BEGIN
-                SELECT
-                    PPost.*
-                    ,PInfo.*
-                    ,COALESCE(ReviewRating.Rating, 0) AS Rating
-                FROM
-                    property_posts AS PPost
-                INNER JOIN
-                    users ON users.id = PPost.user_id
-                INNER JOIN
-                    property_infos AS PInfo ON PInfo.id = PPost.property_info_id
-                LEFT JOIN (
-                    SELECT
-                        property_post_id
-                        ,AVG(rating) AS Rating
-                    FROM reviews
-                    GROUP BY property_post_id
-                ) AS ReviewRating ON ReviewRating.property_post_id = PPost.id
-                WHERE users.id = @userId AND PPost.is_deleted = 0
-                ORDER BY PPost.updated_at DESC
-            END
-        ");
     }
 
     /**
@@ -57,9 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Drop the stored procedure
-        DB::statement("DROP PROCEDURE IF EXISTS GetPropertyPostsByUserId");
-
+        // Drop
         Schema::dropIfExists('property_posts');
     }
 };

@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //-- CREATE VIEW TO GET ALL PROPERTY POST WITH USERNAME WHERE POST IS NOT DELETED
+        // -- DEFINE VIEW TO GET ALL THE ACTIVE PROPERTY POST WITH USER'S NAME
         DB::statement("
             CREATE VIEW RE_V_GET_ALL_ACTIVE_PROPERTY_POST_WITH_USERNAME
             AS
@@ -22,8 +22,7 @@ return new class extends Migration
             FROM property_posts AS PPost
             INNER JOIN users AS PostedByUser
                 ON PostedByUser.id = PPost.user_id
-            WHERE
-                PPost.is_deleted = 0
+            WHERE PPost.is_deleted = 0
         ");
     }
 
@@ -32,7 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Drop the view
-        DB::statement("DROP VIEW IF EXISTS RE_V_GET_ALL_ACTIVE_PROPERTY_POST_WITH_USERNAME");
+        // Drop the view if it exists
+        DB::statement("DROP PROCEDURE IF EXISTS RE_V_GET_ALL_ACTIVE_PROPERTY_POST_WITH_USERNAME");
     }
 };

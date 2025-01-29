@@ -27,7 +27,7 @@
     </section>
 
     <section class="property-post-info">
-        <p class="date-posted">{{ $propertyDetails->updated_at }}</p>
+        <p class="date-posted">{{ \Carbon\Carbon::parse($propertyDetails->updated_at)->format('F j, Y \a\t g:i A') }}</p>
         <h2>
             <img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 18px; height: 18px;">
             {{ $propertyDetails->Location }}
@@ -35,14 +35,22 @@
         <h1 class="unit-price">₱{{ number_format($propertyDetails->rental_price, 2) }}<span class="per-month"> /month</span></h1>
         <div class="tags">
             <a class="unit-type">{{ $propertyDetails->unit_category }}</a>
-            <a class="unit-type">Max of {{ $propertyDetails->max_occupancy }} person occupancy</a>
+            <a class="unit-type">Max {{ $propertyDetails->max_occupancy }} occupants</a>
         </div>
         <p class="description">
             {{ $propertyDetails->description }}
         </p>
         <div class="reviews">
-            <i class="fas fa-star"></i>
-            <i class="far fa-star"></i>
+            @for ($star = 1; $star <= 5; $star++)
+            <!-- If the star is less than or equal to average rating, show the filled star -->
+                @if ($star <= $propertyDetails->Rating)
+                    <i class="fas fa-star"></i>
+                <!-- Otherwise, show empty star -->
+                @else
+                    <i class="far fa-star"></i>
+                @endif
+            @endfor
+            <p>{{ $propertyDetails->Rating }} out of 5</p>
         </div>
         <div class="profile-container">
             <div class="user-profile">

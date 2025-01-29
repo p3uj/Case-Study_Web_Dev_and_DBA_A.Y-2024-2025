@@ -52,23 +52,6 @@ return new class extends Migration
         ");
 
         DB::statement("
-            CREATE PROCEDURE RE_SP_GET_NEWLY_CREATED_USER
-                @p_email NVARCHAR(255)
-            AS
-            BEGIN
-                SELECT
-                    id AS user_id
-                    ,email
-                    ,password
-                    ,role
-                FROM
-                    users
-                WHERE
-                    email = @p_email;
-            END
-        ");
-
-        DB::statement("
             CREATE PROCEDURE RE_SP_GET_ALL_TENANT
             AS
             BEGIN
@@ -92,7 +75,6 @@ return new class extends Migration
     {
         // Drop the stored procedure
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_INSERT_USER");
-        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_NEWLY_CREATED_USER");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_ALL_TENANT");
     }
 };

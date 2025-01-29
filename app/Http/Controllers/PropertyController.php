@@ -33,11 +33,13 @@ class PropertyController extends Controller
             ,'filter-rental-price' => null
         ];
 
+        $userRole = Auth::user()->role;   // Get the role of the authenticated user
         return view('properties', [
             'cities' => $this->city
             ,'barangays' => $this->barangay
             ,'propertyPosts' => $propertyPosts
             ,'filterSearch' => $filterSearch
+            ,'userRole' => $userRole
         ]);
     }
 
@@ -46,12 +48,14 @@ class PropertyController extends Controller
         if ($request->has('filter-unit-category')) {
             // Get the filtered property posts based on the criteria in the request
             $filteredPropertyPosts = PropertyPost::getAllFilteredPropertyPosts($request->input('filter-unit-category'), $request->city, $request->input('filter-rental-price'));
+            $userRole = Auth::user()->role;   // Get the role of the authenticated user
 
             return view('properties', [
                 'cities' => $this->city
                 ,'barangays' => $this->barangay
                 ,'filterSearch' => $request->only(['filter-unit-category', 'city', 'filter-rental-price']) // Only return these fields from the request
                 ,'propertyPosts' => $filteredPropertyPosts
+                ,'userRole' => $userRole
             ]);
         }
 

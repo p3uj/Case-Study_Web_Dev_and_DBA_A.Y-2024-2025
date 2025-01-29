@@ -17,7 +17,7 @@ class UnitPhotos extends Model
 
     // Retrieve all unit photos of the property post based on the property info id
     public static function getAllUnitPhotosById($propertyInfoId) {
-        $unitPhotos = DB::select('RE_SP_GET_ALL_PHOTOS_BY_ID ?', [$propertyInfoId]);
+        $unitPhotos = DB::select('RE_SP_GET_ALL_ACTIVE_PHOTOS_BY_PROPERTY_INFO_ID ?', [$propertyInfoId]);
 
         $unitPhotos = collect($unitPhotos);
 

@@ -66,7 +66,7 @@ class RegisterController extends Controller
         
 
         // Use the stored procedure to find the newly created user by email
-        $user = DB::select('EXEC RE_SP_GET_NEWLY_CREATED_USER ?', [$request->input('email'),]);
+        $user = DB::select('EXEC RE_SP_GET_USER_INFO_BY_ID_AND_USER_BY_EMAIL ?, ?', [null, $request->input('email')]);
 
         // Log the user in if found
         if (!empty($user)) {

@@ -47,7 +47,7 @@
             </form>
         </div>
 
-        <button class="create-a-post-btn" popovertarget="create-post-popover">
+        <button id="create-a-post-btn" class="create-a-post-btn" popovertarget="create-post-popover" data-user-role="">
             Create a post
         </button>
     </div>
@@ -57,9 +57,13 @@
             @foreach ($posts as $post)
                 <div class="find-roommate-tenant-container" data-user-id="{{ $post->user_id }}">
                     <div class="user-profile">
-                        <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Sample Profile">
+                        @if ($post->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                            <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                        @else
+                            <img src="{{ asset('storage/uploads/images/property-posts/' . $review->profile_photo_path) }}" alt="Profile Picture">
+                        @endif
                     </div>
-                    <h4>{{ $post->firstname }} {{ $post->lastname }}</h4>
+                    <h4>{{ $post->UserName }}</h4>
                     <p class="location">
                         <img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; height: 16px; opacity: 0.5">
                         {{ $post->barangay }}, {{ $post->city }}

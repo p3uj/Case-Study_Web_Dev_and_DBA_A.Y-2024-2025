@@ -20,8 +20,8 @@ class FindRoommateOrTenantController extends Controller
         $city = CityController::index();
         $barangay = BarangayController::index();
 
-        // Use the User model to call the getAllFindingPostsWithUser() method to get user info and their related posts
-        $usersPosts = FindRoommateOrTenant::getAllFindingPostsWithUser();
+        // Use the User model to call the getAllFindingPosts() method to all the available find roommate or tenants posts
+        $usersPosts = FindRoommateOrTenant::getAllFindingPosts();
 
         return view('find-roommate-or-tenant', [
             'user' => $user
@@ -41,7 +41,7 @@ class FindRoommateOrTenantController extends Controller
         $searchCategory = Auth::user()->role == 'Tenant' ? 'Roommate' : 'Tenant'; // search category based on the authenticated user role
 
         // Used a stored procedure to store the data
-        DB::statement('EXEC StoreRoommateTenantPost ?, ?, ?, ?, ?', [
+        DB::statement('EXEC RE_SP_INSERT_ROOMMATE_TENANT_POST ?, ?, ?, ?, ?', [
             $userId
             ,$city
             ,$barangay

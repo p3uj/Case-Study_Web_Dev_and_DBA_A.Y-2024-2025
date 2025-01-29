@@ -92,7 +92,7 @@
         </form>
 
         <!-- Create Post Button -->
-        <button class="create-a-post-btn" popovertarget="create-post-popover">
+        <button id="create-a-post-btn" class="create-a-post-btn" popovertarget="create-post-popover" data-user-role="{{$userRole}}">
             Create a post
         </button>
     </div>
@@ -103,7 +103,9 @@
             @if (!empty($propertyPosts))
                 @foreach ($propertyPosts as $property)
                     <div class="property-post-container">
-                        <img class="property-post-image" src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Property Post Image">
+                        <img class="property-post-image" src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Property Post Image"
+                            onclick="window.location.href='{{ route('viewpropertypostpage', ['id' => $property->id, 'property_info_id' => $property->property_info_id]) }}'"
+                        >
                         <h3><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="Location Icon" style="width: 16px; height: 16px;">
                             <span class="location">{{ $property->Location }}</span>
                         </h3>
@@ -113,7 +115,11 @@
                         <h2 class="unit-price">₱{{ number_format($property->rental_price, 2) }}<span class="per-month"> /month</span></h2>
                         <div class="bottom-part">
                             <div class="user-profile">
-                                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                                @if ($property->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                                @else
+                                    <img src="{{ asset('storage/uploads/images/property-posts/' . $review->profile_photo_path) }}" alt="Profile Picture">
+                                @endif
                                 {{-- Do Kyung-Soo --}}
                                 <span class="user-name">{{ $property->UserName }}</span>
                             </div>

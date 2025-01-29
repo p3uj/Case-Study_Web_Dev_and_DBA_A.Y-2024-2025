@@ -23,7 +23,7 @@ class Reviews extends Model
     }
 
     public static function getAllReviewsForAUser($userId) {
-        $reviews = DB::select('EXEC GetAllReviewsByUserId ?', [$userId]);
+        $reviews = DB::select('EXEC RE_SP_GET_ALL_REVIEWS_BY_USER_ID ?', [$userId]);
 
         // Call the formatDate method in the DateConversion class, passing the $authUserPropertyPosts and the column name 'updated_at'
         $reviews = DateConversion::formatDate($reviews, 'updated_at');
