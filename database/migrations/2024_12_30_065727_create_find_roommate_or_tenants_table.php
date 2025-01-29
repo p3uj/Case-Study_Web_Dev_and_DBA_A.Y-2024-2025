@@ -24,54 +24,6 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent();
             $table->boolean('is_deleted')->default(false);
         });
-
-        // Create stored procedure
-        // Define stored procedure to get all finding posts with user
-        DB::statement("
-            CREATE PROCEDURE GetAllRoommateTenantPostsWithUser
-            AS
-            BEGIN
-                SELECT find_post.*, users.firstname, users.lastname
-                FROM find_roommate_or_tenants AS find_post
-                INNER JOIN users
-                    ON find_post.user_id = users.id
-                WHERE find_post.is_deleted = 0 AND find_post.is_already_found = 0
-                ORDER BY find_post.updated_at DESC
-            END
-        ");
-
-        // Define stored procedure to insert a data into find_roommate_or_tenants table
-        DB::statement("
-            CREATE PROCEDURE StoreRoommateTenantPost
-                @userId BIGINT
-                ,@city NVARCHAR(255)
-                ,@barangay NVARCHAR(255)
-                ,@description NVARCHAR(MAX)
-                ,@searchCategory NVARCHAR(255)
-            AS
-            BEGIN
-                INSERT INTO find_roommate_or_tenants (user_id
-                    ,city
-                    ,barangay
-                    ,description
-                    ,search_categories)
-                VALUES (@userId
-                    ,@city
-                    ,@barangay
-                    ,@description
-                    ,@searchCategory)
-            END
-        ");
-
-        // Define stored procedure to get 'find_roommate_or_tenant' post based on the user id
-        DB::statement("
-            CREATE PROCEDURE GetAllRoommateTenantPostsByUserId (@userId BIGINT)
-            AS
-            BEGIN
-                SELECT * FROM find_roommate_or_tenants
-                WHERE user_id = @userId AND is_deleted = 0
-            END
-        ");
     }
 
     /**
@@ -80,10 +32,6 @@ return new class extends Migration
     public function down(): void
     {
         // Drop the stored procedure
-        DB::statement("DROP PROCEDURE IF EXISTS GetAllRoommateTenantPostsWithUser");
-        DB::statement("DROP PROCEDURE IF EXISTS StoreRoommateTenantPost");
-        DB::statement("DROP PROCEDURE IF EXISTS GetAllRoommateTenantPostsByUserId");
-
         Schema::dropIfExists('find_roommate_or_tenants');
     }
 };
