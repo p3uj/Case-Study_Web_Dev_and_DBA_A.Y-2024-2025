@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const durationText = modal.querySelector(".duration");
     const titleText = modal.querySelector(".title");
     const infoText = modal.querySelector(".info");
-    const form = document.getElementById("review-form"); // Assuming you have a form element
+    const reviewTextArea = document.getElementById("review-text");
+    const ratingInputs = document.querySelectorAll('input[name="rating"]'); // Rating radio buttons
+    const form = document.getElementById("form"); // Assuming you have a form element
 
     reviewButtons.forEach(button => {
         button.addEventListener("click", function () {
@@ -15,8 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const location = this.getAttribute("data-location");
             const info = this.getAttribute("data-info");
             const role = this.getAttribute("data-role");
-            const editStatus = this.getAttribute("data-edit-status"); // New: get edit status
-            const isReviewed = this.getAttribute("data-is-reviewed"); // Check if review is already made
+            const isReviewed = this.getAttribute("data-review-status"); // Get review status (1 or 0)
+            const reviewText = this.getAttribute("data-desc"); // Existing review text
+            const rating = this.getAttribute("data-rating"); // Existing rating
 
             // Set the hidden review ID input field value
             document.getElementById("review-id").value = reviewId;
@@ -33,25 +36,25 @@ document.addEventListener("DOMContentLoaded", function () {
             titleText.textContent = location;
             infoText.textContent = info;
 
-            // If review has already been made, set isEdited to 1
-            if (isReviewed == "1") {
-                document.getElementById("is-edited").value = 1; // Set isEdited to 1 if review is made
-            } else {
-                document.getElementById("is-edited").value = 0; // Set isEdited to 0 if it's a new review
-            }
+            // Set the 'is-edited' hidden field based on review status
+            if (isReviewed === "1") {
+                document.getElementById("is-edited").value = 1;
 
-            // Check if we are editing an existing review
-            if (editStatus == "1") {
-                const reviewText = this.getAttribute("data-desc"); // Get existing review text
-                const rating = this.getAttribute("data-rating"); // Get existing rating
+                // Pre-fill the review text area and rating radio buttons if a review exists
+                reviewTextArea.value = reviewText;
 
-                // Pre-fill the modal with the existing review text and rating
-                document.getElementById("review-text").value = reviewText;
-                document.querySelector(`input[name="rating"][value="${rating}"]`).checked = true;
+                // Set the correct rating radio button based on existing rating
+                ratingInputs.forEach(ratingInput => {
+                    if (ratingInput.value === rating) {
+                        ratingInput.checked = true;
+                    }
+                });
             } else {
-                // For new review, ensure review text is empty and rating is unselected
-                document.getElementById("review-text").value = '';
-                document.querySelector('input[name="rating"]:checked').checked = false;
+                document.getElementById("is-edited").value = 0; // Set is-edited to 0 if it's a new review
+                reviewTextArea.value = ''; // Clear review text area for new review
+                ratingInputs.forEach(ratingInput => {
+                    ratingInput.checked = false; // Uncheck all rating radio buttons
+                });
             }
 
             // Show the modal
@@ -78,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function(event) {
         const reviewText = document.getElementById("review-text").value;
         const rating = document.querySelector('input[name="rating"]:checked');
+        const isReviewed = document.getElementById("is-edited").value; // Get the value of the 'is-edited' hidden field
 
         // Check if review text is empty or rating is not selected
         if (!reviewText.trim() || !rating) {
@@ -86,10 +90,18 @@ document.addEventListener("DOMContentLoaded", function () {
             return false;
         }
 
-        // Ask for confirmation before submitting
-        const confirmation = confirm("Are you sure you want to submit this review?");
-        if (!confirmation) {
-            event.preventDefault(); // Prevent form submission if user cancels
+        if (isReviewed === "1") {
+            // Ask for confirmation before submitting
+            const confirmation = confirm("You can only edit your review once. Are you sure you want to submit this review?");
+            if (!confirmation) {
+                event.preventDefault(); // Prevent form submission if user cancels
+            }
+        } else {
+            // Ask for confirmation before submitting
+            const confirmation = confirm("Are you sure you want to submit this review?");
+            if (!confirmation) {
+                event.preventDefault(); // Prevent form submission if user cancels
+            }
         }
     });
 });

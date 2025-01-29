@@ -58,7 +58,7 @@
                                     data-location="{{ $property->city }}, {{ $property->barangay }}"
                                     data-info="{{ $property->unit_category }}, {{ $property->rental_price }}"
                                     data-role="{{ $userRole }}"
-                                    data-review-status="{{ $review->is_reviewed }}">
+                                    data-review-status="{{ $property->is_reviewed }}">
                                     Review
                                 </button>
                         </div>
@@ -88,7 +88,7 @@
                                         data-location="{{ $tenant->firstname }} {{ $tenant->lastname }}"
                                         data-info="{{ $tenant->city }}, {{ $tenant->barangay }}"
                                         data-role="{{ $userRole }}"
-                                        data-review-status="{{ $review->is_reviewed }}">
+                                        data-review-status="{{ $tenant->is_reviewed }}">
                                         Review
                                     </button>
                                 </div>
