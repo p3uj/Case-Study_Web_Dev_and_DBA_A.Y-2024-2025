@@ -22,7 +22,7 @@ use App\Http\Controllers\ViewPropertyPost;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
 Route::middleware('auth')->group(function () {
-    Route::view('/home', 'home')->name('homepage');
+    Route::get('/home', [HomeController::class, 'index'])->name('homepage');
     //Route::view('/property', 'properties')->name('propertiespage');
     //Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
     Route::view('/postaproperty', 'post-a-property')->name('postapropertypage');

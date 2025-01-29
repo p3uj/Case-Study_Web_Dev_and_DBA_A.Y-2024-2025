@@ -15,8 +15,13 @@
     <div class="container">
         <div class="text-section">
             <h1>RentEase</h1>
-            <p>Hassle-free and easy way to find a new home! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Habitant cras morbi hendrerit nunc vel sapien. In habitasse at diam suspendisse non vitae fermentum, pharetra arcu.</p>
-            <a href="{{ route("propertiespage")}}" class="{{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}">Find now</a>
+            <p>Looking for the perfect rental property or a roommate? Our web application makes it easy! 
+                Whether you're a tenant seeking a roommate or a landlord posting a vacancy, our platform 
+                connects you with the right people. With customizable search filters based on location and 
+                rental price, finding your ideal match has never been easier. Plus, the built-in feedback and 
+                rating system ensures trust and transparency between tenants and landlords. Discover the hassle-free 
+                way to find your next home today!</p>
+            <a href="{{ route("propertiespage") }}" class="{{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}">Find now</a>
         </div>
         <div class="image-section">
             <!-- Adding the images from the specified paths -->
@@ -29,12 +34,20 @@
 <div class="featured-properties">
     <h2 class="section-title">Featured Properties</h2>
     <div class="property-grid">
-        <img src="{{ Vite::asset('resources/images/home/fp1.jpg') }}" alt="Property 1" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp2.jpg') }}" alt="Property 2" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp3.jpg') }}" alt="Property 3" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp4.jpg') }}" alt="Property 4" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp5.jpg') }}" alt="Property 5" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp6.jpg') }}" alt="Property 6" class="property-image"> <!-- New image fp6 added -->
+        @if (!Empty($featured))
+            @foreach ($featured as $property)
+                <img class="property-image" src="{{ asset('storage/uploads/images/property-posts/' . $property->photo_path) }}" alt="Property Post Image"
+                            onclick="window.location.href='{{ route('viewpropertypostpage', ['id' => $property->Post, 'property_info_id' => $property->Info]) }}'"
+                        >
+            @endforeach
+        @else
+            <img src="{{ Vite::asset('resources/images/home/fp1.jpg') }}" alt="Property 1" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp2.jpg') }}" alt="Property 2" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp3.jpg') }}" alt="Property 3" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp4.jpg') }}" alt="Property 4" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp5.jpg') }}" alt="Property 5" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp6.jpg') }}" alt="Property 6" class="property-image">
+        @endif
     </div>
 </div>
 
