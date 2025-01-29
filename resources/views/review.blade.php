@@ -55,8 +55,8 @@
                                     data-id="{{ $property->id }}" 
                                     data-photo="{{ $property->FirstPhoto }}"
                                     data-duration="{{ $property->created_at }} - {{ $property->lease_end }}"
-                                    data-location="{{ $tenant->city }}, {{ $tenant->barangay }}"
-                                    data-info="{{ $tenant->category }}, {{ $tenant->unit_price }}"
+                                    data-location="{{ $property->city }}, {{ $property->barangay }}"
+                                    data-info="{{ $property->unit_category }}, {{ $property->rental_price }}"
                                     data-role="{{ $userRole }}">
                                     Review
                                 </button>

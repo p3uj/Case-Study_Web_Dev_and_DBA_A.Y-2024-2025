@@ -33,7 +33,7 @@
                         @foreach ($tenants as $tenant)
                             <div class="tenant-item" id="tenant-item">
                                 <div class="tenant-image">
-                                @if ($tenant->pfp == "http://localhost/RentEase/public/images/sampleProfile.png")
+                                @if ($tenant->profile_photo_path == "http://localhost/RentEase/public/images/sampleProfile.png")
                                     <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                                 @else
                                     <img src="{{ asset('storage/uploads/images/profile-pictures/' . $tenant->pfp) }}" alt="Profile Picture">

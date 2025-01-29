@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/property', [PropertyController::class, 'storeOrFilterSearch'])->name('property.post');
     Route::post('/submit-review', [AddReviewController::class, 'submitReview'])->name('submit.review');
 
-    Route::put('/write-review', [ReviewController::class, 'edit'])->name('writereview');
+    Route::put('/write-review', [ReviewController::class, 'addReview'])->name('writereview');
 });
 
 // Ensure that only unauthenticated users can access this root route.

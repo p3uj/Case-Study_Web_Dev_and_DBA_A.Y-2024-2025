@@ -39,6 +39,7 @@ return new class extends Migration
             WHERE 
                 R.review_by_user_id = @p_UserId
                 AND R.lease_end IS NOT NULL
+                AND R.is_reviewed = 0;
         ");
 
         DB::statement("
@@ -74,6 +75,7 @@ return new class extends Migration
             WHERE
                 review_by_user_id = @p_UserId
                 AND lease_end IS NOT NULL
+                AND R.is_reviewed = 0;
         ");
 
         DB::statement("
@@ -129,7 +131,7 @@ return new class extends Migration
         ");
 
         DB::statement("
-            CREATE PROCEDURE RE_SP_RE_SP_GET_TENANT_REVIEW_BY_ID
+            CREATE PROCEDURE RE_SP_GET_TENANT_REVIEW_BY_ID
                 @p_ReviewId INT
             AS
             SELECT
@@ -154,6 +156,25 @@ return new class extends Migration
             WHERE 
                 R.id = @p_ReviewId
         ");
+
+        DB::statement("
+            CREATE PROCEDURE RE_SP_UPDATE_REVIEW
+                    @p_ReviewId INT
+                    ,@p_Rating INT
+                    ,@p_Description NVARCHAR(255)
+                    , @p_IsReviewed BIT
+                    ,@p_IsEdited BIT
+            AS
+                UPDATE 
+                    reviews
+                SET 
+                    rating = @p_Rating
+                    ,review_text = @p_Description
+                    ,is_reviewed = @p_IsReviewed
+                    ,is_edited = @p_IsEdited
+                WHERE
+                    id = @p_ReviewId
+        ");
     }
 
     /**
@@ -164,6 +185,8 @@ return new class extends Migration
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_PROPERTIES_TO_BE_REVIEWED");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_TENANTS_TO_BE_REVIEWED");
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_INSERT_REVIEW");
-        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_REVIEW_BY_ID");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_LANDLORD_REVIEW_BY_ID");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_TENANT_REVIEW_BY_ID");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_UPDATE_REVIEW");
     }
 };
