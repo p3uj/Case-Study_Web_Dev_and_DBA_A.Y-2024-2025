@@ -76,4 +76,11 @@ class PropertyPost extends Model
 
         return $propertyPostDetails[0];
     }
+
+    // Retrieve editable fields in the property post and based on the property info id
+    public static function getPropertyPostById($propertyInfoId) {
+        $post = DB::select('RE_SP_GET_PROPERTY_DETAILS_BY_ID ?, ?, ?', [null, null, $propertyInfoId]);
+
+        return $post[0];
+    }
 }
