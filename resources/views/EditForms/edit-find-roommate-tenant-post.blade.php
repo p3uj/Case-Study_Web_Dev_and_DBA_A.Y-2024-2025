@@ -54,7 +54,7 @@
             <!-- Description Textarea -->
             <textarea class="description" placeholder="Write a description" id="description" name="description">{{ $post->description }}</textarea>
 
-            <button type="submit" class="post-btn" onclick="return confirm('Are you sure you want to save these changes?')">Save Changes</button>
+            <button type="submit" class="save-btn" onclick="return confirm('Are you sure you want to save these changes?')">Save Changes</button>
         </div>
     </form>
 </body>

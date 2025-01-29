@@ -92,7 +92,7 @@ textarea.description {
 }
 
 /* Button styling */
-.post-btn {
+.save-btn {
     display: block;
     width: 100%; /* Full width of the parent */
     max-width: 400px; /* Adjust for desired length */
@@ -109,7 +109,7 @@ textarea.description {
 }
 
 /* Hover effect */
-.post-btn:hover {
+.save-btn:hover {
     background-color: #9f8b67; /* Lighter brown */
     transform: scale(1.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
