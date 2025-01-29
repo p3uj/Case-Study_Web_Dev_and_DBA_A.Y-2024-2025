@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Searching Post</title>
+    <link rel="stylesheet" href="{{ Vite::asset('resources/css/edit-find-roommate-tenant.css') }}">
 
     @vite('resources/js/edit-dropdown.js')
 </head>
@@ -15,10 +16,12 @@
     <form id="form" action="{{ route('editsearchpost.post') }}" method="post">
         @csrf
         <div class="form-container">
-            <!-- Hidden input to hold the id for the server side -->
+            <!-- Close button with the correct route -->
+            <a href="{{ route('user-profile') }}" class="close-btn" onclick="return confirm('Are you sure you want to leave? Any unsaved changes will be lost.')">&times;</a>
+
+            <!-- Rest of your form remains the same -->
             <input type="hidden" name="id" value="{{ $id }}">
 
-            <!-- Fetch values from the database -->
             <select hidden name="default-city" id="">
                 <option value="{{ $post->city }}" selected></option>
             </select>
@@ -44,15 +47,10 @@
             <!-- Barangay Dropdown Box -->
             <select name="barangay" id="barangay" data-barangay-list="{{ json_encode($barangays) }}"
                 data-fetch-barangay="{{ $post->barangay }}">
-                <!-- This dropdown should be dynamic based on the selected option in the city.
-                            You can use this for API call to get the barangays based on the id(stored as cityCode) of selected option in the city.
-                            https://psgc.gitlab.io/api/cities/{cityCode}/barangays/
-                        -->
                 <option value="" disabled selected>Please select barangay</option>
-                <!-- Barangay options will be populated by property.js  -->
             </select>
 
-            <!-- input -->
+            <!-- Description Textarea -->
             <textarea class="description" placeholder="Write a description" id="description" name="description">{{ $post->description }}</textarea>
 
             <button class="post-btn">Post</button>

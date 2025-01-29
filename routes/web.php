@@ -62,3 +62,6 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 // Registration routes
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+
+// Close button in Edit-find-roommate-tenant
+Route::get('/user-profile', [UserProfileController::class, 'index'])->name('user-profile');
