@@ -80,6 +80,14 @@ class User extends Authenticatable
 
     public static function getUserInfoById($id) {
         $userInfo = DB::select('EXEC RE_SP_GET_USER_INFO_BY_ID_AND_USER_BY_EMAIL ?, ?', [$id, null]); // Used stored procedure and the return will be an array
+
+        // Check if the Rating is 0 or empty and format it as 0.00
+        if (isset($userInfo[0]->Rating)) {
+            $userInfo[0]->Rating = number_format((float) $userInfo[0]->Rating, 2, '.', '');  // Format as 0.00
+        } else {
+            $userInfo[0]->Rating = '0.00';  // Ensure it defaults to 0.00 if not set
+        }
+
         return $userInfo[0]; // Returning the first element of the result array, which contains the authenticated user's information
     }
 }
