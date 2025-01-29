@@ -12,6 +12,10 @@ class HomeController extends Controller
     {
         $featured = DB::select('EXEC RE_SP_GET_FEATURED_PROPERTIES');
 
-        return view('home', ['featured' => $featured]);
+        $properties = DB::select('EXEC RE_SP_GET_ALL_PROPERTY_POST_INFO_RATING');
+
+        $topRated = DB::select('EXEC RE_SP_GET_TOP_RATED_PROPERTIES');
+
+        return view('home', ['featured' => $featured, 'properties' => $properties, 'topRated' => $topRated]);
     }
 }
