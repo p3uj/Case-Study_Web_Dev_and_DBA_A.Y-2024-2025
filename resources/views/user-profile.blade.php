@@ -39,6 +39,9 @@
             <p class="bio">
                 {{ $user->bio }}
             </p>
+            <a href="{{ route('editprofilepage', ['id' => $user->id]) }}">
+                <button>Edit Profile</button>
+            </a>
         </div>
         <div class="profile-picture">
             @if ($user->profile_photo_path == asset('resources/images/sampleProfile.png'))
