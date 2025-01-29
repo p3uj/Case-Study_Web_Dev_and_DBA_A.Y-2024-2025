@@ -21,7 +21,7 @@
             <p>{{ $user->role }}</p>
             <p>{{ $user->city }}</p>
             <div class="rating-container">
-                <h2>{{ number_format($user->Rating, 1) }}</h2>
+                <h2>{{ $user->Rating }}</h2>
                 <div class="reviews">
                     <h3>
                         @for ($star = 1; $star <= 5; $star++)
