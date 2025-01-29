@@ -12,12 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        // Drop view if exists
-        DB::statement("DROP VIEW IF EXISTS RE_V_GET_ALL_USER_INFO_WITH_RATINGS");
-
-        //-- Define stored procedure to get all the property posts with ratings and 1 unit photo based on the user id
-        // -- Get all property post details including ratings, user name and its profile photo
+        //-- DEFINE VIEW TO GET ALL USERS INFO WITH THE REVIEWS RECEIVED BY ALL USERS
         DB::statement("
             CREATE VIEW RE_V_GET_ALL_USER_INFO_WITH_RATINGS
             AS
@@ -25,7 +20,7 @@ return new class extends Migration
                 users.*
                 ,(
                     SELECT
-                        COALESCE(AVG(rating), 0)
+                        COALESCE(ROUND(CAST(AVG(CAST(rating AS DECIMAL(10, 2))) AS DECIMAL(10, 2)), 2), 0) AS Rating
                     FROM reviews
                     WHERE review_to_user_id = users.id
                 ) AS Rating

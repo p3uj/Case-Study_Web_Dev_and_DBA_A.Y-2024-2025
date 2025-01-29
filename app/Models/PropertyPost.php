@@ -40,6 +40,15 @@ class PropertyPost extends Model
         // Call the formatDate method in the DateConversion class, passing the $authUserPropertyPosts and the column name 'updated_at'
         $authUserPropertyPosts = DateConversion::formatDate($authUserPropertyPosts, 'updated_at');
 
+        // Loop through the array and format the Rating
+        foreach ($authUserPropertyPosts as $post) {
+            if (isset($post->Rating)) {
+                $post->Rating = number_format((float) $post->Rating, 2, '.', '');  // Format as 0.00
+            } else {
+                $post->Rating = '0.00';  // Ensure it defaults to 0.00 if not set
+            }
+        }
+
         return $authUserPropertyPosts;
     }
 
@@ -57,6 +66,13 @@ class PropertyPost extends Model
     // Retrieve property post and its details based on the property post id
     public static function getAllPropertyDetailsById($propertyPostId) {
         $propertyPostDetails = DB::select('RE_SP_GET_PROPERTY_DETAILS_BY_ID ?, ?', [null, $propertyPostId]);
+
+        // Check if the Rating is 0 or empty and format it as 0.00
+        if (isset($propertyPostDetails[0]->Rating)) {
+            $propertyPostDetails[0]->Rating = number_format((float) $propertyPostDetails[0]->Rating, 2, '.', '');  // Format as 0.00
+        } else {
+            $propertyPostDetails[0]->Rating = '0.00';  // Ensure it defaults to 0.00 if not set
+        }
 
         return $propertyPostDetails[0];
     }

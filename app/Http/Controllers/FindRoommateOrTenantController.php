@@ -41,7 +41,7 @@ class FindRoommateOrTenantController extends Controller
         $searchCategory = Auth::user()->role == 'Tenant' ? 'Roommate' : 'Tenant'; // search category based on the authenticated user role
 
         // Used a stored procedure to store the data
-        DB::statement('EXEC StoreRoommateTenantPost ?, ?, ?, ?, ?', [
+        DB::statement('EXEC RE_SP_INSERT_ROOMMATE_TENANT_POST ?, ?, ?, ?, ?', [
             $userId
             ,$city
             ,$barangay

@@ -41,17 +41,6 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
-
-        // Create stored procedure
-        DB::statement("
-            CREATE PROCEDURE GetUserInfoById
-                @Id BIGINT
-            AS
-            BEGIN
-                SELECT * FROM users
-                WHERE id = @Id
-            END
-        ");
     }
 
     /**

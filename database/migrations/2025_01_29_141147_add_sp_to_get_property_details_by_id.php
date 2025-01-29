@@ -12,13 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        // Drop the old stored procedure if it exists
-        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_PROPERTY_POSTS_WITH_RATINGS_BY_USER_ID");
-        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_PROPERTY_DETAILS_BY_ID");
-
-        //-- Define stored procedure to get all the property posts with ratings and 1 unit photo based on the user id
-        // -- Get all property post details including ratings, user name and its profile photo
+        // -- DEFINE STORED PROCEDURE TO GET PROPERTY DETAILS BASED ON THE ID
         DB::statement("
             CREATE PROC RE_SP_GET_PROPERTY_DETAILS_BY_ID
                 @p_UserId BIGINT = NULL
@@ -44,7 +38,7 @@ return new class extends Migration
                     LEFT JOIN (
                                 SELECT
                                 property_post_id
-                                ,AVG(rating) AS Rating
+                                ,ROUND(CAST(AVG(CAST(rating AS DECIMAL(10, 2))) AS DECIMAL(10, 2)), 2) AS Rating
                                 FROM reviews
                                 GROUP BY property_post_id
                             ) AS ReviewRating ON ReviewRating.property_post_id = PPost.id
@@ -75,7 +69,7 @@ return new class extends Migration
                     LEFT JOIN (
                         SELECT
                             property_post_id
-                            ,AVG(rating) AS Rating
+                            ,ROUND(CAST(AVG(CAST(rating AS DECIMAL(10, 2))) AS DECIMAL(10, 2)), 2) AS Rating
                         FROM reviews
                         GROUP BY property_post_id
                     ) AS ReviewRating ON ReviewRating.property_post_id = PPost.id
@@ -90,8 +84,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Drop the stored procedure if it exists
-        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_PROPERTY_POSTS_WITH_RATINGS_BY_USER_ID");
+        // Drop the view if it exists
         DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_PROPERTY_DETAILS_BY_ID");
     }
 };

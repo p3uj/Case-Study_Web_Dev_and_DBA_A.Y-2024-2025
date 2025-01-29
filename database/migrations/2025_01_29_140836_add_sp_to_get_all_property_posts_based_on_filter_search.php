@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //-- Define stored procedure to get all the property post based on the filter search
+        // -- DEFINE STORED PROCEDURE TO GET ALL THE PROPERTY POSTS BASED ON THE FILTER SEARCH
         DB::statement("
             CREATE PROC RE_SP_GET_ALL_PROPERTY_POST_BASED_ON_FILTER_SEARCH
                 @p_UnitCategory NVARCHAR(255)
@@ -21,6 +21,7 @@ return new class extends Migration
             AS
             SELECT
                 PPost.id
+                ,PPost.property_info_id
                 ,PPost.UserName
                 ,PInfo.barangay + ', ' + PInfo.city AS Location
                 ,PInfo.unit_category
@@ -31,6 +32,7 @@ return new class extends Migration
                     FROM unit_photos
                     WHERE property_info_id = PInfo.id
                 ) AS FirstPhoto
+                ,users.profile_photo_path
             FROM RE_V_GET_ALL_ACTIVE_PROPERTY_POST_WITH_USERNAME AS PPost
             INNER JOIN property_infos AS PInfo
                 ON PInfo.id = PPost.property_info_id
@@ -38,7 +40,8 @@ return new class extends Migration
                 AND PInfo.unit_category = @p_UnitCategory
                 AND (@p_City IS NULL OR PInfo.city = @p_City)
                 AND (@p_RentalPrice IS NULL OR PInfo.rental_price = @p_RentalPrice)
-            ORDER BY PPost.updated_at DESC
+            INNER JOIN users
+                ON users.id = PPost.user_id
         ");
     }
 
@@ -47,7 +50,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Drop the view
-        DB::statement("DROP VIEW IF EXISTS RE_SP_GET_ALL_PROPERTY_POST_BASED_ON_FILTER_SEARCH");
+        // Drop the view if it exists
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_GET_ALL_PROPERTY_POST_BASED_ON_FILTER_SEARCH");
     }
 };

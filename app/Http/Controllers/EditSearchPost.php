@@ -19,7 +19,7 @@ class EditSearchPost extends Controller
         // Call the
         $post = FindRoommateOrTenant::getRoommateTenantPostsById($id);
 
-        return view('Edit Forms.edit-finding-roommate-tenant-post', [
+        return view('EditForms.edit-find-roommate-tenant-post', [
             'id' => $id
             ,'cities' => $city
             ,'barangays' => $barangay
