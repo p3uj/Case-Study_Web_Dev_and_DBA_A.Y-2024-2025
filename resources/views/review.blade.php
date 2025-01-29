@@ -65,7 +65,7 @@
                 @else
                     @foreach ($toReview as $tenant)
                         <div class="to-review-content">
-                            @if ($tenant->pfp == "http://localhost/RentEase/public/images/sampleProfile.png")
+                            @if ($tenant->pfp == asset('resources/images/sampleProfile.png'))
                                 <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                             @else
                                 <img src="{{ asset('storage/uploads/images/profile-pictures/' . $tenant->pfp) }}" alt="Profile Picture">

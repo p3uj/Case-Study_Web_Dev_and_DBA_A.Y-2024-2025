@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (role === "Tenant") {
                 modalImage.src = `/RentEase/public/storage/uploads/images/property-posts/${photo}`;
             } else {
-                modalImage.src = `/RentEase/public/storage/uploads/images/profile-pictures/samplePhote.png`;             
+                modalImage.src = `/RentEase/public/storage/uploads/images/profile-pictures/${photo}`;             
             }
 
             // Update text fields
