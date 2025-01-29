@@ -40,14 +40,14 @@
                 {{ $user->bio }}
             </p>
             <a href="{{ route('editprofilepage', ['id' => $user->id]) }}">
-                <button>Edit Profile</button>
+                <button class="edit-profile-btn">Edit Profile</button>
             </a>
         </div>
         <div class="profile-picture">
-            @if ($user->profile_photo_path == asset('resources/images/sampleProfile.png'))
+            @if ( asset('resources/images/' . $user->profile_photo_path) == asset('resources/images/sampleProfile.png'))
                 <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
             @else
-                <img src="{{ asset('storage/uploads/images/property-posts/' . $user->profile_photo_path) }}" alt="Profile Picture">
+                <img src="{{ asset('storage/uploads/images/profile-pictures/' . $user->profile_photo_path) }}" alt="Profile Picture">
             @endif
         </div>
     </div>
@@ -69,11 +69,11 @@
             @if (!empty($propertyPost))
                 @foreach ($propertyPost as $property)
                     <div id="property-post" class="property-post-content" data-isPostAvailable="{{$property->is_available}}">
-                        <img class="unit-photo"
+                        <img class="unit-photo" data-is-available="{{$property->is_available}}"
                             src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Image 1"
                             onclick="window.location.href='{{ route('viewpropertypostpage', ['id' => $property->id, 'property_info_id' => $property->property_info_id]) }}'"
                         >
-                        <div class="property-info">
+                        <div class="property-info" data-is-available="{{$property->is_available}}">
                             <div class="date-and-edit-icon">
                                 <p class="date-posted">{{ $property->updated_at }}</p>
                                 <button class="edit-icon" popovertarget="edit-search-post-popover" data-id="{{ $property->id }}"
@@ -86,7 +86,7 @@
                             <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
                                 {{ $property->Location }}
                             </h2>
-                            <div class="tags">
+                            <div class="tags"">
                                 <a class="unit-type">{{ $property->unit_category }}</a>
                                 <a class="unit-price">₱{{ number_format($property->rental_price, 2) }} /month</a>
                                 <a class="max-occupancy">Max {{ $property->max_occupancy }} occupants</a>
@@ -95,8 +95,8 @@
                                 {{ $property->description }}
                             </p>
                             <div class="property-bottom">
-                                <div class="reviews">
-                                    @for ($star = 1; $star <= 5; $star++)
+                                <div class="reviews" data-is-available="{{$property->is_available}}>
+                                    @for ($star = 1; $star <= 6; $star++)
                                         <!-- If the star is less than or equal to average rating, show the filled star -->
                                         @if ($star <= $property->Rating)
                                             <i class="fas fa-star"></i>
@@ -108,13 +108,13 @@
                                     <p>{{ $property->Rating }} out of 5</p>
                                 </div>
                                 <div class="">
-                                    <a href="{{ route('userprofilepage.deletepropertypost', ['id' => $property->id, 'available' => 'null', 'deleted' => 1]) }}">
+                                    <a href="{{ route('userprofilepage.deleteornotavialproperty', ['id' => $property->id, 'available' => 'null', 'deleted' => 1]) }}">
                                         <button class="delete-btn">
                                             Delete Post
                                         </button>
                                     </a>
 
-                                    <a href="{{ route('add.review.page') }}">
+                                    <a href="{{ $property->is_available ? route('add.review.page') : route('userprofilepage.deleteornotavialproperty', ['id' => $property->id, 'available' => ($property->is_available == 1) ? 0 : 1, 'deleted' => 'null']) }}">
                                         <button class="isAvailable-btn">
                                             {{ $property->is_available ? 'Not Available?' : 'Available?' }}
                                         </button>
@@ -176,10 +176,10 @@
                     @foreach ($reviews as $review)
                         <div class="review-info-container">
                             <div class="user-review-profile">
-                                @if ($review->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                                @if (asset('resources/images/' . $review->profile_photo_path) == asset('resources/images/sampleProfile.png'))
                                     <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                                 @else
-                                    <img src="{{ asset('storage/uploads/images/property-posts/' . $review->profile_photo_path) }}" alt="Profile Picture">
+                                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $review->profile_photo_path) }}" alt="Profile Picture">
                                 @endif
                             </div>
                             <div class="reviews">
