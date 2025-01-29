@@ -12,6 +12,7 @@ use App\Models\PropertyPost;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\EditSearchPost;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AddReviewController;
 
@@ -31,10 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-review', [AddReviewController::class, 'index'])->name('add.review.page');
 
     Route::get('viewproperty/{id}/{property_info_id}', [ViewPropertyPost::class, 'index'])->name('viewpropertypostpage');
+    Route::get('editsearchpost/{id}', [EditSearchPost::class, 'index'])->name('editsearchpostpage');
+    Route::get('userprofile/{id}/{found}/{deleted}', [EditSearchPost::class, 'updateFoundOrDelete'])->name('userprofilepage.updatefoundordeleted');
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
     Route::post('/property', [PropertyController::class, 'storeOrFilterSearch'])->name('property.post');
+    Route::post('editsearchpost', [EditSearchPost::class, 'update'])->name('editsearchpost.post');
     Route::post('/submit-review', [AddReviewController::class, 'submitReview'])->name('submit.review');
 
 });

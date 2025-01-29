@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     var barangayDropdown = document.getElementById('barangay'); // Get the barangay dropdown element
     barangayDropdown.disabled = true; // Disable the barangay dropdown initially
     const form = document.getElementById('form');
+    var createPostButton = document.getElementById('create-a-post-btn'); // Get the element that has the id of 'create-a-post-btn'
+    var userRole = createPostButton.getAttribute('data-user-role'); // Get the value of the data attribute of 'data-user-role'
+
+    // Hide the create post button if the user role is a tenant
+    if (userRole == "Tenant") {
+        createPostButton.style.display = "none";
+    }
 
     document.getElementById('city').addEventListener('change', function () {
         var selectedOption = this.options[this.selectedIndex];  // Get the selected option
