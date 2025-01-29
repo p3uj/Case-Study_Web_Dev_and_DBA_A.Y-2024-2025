@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('editsearchpost/{id}', [EditSearchPostController::class, 'index'])->name('editsearchpostpage');
     Route::get('userprofile/{id}/{found}/{deleted}', [EditSearchPostController::class, 'updateFoundOrDelete'])->name('userprofilepage.updatefoundordeleted');
     Route::get('editpropertypost/{id}{property_info_id}', [EditPropertyPostController::class, 'index'])->name('editpropertypostpage');
-    Route::get('userprofile/deleteproperty/{id}/{available}/{deleted}', [EditPropertyPostController::class, 'delete'])->name('userprofilepage.deletepropertypost');
+    Route::get('userprofile/deletepropertyornotavail/{id}/{available}/{deleted}', [EditPropertyPostController::class, 'isAvailableOrDelete'])->name('userprofilepage.deleteornotavialproperty');
     Route::get('editprofile/{id}', [EditProfileController::class, 'index'])->name('editprofilepage');
 
 
