@@ -18,6 +18,7 @@ use App\Http\Controllers\AddReviewController;
 use App\Http\Controllers\EditPropertyPost;
 use App\Http\Controllers\EditPropertyPostController;
 use App\Http\Controllers\EditSearchPostController;
+use App\Http\Controllers\PendingRentalsController;
 use App\Http\Controllers\ViewPropertyPost;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
@@ -25,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('homepage');
     //Route::view('/property', 'properties')->name('propertiespage');
     //Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
-    Route::view('/postaproperty', 'post-a-property')->name('postapropertypage');
+    Route::get('/pendingrentals', [PendingRentalsController::class, 'index'])->name('pendingrentalspage');
     Route::get('/review', [ReviewController::class, 'index'])->name('reviewpage');
     Route::get('/userprofile', [UserProfileController::class, 'index'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
