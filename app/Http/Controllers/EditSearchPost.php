@@ -45,8 +45,9 @@ class EditSearchPost extends Controller
             ,$barangay
             ,$description
         ]);
-
-        return redirect()->back();
+        
+        // Change the redirect to go to user profile
+        return redirect()->route('user-profile');
     }
 
     public function updateFoundOrDelete($id, $found, $deleted) {

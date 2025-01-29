@@ -15,6 +15,7 @@
     <!-- Form -->
     <form id="form" action="{{ route('editsearchpost.post') }}" method="post">
         @csrf
+        <input type="hidden" name="redirect_to" value="{{ route('user-profile') }}">
         <div class="form-container">
             <!-- Close button with the correct route -->
             <a href="{{ route('user-profile') }}" class="close-btn" onclick="return confirm('Are you sure you want to leave? Any unsaved changes will be lost.')">&times;</a>
@@ -53,7 +54,7 @@
             <!-- Description Textarea -->
             <textarea class="description" placeholder="Write a description" id="description" name="description">{{ $post->description }}</textarea>
 
-            <button class="post-btn">Post</button>
+            <button type="submit" class="post-btn" onclick="return confirm('Are you sure you want to save these changes?')">Save Changes</button>
         </div>
     </form>
 </body>

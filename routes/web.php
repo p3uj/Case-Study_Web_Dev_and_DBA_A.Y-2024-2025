@@ -65,3 +65,4 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
 // Close button in Edit-find-roommate-tenant
 Route::get('/user-profile', [UserProfileController::class, 'index'])->name('user-profile');
+
