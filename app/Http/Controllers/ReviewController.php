@@ -44,8 +44,6 @@ class ReviewController extends Controller
 
         $reviews = $this->reviews($userId);
         
-
-
         return view('review', ['toReview' => $toReview, 'userRole' => $userRole, 'reviews' => $reviews]);
     }
 

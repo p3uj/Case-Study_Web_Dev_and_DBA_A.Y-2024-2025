@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const durationText = modal.querySelector(".duration");
     const titleText = modal.querySelector(".title");
     const infoText = modal.querySelector(".info");
+    
 
     reviewButtons.forEach(button => {
         button.addEventListener("click", function () {

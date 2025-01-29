@@ -136,6 +136,19 @@
                             <h1 class="quotation-mark-right">❞</h1>
                             <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
                             <p class="date-review">{{ $review->updated_at }}</p>
+
+                            <button class="review-btn" id="reviewBtn" 
+                                data-id="{{ $review->id }}" 
+                                data-photo="{{ $review->pfp }}"
+                                data-duration="{{ $review->created_at }} - {{ $review->lease_end }}"
+                                data-location="{{ $review->firstname }} {{ $review->lastname }}"
+                                data-info="{{ $review->city }}, {{ $review->barangay }}"
+                                data-role="{{ $userRole }}"
+                                data-rating="{{ $review->rating }}" 
+                                data-desc="{{ $review->review-text }}"
+                                data-edit-status="{{ $review->is_edited }}">
+                                Edit Review
+                            </button>
                         </div>
                     @endforeach
                 </div>
