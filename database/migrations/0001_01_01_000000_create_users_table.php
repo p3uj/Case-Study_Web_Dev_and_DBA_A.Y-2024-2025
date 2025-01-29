@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('profile_photo_path');
             $table->text('bio');
             //$table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
