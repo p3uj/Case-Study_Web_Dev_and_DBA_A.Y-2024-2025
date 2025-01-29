@@ -139,7 +139,7 @@
                             <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
                             <p class="date-review">{{ $review->updated_at }}</p>
 
-                            @if ($review->is_reviewed != 1)
+                            @if ($review->is_edited != 1)
                                 <button class="review-btn" id="reviewBtn" 
                                     data-id="{{ $review->id }}" 
                                     data-photo="{{ $review->pfp }}"

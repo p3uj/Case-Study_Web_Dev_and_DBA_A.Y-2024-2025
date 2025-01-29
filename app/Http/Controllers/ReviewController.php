@@ -47,7 +47,7 @@ class ReviewController extends Controller
         return view('review', ['toReview' => $toReview, 'userRole' => $userRole, 'reviews' => $reviews]);
     }
 
-    public function addReview(Request $request)
+    public function writeReview(Request $request)
     {
         // Get values from the request
         $reviewId = $request->input('review-id');
