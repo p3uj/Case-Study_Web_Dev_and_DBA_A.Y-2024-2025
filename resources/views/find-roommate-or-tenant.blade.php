@@ -57,10 +57,10 @@
             @foreach ($posts as $post)
                 <div class="find-roommate-tenant-container" data-user-id="{{ $post->user_id }}">
                     <div class="user-profile">
-                        @if ($post->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                        @if (asset('resources/images/' . $post->profile_photo_path) == asset('resources/images/sampleProfile.png'))
                             <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                         @else
-                            <img src="{{ asset('storage/uploads/images/property-posts/' . $review->profile_photo_path) }}" alt="Profile Picture">
+                            <img src="{{ asset('storage/uploads/images/profile-pictures/' . $post->profile_photo_path) }}" alt="Profile Picture">
                         @endif
                     </div>
                     <h4>{{ $post->UserName }}</h4>
