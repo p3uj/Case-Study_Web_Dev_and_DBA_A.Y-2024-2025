@@ -17,6 +17,7 @@ class AddReviewController extends Controller
         $userId = Auth::id();
 
         $properties = DB::select('EXEC RE_SP_GET_ALL_USER_PROPERTY ?', [$userId]);
+
         // Send the tenants data to the view
         return view('add-review', compact('tenants', 'properties'));
     }
@@ -30,7 +31,7 @@ class AddReviewController extends Controller
         try {
             // Call the stored procedure to create the first review (user as review_by and tenant as review_to)
             DB::statement('EXEC RE_SP_INSERT_REVIEW @p_PPostId = ?, @p_ReviewBy = ?, @p_ReviewTo = ?', [
-                null,              // PropertyPostId (null for the first review)
+                $propertyId,              // PropertyPostId (null for the first review)
                 $landlordId,      // p_ReviewBy (user)
                 $tenantId         // p_ReviewTo (tenant)
             ]);
@@ -41,16 +42,11 @@ class AddReviewController extends Controller
                 $tenantId,        // p_ReviewBy (tenant)
                 $landlordId       // p_ReviewTo (user)
             ]);
-
-            // Call the stored procedure to update the column of is_available in the db table of property_posts
-            DB::statement('RE_SP_UPDATE_PROPERTY_POST_AND_INFO_BY_ID ?, ?, ?, ?, ?, ?, ?, ?, ?', [
-                null, $propertyId, null, null, null, null, null, null, 0
-            ]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error executing stored procedure', 'error' => $e->getMessage()], 500);
         }
-
+    
         // Redirect the user back to their profile page
         return redirect()->route('userprofilepage')->with('message', 'Reviews submitted successfully!');
-    }
+    }    
 }

@@ -1,22 +1,15 @@
 <?php
 
-use App\Http\Controllers\Api\BarangaysController;
-use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\FindRoommateOrTenantController;
 use App\Http\Controllers\UserProfileController;
-use App\Models\FindRoommateOrTenant;
-use App\Models\PropertyPost;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\EditSearchPost;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AddReviewController;
 use App\Http\Controllers\EditProfileController;
-use App\Http\Controllers\EditPropertyPost;
 use App\Http\Controllers\EditPropertyPostController;
 use App\Http\Controllers\EditSearchPostController;
 use App\Http\Controllers\PendingRentalsController;
@@ -29,7 +22,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('homepage');
     //Route::view('/property', 'properties')->name('propertiespage');
     //Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
-    Route::get('/pendingrentals', [PendingRentalsController::class, 'index'])->name('pendingrentalspage');
     Route::get('/review', [ReviewController::class, 'index'])->name('reviewpage');
     Route::get('/userprofile', [UserProfileController::class, 'index'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
@@ -55,9 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('editprofile', [EditProfileController::class, 'update'])->name('editprofilepage.post');
     Route::post('/home/searchuserresult/', [SearchUserResultController::class, 'fetchUser'])->name('searchuserresult.post');
 
-
     Route::put('/write-review', [ReviewController::class, 'writeReview'])->name('writereview');
-    Route::put('/update-lease', [PendingRentalsController::class, 'updateLeaseStatus'])->name('updatelease');
 });
 
 // Ensure that only unauthenticated users can access this root route.
