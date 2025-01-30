@@ -59,6 +59,13 @@
     color: var(--bg-primary);
     padding: 16px 32px;
     width: 100%;
+    background-color: var(--btn-default);
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2);
+}
+
+.post-btn:hover {
+    background-color: var(--btn-hover);
 }
 
 .tenant-roommate-search-container h3 {

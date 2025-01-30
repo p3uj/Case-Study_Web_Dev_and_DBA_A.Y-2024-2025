@@ -87,16 +87,27 @@ return new class extends Migration
                 @p_ReviewTo INT
             AS
             BEGIN
+                -- Insert review into reviews table
                 INSERT INTO reviews (
-                    property_post_id
-                    ,review_by_user_id
-                    ,review_to_user_id)
-                VALUES (
-                    @p_PPostId
-                    ,@p_ReviewBy
-                    ,@p_ReviewTo);
-            END
+                    property_post_id,
+                    review_by_user_id,
+                    review_to_user_id
+                ) VALUES (
+                    @p_PPostId,
+                    @p_ReviewBy,
+                    @p_ReviewTo
+                );
+
+                -- Update property_posts table
+                UPDATE 
+                    property_posts
+                SET 
+                    is_available = 0
+                WHERE 
+                    id = @p_PPostId;
+            END;
         ");
+
 
         DB::statement("
             CREATE PROCEDURE RE_SP_GET_LANDLORD_REVIEW_BY_ID
