@@ -15,11 +15,14 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EditSearchPost;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AddReviewController;
+use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\EditPropertyPost;
 use App\Http\Controllers\EditPropertyPostController;
 use App\Http\Controllers\EditSearchPostController;
 use App\Http\Controllers\PendingRentalsController;
+use App\Http\Controllers\SearchUserResultController;
 use App\Http\Controllers\ViewPropertyPost;
+use App\Http\Controllers\ViewUserProfileController;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
 Route::middleware('auth')->group(function () {
@@ -38,7 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::get('editsearchpost/{id}', [EditSearchPostController::class, 'index'])->name('editsearchpostpage');
     Route::get('userprofile/{id}/{found}/{deleted}', [EditSearchPostController::class, 'updateFoundOrDelete'])->name('userprofilepage.updatefoundordeleted');
     Route::get('editpropertypost/{id}{property_info_id}', [EditPropertyPostController::class, 'index'])->name('editpropertypostpage');
-    Route::get('userprofile/deleteproperty/{id}/{available}/{deleted}', [EditPropertyPostController::class, 'delete'])->name('userprofilepage.deletepropertypost');
+    Route::get('userprofile/deletepropertyornotavail/{id}/{available}/{deleted}', [EditPropertyPostController::class, 'isAvailableOrDelete'])->name('userprofilepage.deleteornotavialproperty');
+    Route::get('editprofile/{id}', [EditProfileController::class, 'index'])->name('editprofilepage');
+    Route::get('/userprofile/view/{userId}', [ViewUserProfileController::class, 'index'])->name('viewuserprofilepage');
+    Route::get('/home/searchuserresult/', [SearchUserResultController::class, 'index'])->name('searchuserresultpage');
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
@@ -46,6 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::post('editsearchpost', [EditSearchPostController::class, 'update'])->name('editsearchpost.post');
     Route::post('/submit-review', [AddReviewController::class, 'submitReview'])->name('submit.review');
     Route::post('editpropertypost', [EditPropertyPostController::class, 'update'])->name('editpropertypost.post');
+    Route::post('editprofile', [EditProfileController::class, 'update'])->name('editprofilepage.post');
+    Route::post('/home/searchuserresult/', [SearchUserResultController::class, 'fetchUser'])->name('searchuserresult.post');
+
 
     Route::put('/write-review', [ReviewController::class, 'writeReview'])->name('writereview');
     Route::put('/update-lease', [PendingRentalsController::class, 'updateLeaseStatus'])->name('updatelease');

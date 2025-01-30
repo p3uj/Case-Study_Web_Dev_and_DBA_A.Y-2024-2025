@@ -6,6 +6,35 @@ body {
     padding: 0;
 }
 
+/* Profile picture styling */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 150px; /* Set the width of the container */
+    height: 150px; /* Set the height of the container */
+    border-radius: 50%; /* Make it circular */
+    overflow: hidden; /* Hide any part of the image that goes outside the container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Add a subtle background color for empty states */
+    border: 2px solid #ccc; /* Optional: Add a border */
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the container while maintaining aspect ratio */
+    object-position: center; /* Centers the image */
+}
+
 /* Centering the form while keeping the navbar intact */
 .main-container {
     display: flex;
@@ -29,7 +58,6 @@ body {
     z-index: 999; /* Ensures modal is on top */
 }
 
-
 /* Form container styling */
 .form-container {
     width: 500px; /* Fixed width for the form */
@@ -37,10 +65,12 @@ body {
     background-color: #BDA27E; /* Background color */
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+    /* Center the form properly */
     position: absolute;
-    top: 52%; /* Balanced position */
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centering the form */
+    transform: translate(-50%, -50%);
     transition: background-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease-in-out; /* Smooth transition */
 }
 
@@ -59,7 +89,7 @@ body {
     background: none;
     border: none;
     font-size: 25px;
-    color: black;
+    color: black; /* Change the color to black */
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -69,8 +99,9 @@ body {
     color: #9f8b67; /* Lighter brown */
     transform: scale(1.3); /* Slight enlargement */
 }
-/* Form elements */
-select, textarea {
+
+/* Input fields styling */
+.input-field {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -85,12 +116,43 @@ select:disabled {
     color: #999;
 }
 
-/* Textarea styling */
-textarea.description {
-    height: 150px;
-    resize: vertical;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+/* Focus effect for input fields */
+.input-field:focus {
+    border-color: #5a3d2b; /* Dark brown */
+    outline: none;
+    box-shadow: 0 0 5px rgba(90, 61, 43, 0.5);
+}
+
+/* First Name and Last Name Input Fields */
+#firstname, #lastname {
+    font-size: 16px;
+    text-align: left;
+    margin: 10px 0;
+}
+
+/* File Input Customization */
+.file-input {
+    display: none;
+}
+
+.file-label {
+    display: inline-block;
+    background-color: #5a3d2b; /* Brown color */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+/* Hover Effect for File Upload Button */
+.file-label:hover {
+    background-color: #9f8b67; /* Lighter brown */
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Button styling */
@@ -132,4 +194,36 @@ textarea::placeholder {
     .save-btn {
         font-size: 14px;
     }
+}
+
+/* Profile and Name layout */
+.profile-and-name {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    gap: 20px; /* Add some space between profile picture and name */
+    margin-bottom: 20px; /* Add margin below the profile section */
+}
+
+/* User name section styling */
+.user-name {
+    display: flex;
+    flex-direction: column; /* Stack firstname and lastname vertically */
+    gap: 10px; /* Add some space between the fields */
+}
+
+/* Firstname and Lastname input styling */
+.firstname input,
+.lastname input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+.firstname p, .lastname p{
+    margin-bottom: 8px;
+    color: var(--txt-primary);
 }

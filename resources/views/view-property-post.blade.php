@@ -54,7 +54,11 @@
         </div>
         <div class="profile-container">
             <div class="user-profile">
-                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                @if (asset('resources/images/' . $propertyDetails->ProfilePhoto) == asset('resources/images/sampleProfile.png'))
+                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $propertyDetails->user_id]) }}'">
+                @else
+                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $propertyDetails->ProfilePhoto) }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $propertyDetails->user_id]) }}'">
+                @endif
                 {{-- Do Kyung-Soo --}}
                 <span class="user-name">{{ $propertyDetails->Username }}</span>
             </div>

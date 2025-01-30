@@ -15,8 +15,9 @@
 <body>
     <div class="navbar">
         <img src="{{ Vite::asset('resources/images/RentEaseLogo.png') }}" alt="Rent Ease Logo" class="rentease-logo">
-        <form class="search-form">
-            <input type="text" class="searchbar" placeholder="Search a user...">
+        <form class="search-form" action="{{ route('searchuserresult.post') }}" method="post">
+            @csrf
+            <input type="text" class="searchbar" name="search-user" placeholder="Search a user...">
             <button type="submit"><i class="fas fa-search"></i></button>
         </form>
         <a href="{{ route("homepage")}}" class="{{ Route::currentRouteName() === 'homepage' ? 'active' : '' }}">Home</a>
@@ -28,7 +29,11 @@
         <a href="{{ route("reviewpage")}}" class="{{ Route::currentRouteName() === 'reviewpage' ? 'active' : '' }}">Review</a>
         <a href="{{ route("logout") }}" class="logout">Logout</a>
         <a href="{{ route("userprofilepage")}}" class="{{ Route::currentRouteName() == 'userprofilepage' ? 'active' : '' }} profile-border">
-            <img src="{{ Vite::asset('resources/images/sampleProfile.png')}}" alt="Sample Profile" class="sample-profile">
+            @if (asset('resources/images/' . Auth::user()->profile_photo_path) == asset('resources/images/sampleProfile.png'))
+                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture" class="sample-profile">
+            @else
+                <img src="{{ asset('storage/uploads/images/profile-pictures/' . Auth::user()->profile_photo_path) }}" alt="Profile Picture" class="sample-profile">
+            @endif
         </a>
     </div>
 </body>

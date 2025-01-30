@@ -78,6 +78,18 @@ body{
     color: orange;
 }
 
+.edit-profile-btn {
+    padding: 16px 24px;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--rentease-secondary);
+    color: var(--bg-primary);
+}
+
+.edit-profile-btn:hover {
+    background-color: var(--rentease-hover-secondary);
+}
+
 .container {
     width: 100vw;
 }
@@ -133,6 +145,29 @@ body{
     width: 40%;
     object-fit: cover;
     cursor: pointer;
+}
+
+.property-post-content[data-isPostAvailable="0"] {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.8);
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 28px;
+    width: 100vw;
+    box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
+}
+
+.property-post-content[data-isPostAvailable="0"] .unit-photo {
+    height: auto;
+    width: 40%;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.property-post-content[data-isPostAvailable="0"] .tags{
+    opacity: 0.3;
 }
 
 .property-info {

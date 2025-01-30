@@ -37,7 +37,7 @@ return new class extends Migration
                 ON PInfo.id = PPost.property_info_id
             RIGHT JOIN reviews AS R
                 ON R.property_post_id = PPost.id
-            WHERE 
+            WHERE
                 R.review_by_user_id = @p_UserId
                 AND R.lease_end IS NOT NULL
                 AND R.is_reviewed = 0;
@@ -82,7 +82,7 @@ return new class extends Migration
 
         DB::statement("
             CREATE PROCEDURE RE_SP_INSERT_REVIEW
-                @p_PPostId INT,
+                @p_PPostId INT = NULL,
                 @p_ReviewBy INT,
                 @p_ReviewTo INT
             AS
@@ -166,7 +166,7 @@ return new class extends Migration
                 ON PInfo.id = PPost.property_info_id
             RIGHT JOIN reviews AS R
                 ON R.property_post_id = PPost.id
-            WHERE 
+            WHERE
                 R.id = @p_ReviewId
         ");
 
@@ -178,9 +178,9 @@ return new class extends Migration
                     , @p_IsReviewed BIT
                     ,@p_IsEdited BIT
             AS
-            UPDATE 
+            UPDATE
                 reviews
-            SET 
+            SET
                 rating = @p_Rating
                 ,review_text = @p_Description
                 ,is_reviewed = @p_IsReviewed
@@ -191,7 +191,7 @@ return new class extends Migration
 
         DB::statement("
             CREATE PROCEDURE RE_SP_GET_ALL_REVIEWS_WRITTEN_BY_USER
-                    @p_UserId INT 
+                    @p_UserId INT
             AS
             SELECT
                 U.profile_photo_path AS pfp
