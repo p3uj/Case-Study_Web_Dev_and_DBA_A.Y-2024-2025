@@ -15,8 +15,13 @@
     <div class="container">
         <div class="text-section">
             <h1>RentEase</h1>
-            <p>Hassle-free and easy way to find a new home! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Habitant cras morbi hendrerit nunc vel sapien. In habitasse at diam suspendisse non vitae fermentum, pharetra arcu.</p>
-            <a href="{{ route("propertiespage")}}" class="{{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}">Find now</a>
+            <p>Looking for the perfect rental property or a roommate? Our web application makes it easy! 
+                Whether you're a tenant seeking a roommate or a landlord posting a vacancy, our platform 
+                connects you with the right people. With customizable search filters based on location and 
+                rental price, finding your ideal match has never been easier. Plus, the built-in feedback and 
+                rating system ensures trust and transparency between tenants and landlords. Discover the hassle-free 
+                way to find your next home today!</p>
+            <a href="{{ route("propertiespage") }}" class="{{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}">Find now</a>
         </div>
         <div class="image-section">
             <!-- Adding the images from the specified paths -->
@@ -29,12 +34,20 @@
 <div class="featured-properties">
     <h2 class="section-title">Featured Properties</h2>
     <div class="property-grid">
-        <img src="{{ Vite::asset('resources/images/home/fp1.jpg') }}" alt="Property 1" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp2.jpg') }}" alt="Property 2" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp3.jpg') }}" alt="Property 3" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp4.jpg') }}" alt="Property 4" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp5.jpg') }}" alt="Property 5" class="property-image">
-        <img src="{{ Vite::asset('resources/images/home/fp6.jpg') }}" alt="Property 6" class="property-image"> <!-- New image fp6 added -->
+        @if (!Empty($featured))
+            @foreach ($featured as $property)
+                <img class="property-image" src="{{ asset('storage/uploads/images/property-posts/' . $property->photo_path) }}" alt="Property Post Image"
+                            onclick="window.location.href='{{ route('viewpropertypostpage', ['id' => $property->Post, 'property_info_id' => $property->Info]) }}'"
+                        >
+            @endforeach
+        @else
+            <img src="{{ Vite::asset('resources/images/home/fp1.jpg') }}" alt="Property 1" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp2.jpg') }}" alt="Property 2" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp3.jpg') }}" alt="Property 3" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp4.jpg') }}" alt="Property 4" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp5.jpg') }}" alt="Property 5" class="property-image">
+            <img src="{{ Vite::asset('resources/images/home/fp6.jpg') }}" alt="Property 6" class="property-image">
+        @endif
     </div>
 </div>
 
@@ -44,74 +57,102 @@
     <div class="arrows-container">
         <button class="arrow left-arrow"><i class="fas fa-chevron-left"></i></button>
         <div class="properties-grid">
-            <div class="property-card">
-                <div class="image-holder">
-                    <img src="{{ Vite::asset('resources/images/home/p1.jpg') }}" alt="Apartment">
+            @if (!Empty($properties))
+                @foreach ($properties as $property)
+                    <div class="property-card">
+                        <div class="image-holder">
+                            <img src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Apartment">
+                        </div>
+                        <h3>{{ $property->unit_category}}</h3>
+                        <div class="category">Category: {{ $property->unit_category}}</div>
+                        <div class="location">Location: {{ $property->location}}</div>
+                        <div class="price">{{ $property->rental_price}}/month</div>
+                        <div class="ratings">
+                            @for ($star = 1; $star <= 5; $star++)
+                            <!-- If the star is less than or equal to average rating, show the filled star -->
+                                @if ($star <= $property->Rating)
+                                    <i class="fas fa-star"></i>
+                                <!-- Otherwise, show empty star -->
+                                @else
+                                    <i class="far fa-star"></i>
+                                @endif
+                            @endfor
+                            <p>{{ $property->Rating }} out of 5</p>
+                        </div>
+                        <a href='{{ route('viewpropertypostpage', ['id' => $property->Post, 'property_info_id' => $property->Info]) }}'>View Details</a>
+                    </div>
+                @endforeach
+            @else
+                <div class="property-card">
+                    <div class="image-holder">
+                        <img src="{{ Vite::asset('resources/images/home/p1.jpg') }}" alt="Apartment">
+                    </div>
+                    <h3>SkyRise Apartment</h3>
+                    <div class="category">Category: Apartment</div>
+                    <div class="location">Location: Metro Manila, Philippines</div>
+                    <div class="price">₱15,000/month</div>
+                    <div class="ratings">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i> <!-- Empty star -->
+                    </div>
+                    <a href="#">View Details</a>
                 </div>
-                <h3>SkyRise Apartment</h3>
-                <div class="category">Category: Apartment</div>
-                <div class="location">Location: Metro Manila, Philippines</div>
-                <div class="price">₱15,000/month</div>
-                <div class="ratings">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i> <!-- Empty star -->
+                    <div class="property-card">
+                    <div class="image-holder">
+                        <img src="{{ Vite::asset('resources/images/home/p2.jpg') }}" alt="Boarding House">
+                    </div>
+                    <h3>BoardBase Boarding House</h3>
+                    <div class="category">Category: Boarding House</div>
+                    <div class="location">Location: Quezon City, Philippines</div>
+                    <div class="price">₱20,000/month</div>
+                    <div class="ratings">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i> <!-- Empty star -->
+                        <i class="far fa-star"></i> <!-- Empty star -->
+                    </div>
+                    <a href="#">View Details</a>
                 </div>
-                <a href="#">View Details</a>
-            </div>
-            <div class="property-card">
-                <div class="image-holder">
-                    <img src="{{ Vite::asset('resources/images/home/p2.jpg') }}" alt="Boarding House">
+                <div class="property-card">
+                    <div class="image-holder">
+                        <img src="{{ Vite::asset('resources/images/home/p3.jpg') }}" alt="Studio Unit">
+                    </div>
+                    <h3>APT Studio Unit</h3>
+                    <div class="category">Category: Studio Unit</div>
+                    <div class="location">Location: Cebu, Philippines</div>
+                    <div class="price">₱30,000/month</div>
+                    <div class="ratings">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i> <!-- Full stars -->
+                    </div>
+                    <a href="#">View Details</a>
                 </div>
-                <h3>BoardBase Boarding House</h3>
-                <div class="category">Category: Boarding House</div>
-                <div class="location">Location: Quezon City, Philippines</div>
-                <div class="price">₱20,000/month</div>
-                <div class="ratings">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i> <!-- Empty star -->
-                    <i class="far fa-star"></i> <!-- Empty star -->
+                <div class="property-card">
+                    <div class="image-holder">
+                        <img src="{{ Vite::asset('resources/images/home/p4.jpg') }}" alt="Dorm">
+                    </div>
+                    <h3>Dormix Dormitories</h3>
+                    <div class="category">Category: Dormitory</div>
+                    <div class="location">Location: Manila, Philippines</div>
+                    <div class="price">₱12,000/month</div>
+                    <div class="ratings">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i> <!-- Empty star -->
+                    </div>
+                    <a href="#">View Details</a>
                 </div>
-                <a href="#">View Details</a>
-            </div>
-            <div class="property-card">
-                <div class="image-holder">
-                    <img src="{{ Vite::asset('resources/images/home/p3.jpg') }}" alt="Studio Unit">
-                </div>
-                <h3>APT Studio Unit</h3>
-                <div class="category">Category: Studio Unit</div>
-                <div class="location">Location: Cebu, Philippines</div>
-                <div class="price">₱30,000/month</div>
-                <div class="ratings">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i> <!-- Full stars -->
-                </div>
-                <a href="#">View Details</a>
-            </div>
-            <div class="property-card">
-                <div class="image-holder">
-                    <img src="{{ Vite::asset('resources/images/home/p4.jpg') }}" alt="Dorm">
-                </div>
-                <h3>Dormix Dormitories</h3>
-                <div class="category">Category: Dormitory</div>
-                <div class="location">Location: Manila, Philippines</div>
-                <div class="price">₱12,000/month</div>
-                <div class="ratings">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i> <!-- Empty star -->
-                </div>
-                <a href="#">View Details</a>
-            </div>
+            @endif
+            
         </div>
         <button class="arrow right-arrow"><i class="fas fa-chevron-right"></i></button>
     </div>
@@ -121,15 +162,29 @@
     <div class="top-rated-properties">
     <h2>Top Rated Properties</h2>
     <div class="top-rated-grid">
-        <div class="ranked-property">
-            <div class="rank">1</div>
-            <div class="image-placeholder"></div>
-            <div class="info">
-                <h3>Luxury Apartment</h3>
-                <p>Downtown location, spacious</p>
+        @if (!Empty($topRated))
+            @foreach ($topRated as $index => $property)
+                <div class="ranked-property">
+                    <div class="rank">{{ $index + 1 }}</div>
+                    <div class="image-placeholder">
+                        <img src="{{ asset('storage/uploads/images/property-posts/' . $property->FirstPhoto) }}" alt="Apartment">
+                    </div>
+                    <div class="info">
+                        <h3>{{ $property->unit_category }}</h3>
+                        <p>{{ $property->location }}</p>
+                    </div>
+                </div>
+            @endforeach
+        @else
+            <div class="ranked-property">
+                <div class="rank">1</div>
+                <div class="image-placeholder"></div>
+                <div class="info">
+                    <h3>Luxury Apartment</h3>
+                    <p>Downtown location, spacious</p>
+                </div>
             </div>
-        </div>
-        <div class="ranked-property">
+            <div class="ranked-property">
             <div class="rank">2</div>
             <div class="image-placeholder"></div>
             <div class="info">
@@ -169,6 +224,7 @@
                 <p>Waterfront location, modern design</p>
             </div>
         </div>
+        @endif
     </div>
 </div>
 
@@ -231,10 +287,10 @@
                 <h3>Follow Us</h3>
                 <p>Follow us on social media:</p>
                 <ul class="social-media">
-                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fab fa-discord"></i></a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i></a>@RentEase</li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a>@RentEase</li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a>@RentEase</li>
+                    <li><a href="#"><i class="fab fa-discord"></i></a> @RentEase</li>
                 </ul>
             </div>
         </div>

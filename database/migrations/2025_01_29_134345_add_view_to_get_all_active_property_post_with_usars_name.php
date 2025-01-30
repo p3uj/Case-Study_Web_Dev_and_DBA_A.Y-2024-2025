@@ -32,6 +32,6 @@ return new class extends Migration
     public function down(): void
     {
         // Drop the view if it exists
-        DB::statement("DROP PROCEDURE IF EXISTS RE_V_GET_ALL_ACTIVE_PROPERTY_POST_WITH_USERNAME");
+        DB::statement("DROP VIEW IF EXISTS RE_V_GET_ALL_ACTIVE_PROPERTY_POST_WITH_USERNAME");
     }
 };

@@ -24,7 +24,7 @@
         <a href="{{ route("findroommateortenantpage")}}" class="{{ Route::currentRouteName() === 'findroommateortenantpage' ? 'active' : '' }}">
             Find {{ Auth::user()->role === 'Landlord' ? 'Tenant' : 'Roommate' }}
         </a>
-        <a href="{{ route("postapropertypage")}}" class="{{ Route::currentRouteName() === 'postapropertypage' ? 'active' : '' }}">Post a Property</a>
+        <a href="{{ route("pendingrentalspage")}}" class="{{ Route::currentRouteName() === 'pendingrentalspage' ? 'active' : '' }}">Pending Rentals</a>
         <a href="{{ route("reviewpage")}}" class="{{ Route::currentRouteName() === 'reviewpage' ? 'active' : '' }}">Review</a>
         <a href="{{ route("logout") }}" class="logout">Logout</a>
         <a href="{{ route("userprofilepage")}}" class="{{ Route::currentRouteName() == 'userprofilepage' ? 'active' : '' }} profile-border">
