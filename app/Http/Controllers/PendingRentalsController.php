@@ -20,13 +20,13 @@ class PendingRentalsController extends Controller
 
     public function updateLeaseStatus(Request $request)
     {
-        $reviewId = $request->input('reviewId');
+        $landlordId = Auth::id();
         $postId = $request->input('postId');
         $isAvailable = 1;
         $leaseEnd = now();
 
         DB::statement('EXEC RE_SP_UPDATE_AVAILABILITY_ENDLEASE ?, ?, ?, ?', [
-            $reviewId, $postId, $isAvailable, $leaseEnd
+            $landlordId, $postId, $isAvailable, $leaseEnd
         ]);
 
         return redirect()->back();

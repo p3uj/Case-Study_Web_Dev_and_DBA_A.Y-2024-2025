@@ -15,11 +15,11 @@
     <div class="container">
         <div class="text-section">
             <h1>RentEase</h1>
-            <p>Looking for the perfect rental property or a roommate? Our web application makes it easy! 
-                Whether you're a tenant seeking a roommate or a landlord posting a vacancy, our platform 
-                connects you with the right people. With customizable search filters based on location and 
-                rental price, finding your ideal match has never been easier. Plus, the built-in feedback and 
-                rating system ensures trust and transparency between tenants and landlords. Discover the hassle-free 
+            <p>Looking for the perfect rental property or a roommate? Our web application makes it easy!
+                Whether you're a tenant seeking a roommate or a landlord posting a vacancy, our platform
+                connects you with the right people. With customizable search filters based on location and
+                rental price, finding your ideal match has never been easier. Plus, the built-in feedback and
+                rating system ensures trust and transparency between tenants and landlords. Discover the hassle-free
                 way to find your next home today!</p>
             <a href="{{ route("propertiespage") }}" class="{{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}">Find now</a>
         </div>
@@ -55,7 +55,7 @@
 <div class="properties">
     <h2>Properties</h2>
     <div class="arrows-container">
-        <button class="arrow left-arrow"><i class="fas fa-chevron-left"></i></button>
+        <button class="arrow left-arrow" {{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}" onclick="window.location.href='{{ route('propertiespage') }}'"><i class="fas fa-chevron-left"></i></button>
         <div class="properties-grid">
             @if (!Empty($properties))
                 @foreach ($properties as $property)
@@ -152,9 +152,10 @@
                     <a href="#">View Details</a>
                 </div>
             @endif
-            
         </div>
-        <button class="arrow right-arrow"><i class="fas fa-chevron-right"></i></button>
+        <button class="arrow right-arrow" {{ Route::currentRouteName() === 'propertiespage' ? 'active' : '' }}" onclick="window.location.href='{{ route('propertiespage') }}'">
+            <i class="fas fa-chevron-right"></i>
+        </button>
     </div>
 </div>
 

@@ -14,8 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         DB::statement("
-            CREATE PROCEDURE RE_SP_UPDATE_AVAILABILITY_ENDLEASE
-                @p_ReviewId INT
+            CREATE PROCEDURE RE_SP_UPDATE_PROPERTY_AVAILABILITY_ENDLEASE
+                @p_landlordId INT
                 ,@p_PostId INT
                 ,@p_IsAvailable BIT
                 ,@p_leaseEnd DATETIME
@@ -25,7 +25,9 @@ return new class extends Migration
             SET 
                 lease_end = @p_leaseEnd
             WHERE
-                id = @p_ReviewId
+                review_by_user_id = @p_landlordId
+                AND review_to_user_id = @p_landlordId
+                AND property_post_id = @p_PostId
 
             UPDATE
                 property_posts

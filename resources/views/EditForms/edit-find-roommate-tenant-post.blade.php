@@ -32,6 +32,7 @@
             <textarea hidden name="default-description">{{ $post->description }}</textarea>
 
             <!-- City Dropdown Box -->
+            <p>City:</p>
             <select name="city" id="city" data-city-list="{{ json_encode($cities) }}">
                 <option value="" disabled selected>Please select city</option>
                 @foreach ($cities as $city)
@@ -46,12 +47,14 @@
             <input type="hidden" id="default-barangay-list" data-default-barangay="">
 
             <!-- Barangay Dropdown Box -->
+            <p>Barangay:</p>
             <select name="barangay" id="barangay" data-barangay-list="{{ json_encode($barangays) }}"
                 data-fetch-barangay="{{ $post->barangay }}">
                 <option value="" disabled selected>Please select barangay</option>
             </select>
 
             <!-- Description Textarea -->
+            <p>Description:</p>
             <textarea class="description" placeholder="Write a description" id="description" name="description">{{ $post->description }}</textarea>
 
             <button type="submit" class="save-btn" onclick="return confirm('Are you sure you want to save these changes?')">Save Changes</button>
