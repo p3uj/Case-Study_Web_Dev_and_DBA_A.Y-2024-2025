@@ -25,7 +25,7 @@ class PendingRentalsController extends Controller
         $isAvailable = 1;
         $leaseEnd = now();
 
-        DB::statement('EXEC RE_SP_UPDATE_AVAILABILITY_ENDLEASE ?, ?, ?, ?', [
+        DB::statement('EXEC RE_SP_UPDATE_PROPERTY_AVAILABILITY_ENDLEASE ?, ?, ?, ?', [
             $landlordId, $postId, $isAvailable, $leaseEnd
         ]);
 
