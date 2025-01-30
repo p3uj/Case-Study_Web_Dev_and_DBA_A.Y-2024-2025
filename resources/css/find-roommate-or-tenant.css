@@ -153,6 +153,7 @@
     width: 100%;
     object-fit: cover;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .user-profile img:hover {

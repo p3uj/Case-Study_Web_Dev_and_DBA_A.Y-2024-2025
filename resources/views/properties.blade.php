@@ -116,9 +116,9 @@
                         <div class="bottom-part">
                             <div class="user-profile">
                                 @if (asset('resources/images/' . $property->profile_photo_path) == asset('resources/images/sampleProfile.png'))
-                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
+                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $property->user_id]) }}'">
                                 @else
-                                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $property->profile_photo_path) }}" alt="Profile Picture">
+                                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $property->profile_photo_path) }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $property->user_id]) }}'">
                                 @endif
                                 {{-- Do Kyung-Soo --}}
                                 <span class="user-name">{{ $property->UserName }}</span>
