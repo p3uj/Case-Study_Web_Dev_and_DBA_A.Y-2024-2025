@@ -20,6 +20,7 @@ use App\Http\Controllers\EditPropertyPost;
 use App\Http\Controllers\EditPropertyPostController;
 use App\Http\Controllers\EditSearchPostController;
 use App\Http\Controllers\PendingRentalsController;
+use App\Http\Controllers\SearchUserResultController;
 use App\Http\Controllers\ViewPropertyPost;
 use App\Http\Controllers\ViewUserProfileController;
 
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('userprofile/deletepropertyornotavail/{id}/{available}/{deleted}', [EditPropertyPostController::class, 'isAvailableOrDelete'])->name('userprofilepage.deleteornotavialproperty');
     Route::get('editprofile/{id}', [EditProfileController::class, 'index'])->name('editprofilepage');
     Route::get('/userprofile/view/{userId}', [ViewUserProfileController::class, 'index'])->name('viewuserprofilepage');
+    Route::get('/home/searchuserresult/', [SearchUserResultController::class, 'index'])->name('searchuserresultpage');
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
@@ -51,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/submit-review', [AddReviewController::class, 'submitReview'])->name('submit.review');
     Route::post('editpropertypost', [EditPropertyPostController::class, 'update'])->name('editpropertypost.post');
     Route::post('editprofile', [EditProfileController::class, 'update'])->name('editprofilepage.post');
+    Route::post('/home/searchuserresult/', [SearchUserResultController::class, 'fetchUser'])->name('searchuserresult.post');
 
 
     Route::put('/write-review', [ReviewController::class, 'writeReview'])->name('writereview');
