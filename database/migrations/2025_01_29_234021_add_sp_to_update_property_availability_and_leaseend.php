@@ -43,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_UPDATE_AVAILABILITY_ENDLEASE");
+        DB::statement("DROP PROCEDURE IF EXISTS RE_SP_UPDATE_PROPERTY_AVAILABILITY_ENDLEASE");
     }
 };
