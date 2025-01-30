@@ -21,6 +21,7 @@ use App\Http\Controllers\EditPropertyPostController;
 use App\Http\Controllers\EditSearchPostController;
 use App\Http\Controllers\PendingRentalsController;
 use App\Http\Controllers\ViewPropertyPost;
+use App\Http\Controllers\ViewUserProfileController;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
 Route::middleware('auth')->group(function () {
@@ -41,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('editpropertypost/{id}{property_info_id}', [EditPropertyPostController::class, 'index'])->name('editpropertypostpage');
     Route::get('userprofile/deletepropertyornotavail/{id}/{available}/{deleted}', [EditPropertyPostController::class, 'isAvailableOrDelete'])->name('userprofilepage.deleteornotavialproperty');
     Route::get('editprofile/{id}', [EditProfileController::class, 'index'])->name('editprofilepage');
-
+    Route::get('/userprofile/view/{userId}', [ViewUserProfileController::class, 'index'])->name('viewuserprofilepage');
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
