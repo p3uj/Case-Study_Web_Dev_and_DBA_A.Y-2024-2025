@@ -90,4 +90,19 @@ class User extends Authenticatable
 
         return $userInfo[0]; // Returning the first element of the result array, which contains the authenticated user's information
     }
+
+    public static function searchUserResult($searchUserValue) {
+        $searchUserResult = DB::select('RE_SP_GET_USER_BY_NAME ?', [$searchUserValue]);
+
+        // Loop through the array and format the Rating
+        foreach ($searchUserResult as $user) {
+            if (isset($user->Rating)) {
+                $user->Rating = number_format((float) $user->Rating, 2, '.', '');  // Format as 0.00
+            } else {
+                $user->Rating = '0.00';  // Ensure it defaults to 0.00 if not set
+            }
+        }
+
+        return $searchUserResult;
+    }
 }
