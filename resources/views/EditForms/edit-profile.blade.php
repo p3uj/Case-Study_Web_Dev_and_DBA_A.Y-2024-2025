@@ -48,10 +48,13 @@
             </div>
 
             <!-- Input fields -->
+            <p>Firstname:</p>
             <input type="text" class="input-field" name="firstname" id="firstname" placeholder="Type your firstname" value="{{ $userInfo->firstname }}">
+            <p>Lastname:</p>
             <input type="text" class="input-field" name="lastname" id="lastname" placeholder="Type your lastname" value="{{ $userInfo->lastname }}">
 
             <!-- City Dropdown Box -->
+            <p>City:</p>
             <select class="input-field" name="city" id="city" data-city-list="{{ json_encode($cities) }}">
                 <option value="" disabled selected>Please select city</option>
                 @foreach ($cities as $city)
@@ -63,6 +66,7 @@
             </select>
 
             <!-- Bio Textarea -->
+            <p>Bio:</p>
             <textarea class="input-field bio" placeholder="Write a Bio" id="bio" name="bio">{{ $userInfo->bio }}</textarea>
 
             <button type="submit" class="save-btn"
