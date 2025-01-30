@@ -17,6 +17,7 @@ return new class extends Migration
             AS
             SELECT
                 R.id
+                ,PPost.id AS Post
                 ,(
                     SELECT TOP 1 photo_path
                     FROM unit_photos

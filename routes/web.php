@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('editpropertypost', [EditPropertyPostController::class, 'update'])->name('editpropertypost.post');
 
     Route::put('/write-review', [ReviewController::class, 'writeReview'])->name('writereview');
+    Route::put('/update-lease', [PendingRentalsController::class, 'updateLeaseStatus'])->name('updatelease');
 });
 
 // Ensure that only unauthenticated users can access this root route.

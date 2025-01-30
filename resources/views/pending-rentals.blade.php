@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Profile Tabs</title>
 
     {{-- Link css and javascript file --}}
@@ -32,10 +33,19 @@
                             <a class="max-occupancy">Max {{ $property->max_occupancy }} occupants</a>
                         </div>
                     </div>
-                    <div class="lease-btn-wrapper">
-                        <button class="lease-btn">End Lease</button>
-                    </div>
-                    
+                    @if ($userRole == 'Landlord')
+                        <!-- Form with a button that triggers confirmation -->
+                        <form action="{{ route('updatelease') }}" method="POST" class="lease-btn-wrapper">
+                            @csrf
+                            @method('PUT')
+
+                            <input type="hidden" name="reviewId" value="{{ $property->id }}">
+                            <input type="hidden" name="postId" value="{{ $property->Post }}">
+
+                            <!-- Change the button type to 'button' and use onclick to trigger confirmation -->
+                            <button type="button" class="lease-btn" onclick="confirmEndLease(event)">End Lease</button>
+                        </form>
+                    @endif
                 </div>
             </div>
             @endforeach
@@ -46,5 +56,18 @@
             </div>
         @endif      
     </div>
+
+    <script>
+        function confirmEndLease(event) {
+            // Ask for confirmation before submitting the form
+            if (confirm("Are you sure you want to end the lease for this property?")) {
+                // If confirmed, submit the form
+                event.target.closest('form').submit();
+            } else {
+                // If canceled, prevent the form submission
+                event.preventDefault();
+            }
+        }
+    </script>
 </body>
 </html>
