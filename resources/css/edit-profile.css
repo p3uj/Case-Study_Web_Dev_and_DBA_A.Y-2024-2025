@@ -6,6 +6,16 @@ body {
     padding: 0;
 }
 
+/* Profile picture styling */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .profile-picture {
     width: 150px; /* Set the width of the container */
     height: 150px; /* Set the height of the container */
@@ -61,15 +71,16 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease-in-out; /* Smooth transition */
 }
 
 /* Hover effect for the form container */
 .form-container:hover {
-    background-color: #E5E4E2;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    background-color: #E5E4E2; /* Lighter background on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+    transform: translate(-50%, -50%) scale(1.03); /* Subtle forward pop effect */
 }
 
-/* Close button */
 /* Close button */
 .close-btn {
     position: absolute;
@@ -80,14 +91,17 @@ body {
     font-size: 25px;
     color: black; /* Change the color to black */
     cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
+/* Hover effect: changes color and makes the '×' larger */
 .close-btn:hover {
-    color: #9f8b67; /* Optional: You can keep the hover effect or remove it */
+    color: #9f8b67; /* Lighter brown */
+    transform: scale(1.3); /* Slight enlargement */
 }
 
-/* Form elements */
-select, textarea {
+/* Input fields styling */
+.input-field {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -102,12 +116,43 @@ select:disabled {
     color: #999;
 }
 
-/* Textarea styling */
-textarea.description {
-    height: 150px;
-    resize: vertical;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+/* Focus effect for input fields */
+.input-field:focus {
+    border-color: #5a3d2b; /* Dark brown */
+    outline: none;
+    box-shadow: 0 0 5px rgba(90, 61, 43, 0.5);
+}
+
+/* First Name and Last Name Input Fields */
+#firstname, #lastname {
+    font-size: 16px;
+    text-align: left;
+    margin: 10px 0;
+}
+
+/* File Input Customization */
+.file-input {
+    display: none;
+}
+
+.file-label {
+    display: inline-block;
+    background-color: #5a3d2b; /* Brown color */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+/* Hover Effect for File Upload Button */
+.file-label:hover {
+    background-color: #9f8b67; /* Lighter brown */
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Button styling */
@@ -146,7 +191,7 @@ textarea::placeholder {
         padding: 15px;
     }
 
-    .post-btn {
+    .save-btn {
         font-size: 14px;
     }
 }
