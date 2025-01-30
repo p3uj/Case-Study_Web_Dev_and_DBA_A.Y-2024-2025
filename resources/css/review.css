@@ -56,7 +56,6 @@ body {
     display: block;
 }
 
-/* To Review Section */
 .to-review-content {
     background-color: #BDA27E;
     margin-bottom: 28px;
@@ -64,26 +63,32 @@ body {
     min-height: 250px;
     border-radius: 12px;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 24px;
+    align-items: stretch; /* Ensures all children stretch to full height */
+    justify-content: flex-start;
+    padding: 0; /* Remove padding to allow full coverage */
     position: relative;
-    gap: 24px;
+    gap: 16px;
     flex-direction: row;
+    overflow: hidden; /* Prevents image from exceeding container bounds */
 }
 
+/* Make the image cover the left side, top to bottom */
 .to-review-content img {
-    width: 100px;
-    height: 60px;
-    object-fit: cover;
-    margin-right: 20px; /* Space between the image and text */
+    width: 20%; /* Adjust width as needed */
+    height: 95%; /* Ensure it covers the full height */
+    object-fit: cover; /* Ensures the image fully covers its area */
+    border-radius: 12px 0 0 12px; /* Rounded corners only on the left side */
+    flex-shrink: 0; /* Prevents the image from shrinking */
 }
 
-/* Ensure the text content aligns to the right */
+/* Move text closer to the image */
 .to-review-info {
     flex-grow: 1;
-    text-align: left; /* Align text to the left */
-    margin-left: 500px; /* Push text content to the right */
+    text-align: left;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center text vertically */
 }
 
 /* Align the content within .to-review-info */
@@ -151,19 +156,20 @@ body {
 }
 
 .user-review-profile img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 20px;
+    width: 200px; /* Adjust the size */
+    height: 200px; /* Keep it square */
+    border-radius: 50%; /* Makes it a circle */
+    object-fit: cover; /* Ensures full coverage */
 }
 
+/* Ensure content (text and stars) in My Reviews are in a row */
 /* Ensure content (text and stars) in My Reviews are in a row */
 .reviews {
     display: flex;
     flex-direction: row; /* Align reviews in a row */
     align-items: center; /* Vertically center the content */
     gap: 8px; /* Space between text and star rating */
+    justify-content: flex-end; /* Align content to the right */
 }
 
 .reviews h3 {
