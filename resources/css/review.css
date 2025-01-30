@@ -1,51 +1,53 @@
-*{
+/* Resetting styles */
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: poppins,sans-serif;
+    font-family: poppins, sans-serif;
     text-decoration: none;
 }
 
-body{
+body {
     overflow-x: hidden;
 }
 
 .container {
     width: 100vw;
+    padding: 0 135px;
+    position: relative; /* Make sure the container doesn't overlap with the form */
 }
 
+/* Tab Navigation Styles */
 .tab-box {
-    margin-left: 135px;
-    margin-right: 135px;
-    margin-top: 26px;
-    margin-bottom: 26px;
+    margin: 26px 0;
 }
 
 .tab-btn {
-    background-color: transparent;
-    color: var(--txt-secondary);
+    color: #333; /* Default text color */
     padding: 16px 32px;
-    border: none;
-    border-radius: 45px;
     font-size: 16px;
     font-weight: 600;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    text-decoration: none; /* Remove underline */
+    background-color: transparent; /* Ensure there's no background */
+    border: none;
+    border-radius: 45px;
 }
 
+/* Tab button hover effect */
 .tab-btn:hover {
-    background-color: #007BFF;
-    color: #fff;
+    color: #BDA27E; /* Color when hovering */
+    background-color: transparent; /* No background when hovering */
 }
 
-.tab-btn:hover {
-    color: var(--bg-primary);
-    background-color: var(--rentease-hover-secondary);
-}
-
+/* Active Tab button styles */
 .tab-btn.active {
-    background-color: var(--rentease-secondary);
-    color: var(--bg-primary);
+    color: #C19A6B; /* Active text color */
+    background-color: transparent;
 }
 
+/* Tab Content Styles */
 .tab-content {
     display: none;
 }
@@ -54,90 +56,181 @@ body{
     display: block;
 }
 
+/* To Review Section */
 .to-review-content {
-    display: flex;
-    background-color: var(--rentease-secondary);
-    max-height: 400px;
-    overflow: hidden;
-    position: relative;
+    background-color: #BDA27E;
     margin-bottom: 28px;
     width: 100%;
-    box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
-    justify-content: space-between;
+    min-height: 250px;
+    border-radius: 12px;
+    display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: 24px;
+    position: relative;
+    gap: 24px;
+    flex-direction: row;
 }
 
 .to-review-content img {
-    height: auto;
-    width: 40%;
+    width: 100px;
+    height: 60px;
     object-fit: cover;
+    margin-right: 20px; /* Space between the image and text */
 }
 
+/* Ensure the text content aligns to the right */
 .to-review-info {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
+    flex-grow: 1;
+    text-align: left; /* Align text to the left */
+    margin-left: 500px; /* Push text content to the right */
 }
 
-.to-review-info img {
-    height: 18px;
+/* Align the content within .to-review-info */
+.to-review-info h2, .to-review-info h5 {
+    text-align: left;
+    margin-bottom: 12px;
+}
+
+.to-review-info h5 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+}
+
+.to-review-info h5 img {
     width: 18px;
-    margin-right: 8px;
-}
-
-.review-btn-wrapper {
-    display: flex;
-    width: 10%;
-    justify-content: center;
-}
-
-.review-btn {
-    padding: 16px 32px;
-    color: var(--bg-primary);
-    background-color: var(--btn-default);
-    border: none;
-    border-radius: 20px;
-    margin: 20px;
-}
-
-.review-btn:hover {
-    background-color: var(--btn-hover);
+    height: 18px;
 }
 
 .lease-duration {
-    font-size: 16px;
-    color: var(--txt-secondary);
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 12px;
 }
 
-.tags {
-    margin-top: 8px;
-    margin-bottom: 16px;
-    display: inline-flex;
-    gap: 14px;
+.to-review-info h2 {
+    font-size: 24px;
 }
 
-.unit-type {
-    background: linear-gradient(82deg,#F5F5DC, #BDA27E);
-    padding: 16px 24px;
+/* Review Button for To Review */
+.review-btn {
+    background-color: #5a3d2b; /* Button color */
+    color: white;
+    padding: 12px 32px;
+    border: none;
     border-radius: 45px;
-    font-weight: 600;
-    border: 1px solid var(--btn-default);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.unit-price {
-    background: linear-gradient(82deg,#D9534F, #FF6F61);
-    padding: 16px 24px;
+/* Hover effect for To Review Button */
+.review-btn:hover {
+    background-color: #E5E4E2; /* Change color on hover */
+    color: black;
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* My Reviews Section */
+.review-info-container {
+    background-color: #BDA27E;
+    margin-bottom: 28px;
+    width: 100%;
+    min-height: 250px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    position: relative;
+    gap: 24px;
+    flex-direction: row;
+}
+
+.user-review-profile img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+/* Ensure content (text and stars) in My Reviews are in a row */
+.reviews {
+    display: flex;
+    flex-direction: row; /* Align reviews in a row */
+    align-items: center; /* Vertically center the content */
+    gap: 8px; /* Space between text and star rating */
+}
+
+.reviews h3 {
+    color: #FFD700;
+    margin-bottom: 0;
+}
+
+/* Align the content within .reviews-caption */
+.reviews-caption h1, .reviews-caption h4 {
+    text-align: right; /* Align text to the right */
+    margin-bottom: 12px;
+}
+
+.date-review {
+    color: #333;
+    font-size: 14px;
+}
+
+/* Review Button for My Reviews */
+.editreview-btn-wrapper {
+    text-align: right;
+}
+
+.editreview-btn {
+    background-color: #5a3d2b; /* Button color */
+    color: white;
+    padding: 12px 32px;
+    border: none;
     border-radius: 45px;
-    font-weight: 600;
-    border: 1px solid var(--btn-default);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.description {
-    max-height: 120px;
-    overflow: auto; /* allow user to scroll when the height exceed to the max-height*/
-    font-size: 20px;
-    line-height: 30px;
+/* Hover effect for Edit Review Button */
+.editreview-btn:hover {
+    background-color: #E5E4E2; /* Change color on hover */
+    color: black;
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .to-review-content, .review-info-container {
+        flex-direction: column;
+        min-height: auto;
+        gap: 16px;
+        align-items: flex-start; /* Align items to the start for small screens */
+    }
+
+    .review-btn, .editreview-btn {
+        position: static;
+        transform: none;
+        margin-top: 16px;
+        width: 100%;
+    }
+
+    .review-info-container h4,
+    .date-review {
+        position: static;
+        text-align: right;
+        margin-top: 8px;
+    }
 }
