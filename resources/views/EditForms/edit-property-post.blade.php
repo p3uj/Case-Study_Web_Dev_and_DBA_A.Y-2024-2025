@@ -37,6 +37,7 @@
             <input type="hidden" name="defualt-max-occupancy" value="{{ $post->max_occupancy }}">
             <textarea hidden name="default-description">{{ $post->description }}</textarea>
 
+            <p>Unit Category:</p>
             <!-- Unit Category Dropdown Box -->
             <select name="unit-category" id="unit-category" required>
                 <option value="" disabled selected>Please select a unit category</option>
@@ -47,6 +48,7 @@
                 <option value="Other" {{ $post->unit_category == "Other" ? 'selected' : '' }}>Other</option>
             </select>
 
+            <p>City:</p>
             <!-- City Dropdown Box -->
             <select name="city" id="city" data-city-list="{{ json_encode($cities) }}">
                 <option value="" disabled selected>Please select city</option>
@@ -62,16 +64,20 @@
             <input type="hidden" id="default-barangay-list" data-default-barangay="">
 
             <!-- Barangay Dropdown Box -->
+            <p>Barangay:</p>
             <select name="barangay" id="barangay" data-barangay-list="{{ json_encode($barangays) }}"
                 data-fetch-barangay="{{ $post->barangay }}">
                 <option value="" disabled selected>Please select barangay</option>
             </select>
-            
+
             <!-- Input Fields -->
+            <p>Rental Price:</p>
             <input type="number" class="input-field" placeholder="Rental Price" id="rental-price" name="rental-price" value="{{ old('rental-price', $post->rental_price) }}">
 
+            <p>Maximum Occupancy:</p>
             <input type="number" class="input-field" placeholder="Maximum Occupancy" id="max-occupancy" name="max-occupancy" value="{{ old('max-occupancy', $post->max_occupancy) }}">
 
+            <p>Description:</p>
             <textarea class="description" placeholder="Write a description" id="description" name="description">{{ $post->description }}</textarea>
 
             <button type="submit" class="save-btn" onclick="return confirm('Are you sure you want to save these changes?')">Save Changes</button>

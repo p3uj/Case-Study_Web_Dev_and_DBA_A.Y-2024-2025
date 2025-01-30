@@ -31,16 +31,27 @@
             <textarea hidden name="default-bio">{{ $userInfo->bio }}</textarea>
             <input type="hidden" name="default-profile-photo-path" value="{{ $userInfo->profile_photo_path }}">
 
-            <div class="profile-picture">
-                <img id="profilePreview" src="{{ asset('resources/images/' . $userInfo->profile_photo_path) == asset('resources/images/sampleProfile.png') ? Vite::asset('resources/images/sampleProfile.png') : asset('storage/uploads/images/profile-pictures/' . $userInfo->profile_photo_path) }}" alt="Profile Picture">
+            <div class="profile-and-name">
+                <div>
+                    <div class="profile-picture">
+                        <img id="profilePreview" src="{{ asset('resources/images/' . $userInfo->profile_photo_path) == asset('resources/images/sampleProfile.png') ? Vite::asset('resources/images/sampleProfile.png') : asset('storage/uploads/images/profile-pictures/' . $userInfo->profile_photo_path) }}" alt="Profile Picture">
+                    </div>
+                    <input type="file" id="image" name="profile-photo-path" accept="image/*">
+                </div>
+                <div class="user-name">
+                    <div class="firstname">
+                        <p>Firstname:</p>
+                        <input type="text" name="firstname" id="firstname" placeholder="Type your firstname" value="{{ $userInfo->firstname }}">
+                    </div>
+                    <div class="lastname">
+                        <p>Lastname:</p>
+                        <input type="text" name="lastname" id="lastname" placeholder="Type your lastname" value="{{ $userInfo->lastname }}">
+                    </div>
+                </div>
             </div>
-            <input type="file" id="image" name="profile-photo-path" accept="image/*">
-
-            <!-- Input fields -->
-            <input type="text" name="firstname" id="firstname" placeholder="Type your firstname" value="{{ $userInfo->firstname }}">
-            <input type="text" name="lastname" id="lastname" placeholder="Type your lastname" value="{{ $userInfo->lastname }}">
 
             <!-- City Dropdown Box -->
+            <p>City:</p>
             <select name="city" id="city" data-city-list="{{ json_encode($cities) }}">
                 <option value="" disabled selected>Please select city</option>
                 @foreach ($cities as $city)
@@ -52,6 +63,7 @@
             </select>
 
             <!-- Bio Textarea -->
+            <p>Bio:</p>
             <textarea class="bio" placeholder="Write a Bio" id="bio" name="bio">{{ $userInfo->bio }}</textarea>
 
             <button type="submit" class="save-btn" onclick="return confirm('Are you sure you want to save these changes?')">Save Changes</button>

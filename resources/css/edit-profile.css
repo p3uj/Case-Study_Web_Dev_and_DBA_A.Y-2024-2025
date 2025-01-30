@@ -70,7 +70,6 @@ body {
 }
 
 /* Close button */
-/* Close button */
 .close-btn {
     position: absolute;
     top: 5px;
@@ -149,4 +148,36 @@ textarea::placeholder {
     .post-btn {
         font-size: 14px;
     }
+}
+
+/* Profile and Name layout */
+.profile-and-name {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    gap: 20px; /* Add some space between profile picture and name */
+    margin-bottom: 20px; /* Add margin below the profile section */
+}
+
+/* User name section styling */
+.user-name {
+    display: flex;
+    flex-direction: column; /* Stack firstname and lastname vertically */
+    gap: 10px; /* Add some space between the fields */
+}
+
+/* Firstname and Lastname input styling */
+.firstname input,
+.lastname input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+.firstname p, .lastname p{
+    margin-bottom: 8px;
+    color: var(--txt-primary);
 }
