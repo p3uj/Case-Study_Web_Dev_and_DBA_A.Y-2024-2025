@@ -177,6 +177,12 @@ php artisan migrate:fresh
 
 > ⚠️ `migrate:fresh` will drop all tables in the `RentEaseDB` database.
 
+Create storage link:
+
+```powershell
+php artisan storage:link
+```
+
 ---
 
 ## 9. Build Frontend Assets
