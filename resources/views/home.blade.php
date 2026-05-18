@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ Vite::asset('resources/images/RentEaseLogoWithBG.png') }}" type="image/png">
     <title>Home</title>
     <link rel="stylesheet" href="{{ Vite::asset('resources/css/home.css') }}">
     <!-- Add Font Awesome for the arrows -->
