@@ -77,9 +77,9 @@ Laravel uses the `sqlsrv` driver to talk to SQL Server. The required PHP extensi
 ## 4. Database Setup (SQL Server)
 
 1. Open **SQL Server Management Studio (SSMS)** and connect to your local SQL Server instance.
-2. Create a new empty database named **`rentease`**:
+2. Create a new empty database named **`RentEaseDB`**:
     ```sql
-    CREATE DATABASE rentease;
+    CREATE DATABASE RentEaseDB;
     ```
 3. Make sure **TCP/IP** is enabled and the server is listening on port **1433**:
     - Open _SQL Server Configuration Manager_ → _SQL Server Network Configuration_ → Protocols for SQLEXPRESS01.
@@ -88,7 +88,7 @@ Laravel uses the `sqlsrv` driver to talk to SQL Server. The required PHP extensi
 4. Verify **TCP/IP** is working
     - Open CMD and run: `netstat -ano | findstr 1433`
     - If you see LISTENING → TCP is enabled
-5. Ensure a SQL login exists that can access the `rentease` database (either SQL authentication or your Windows account). You will use these credentials in the `.env` file.
+5. Ensure a SQL login exists that can access the `RentEaseDB` database (either SQL authentication or your Windows account). You will use these credentials in the `.env` file.
 
 ---
 
@@ -112,28 +112,44 @@ npm install
 
 ## 7. Configure Environment Variables
 
-1. Copy the example environment file:
+1.  Copy the example environment file:
     ```powershell
     copy .env.example .env
     ```
-2. Generate the application key:
+2.  Generate the application key:
+
     ```powershell
     php artisan key:generate
     ```
-3. Open `.env` and update the database section to match your local SQL Server setup:
+
+    > ⚠️ if the **APP_KEY** on your `.env` file did not automatically update, do this instead:
+
+    ```powershell
+    php artisan key:generate --show
+    ```
+
+    > ⚠️ then place the generated key to **APP_KEY** on your `.env` file
+
+3.  Open `.env` and update the database section to match your local SQL Server setup:
 
     ```env
     DB_CONNECTION=sqlsrv
     DB_HOST=127.0.0.1
     DB_PORT=1433
-    DB_DATABASE=rentease
+    DB_DATABASE=RentEaseDB
     DB_USERNAME=your_sql_username
     DB_PASSWORD=your_sql_password
     ```
 
     > If you use a named SQL Server instance (e.g. `SQLEXPRESS`), set `DB_HOST=127.0.0.1\SQLEXPRESS` or configure the SQL Server Browser service and use the port directly.
 
-4. (Optional) Test the connection with the helper script bundled in the repo:
+    Run this after you setup your `.env` file:
+
+    ```powershell
+    php artisan optimize:clear
+    ```
+
+4.  (Optional) Test the connection with the helper script bundled in the repo:
     ```powershell
     C:\xampp\php\php.exe test_connection.php
     ```
@@ -146,6 +162,10 @@ npm install
 The project ships with a large set of migrations that also create **stored procedures** and **views** used by the controllers. Run them all:
 
 ```powershell
+php artisan cache:table
+```
+
+```powershell
 php artisan migrate
 ```
 
@@ -155,7 +175,7 @@ If you ever need to start fresh:
 php artisan migrate:fresh
 ```
 
-> ⚠️ `migrate:fresh` will drop all tables in the `rentease` database.
+> ⚠️ `migrate:fresh` will drop all tables in the `RentEaseDB` database.
 
 ---
 
@@ -230,7 +250,7 @@ For cleaner URLs, configure an Apache virtual host that points its `DocumentRoot
   SQL Server is not reachable. Verify the SQL Server service is running, **TCP/IP** is enabled, and port **1433** is open. Also confirm `DB_HOST` / `DB_PORT` in `.env`.
 
 - **`Login failed for user`**
-  Wrong credentials in `.env`, or the SQL login is disabled / not mapped to the `rentease` database. Fix it in SSMS under _Security → Logins_.
+  Wrong credentials in `.env`, or the SQL login is disabled / not mapped to the `RentEaseDB` database. Fix it in SSMS under _Security → Logins_.
 
 - **Vite assets not loading (blank styles)**
   Run `npm run dev` during development, or `npm run build` if serving through Apache.
