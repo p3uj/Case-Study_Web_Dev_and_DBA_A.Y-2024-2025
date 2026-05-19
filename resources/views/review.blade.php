@@ -37,7 +37,7 @@
                             <div class="to-review-info">
                                 <p class="lease-duration">{{ $property->created_at }} - {{ $property->lease_end }}</p>
 
-                                <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon" class="icon">
                                     {{ $property->city }}, {{ $property->barangay }}
                                 </h2>
 
@@ -51,7 +51,7 @@
                                 </p>
                             </div>
                             <div class="review-btn-wrapper">
-                                <button class="toreview-btn" id="reviewBtn"
+                                <button class="review-btn" id="reviewBtn"
                                     data-id="{{ $property->id }}"
                                     data-photo="{{ $property->FirstPhoto }}"
                                     data-duration="{{ $property->created_at }} - {{ $property->lease_end }}"
@@ -61,6 +61,7 @@
                                     data-review-status="{{ $property->is_reviewed }}">
                                     Review
                                 </button>
+                            </div>
                         </div>
                     @endforeach
                 @else
@@ -76,7 +77,7 @@
 
                                 <h2>{{ $tenant->firstname }} {{ $tenant->lastname }}</h2>
 
-                                <h5><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                <h5><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon" class="icon">
                                     {{ $tenant->city }}, {{ $tenant->barangay }}
                                 </h5>
                                 
@@ -105,74 +106,75 @@
         </div>
         
         <!-- Tab Content (My Reviews) -->
-<div class="tab-content" id="my-reviews">
-    @if (!empty($reviews))
-        <div class="reviews-content">
-            @foreach ($reviews as $review)
-                <div class="review-info-container">
-                    <!-- User Profile Image -->
-                    <div class="user-review-profile">
-                        @if ($review->pfp == asset('resources/images/sampleProfile.png'))
-                            <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
-                        @else
-                            <img src="{{ asset('storage/uploads/images/profile-pictures/' . $review->pfp) }}" alt="Profile Picture">
-                        @endif
-                    </div>
-
-                    <!-- Reviews Section -->
-                    <div class="reviews">
-                        <h3>
-                            @for ($star = 1; $star <= $review->rating; $star++)
-                                @if ($star <= $review->rating)
-                                    <i class="fas fa-star"></i>
+        <div class="tab-content" id="my-reviews">
+            @if (!empty($reviews))
+                <div class="reviews-content">
+                    @foreach ($reviews as $review)
+                        <div class="review-info-container">
+                            <!-- User Profile Image -->
+                            <div class="user-review-profile">
+                                @if ($review->pfp == asset('resources/images/sampleProfile.png'))
+                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                                 @else
-                                    <i class="far fa-star"></i>
+                                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $review->pfp) }}" alt="Profile Picture">
                                 @endif
-                            @endfor
-                        </h3>
-                    </div>
+                            </div>
 
-                    <!-- Review Text -->
-                    <h1>❝</h1>
-                    <div class="review-caption">
-                        <p>{{ $review->review_text }}</p>
-                    </div>
-                    <h1 class="quotation-mark-right">❞</h1>
+                            <!-- Reviews Section -->
+                            <div class="reviews">
+                                <h3>
+                                    @for ($star = 1; $star <= $review->rating; $star++)
+                                        @if ($star <= $review->rating)
+                                            <i class="fas fa-star"></i>
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                </h3>
+                            </div>
 
-                    <!-- Reviewer Name and Date -->
-                    <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
-                    <p class="date-review">{{ $review->updated_at }}</p>
+                            <!-- Review Text -->
+                            <h1>❝</h1>
+                            <div class="review-caption">
+                                <p>{{ $review->review_text }}</p>
+                            </div>
+                            <h1 class="quotation-mark-right">❞</h1>
 
-                    <!-- Edit Review Button -->
-                    @if ($review->is_edited != 1)
-                        <div class="editreview-btn-wrapper">
-                            <button class="editreview-btn" id="reviewBtn"
-                                data-id="{{ $review->id }}"
-                                data-photo="{{ $review->pfp }}"
-                                data-duration="{{ $review->created_at }} - {{ $review->lease_end }}"
-                                data-location="{{ $review->firstname }} {{ $review->lastname }}"
-                                data-info="{{ $review->city }}, {{ $review->barangay }}"
-                                data-role="{{ $userRole }}"
-                                data-rating="{{ $review->rating }}"
-                                data-desc="{{ $review->review_text }}"
-                                data-review-status="{{ $review->is_reviewed }}">
-                                Edit Review
-                            </button>
+                            <!-- Reviewer Name and Date -->
+                            <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
+                            <p class="date-review">{{ $review->updated_at }}</p>
+
+                            <!-- Edit Review Button -->
+                            @if ($review->is_edited != 1)
+                                <div class="editreview-btn-wrapper">
+                                    <button class="editreview-btn" id="reviewBtn"
+                                        data-id="{{ $review->id }}"
+                                        data-photo="{{ $review->pfp }}"
+                                        data-duration="{{ $review->created_at }} - {{ $review->lease_end }}"
+                                        data-location="{{ $review->firstname }} {{ $review->lastname }}"
+                                        data-info="{{ $review->city }}, {{ $review->barangay }}"
+                                        data-role="{{ $userRole }}"
+                                        data-rating="{{ $review->rating }}"
+                                        data-desc="{{ $review->review_text }}"
+                                        data-review-status="{{ $review->is_reviewed }}">
+                                        Edit Review
+                                    </button>
+                                </div>
+                            @endif
                         </div>
-                    @endif
+                    @endforeach
                 </div>
-            @endforeach
+            @else
+                <div style="margin: 16px 135px;">
+                    <h1>No Reviews Made.</h1>
+                    <h3>You have not given a review so far.</h3>
+                </div>
+            @endif
         </div>
-    @else
-        <div style="margin: 16px 135px;">
-            <h1>No Reviews Made.</h1>
-            <h3>You have not given a review so far.</h3>
-        </div>
-    @endif
-</div>
+    </div>
 
-<!-- Include Modal HTML -->
-@include('write-review')
+    <!-- Include Modal HTML -->
+    @include('write-review')
 
 </body>
 </html>
