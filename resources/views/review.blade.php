@@ -67,7 +67,7 @@
                 @else
                     @foreach ($toReview as $tenant)
                         <div class="to-review-content">
-                            @if ($tenant->pfp == asset('resources/images/sampleProfile.png'))
+                            @if (asset('resources/images/' . $tenant->pfp) == asset('resources/images/sampleProfile.png'))
                                 <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                             @else
                                 <img src="{{ asset('storage/uploads/images/profile-pictures/' . $tenant->pfp) }}" alt="Profile Picture">
@@ -113,7 +113,7 @@
                         <div class="review-info-container">
                             <!-- User Profile Image -->
                             <div class="user-review-profile">
-                                @if ($review->pfp == asset('resources/images/sampleProfile.png'))
+                                @if (asset('resources/images/' . $review->pfp) == asset('resources/images/sampleProfile.png'))
                                     <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                                 @else
                                     <img src="{{ asset('storage/uploads/images/profile-pictures/' . $review->pfp) }}" alt="Profile Picture">

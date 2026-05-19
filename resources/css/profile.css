@@ -1,12 +1,12 @@
-* {
+*{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: poppins, sans-serif;
+    font-family: poppins,sans-serif;
     text-decoration: none;
 }
 
-body {
+body{
     overflow-x: hidden;
 }
 
@@ -147,6 +147,29 @@ body {
     cursor: pointer;
 }
 
+.property-post-content[data-isPostAvailable="0"] {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.8);
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 28px;
+    width: 100vw;
+    box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
+}
+
+.property-post-content[data-isPostAvailable="0"] .unit-photo {
+    height: auto;
+    width: 40%;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.property-post-content[data-isPostAvailable="0"] .tags{
+    opacity: 0.3;
+}
+
 .property-info {
     margin-right: 135px;
     padding: 38px;
@@ -187,9 +210,8 @@ body {
     gap: 14px;
 }
 
-.unit-type,
-.max-occupancy {
-    background: linear-gradient(82deg, #F5F5DC, #BDA27E);
+.unit-type, .max-occupancy {
+    background: linear-gradient(82deg,#F5F5DC, #BDA27E);
     padding: 16px 24px;
     border-radius: 45px;
     font-weight: 600;
@@ -197,7 +219,7 @@ body {
 }
 
 .unit-price {
-    background: linear-gradient(82deg, #D9534F, #FF6F61);
+    background: linear-gradient(82deg,#D9534F, #FF6F61);
     padding: 16px 24px;
     border-radius: 45px;
     font-weight: 600;
@@ -206,8 +228,7 @@ body {
 
 .description {
     max-height: 120px;
-    overflow: auto;
-    /* allow user to scroll when the height exceed to the max-height*/
+    overflow: auto; /* allow user to scroll when the height exceed to the max-height*/
     margin-bottom: 50px;
     font-size: 20px;
     line-height: 30px;
@@ -250,15 +271,14 @@ body {
     box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
 }
 
-.find-tenant-info {
+.find-tenant-info{
     padding: 38px 135px 0px 135px;
     width: 100vw;
 }
 
 .caption {
     max-height: 150px;
-    overflow: auto;
-    /* allow user to scroll when the height exceed to the max-height*/
+    overflow: auto; /* allow user to scroll when the height exceed to the max-height*/
     font-size: 20px;
     line-height: 30px;
 }
@@ -337,8 +357,7 @@ body {
     position: relative;
     margin-top: 90px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s;
-    /* Transition all properties including border color */
+    transition: all 0.5s; /* Transition all properties including border color */
 }
 
 .review-info-container:hover {
@@ -405,47 +424,35 @@ h4,
 /* Cuztomize the scrollbar */
 /* Target the scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
-    /* Width of the vertical scrollbar */
-    height: 10px;
-    /* Height of the horizontal scrollbar */
+    width: 10px; /* Width of the vertical scrollbar */
+    height: 10px; /* Height of the horizontal scrollbar */
 }
 
 /* Scrollbar track */
 ::-webkit-scrollbar-track {
-    background: rgba(240, 240, 240, 0.3);
-    /* Color of the scrollbar track */
-    border-radius: 10px;
-    /* Rounded corners */
+    background: rgba(240, 240, 240, 0.3); /* Color of the scrollbar track */
+    border-radius: 10px; /* Rounded corners */
 }
 
 /* Scrollbar thumb */
 ::-webkit-scrollbar-thumb {
-    background-color: #007bff;
-    /* Color of the scrollbar thumb */
-    border-radius: 10px;
-    /* Rounded corners */
-    border: 2px solid #f0f0f0;
-    /* Padding around the thumb */
+    background-color: #007bff; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid #f0f0f0; /* Padding around the thumb */
 }
 
 /* Scrollbar thumb on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #0056b3;
-    /* Darker color when hovering */
+    background-color: #0056b3; /* Darker color when hovering */
 }
 
 
 /* Edit form */
 #edit-search-post-popover {
-    position: fixed;
-    /* stay on screen even when scrolling */
-    top: 50%;
-    /* Move element halfway down the viewport */
-    left: 50%;
-    /* Move element halfway to the right */
-    transform: translate(-50%, -50%);
-    /* Adjust position back by half the element's width and height */
+    position: fixed; /* stay on screen even when scrolling */
+    top: 50%; /* Move element halfway down the viewport */
+    left: 50%; /* Move element halfway to the right */
+    transform: translate(-50%, -50%); /* Adjust position back by half the element's width and height */
     text-align: center;
     padding: 40px;
     background-color: var(--rentease-secondary);

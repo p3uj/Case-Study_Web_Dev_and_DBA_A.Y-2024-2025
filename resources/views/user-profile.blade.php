@@ -44,10 +44,10 @@
             </a>
         </div>
         <div class="profile-picture">
-            @if ($user->profile_photo_path == asset('resources/images/sampleProfile.png'))
+            @if (asset('resources/images/' . $user->profile_photo_path) == asset('resources/images/sampleProfile.png'))
                 <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
             @else
-                <img src="{{ asset('storage/uploads/images/property-posts/' . $user->profile_photo_path) }}" alt="Profile Picture">
+                <img src="{{ asset('storage/uploads/images/profile-pictures/' . $user->profile_photo_path) }}" alt="Profile Picture">
             @endif
         </div>
     </div>
@@ -176,10 +176,10 @@
                     @foreach ($reviews as $review)
                         <div class="review-info-container">
                             <div class="user-review-profile">
-                                @if ($review->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                                @if (asset('resources/images/' . $review->profile_photo_path) == asset('resources/images/sampleProfile.png'))
                                     <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                                 @else
-                                    <img src="{{ asset('storage/uploads/images/property-posts/' . $review->profile_photo_path) }}" alt="Profile Picture">
+                                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $review->profile_photo_path) }}" alt="Profile Picture">
                                 @endif
                             </div>
                             <div class="reviews">
