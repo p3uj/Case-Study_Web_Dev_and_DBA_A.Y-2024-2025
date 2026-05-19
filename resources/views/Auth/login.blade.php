@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ Vite::asset('resources/images/RentEaseLogoWithBG.png') }}" type="image/png">
     <title>RentEase Login</title>
 
     {{-- Link CSS file --}}
@@ -15,7 +16,7 @@
             {{-- Dynamic alert for error or warning --}}
             @if (session('error') || session('info'))
                 <div id="alert" class="alert {{ session('error') ? 'alert-danger' : 'alert-warning' }}">
-                    <span class="alert-icon">⚠️</span> 
+                    <span class="alert-icon">⚠️</span>
                     <span class="alert-message">
                         {{ session('error') ?? session('info') }}
                     </span>
@@ -45,8 +46,6 @@
 
                 <button type="submit">Login</button>
             </form>
-
-            <a href="#">Forgot password?</a>
             <div class="register-link">
                 <p>Does not have an account yet? <a href="{{ route('register') }}">Register</a></p>
             </div>

@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const files = Array.from(imageInput.files);
 
         // Check if total files exceed the limit
-        if (files.length > 12) {
-            alert('You can only upload a maximum of 12 files.');
+        if (files.length > 7) {
+            alert('You can only upload a maximum of 7 files.');
             imageInput.value = ''; // Reset the input
             selectedFiles = []; // Clear selected files array
             imagePreviewSection.style.display = 'none'; // Hide the preview section
@@ -144,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Check if imageInput exceeds file limit
-        if (imageInput.files.length > 12) {
+        if (imageInput.files.length > 7) {
             event.preventDefault(); // Prevent form submission
-            alert('You can upload a maximum of 12 files. Please remove some files.');
+            alert('You can upload a maximum of 7 files. Please remove some files.');
             imageInput.value = ''; // Reset the input
             selectedFiles = []; // Clear selected files array
             imagePreviewSection.style.display = 'none'; // Hide preview section

@@ -126,6 +126,7 @@
     /* border: 2px solid var(--rentease-primary); */
     border: 2px solid var(--rentease-secondary);
     margin-left: -6px;
+    cursor: pointer;
 }
 
 /* .slider-img.active h1 {

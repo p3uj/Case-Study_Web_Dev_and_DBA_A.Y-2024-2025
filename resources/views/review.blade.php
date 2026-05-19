@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ Vite::asset('resources/images/RentEaseLogoWithBG.png') }}" type="image/png">
     <title>Profile Tabs</title>
 
     {{-- Link css and javascript file --}}
@@ -82,8 +83,8 @@
                                 </h5>
                                 
                                 <div class="review-btn-wrapper">
-                                    <button class="review-btn" id="reviewBtn"
-                                        data-id="{{ $tenant->id }}"
+                                    <button class="review-btn" id="reviewBtn" 
+                                        data-id="{{ $tenant->id }}" 
                                         data-photo="{{ $tenant->pfp }}"
                                         data-duration="{{ $tenant->created_at }} - {{ $tenant->lease_end }}"
                                         data-location="{{ $tenant->firstname }} {{ $tenant->lastname }}"
@@ -104,7 +105,7 @@
                 </div>
             @endif
         </div>
-        
+
         <!-- Tab Content (My Reviews) -->
         <div class="tab-content" id="my-reviews">
             @if (!empty($reviews))
