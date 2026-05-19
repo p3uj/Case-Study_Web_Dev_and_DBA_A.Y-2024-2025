@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ Vite::asset('resources/images/RentEaseLogoWithBG.png') }}" type="image/png">
     <title>Profile Tabs</title>
 
     {{-- Link css and javascript file --}}
