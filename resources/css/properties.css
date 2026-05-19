@@ -1,8 +1,8 @@
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: poppins,sans-serif;
+    font-family: poppins, sans-serif;
     text-decoration: none;
 }
 
@@ -56,7 +56,8 @@
     color: var(--rentease-primary);
 }
 
-.filter-unit-category, .filter-rental-price {
+.filter-unit-category,
+.filter-rental-price {
     border-radius: 40px;
     border: none;
 }
@@ -76,16 +77,21 @@
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.properties-container select, input {
+.properties-container select,
+input {
     padding: 12px 12px;
     width: 100%;
 }
 
 #create-post-popover {
-    position: absolute; /* Allow absolute positioning */
-    top: 50%; /* Move element halfway down the viewport */
-    left: 50%; /* Move element halfway to the right */
-    transform: translate(-50%, -50%); /* Adjust position back by half the element's width and height */
+    position: absolute;
+    /* Allow absolute positioning */
+    top: 50%;
+    /* Move element halfway down the viewport */
+    left: 50%;
+    /* Move element halfway to the right */
+    transform: translate(-50%, -50%);
+    /* Adjust position back by half the element's width and height */
     text-align: center;
     padding: 40px;
     background-color: var(--rentease-secondary);
@@ -97,8 +103,10 @@
 .form-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    gap: 10px; /* Add space between items */
+    align-items: center;
+    /* Center items horizontally */
+    gap: 10px;
+    /* Add space between items */
     width: 30vw;
 }
 
@@ -114,6 +122,13 @@
     color: var(--bg-primary);
     padding: 16px 32px;
     width: 100%;
+    background-color: var(--btn-default);
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.2);
+}
+
+.post-btn:hover {
+    background-color: var(--btn-hover);
 }
 
 .properties-container h3 {
@@ -140,9 +155,11 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
     width: 100%;
-    height: 140px; /* Set a fixed height */
+    height: 140px;
+    /* Set a fixed height */
     padding: 10px;
     background: rgb(247, 243, 243);
     border-radius: 5px;
@@ -230,11 +247,13 @@
     border-radius: 45px;
     position: relative;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s; /* Transition all properties including border color */
+    transition: all 0.5s;
+    /* Transition all properties including border color */
 }
 
 .property-post-image {
-    margin: 0 -38px 8px -38px; /* Negative margins to counteract the container's horizontal padding */
+    margin: 0 -38px 8px -38px;
+    /* Negative margins to counteract the container's horizontal padding */
 }
 
 .property-post-container img {
@@ -256,8 +275,10 @@
     max-width: 270px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; /* Prevent wrapping */
-    display: inline-block; /* Ensure it's treated as a block for text overflow */
+    white-space: nowrap;
+    /* Prevent wrapping */
+    display: inline-block;
+    /* Ensure it's treated as a block for text overflow */
     color: var(--txt-primary);
 }
 
@@ -279,7 +300,8 @@
 }
 
 .user-profile {
-    display: inline-flex; /* Make the container adjust its width based on content */
+    display: inline-flex;
+    /* Make the container adjust its width based on content */
     align-items: center;
     gap: 6px;
     background-color: var(--rentease-primary);
@@ -293,12 +315,14 @@
     max-width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; /* Prevent wrapping */
-    display: inline-block; /* Ensure it's treated as a block for text overflow */
+    white-space: nowrap;
+    /* Prevent wrapping */
+    display: inline-block;
+    /* Ensure it's treated as a block for text overflow */
     color: var(--txt-primary);
 }
 
-.user-profile img{
+.user-profile img {
     width: 45px;
     height: 45px;
     object-fit: cover;
@@ -339,26 +363,34 @@
 /* Cuztomize the scrollbar */
 /* Target the scrollbar */
 ::-webkit-scrollbar {
-    width: 10px; /* Width of the vertical scrollbar */
-    height: 10px; /* Height of the horizontal scrollbar */
+    width: 10px;
+    /* Width of the vertical scrollbar */
+    height: 10px;
+    /* Height of the horizontal scrollbar */
 }
 
 /* Scrollbar track */
 ::-webkit-scrollbar-track {
-    background: rgba(240, 240, 240, 0.3); /* Color of the scrollbar track */
-    border-radius: 10px; /* Rounded corners */
+    background: rgba(240, 240, 240, 0.3);
+    /* Color of the scrollbar track */
+    border-radius: 10px;
+    /* Rounded corners */
 }
 
 /* Scrollbar thumb */
 ::-webkit-scrollbar-thumb {
-    background-color: #007bff; /* Color of the scrollbar thumb */
-    border-radius: 10px; /* Rounded corners */
-    border: 2px solid #f0f0f0; /* Padding around the thumb */
+    background-color: #007bff;
+    /* Color of the scrollbar thumb */
+    border-radius: 10px;
+    /* Rounded corners */
+    border: 2px solid #f0f0f0;
+    /* Padding around the thumb */
 }
 
 /* Scrollbar thumb on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #0056b3; /* Darker color when hovering */
+    background-color: #0056b3;
+    /* Darker color when hovering */
 }
 
 /* Styling for the backdrop of the popover in the top layer */
