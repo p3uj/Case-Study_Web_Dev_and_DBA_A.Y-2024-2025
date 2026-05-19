@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const reviewButtons = document.querySelectorAll(".review-btn");
+    const reviewButtons = document.querySelectorAll(
+        ".review-btn, .editreview-btn",
+    );
     const modal = document.getElementById("write-review-modal");
     const modalImage = modal.querySelector(".image img");
     const durationText = modal.querySelector(".duration");
@@ -9,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const ratingInputs = document.querySelectorAll('input[name="rating"]'); // Rating radio buttons
     const form = document.getElementById("form"); // Assuming you have a form element
 
-    reviewButtons.forEach(button => {
+    reviewButtons.forEach((button) => {
         button.addEventListener("click", function () {
             const reviewId = this.getAttribute("data-id");
             const photo = this.getAttribute("data-photo");
@@ -28,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (role === "Tenant") {
                 modalImage.src = `/RentEase/public/storage/uploads/images/property-posts/${photo}`;
             } else {
-                modalImage.src = `/RentEase/public/storage/uploads/images/profile-pictures/${photo}`;             
+                modalImage.src = `/RentEase/public/storage/uploads/images/profile-pictures/${photo}`;
             }
 
             // Update text fields
@@ -44,15 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 reviewTextArea.value = reviewText;
 
                 // Set the correct rating radio button based on existing rating
-                ratingInputs.forEach(ratingInput => {
+                ratingInputs.forEach((ratingInput) => {
                     if (ratingInput.value === rating) {
                         ratingInput.checked = true;
                     }
                 });
             } else {
                 document.getElementById("is-edited").value = 0; // Set is-edited to 0 if it's a new review
-                reviewTextArea.value = ''; // Clear review text area for new review
-                ratingInputs.forEach(ratingInput => {
+                reviewTextArea.value = ""; // Clear review text area for new review
+                ratingInputs.forEach((ratingInput) => {
                     ratingInput.checked = false; // Uncheck all rating radio buttons
                 });
             }
@@ -71,14 +73,14 @@ document.addEventListener("DOMContentLoaded", function () {
     closeButton.addEventListener("click", closeModal);
 
     // Close the modal if the user clicks outside the modal content
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target === modal) {
             closeModal();
         }
     };
 
     // Validate form before submitting
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", function (event) {
         const reviewText = document.getElementById("review-text").value;
         const rating = document.querySelector('input[name="rating"]:checked');
         const isReviewed = document.getElementById("is-edited").value; // Get the value of the 'is-edited' hidden field
@@ -86,19 +88,25 @@ document.addEventListener("DOMContentLoaded", function () {
         // Check if review text is empty or rating is not selected
         if (!reviewText.trim() || !rating) {
             event.preventDefault(); // Prevent form submission
-            alert("Please provide both a review description and a rating before submitting.");
+            alert(
+                "Please provide both a review description and a rating before submitting.",
+            );
             return false;
         }
 
         if (isReviewed === "1") {
             // Ask for confirmation before submitting
-            const confirmation = confirm("You can only edit your review once. Are you sure you want to submit this review?");
+            const confirmation = confirm(
+                "You can only edit your review once. Are you sure you want to submit this review?",
+            );
             if (!confirmation) {
                 event.preventDefault(); // Prevent form submission if user cancels
             }
         } else {
             // Ask for confirmation before submitting
-            const confirmation = confirm("Are you sure you want to submit this review?");
+            const confirmation = confirm(
+                "Are you sure you want to submit this review?",
+            );
             if (!confirmation) {
                 event.preventDefault(); // Prevent form submission if user cancels
             }
