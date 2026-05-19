@@ -72,7 +72,7 @@ body {
     border-radius: 12px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     padding: 24px;
     position: relative;
     gap: 24px;
@@ -80,8 +80,9 @@ body {
 }
 
 .to-review-content img {
-    width: 100px;
-    height: 60px;
+    width: fit-content;
+    height: 200px;
+    /* border-radius: 50%; */
     object-fit: cover;
     margin-right: 20px;
     /* Space between the image and text */
@@ -92,7 +93,7 @@ body {
     flex-grow: 1;
     text-align: left;
     /* Align text to the left */
-    margin-left: 500px;
+    /* margin-left: 500px; */
     /* Push text content to the right */
 }
 
@@ -165,8 +166,8 @@ body {
 }
 
 .user-review-profile img {
-    width: 60px;
-    height: 60px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 20px;

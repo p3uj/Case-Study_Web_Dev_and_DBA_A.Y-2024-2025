@@ -23,9 +23,16 @@ body {
     margin-bottom: 28px;
     width: 100%;
     box-shadow: 5px 7px 25px var(--rentease-hover-secondary);
-    /* justify-content: space-between;
-    align-items: center; */
-    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    align-items: center;
+    /* flex-wrap: wrap; */
+}
+
+.to-review-content div:first-of-type {
+    /* background-color: red; */
+    padding-left: 2rem;
+    align-self: center;
+    margin-right: auto;
 }
 
 .property-post-content {
@@ -51,7 +58,10 @@ body {
 }
 
 h4 {
-    width: 30%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
     height: auto;
 }
 
