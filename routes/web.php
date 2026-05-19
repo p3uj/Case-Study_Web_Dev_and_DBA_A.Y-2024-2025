@@ -1,27 +1,32 @@
 <?php
 
+use App\Http\Controllers\Api\BarangaysController;
+use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\FindRoommateOrTenantController;
 use App\Http\Controllers\UserProfileController;
+use App\Models\FindRoommateOrTenant;
+use App\Models\PropertyPost;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\EditSearchPost;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AddReviewController;
-use App\Http\Controllers\EditProfileController;
+use App\Http\Controllers\EditPropertyPost;
 use App\Http\Controllers\EditPropertyPostController;
 use App\Http\Controllers\EditSearchPostController;
 use App\Http\Controllers\PendingRentalsController;
-use App\Http\Controllers\SearchUserResultController;
 use App\Http\Controllers\ViewPropertyPost;
-use App\Http\Controllers\ViewUserProfileController;
 
 // Ensure that the authenticated users are the only ones who can access the following routes.
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('homepage');
     //Route::view('/property', 'properties')->name('propertiespage');
     //Route::view('/findroommateortenant', 'find-roommate-or-tenant')->name('findroommateortenantpage');
+    Route::get('/pendingrentals', [PendingRentalsController::class, 'index'])->name('pendingrentalspage');
     Route::get('/review', [ReviewController::class, 'index'])->name('reviewpage');
     Route::get('/userprofile', [UserProfileController::class, 'index'])->name('userprofilepage');
     Route::get('/property', [PropertyController::class, 'index'])->name('propertiespage');
@@ -33,10 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('editsearchpost/{id}', [EditSearchPostController::class, 'index'])->name('editsearchpostpage');
     Route::get('userprofile/{id}/{found}/{deleted}', [EditSearchPostController::class, 'updateFoundOrDelete'])->name('userprofilepage.updatefoundordeleted');
     Route::get('editpropertypost/{id}{property_info_id}', [EditPropertyPostController::class, 'index'])->name('editpropertypostpage');
-    Route::get('userprofile/deletepropertyornotavail/{id}/{available}/{deleted}', [EditPropertyPostController::class, 'isAvailableOrDelete'])->name('userprofilepage.deleteornotavialproperty');
-    Route::get('editprofile/{id}', [EditProfileController::class, 'index'])->name('editprofilepage');
-    Route::get('/userprofile/view/{userId}', [ViewUserProfileController::class, 'index'])->name('viewuserprofilepage');
-    Route::get('/home/searchuserresult/', [SearchUserResultController::class, 'index'])->name('searchuserresultpage');
+    Route::get('userprofile/deleteproperty/{id}/{available}/{deleted}', [EditPropertyPostController::class, 'delete'])->name('userprofilepage.deletepropertypost');
 
     // Post routes
     Route::post('/findroommateortenant', [FindRoommateOrTenantController::class, 'store'])->name('findroommateortenant.post');
@@ -44,10 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::post('editsearchpost', [EditSearchPostController::class, 'update'])->name('editsearchpost.post');
     Route::post('/submit-review', [AddReviewController::class, 'submitReview'])->name('submit.review');
     Route::post('editpropertypost', [EditPropertyPostController::class, 'update'])->name('editpropertypost.post');
-    Route::post('editprofile', [EditProfileController::class, 'update'])->name('editprofilepage.post');
-    Route::post('/home/searchuserresult/', [SearchUserResultController::class, 'fetchUser'])->name('searchuserresult.post');
 
     Route::put('/write-review', [ReviewController::class, 'writeReview'])->name('writereview');
+    Route::put('/update-lease', [PendingRentalsController::class, 'updateLeaseStatus'])->name('updatelease');
 });
 
 // Ensure that only unauthenticated users can access this root route.

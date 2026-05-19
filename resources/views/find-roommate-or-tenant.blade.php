@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ Vite::asset('resources/images/RentEaseLogoWithBG.png') }}" type="image/png">
     <title>Find Roommate/Tenant</title>
 
     @vite('resources/css/find-roommate-or-tenant.css')
@@ -58,10 +57,10 @@
             @foreach ($posts as $post)
                 <div class="find-roommate-tenant-container" data-user-id="{{ $post->user_id }}">
                     <div class="user-profile">
-                        @if (asset('resources/images/' . $post->profile_photo_path) == asset('resources/images/sampleProfile.png'))
-                            <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $post->user_id]) }}'">
+                        @if ($post->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                            <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                         @else
-                            <img src="{{ asset('storage/uploads/images/profile-pictures/' . $post->profile_photo_path) }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $post->user_id]) }}'">
+                            <img src="{{ asset('storage/uploads/images/property-posts/' . $review->profile_photo_path) }}" alt="Profile Picture">
                         @endif
                     </div>
                     <h4>{{ $post->UserName }}</h4>

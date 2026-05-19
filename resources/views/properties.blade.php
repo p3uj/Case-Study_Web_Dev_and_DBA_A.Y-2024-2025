@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ Vite::asset('resources/images/RentEaseLogoWithBG.png') }}" type="image/png">
     <title>Properties</title>
 
     {{-- Link css and javascript file --}}
@@ -116,10 +115,10 @@
                         <h2 class="unit-price">₱{{ number_format($property->rental_price, 2) }}<span class="per-month"> /month</span></h2>
                         <div class="bottom-part">
                             <div class="user-profile">
-                                @if (asset('resources/images/' . $property->profile_photo_path) == asset('resources/images/sampleProfile.png'))
-                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $property->user_id]) }}'">
+                                @if ($property->profile_photo_path == asset('resources/images/sampleProfile.png'))
+                                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                                 @else
-                                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $property->profile_photo_path) }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $property->user_id]) }}'">
+                                    <img src="{{ asset('storage/uploads/images/property-posts/' . $property->profile_photo_path) }}" alt="Profile Picture">
                                 @endif
                                 {{-- Do Kyung-Soo --}}
                                 <span class="user-name">{{ $property->UserName }}</span>

@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="{{ Vite::asset('resources/images/RentEaseLogoWithBG.png') }}" type="image/png">
     <title>View Property Post</title>
 
     {{-- Link css and javascript file --}}
@@ -55,11 +54,7 @@
         </div>
         <div class="profile-container">
             <div class="user-profile">
-                @if (asset('resources/images/' . $propertyDetails->ProfilePhoto) == asset('resources/images/sampleProfile.png'))
-                    <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $propertyDetails->user_id]) }}'">
-                @else
-                    <img src="{{ asset('storage/uploads/images/profile-pictures/' . $propertyDetails->ProfilePhoto) }}" alt="Profile Picture" onclick="window.location.href='{{ route('viewuserprofilepage', ['userId' => $propertyDetails->user_id]) }}'">
-                @endif
+                <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
                 {{-- Do Kyung-Soo --}}
                 <span class="user-name">{{ $propertyDetails->Username }}</span>
             </div>

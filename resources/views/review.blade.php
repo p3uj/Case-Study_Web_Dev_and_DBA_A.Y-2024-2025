@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ Vite::asset('resources/images/RentEaseLogoWithBG.png') }}" type="image/png">
     <title>Profile Tabs</title>
 
     {{-- Link css and javascript file --}}
@@ -38,7 +37,7 @@
                             <div class="to-review-info">
                                 <p class="lease-duration">{{ $property->created_at }} - {{ $property->lease_end }}</p>
 
-                                <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                <h2><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon" class="icon">
                                     {{ $property->city }}, {{ $property->barangay }}
                                 </h2>
 
@@ -52,8 +51,8 @@
                                 </p>
                             </div>
                             <div class="review-btn-wrapper">
-                                <button class="review-btn" id="reviewBtn" 
-                                    data-id="{{ $property->id }}" 
+                                <button class="review-btn" id="reviewBtn"
+                                    data-id="{{ $property->id }}"
                                     data-photo="{{ $property->FirstPhoto }}"
                                     data-duration="{{ $property->created_at }} - {{ $property->lease_end }}"
                                     data-location="{{ $property->city }}, {{ $property->barangay }}"
@@ -62,6 +61,7 @@
                                     data-review-status="{{ $property->is_reviewed }}">
                                     Review
                                 </button>
+                            </div>
                         </div>
                     @endforeach
                 @else
@@ -77,13 +77,13 @@
 
                                 <h2>{{ $tenant->firstname }} {{ $tenant->lastname }}</h2>
 
-                                <h5><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon">
+                                <h5><img src="{{ Vite::asset('resources/images/icon/location.png') }}" alt="location icon" class="icon">
                                     {{ $tenant->city }}, {{ $tenant->barangay }}
                                 </h5>
                                 
                                 <div class="review-btn-wrapper">
-                                    <button class="review-btn" id="reviewBtn" 
-                                        data-id="{{ $tenant->id }}" 
+                                    <button class="review-btn" id="reviewBtn"
+                                        data-id="{{ $tenant->id }}"
                                         data-photo="{{ $tenant->pfp }}"
                                         data-duration="{{ $tenant->created_at }} - {{ $tenant->lease_end }}"
                                         data-location="{{ $tenant->firstname }} {{ $tenant->lastname }}"
@@ -104,13 +104,14 @@
                 </div>
             @endif
         </div>
-
+        
         <!-- Tab Content (My Reviews) -->
         <div class="tab-content" id="my-reviews">
             @if (!empty($reviews))
                 <div class="reviews-content">
                     @foreach ($reviews as $review)
                         <div class="review-info-container">
+                            <!-- User Profile Image -->
                             <div class="user-review-profile">
                                 @if ($review->pfp == asset('resources/images/sampleProfile.png'))
                                     <img src="{{ Vite::asset('resources/images/sampleProfile.png') }}" alt="Profile Picture">
@@ -118,41 +119,47 @@
                                     <img src="{{ asset('storage/uploads/images/profile-pictures/' . $review->pfp) }}" alt="Profile Picture">
                                 @endif
                             </div>
+
+                            <!-- Reviews Section -->
                             <div class="reviews">
                                 <h3>
                                     @for ($star = 1; $star <= $review->rating; $star++)
-                                        <!-- If the star is less than or equal to average rating, show the filled star -->
                                         @if ($star <= $review->rating)
                                             <i class="fas fa-star"></i>
-                                        <!-- Otherwise, show empty star -->
                                         @else
                                             <i class="far fa-star"></i>
                                         @endif
                                     @endfor
                                 </h3>
-
                             </div>
+
+                            <!-- Review Text -->
                             <h1>❝</h1>
                             <div class="review-caption">
                                 <p>{{ $review->review_text }}</p>
                             </div>
                             <h1 class="quotation-mark-right">❞</h1>
+
+                            <!-- Reviewer Name and Date -->
                             <h4>- {{ $review->firstname }} {{ $review->lastname }}</h4>
                             <p class="date-review">{{ $review->updated_at }}</p>
 
+                            <!-- Edit Review Button -->
                             @if ($review->is_edited != 1)
-                                <button class="review-btn" id="reviewBtn" 
-                                    data-id="{{ $review->id }}" 
-                                    data-photo="{{ $review->pfp }}"
-                                    data-duration="{{ $review->created_at }} - {{ $review->lease_end }}"
-                                    data-location="{{ $review->firstname }} {{ $review->lastname }}"
-                                    data-info="{{ $review->city }}, {{ $review->barangay }}"
-                                    data-role="{{ $userRole }}"
-                                    data-rating="{{ $review->rating }}" 
-                                    data-desc="{{ $review->review_text }}"
-                                    data-review-status="{{ $review->is_reviewed }}">
-                                    Edit Review
-                                </button>
+                                <div class="editreview-btn-wrapper">
+                                    <button class="editreview-btn" id="reviewBtn"
+                                        data-id="{{ $review->id }}"
+                                        data-photo="{{ $review->pfp }}"
+                                        data-duration="{{ $review->created_at }} - {{ $review->lease_end }}"
+                                        data-location="{{ $review->firstname }} {{ $review->lastname }}"
+                                        data-info="{{ $review->city }}, {{ $review->barangay }}"
+                                        data-role="{{ $userRole }}"
+                                        data-rating="{{ $review->rating }}"
+                                        data-desc="{{ $review->review_text }}"
+                                        data-review-status="{{ $review->is_reviewed }}">
+                                        Edit Review
+                                    </button>
+                                </div>
                             @endif
                         </div>
                     @endforeach
@@ -164,10 +171,10 @@
                 </div>
             @endif
         </div>
-
     </div>
 
     <!-- Include Modal HTML -->
     @include('write-review')
+
 </body>
 </html>

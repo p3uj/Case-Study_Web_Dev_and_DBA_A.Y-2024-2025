@@ -30,7 +30,6 @@ return new class extends Migration
                     ON PInfo.id = PPost.property_info_id
                 WHERE
                     PPost.user_id = @p_UserId
-                    AND PPost.is_deleted = 0
             END
         ");
     }
